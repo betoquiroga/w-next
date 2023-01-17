@@ -1,5 +1,5 @@
-import Presenter from "../components/Presenter"
+import HomeView from "@modules/Home/HomeView"
 
 export default function Page() {
-  return <div><Presenter /></div>
+  return <div><HomeView /></div>
 }

@@ -1,6 +1,8 @@
 'use client'
 
 import { socket } from "../../socket/mainSocket"
+import songs from "../../__mock__/songs"
+import ReactHtmlParser from "react-html-parser"
 
 export default function Dashboard() {
   const addMessage = (e: React.SyntheticEvent) => {
@@ -9,18 +11,11 @@ export default function Dashboard() {
 
   return (
     <div>
-      <p onClick={addMessage} className="bg-gray-500 p-5">
-        El Dios que hizo los cielos y la tierra <br /> Con el poder de su
-        palabra <br /> Y reina con autoridad
-      </p>
-      <p onClick={addMessage} className="bg-gray-500 p-5">
-        El Dios que aún los vientos le obedecen <br /> Una palabra es suficiente
-        <br />
-        Para los muertos levantar
-      </p>
-      <p onClick={addMessage} className="bg-gray-500 p-5">
-        Nadie es como él <br /> Oh, gran yo soy
-      </p>
+      {songs[0].lyrics.map(( vers ) => (
+        <div key={vers.order}  onClick={addMessage} className="p-5 text-white hover:bg-slate-800 cursor-pointer">
+          {ReactHtmlParser(vers.content)}
+        </div>
+      ))}
     </div>
   )
 }

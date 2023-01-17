@@ -1,12 +1,12 @@
 "use client"
 
 import { SetStateAction, useEffect, useState } from "react"
-import { socket } from "../socket/mainSocket"
+import { socket } from "../../../socket/mainSocket"
 import ReactHtmlParser from "react-html-parser"
 
 
-const Presenter = () => {
-  const [content, setContent] = useState<string>("")
+const HomeView = () => {
+  const [content, setContent] = useState<string>("... nothing ...")
 
   useEffect(() => {
     socket.on("message", (message: SetStateAction<string>) => {
@@ -15,12 +15,12 @@ const Presenter = () => {
   }, [])
 
   return (
-    <div>
-      <span className="text-3xl font-bold text-white">
+    <div className="prueba">
+      <p className="font-bold text-white">
         {ReactHtmlParser(content)}
-      </span>
+      </p>
       <button
-        className="text-gray-500"
+        className="bg-black"
         onClick={() => {
           if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen()
@@ -29,10 +29,10 @@ const Presenter = () => {
           }
         }}
       >
-        [ ]
+        [ Full ]
       </button>
     </div>
   )
 }
 
-export default Presenter
+export default HomeView

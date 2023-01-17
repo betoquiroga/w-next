@@ -1,5 +1,7 @@
 import { io } from "socket.io-client"
 
-export const socket = io("http://192.168.100.12:4001", {
+const WS_HOST = process.env.NEXT_PUBLIC_WS_HOST
+
+export const socket = io(WS_HOST, {
   transports: ["websocket", "polling"],
 })
