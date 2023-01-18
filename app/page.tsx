@@ -1,5 +1,5 @@
 import HomeView from "@modules/Home/HomeView"
 
 export default function Page() {
-  return <div><HomeView /></div>
+  return <HomeView />
 }

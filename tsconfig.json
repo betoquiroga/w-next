@@ -2,7 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@modules/*": ["public/modules/*"]
+      "@modules/*": ["public/modules/*"],
+      "@components/*": ["public/components/*"],
+      "@icons/*": ["public/common/Icons/*"],
+      "@interfaces/*": ["public/common/Interfaces/*"]
     },
     "target": "es5",
     "lib": [

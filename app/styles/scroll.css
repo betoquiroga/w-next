@@ -1,0 +1,28 @@
+:root {
+  --primary: #0C131C;
+  --secondary: #435965;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  @apply w-4;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-ww-content;
+  @apply rounded;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-ww-scroll;
+  @apply rounded-2xl;
+  @apply border-4;
+  @apply border-solid;
+  @apply border-ww-content;
+}

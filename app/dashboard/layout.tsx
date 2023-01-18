@@ -1,3 +1,5 @@
+import MainMenu from "@components/Navigation/MainMenu"
+
 export default function RootLayout({
   children,
 }: {
@@ -6,7 +8,10 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body>{children}</body>
+      <body className="dashboard">
+        <MainMenu />
+        <main>{children}</main>
+      </body>
     </html>
   )
 }
