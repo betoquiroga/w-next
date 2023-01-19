@@ -1,4 +1,4 @@
-const Config = () => {
+const ConfigIcon = () => {
   return (
     <svg
       width="16"
@@ -17,4 +17,4 @@ const Config = () => {
   )
 }
 
-export default Config
+export default ConfigIcon

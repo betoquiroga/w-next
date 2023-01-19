@@ -1,9 +1,4 @@
-import Bible from "@icons/bible"
-import Config from "@icons/config"
-import Menu from "@icons/menu"
-import Photo from "@icons/photo"
-import Profile from "@icons/profile"
-import Song from "@icons/song"
+import { Bible, Config, Menu, Photo, Profile, Song } from "@icons/index"
 import MainMenuItem from "./MainMenuItem"
 
 const MainMenu = () => {

@@ -1,4 +1,4 @@
-const Profile = () => {
+const ProfileIcon = () => {
   return (
     <svg
       width="16"
@@ -17,4 +17,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default ProfileIcon

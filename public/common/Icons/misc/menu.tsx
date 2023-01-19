@@ -1,4 +1,4 @@
-const Menu = () => {
+const MenuIcon = () => {
   return (
     <svg
       width="16"
@@ -17,4 +17,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export default MenuIcon

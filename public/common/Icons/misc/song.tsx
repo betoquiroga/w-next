@@ -1,4 +1,4 @@
-const Song = () => {
+const SongIcon = () => {
   return (
     <svg
       width="16"
@@ -17,4 +17,4 @@ const Song = () => {
   )
 }
 
-export default Song
+export default SongIcon

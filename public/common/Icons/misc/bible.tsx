@@ -1,4 +1,4 @@
-const Bible = () => {
+const BibleIcon = () => {
   return (
     <svg
       width="16"
@@ -17,4 +17,4 @@ const Bible = () => {
   )
 }
 
-export default Bible
+export default BibleIcon

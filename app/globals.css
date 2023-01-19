@@ -7,4 +7,5 @@
 
 html {
   @apply bg-ww-main;
+  @apply text-ww-normal;
 }

@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body className="dashboard">
+      <body>
         <MainMenu />
         <main>{children}</main>
       </body>
