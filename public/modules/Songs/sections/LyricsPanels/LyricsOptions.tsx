@@ -1,8 +1,9 @@
 import { Bible, Config, Photo, Profile, Song } from "@icons/index"
 
-const SongsOptions = () => {
+const LyricsOptions = () => {
   return (
     <div className="pb-4 flex justify-between w-full">
+      <span>Live edit</span>
       <div className="grid-cols-5 grid gap-4 self-center">
         <Song />
         <Bible />
@@ -10,9 +11,8 @@ const SongsOptions = () => {
         <Config />
         <Profile />
       </div>
-      <span>Ordenar por</span>
     </div>
   )
 }
 
-export default SongsOptions
+export default LyricsOptions

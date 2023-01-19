@@ -1,6 +1,6 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
-import SongsPanel from "./SongsPanels/SongsPanel"
+import LyricsPanel from "./LyricsPanels/LyricsPanel"
 
 const LyricsSection = () => {
   return (
@@ -8,7 +8,7 @@ const LyricsSection = () => {
       <Tab.Group>
         <TabsHeader items={["Letras", "Detalles", "Configuración"]} />
         <Tab.Panels className="p-4">
-          <SongsPanel />
+          <LyricsPanel />
           <Tab.Panel>Aquí irán los listados creados</Tab.Panel>
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>
         </Tab.Panels>
