@@ -4,7 +4,6 @@ import { SetStateAction, useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
 import ReactHtmlParser from "react-html-parser"
 
-
 const HomeView = () => {
   const [content, setContent] = useState<string>("... nothing ...")
 
@@ -16,9 +15,7 @@ const HomeView = () => {
 
   return (
     <div className="prueba">
-      <p className="font-bold text-white">
-        {ReactHtmlParser(content)}
-      </p>
+      <p className="font-bold text-white">{ReactHtmlParser(content)}</p>
       <button
         className="bg-black"
         onClick={() => {

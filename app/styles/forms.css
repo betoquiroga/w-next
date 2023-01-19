@@ -1,0 +1,3 @@
+.input {
+  @apply mb-2 w-full p-3 focus:outline-none focus-visible:outline-none bg-ww-alt rounded-lg;
+}

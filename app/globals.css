@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @import "./styles/scroll.css";
+@import "./styles/forms.css";
 @import "./styles/prueba.css";
+
 
 html {
   @apply bg-ww-main;
