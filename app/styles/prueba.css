@@ -9,11 +9,15 @@
   align-items: center;
 }
 
-.prueba p {
+.prueba p, .prueba span {
   font-size: 4rem;
   line-height: initial;
   text-align: center;
   text-shadow: 0px 3px 3px black;
+}
+
+.prueba span {
+  justify-content: center;
 }
 
 .prueba button {
