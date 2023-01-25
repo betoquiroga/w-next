@@ -5,7 +5,7 @@ import SongsSearch from "./SongsSearch"
 
 const SongsPanel = () => {
   return (
-    <Tab.Panel>
+    <Tab.Panel className="overflow-y-scroll">
       <SongsSearch />
       <SongsOptions />
       <SongList />

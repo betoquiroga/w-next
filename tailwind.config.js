@@ -5,9 +5,9 @@ module.exports = {
     extend: {
       colors: {
         "ww-main": "#040606",
-        "ww-content": "#0C131C",
+        "ww-content": "#0D1526",
         "ww-alt": "#253541",
-        "ww-scroll": "#435965",
+        "ww-scroll": "#253541",
         "ww-lighter": "#7D8D96",
         "ww-normal": "#EBECED",
         "ww-title": "#FFFFFF",

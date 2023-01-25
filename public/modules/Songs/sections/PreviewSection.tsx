@@ -4,7 +4,7 @@ import PreviewPanel from "./PreviewPanels/PreviewPanel"
 
 const PreviewSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-3 row-span-3">
+    <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
         <Tab.Panels className="p-4">

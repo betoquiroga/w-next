@@ -4,7 +4,7 @@ import StylePanel from "./StylePanels/StylePanel"
 
 const StyleSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-3 row-span-3">
+    <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
       <Tab.Group>
         <TabsHeader items={["Estilos", "Ajustes del estilo"]} />
         <Tab.Panels className="p-4">

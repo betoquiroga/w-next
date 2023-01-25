@@ -5,10 +5,11 @@ const PreviewOptions = () => {
         <label className="mb-4" htmlFor="transicion">
           Transición{" "}
         </label>
-        <select name="" id="" className="input mt-2">
-          <option value="default" selected>
-            Del estilo (Fade)
-          </option>
+        <select name="" id="" className="input mt-2" defaultValue="default">
+          <option value="default">Del estilo (Fade)</option>
+          <option value="default">Auto</option>
+          <option value="default">Black & white</option>
+          <option value="default">Disappear</option>
         </select>
       </div>
       <div>
@@ -16,7 +17,7 @@ const PreviewOptions = () => {
           Duración de la transición
         </label>
         <input
-          type="text"
+          type="number"
           id="duration"
           placeholder="Milisegundos"
           className="input mt-2"

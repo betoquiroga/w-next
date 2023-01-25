@@ -1,4 +1,7 @@
+import { Manrope } from "@next/font/google"
 import "./globals.css"
+
+const manrope = Manrope({ subsets: ["latin"] })
 
 export default function RootLayout({
   children,
@@ -8,7 +11,7 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body>{children}</body>
+      <body className={manrope.className}>{children}</body>
     </html>
   )
 }
