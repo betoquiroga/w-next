@@ -4,8 +4,9 @@
     "paths": {
       "@modules/*": ["public/modules/*"],
       "@components/*": ["public/components/*"],
-      "@icons/*": ["public/common/Icons/*"],
-      "@interfaces/*": ["public/common/Interfaces/*"]
+      "@icons/*": ["public/common/icons/*"],
+      "@interfaces/*": ["public/common/interfaces/*"],
+      "@services/*": ["public/common/services/*"]
     },
     "target": "es5",
     "lib": [

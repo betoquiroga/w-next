@@ -1,4 +1,4 @@
-import { Bible, Config, Menu, Photo, Profile, Song } from "@icons/index"
+import { Bible, Config, Menu, Photo, Profile, Song } from "public/common/icons/index"
 import MainMenuItem from "./MainMenuItem"
 
 const MainMenu = () => {

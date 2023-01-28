@@ -1,4 +1,4 @@
-import { IconSvg } from "@interfaces/icon.interface"
+import { IconSvg } from "public/common/interfaces/icon.interface"
 import classNames from "classnames"
 import Link from "next/link"
 

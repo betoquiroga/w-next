@@ -1,4 +1,4 @@
-import { Bible, Config, Photo, Profile, Song } from "@icons/index"
+import { Bible, Config, Photo, Profile, Song } from "public/common/icons/index"
 
 const SongsOptions = () => {
   return (
