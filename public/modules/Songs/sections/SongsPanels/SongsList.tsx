@@ -5,7 +5,7 @@ const SongList = ({ data }: SongListProps) => {
   return (
     <div className="songs">
       {data.map((i) => (
-        <SongsItem key={i.id} title={i.title} author={i.author} />
+        <SongsItem key={i.id} id={i.id} title={i.title} author={i.author} />
       ))}
     </div>
   )
