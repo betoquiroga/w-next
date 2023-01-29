@@ -1,26 +1,18 @@
+import { Song } from "@interfaces/song.interface"
 import SongsItem from "./SongsItem"
 
-const SongList = () => {
+const SongList = ({ data }: SongListProps) => {
   return (
     <div className="songs">
-      <SongsItem
-        title="El Dios que Adoramos"
-        author="La IBI & Gracia Soberana"
-      />
-      <SongsItem
-        title="El Dios que Adoramos"
-        author="La IBI & Gracia Soberana"
-      />
-      <SongsItem
-        title="El Dios que Adoramos"
-        author="La IBI & Gracia Soberana"
-      />
-      <SongsItem
-        title="El Dios que Adoramos"
-        author="La IBI & Gracia Soberana"
-      />
+      {data.map((i) => (
+        <SongsItem key={i.id} title={i.title} author={i.author} />
+      ))}
     </div>
   )
+}
+
+type SongListProps = {
+  data: Array<Song>
 }
 
 export default SongList

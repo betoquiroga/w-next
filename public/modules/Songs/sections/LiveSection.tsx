@@ -2,7 +2,7 @@ import LiveItem from "./LivePanel/LiveItem"
 
 const LiveSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-10 p-4 overflow-y-scroll">
+    <div className="bg-ww-content rounded col-span-10 p-4">
       <div className="flex gap-6">
         <LiveItem
           title="Pantalla Principal - TV"
