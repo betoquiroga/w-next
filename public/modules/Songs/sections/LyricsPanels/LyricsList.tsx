@@ -4,7 +4,7 @@ import LyricsItem from "./LyricsItem"
 const LyricsList = ({ data }: LyricsListProps) => {
   return (
     <div className="songs border-t-2 border-t-ww-alt">
-      {data.lyrics.map((i) => (
+      {data?.lyrics.map((i) => (
         <LyricsItem key={i.order} content={i.content} />
       ))}
     </div>
@@ -12,7 +12,7 @@ const LyricsList = ({ data }: LyricsListProps) => {
 }
 
 type LyricsListProps = {
-  data: Lyric
+  data: Lyric | undefined
 }
 
 export default LyricsList

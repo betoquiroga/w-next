@@ -5,7 +5,7 @@ import { socket } from "../../../socket/mainSocket"
 import ReactHtmlParser from "react-html-parser"
 
 const HomeView = () => {
-  const [content, setContent] = useState<string>("... nothing ...")
+  const [content, setContent] = useState<string>("")
 
   useEffect(() => {
     socket.on("message", (message: SetStateAction<string>) => {

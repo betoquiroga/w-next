@@ -1,9 +1,8 @@
-import { LyricsIdContext } from "public/context/LyricsIdContext"
+import { LyricsIdContext } from "public/common/context/LyricsIdContext"
 import { useContext } from "react"
 
 const SongsItem = ({ id, title, author }: SongsItemProps) => {
   const { setLyricsId } = useContext(LyricsIdContext)
-
   const changeSong = (id: number) => {
     setLyricsId(id)
   }
