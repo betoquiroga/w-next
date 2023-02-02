@@ -2,7 +2,7 @@ import { socket } from "socket/mainSocket"
 
 const LyricsItem = ({ content }: LyricsItemProps) => {
   const addMessage = (e: React.SyntheticEvent) => {
-    socket.emit("message", e.currentTarget.innerHTML)
+    socket.emit("lyric", e.currentTarget.innerHTML)
   }
 
   return (

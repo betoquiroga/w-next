@@ -1,20 +1,29 @@
 "use client"
 
-import { SetStateAction, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
 import ReactHtmlParser from "react-html-parser"
+import { StyleContext } from "@context/StyleContext"
 
 const HomeView = () => {
+  const { style } = useContext(StyleContext)
   const [content, setContent] = useState<string>("")
+  const [styleData, setStyleData] = useState<string>(style.image)
 
   useEffect(() => {
-    socket.on("message", (message: SetStateAction<string>) => {
+    socket.on("lyric", (message: string) => {
       setContent(message)
+    })
+    socket.on("style", (data: string) => {
+      setStyleData(JSON.parse(data).image)
     })
   }, [])
 
   return (
-    <div className="prueba">
+    <div
+      className="prueba bg-cover"
+      style={{ backgroundImage: `url('${styleData}')` }}
+    >
       <p className="font-bold text-white">{ReactHtmlParser(content)}</p>
       <button
         className="bg-black"

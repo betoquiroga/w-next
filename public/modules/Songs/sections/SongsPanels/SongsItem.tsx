@@ -1,15 +1,12 @@
-import { LyricsIdContext } from "public/common/context/LyricsIdContext"
+import { LyricsContext } from "@context/LyricsContext"
 import { useContext } from "react"
 
 const SongsItem = ({ id, title, author }: SongsItemProps) => {
-  const { setLyricsId } = useContext(LyricsIdContext)
-  const changeSong = (id: number) => {
-    setLyricsId(id)
-  }
+  const { setLyricsId } = useContext(LyricsContext)
 
   return (
     <div
-      onClick={() => changeSong(id)}
+      onClick={() => setLyricsId(id)}
       className="song border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer"
     >
       <p className="text-ww-normal">{title}</p>

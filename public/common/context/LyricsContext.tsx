@@ -9,9 +9,9 @@ import {
 } from "react"
 import { getLyrics } from "../api/songs/lyrics.api"
 
-const LyricsIdContext = createContext({} as LyricsIdContextProps)
+const LyricsContext = createContext({} as LyricsContextProps)
 
-const LyricsIdProvider = ({ children }: LyricsIdProviderProps) => {
+const LyricsProvider = ({ children }: LyricsProviderProps) => {
   const [lyricsId, setLyricsId] = useState(1)
   const { data, isLoading, isError, refetch } = useQuery<Lyric, Error>(
     [`CURRENT_SONG_LYRICS-${lyricsId}`],
@@ -22,15 +22,15 @@ const LyricsIdProvider = ({ children }: LyricsIdProviderProps) => {
   }, [lyricsId])
 
   return (
-    <LyricsIdContext.Provider
+    <LyricsContext.Provider
       value={{ lyricsId, setLyricsId, data, isLoading, isError }}
     >
       {children}
-    </LyricsIdContext.Provider>
+    </LyricsContext.Provider>
   )
 }
 
-type LyricsIdContextProps = {
+type LyricsContextProps = {
   lyricsId: number
   setLyricsId: Dispatch<SetStateAction<number>>
   data: Lyric | undefined
@@ -38,8 +38,8 @@ type LyricsIdContextProps = {
   isError: boolean
 }
 
-type LyricsIdProviderProps = {
+type LyricsProviderProps = {
   children: React.ReactNode
 }
 
-export { LyricsIdContext, LyricsIdProvider }
+export { LyricsContext, LyricsProvider }

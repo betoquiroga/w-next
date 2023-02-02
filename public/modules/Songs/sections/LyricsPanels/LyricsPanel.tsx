@@ -1,11 +1,11 @@
+import { LyricsContext } from "@context/LyricsContext"
 import { Tab } from "@headlessui/react"
-import { LyricsIdContext } from "public/common/context/LyricsIdContext"
 import { useContext } from "react"
 import LyricsList from "./LyricsList"
 import LyricsOptions from "./LyricsOptions"
 
 const LyricsPanel = () => {
-  const { data, isLoading, isError } = useContext(LyricsIdContext)
+  const { data, isLoading, isError } = useContext(LyricsContext)
 
   if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>

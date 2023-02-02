@@ -6,7 +6,8 @@
       "@components/*": ["public/components/*"],
       "@icons/*": ["public/common/icons/*"],
       "@interfaces/*": ["public/common/interfaces/*"],
-      "@services/*": ["public/common/services/*"]
+      "@services/*": ["public/common/services/*"],
+      "@context/*": ["public/common/context/*"]
     },
     "target": "es5",
     "lib": [
