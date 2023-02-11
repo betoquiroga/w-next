@@ -3,7 +3,7 @@ import { GenericResponse } from "@interfaces/response.interface"
 import HttpRequest from "@services/http-request"
 import { ServiceResponse } from "@services/response"
 
-const ALL_LYRICS_ENDPOINT = "lyrics"
+const ALL_LYRICS_ENDPOINT = "lyrics/song"
 
 export default class LyricsService extends HttpRequest {
   async getLyrics(id: number) {
