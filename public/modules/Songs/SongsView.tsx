@@ -7,7 +7,7 @@ import StyleSection from "./sections/StyleSection"
 
 const SongsView = () => {
   return (
-    <div className="grid grid-cols-12 gap-4 p-4 w-full justify-items-stretch pl-[5rem] grid-rows-[40rem_minmax(18rem,_1fr)]">
+    <div className="grid grid-cols-12 gap-4 p-4 w-full justify-items-stretch pl-[5rem] grid-rows-[47rem_minmax(18rem,_1fr)]">
       <SongsSection />
       <LyricsSection />
       <StyleSection />
