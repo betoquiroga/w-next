@@ -12,6 +12,6 @@ export default class StyleService extends HttpRequest {
     })
 
     const response = await this.get<GenericResponse<Style[]>>()
-    return new ServiceResponse(response.data.data)
+    return new ServiceResponse(response.data)
   }
 }

@@ -10,10 +10,12 @@
 }
 
 .prueba p, .prueba span {
-  font-size: 4rem;
+  --sha-posi: 3px;
+  --sha-nega: -3px;
+  font-size: 6rem;
   line-height: initial;
   text-align: center;
-  text-shadow: 0px 3px 3px black;
+  text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .prueba span {
@@ -29,12 +31,4 @@
   padding: 5px;
   border-radius: 5px;
   color: #d1d1d1;
-}
-
-.floating {
-  transform: scale(.2);
-  position: fixed;
-  z-index: 9;
-  right: 25px;
-  top: 25px;
 }

@@ -1,0 +1,43 @@
+
+.chroma {
+  background: rgb(0, 196, 16);
+  width: 100vw;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+
+}
+
+.chroma p, .chroma span {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: -2px -2px 0 black, -2px 2px 0 black, 2px -2px 0 black, 2px 2px 0 black
+}
+
+.chroma span {
+  justify-content: center;
+}
+
+.chroma button {
+  position: fixed;
+  z-index: 9;
+  top: 10px;
+  left: 10px;
+  background: gray;
+  padding: 5px;
+  border-radius: 5px;
+  color: #d1d1d1;
+}
+
+.floating {
+  transform: scale(.2);
+  position: fixed;
+  z-index: 9;
+  right: 25px;
+  top: 25px;
+}

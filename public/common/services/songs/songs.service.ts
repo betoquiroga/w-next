@@ -12,6 +12,6 @@ export default class SongsService extends HttpRequest {
     })
 
     const response = await this.get<GenericResponse<Song[]>>()
-    return new ServiceResponse(response.data.data)
+    return new ServiceResponse(response.data)
   }
 }
