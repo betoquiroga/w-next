@@ -8,7 +8,7 @@ const LyricsItem = ({ content }: LyricsItemProps) => {
   return (
     <div className="song hover:bg-ww-alt cursor-pointer">
       <p className="text-ww-normal p-4" onClick={addMessage}>
-        {content.map((line) => (
+        {content.split("\n").map((line) => (
           <span key={line} className="flex">
             {line}
           </span>
@@ -19,7 +19,7 @@ const LyricsItem = ({ content }: LyricsItemProps) => {
 }
 
 type LyricsItemProps = {
-  content: Array<string>
+  content: string
 }
 
 export default LyricsItem

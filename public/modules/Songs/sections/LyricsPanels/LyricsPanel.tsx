@@ -13,7 +13,7 @@ const LyricsPanel = () => {
   return (
     <Tab.Panel>
       <LyricsOptions />
-      <LyricsList data={data} />
+      {data && <LyricsList data={data} />}
     </Tab.Panel>
   )
 }

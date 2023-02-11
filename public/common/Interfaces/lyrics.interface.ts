@@ -3,7 +3,7 @@ import { Song } from "./song.interface"
 export interface Lyric {
   id: number
   songId: number
-  lyrics: Array<LyricContent>
+  verse: string
   song: Song
 }
 

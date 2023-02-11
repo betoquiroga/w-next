@@ -12,6 +12,6 @@ export default class LyricsService extends HttpRequest {
     })
 
     const response = await this.get<GenericResponse<Lyric>>()
-    return new ServiceResponse(response.data.data)
+    return new ServiceResponse(response.data)
   }
 }
