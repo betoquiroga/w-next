@@ -4,6 +4,7 @@
     "paths": {
       "@modules/*": ["public/modules/*"],
       "@components/*": ["public/components/*"],
+      "@icons/*": ["public/common/icons/*"],
       "@interfaces/*": ["public/common/interfaces/*"],
       "@services/*": ["public/common/services/*"],
       "@context/*": ["public/common/context/*"]

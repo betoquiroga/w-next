@@ -1,9 +1,9 @@
-import BibleIcon from "public/common/Icons/misc/bible"
-import ConfigIcon from "public/common/Icons/misc/config"
-import MenuIcon from "public/common/Icons/misc/menu"
-import PhotoIcon from "public/common/Icons/misc/photo"
-import ProfileIcon from "public/common/Icons/misc/profile"
-import SongIcon from "public/common/Icons/misc/song"
+import BibleIcon from "@icons/misc/bible"
+import ConfigIcon from "@icons/misc/config"
+import MenuIcon from "@icons/misc/menu"
+import PhotoIcon from "@icons/misc/photo"
+import ProfileIcon from "@icons/misc/profile"
+import SongIcon from "@icons/misc/song"
 import MainMenuItem from "./MainMenuItem"
 
 const MainMenu = () => {
