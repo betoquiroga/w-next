@@ -4,7 +4,7 @@ import LyricsItem from "./LyricsItem"
 const LyricsList = ({ data }: LyricsListProps) => {
   return (
     <div className="songs border-t-2 border-t-ww-alt">
-      {data?.map((i) => (
+      {data?.map((i: Lyric) => (
         <LyricsItem key={i.id} content={i.verse} />
       ))}
     </div>
@@ -12,7 +12,8 @@ const LyricsList = ({ data }: LyricsListProps) => {
 }
 
 type LyricsListProps = {
-  data: Lyric[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
 }
 
 export default LyricsList

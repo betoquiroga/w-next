@@ -1,4 +1,3 @@
-import { GenericResponse } from "@interfaces/response.interface"
 import { Song } from "@interfaces/song.interface"
 import HttpRequest from "@services/http-request"
 import { ServiceResponse } from "@services/response"
@@ -11,7 +10,7 @@ export default class SongsService extends HttpRequest {
       endpoint: ALL_SONGS_ENDPOINT,
     })
 
-    const response = await this.get<GenericResponse<Song[]>>()
+    const response = await this.get<Song[]>()
     return new ServiceResponse(response.data)
   }
 }

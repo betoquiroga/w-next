@@ -4,7 +4,7 @@ import SongsItem from "./SongsItem"
 const SongList = ({ data }: SongListProps) => {
   return (
     <div className="songs">
-      {data.map((i) => (
+      {data.map((i: Song) => (
         <SongsItem key={i.id} id={i.id} title={i.title} author={i.author} />
       ))}
     </div>
@@ -12,7 +12,7 @@ const SongList = ({ data }: SongListProps) => {
 }
 
 type SongListProps = {
-  data: Array<Song>
+  data: Song[]
 }
 
 export default SongList
