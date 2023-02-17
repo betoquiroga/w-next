@@ -12,6 +12,16 @@ export interface MessageResponse {
 }
 
 export interface ErrorResponse {
-  code: string
+  name: string
   message: string
+  stack?: string
+  response: {
+    config: {
+      url: string
+      method: string
+    }
+    data: { message: string; errors: { code: string; message: string }[] }
+    status: number
+    statusText: string
+  }
 }

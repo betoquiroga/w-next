@@ -1,6 +1,6 @@
 import { HttpRequestParam } from "public/common/interfaces/http-request"
 import axios, { AxiosResponse } from "axios"
-import { WW_API_DOMAIN } from "../constants/domains/domains"
+import { WW_API_DOMAIN } from "../constants/domains"
 
 export default class HttpRequest implements HttpRequestParam {
   constructor(
