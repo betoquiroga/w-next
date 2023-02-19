@@ -7,7 +7,7 @@ export interface AuthenticateResponse extends Response {
 }
 
 export interface RegisterResponse extends Response {
-  data: Data
+  token: string
 }
 
 export interface IsAuthenticatedResponse extends Response {

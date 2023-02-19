@@ -7,8 +7,10 @@ import { useState } from "react"
 import { joiResolver } from "@hookform/resolvers/joi/dist/joi"
 import { LoginFormSchema } from "./helpers/login-form-schema.helper"
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 
 const LoginView = () => {
+  const router = useRouter()
   const [messageError, setMessageError] = useState<string>()
 
   const {
@@ -27,8 +29,8 @@ const LoginView = () => {
     {
       onSuccess: async () => {
         await queryClient.cancelQueries([IS_AUTHENTICATED])
-
         queryClient.setQueryData([IS_AUTHENTICATED], true)
+        router.push("/songs")
       },
       onError: (err: ErrorResponse) => {
         setMessageError(err.response.data.errors[0].message)

@@ -9,7 +9,7 @@ import { AxiosResponse } from "axios"
 
 const VALIDATE_TOKEN_ENDPOINT = "validate-tokens"
 const AUTHENTICATE_ENDPOINT = "users/login"
-const REGISTER_ENDPOINT = "registry"
+const REGISTER_ENDPOINT = "users"
 
 export default class AuthenticationService extends HttpRequest {
   public authenticate(

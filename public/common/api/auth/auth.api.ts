@@ -20,7 +20,7 @@ export const login = (token: string) => localStorage.setItem(TOKEN_NAME, token)
 
 export const authenticate = async (username: string, password: string) => {
   const response = await service.authenticate(username, password)
-  const jwt = response.data.token
+  const jwt = response.data?.token
 
   if (!jwt) {
     logout()
@@ -35,7 +35,7 @@ export const authenticate = async (username: string, password: string) => {
 
 export const registration = async (payload: RegisterPayload) => {
   const response = await service.register(payload)
-  const jwt = response.data?.data?.token
+  const jwt = response.data?.token
 
   if (!jwt) {
     logout()

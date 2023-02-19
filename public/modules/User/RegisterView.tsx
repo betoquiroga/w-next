@@ -1,64 +1,79 @@
+import { ErrorResponse } from "@interfaces/http-response"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
-import { useState, FormEvent, ChangeEvent } from "react"
+import { registration } from "public/common/api/auth/auth.api"
+import { IS_AUTHENTICATED } from "public/common/constants/auth"
+import { useState } from "react"
+import { joiResolver } from "@hookform/resolvers/joi/dist/joi"
+import { useForm } from "react-hook-form"
+import { RegisterFormSchema } from "./helpers/register-form-schema.helper"
+import { RegisterPayload } from "@interfaces/auth-service.interface"
+import { useRouter } from "next/navigation"
 
 const RegisterView = () => {
-  const [fullName, setFullName] = useState("")
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordVerify, setPasswordVerify] = useState("")
+  const router = useRouter()
+  const [messageError, setMessageError] = useState<string>()
 
-  const handleFullNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value)
+  const {
+    register,
+    handleSubmit: onSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormValues>({
+    resolver: joiResolver(RegisterFormSchema),
+    mode: "onChange",
+  })
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading } = useMutation(
+    async ({ name, username, email, password }: RegisterPayload) =>
+      await registration({ name, email, username, password }),
+    {
+      onSuccess: async () => {
+        await queryClient.cancelQueries([IS_AUTHENTICATED])
+
+        queryClient.setQueryData([IS_AUTHENTICATED], true)
+        router.push("/login")
+      },
+      onError: (err: ErrorResponse) => {
+        setMessageError(err.response.data.errors[0].message)
+      },
+    }
+  )
+
+  const handleSubmit = async ({
+    name,
+    email,
+    username,
+    password,
+  }: RegisterFormValues): Promise<void> => {
+    mutate({ name, email, username, password })
   }
 
-  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value)
-  }
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
-  const handlePasswordVerifyChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPasswordVerify(e.target.value)
-  }
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // aquí agregarías el código para enviar los datos de registro a tu servidor
-  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-ww-main">
       <div className="bg-ww-content p-16 rounded shadow-md w-[30rem]">
-        <h1 className="text-2xl font-bold mb-6">Crea tu cuenta</h1>
-        <form onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-bold mb-6">Inicia sesión</h1>
+        <form onSubmit={onSubmit(handleSubmit)}>
           <div className="mb-4">
-            <label htmlFor="fullName" className="block text-ww-normal mb-2">
+            <label htmlFor="name" className="block text-ww-normal mb-2">
               Nombre completo
             </label>
             <input
               type="text"
-              id="fullName"
-              value={fullName}
-              onChange={handleFullNameChange}
+              id="name"
               className="appearance-none border rounded w-full py-2 px-3 text-ww-main leading-tight focus:outline-none focus:shadow-outline"
+              {...register("name")}
             />
           </div>
           <div className="mb-4">
             <label htmlFor="username" className="block text-ww-normal mb-2">
-              Nombre de usuario
+              Nombre de Usuario
             </label>
             <input
               type="text"
               id="username"
-              value={username}
-              onChange={handleUsernameChange}
               className="appearance-none border rounded w-full py-2 px-3 text-ww-main leading-tight focus:outline-none focus:shadow-outline"
+              {...register("username")}
             />
           </div>
           <div className="mb-4">
@@ -66,42 +81,41 @@ const RegisterView = () => {
               Correo electrónico
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
-              value={email}
-              onChange={handleEmailChange}
               className="appearance-none border rounded w-full py-2 px-3 text-ww-main leading-tight focus:outline-none focus:shadow-outline"
+              {...register("email")}
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-6">
             <label htmlFor="password" className="block text-ww-normal mb-2">
               Contraseña
             </label>
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={handlePasswordChange}
+              {...register("password")}
               className="appearance-none border rounded w-full py-2 px-3 text-ww-main leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-ww-normal mb-2">
-              Repetir Contraseña
+          <div className="mb-6">
+            <label
+              htmlFor="passwordRepeat"
+              className="block text-ww-normal mb-2"
+            >
+              Repite la contraseña
             </label>
             <input
               type="password"
-              id="password"
-              value={passwordVerify}
-              onChange={handlePasswordVerifyChange}
+              id="passwordRepeat"
               className="appearance-none border rounded w-full py-2 px-3 text-ww-main leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <button
             type="submit"
-            className="bg-ww-green-700 hover:bg-ww-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+            className="bg-ww-green-700 hover:bg-ww-green-600 text-ww-normal font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           >
-            Regístrate
+            {isLoading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
         <div className="text-center mt-4">
@@ -113,6 +127,13 @@ const RegisterView = () => {
       </div>
     </div>
   )
+}
+
+type RegisterFormValues = {
+  name: string
+  username: string
+  email: string
+  password: string
 }
 
 export default RegisterView
