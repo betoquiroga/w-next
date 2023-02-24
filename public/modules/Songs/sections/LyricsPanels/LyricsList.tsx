@@ -4,9 +4,11 @@ import LyricsItem from "./LyricsItem"
 const LyricsList = ({ data }: LyricsListProps) => {
   return (
     <div className="songs border-t-2 border-t-ww-alt">
-      {data?.map((i: Lyric) => (
-        <LyricsItem key={i.id} content={i.verse} />
-      ))}
+      {data
+        ?.sort((a: Lyric, b: Lyric) => a.order - b.order)
+        .map((i: Lyric) => (
+          <LyricsItem key={i.id} content={i.verse} id={i.id} />
+        ))}
     </div>
   )
 }

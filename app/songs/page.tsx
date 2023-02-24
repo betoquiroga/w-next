@@ -1,11 +1,11 @@
 "use client"
 import SongsView from "@modules/Songs/SongsView"
-import { LyricsProvider } from "@context/LyricsContext"
+import { SongProvider } from "@context/SongsContext"
 
 export default function Songs() {
   return (
-    <LyricsProvider>
+    <SongProvider>
       <SongsView />
-    </LyricsProvider>
+    </SongProvider>
   )
 }

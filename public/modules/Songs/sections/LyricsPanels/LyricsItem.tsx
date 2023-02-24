@@ -1,12 +1,24 @@
+import { ActiveLyricContext } from "@context/ActiveLyricContext"
+import LyricsService from "@services/lyrics/lyrics.service"
+import classNames from "classnames"
+import { useContext } from "react"
 import { socket } from "socket/mainSocket"
 
-const LyricsItem = ({ content }: LyricsItemProps) => {
+const LyricsItem = ({ content, id }: LyricsItemProps) => {
+  const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
+  const lyricsService = new LyricsService()
   const addMessage = (e: React.SyntheticEvent) => {
+    setActiveLyricId(id)
+    lyricsService.setActive(id)
     socket.emit("lyric", e.currentTarget.innerHTML)
   }
 
   return (
-    <div className="song hover:bg-ww-alt cursor-pointer">
+    <div
+      className={classNames("song hover:bg-ww-alt cursor-pointer", {
+        "bg-ww-green-800 hover:bg-ww-green-800": activeLyricId === id,
+      })}
+    >
       <p className="text-ww-normal p-4" onClick={addMessage}>
         {content.split("\n").map((line) => (
           <span key={line} className="flex">
@@ -19,6 +31,7 @@ const LyricsItem = ({ content }: LyricsItemProps) => {
 }
 
 type LyricsItemProps = {
+  id: number
   content: string
 }
 

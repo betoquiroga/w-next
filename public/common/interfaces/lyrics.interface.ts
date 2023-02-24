@@ -3,4 +3,6 @@ export interface Lyric {
   songId: number
   verse: string
   song: number
+  order: number
+  active: boolean
 }

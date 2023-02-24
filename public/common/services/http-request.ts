@@ -42,6 +42,12 @@ export default class HttpRequest implements HttpRequestParam {
     })
   }
 
+  protected patch<T>(data: unknown): Promise<AxiosResponse<T>> {
+    return axios.patch(this.urlBuilder(), data, {
+      headers: this.headers,
+    })
+  }
+
   protected put<T>(data: unknown): Promise<AxiosResponse<T>> {
     return axios.put(this.urlBuilder(), data, {
       headers: this.headers,
