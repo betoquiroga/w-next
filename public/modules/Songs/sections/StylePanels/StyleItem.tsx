@@ -1,5 +1,5 @@
 import { StyleContext } from "@context/StyleContext"
-import { useContext } from "react"
+import { SyntheticEvent, useContext } from "react"
 import { socket } from "socket/mainSocket"
 
 const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
@@ -11,6 +11,11 @@ const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
     setStyle(data)
   }
 
+  const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement
+    target.src = "/images/styles/video.jpeg"
+  }
+
   return (
     <div className="song border-b-2 border-b-ww-alt last:border-none py-4 flex align-top">
       <img
@@ -18,6 +23,7 @@ const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
         src={image}
         alt={title}
         className="w-[7rem] mr-6 aspect-video hover:opacity-80 hover:cursor-pointer"
+        onError={handleError}
       />
       <div>
         <p className="text-ww-normal">{title}</p>

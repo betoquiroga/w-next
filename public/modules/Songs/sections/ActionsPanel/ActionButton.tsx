@@ -4,7 +4,7 @@ const ActionButton = ({ text, onClick }: ActionButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className="w-full bg-ww-alt transition-all py-2 px-4 rounded-lg mb-4"
+      className="w-full bg-ww-alt transition-all py-2 px-4 rounded-lg mb-4 hover:bg-ww-green-800"
     >
       {text}
     </button>

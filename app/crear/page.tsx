@@ -16,7 +16,11 @@ export default function Page() {
         active: false,
       }
       axios
-        .post("http://50.116.34.230:3040/lyrics", hi)
+        .post("http://localhost:3040/lyrics", hi, {
+          headers: {
+            Authorization: localStorage.getItem("tokenWW"),
+          },
+        })
         .then((resp) => console.log(resp))
     })
   }

@@ -6,7 +6,7 @@ const INITIAL_STATE: Style = {
   title: "Contexto espacial",
   type: "Imagen JPEG",
   details: "Manrope Black / 24px",
-  image: "/images/styles/sideral.jpeg",
+  image: "/images/styles/bonito.jpeg",
 }
 
 const StyleContext = createContext({} as StyleContextProps)

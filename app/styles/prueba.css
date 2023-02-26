@@ -1,6 +1,6 @@
 
 .prueba {
-  background: linear-gradient(to left, orange, red);
+  background: black;
   width: 100vw;
   overflow: hidden;
   height: 100vh;
@@ -9,10 +9,23 @@
   align-items: center;
 }
 
+.wallpaper {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.wallpaper img, .wallpaper video {
+  width: 100%;
+}
+
 .prueba p, .prueba span {
+  z-index: 1;
   --sha-posi: 3px;
   --sha-nega: -3px;
-  font-size: 6rem;
+  font-size: 8rem;
   line-height: initial;
   text-align: center;
   text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
@@ -26,9 +39,10 @@
   position: fixed;
   z-index: 9;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   background: gray;
   padding: 5px;
   border-radius: 5px;
   color: #d1d1d1;
+  opacity: .25;
 }
