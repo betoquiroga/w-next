@@ -1,16 +1,12 @@
+import { SongsContext } from "@context/SongsContext"
 import { Tab } from "@headlessui/react"
-import { Song } from "@interfaces/song.interface"
-import { useQuery } from "@tanstack/react-query"
-import { getSongs } from "public/common/api/songs/songs.api"
+import { useContext } from "react"
 import SongList from "./SongsList"
 import SongsOptions from "./SongsOptions"
 import SongsSearch from "./SongsSearch"
 
 const SongsPanel = () => {
-  const { data, isLoading, isError } = useQuery<Song[], Error>(
-    ["ALL_SONGS"],
-    getSongs
-  )
+  const { data, isLoading, isError } = useContext(SongsContext)
 
   if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>

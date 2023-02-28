@@ -9,7 +9,7 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
   const lyricsService = new LyricsService()
   const addMessage = (e: React.SyntheticEvent) => {
     setActiveLyricId(id)
-    lyricsService.setActive(id)
+    if (id > 0) lyricsService.setActive(id)
     socket.emit("lyric", e.currentTarget.innerHTML)
   }
 
@@ -19,9 +19,17 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
         "bg-ww-green-800 hover:bg-ww-green-800": activeLyricId === id,
       })}
     >
-      <p className="text-ww-normal p-4" onClick={addMessage}>
-        {content.split("\n").map((line) => (
-          <span key={line} className="flex">
+      <p
+        className={classNames("text-ww-normal p-4", {
+          "text-ww-green-300": id < 0,
+        })}
+        onClick={addMessage}
+      >
+        {content.split("\n").map((line, i) => (
+          <span
+            key={line}
+            className={classNames("flex", { "song-author": i > 0 && id < 0 })}
+          >
             {line}
           </span>
         ))}

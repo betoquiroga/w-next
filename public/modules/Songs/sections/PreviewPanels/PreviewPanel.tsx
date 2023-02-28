@@ -5,7 +5,7 @@ import PreviewOptions from "./PreviewOptions"
 
 const PreviewPanel = () => {
   return (
-    <Tab.Panel>
+    <Tab.Panel className="preview">
       <PreviewHeader text="Pantalla principal - TV" select />
       <PreviewCurrent />
       <PreviewHeader text="Opciones" />

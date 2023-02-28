@@ -5,14 +5,15 @@ const SongList = ({ data }: SongListProps) => {
   return (
     <div className="songs">
       {data.map((i: Song) => (
-        <SongsItem key={i.id} id={i.id} title={i.title} author={i.author} />
+        <SongsItem key={i.id} song={i} />
       ))}
     </div>
   )
 }
 
 type SongListProps = {
-  data: Song[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
 }
 
 export default SongList

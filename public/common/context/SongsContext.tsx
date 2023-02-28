@@ -1,4 +1,4 @@
-import { Lyric } from "@interfaces/lyrics.interface"
+import { Song } from "@interfaces/song.interface"
 import { useQuery } from "@tanstack/react-query"
 import {
   createContext,
@@ -7,33 +7,33 @@ import {
   useEffect,
   useState,
 } from "react"
-import { getLyrics } from "../api/songs/lyrics.api"
+import { getSongs } from "../api/songs/songs.api"
 
-const SongContext = createContext({} as SongContextProps)
+const SongsContext = createContext({} as SongContextProps)
 
-const SongProvider = ({ children }: SongProviderProps) => {
-  const [songId, setSongId] = useState(2)
-  const { data, isLoading, isError, refetch } = useQuery<Lyric, Error>(
-    [`CURRENT_SONG_LYRICS-${songId}`],
-    () => getLyrics(songId)
+const SongsProvider = ({ children }: SongProviderProps) => {
+  const [songId, setSongId] = useState(0)
+  const { data, isLoading, isError, refetch } = useQuery<Song[], Error>(
+    ["ALL_SONGS"],
+    getSongs
   )
   useEffect(() => {
     refetch()
   }, [songId])
 
   return (
-    <SongContext.Provider
+    <SongsContext.Provider
       value={{ songId, setSongId, data, isLoading, isError }}
     >
       {children}
-    </SongContext.Provider>
+    </SongsContext.Provider>
   )
 }
 
 type SongContextProps = {
   songId: number
   setSongId: Dispatch<SetStateAction<number>>
-  data: Lyric | undefined
+  data: Song[] | undefined
   isLoading: boolean
   isError: boolean
 }
@@ -42,4 +42,4 @@ type SongProviderProps = {
   children: React.ReactNode
 }
 
-export { SongContext, SongProvider }
+export { SongsContext, SongsProvider }

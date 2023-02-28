@@ -1,5 +1,5 @@
 import { ActiveLyricProvider } from "@context/ActiveLyricContext"
-import { SongContext } from "@context/SongsContext"
+import { SongContext } from "@context/SongContext"
 import { Tab } from "@headlessui/react"
 import { useContext } from "react"
 import LyricsList from "./LyricsList"

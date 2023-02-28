@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.wallpaper {
+.prueba .wallpaper {
   position: fixed;
   z-index: 0;
   top: 0;
@@ -25,7 +25,7 @@
   z-index: 1;
   --sha-posi: 3px;
   --sha-nega: -3px;
-  font-size: 8rem;
+  font-size: 5.5vw;
   line-height: initial;
   text-align: center;
   text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
@@ -45,4 +45,25 @@
   border-radius: 5px;
   color: #d1d1d1;
   opacity: .25;
+}
+
+.preview .current {
+  transform-origin: top left;
+  max-height: 320px;
+}
+
+.preview .prueba {
+  position: relative;
+  transform-origin: top left;
+  transform: scale(0.225);
+}
+
+.preview .wallpaper {
+  position: absolute;
+}
+
+.prueba .song-author{
+  font-size: 3.5vw;
+  font-weight: normal;
+  opacity: .7;
 }

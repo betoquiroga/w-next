@@ -1,17 +1,20 @@
-import { SongContext } from "@context/SongsContext"
+import { SongContext } from "@context/SongContext"
+import { Song } from "@interfaces/song.interface"
 import SongsService from "@services/songs/songs.service"
 import classNames from "classnames"
 import { useContext } from "react"
 
-const SongsItem = ({ id, title, author }: SongsItemProps) => {
+const SongsItem = ({ song }: SongsItemProps) => {
   const songService = new SongsService()
-  const { songId, setSongId } = useContext(SongContext)
+  const { songId, setSongId, setSong } = useContext(SongContext)
 
   const handleClick = async () => {
     setSongId(id)
+    setSong(song)
     await songService.setActive(id)
   }
 
+  const { id, title, author } = song
   return (
     <div
       onClick={handleClick}
@@ -27,9 +30,7 @@ const SongsItem = ({ id, title, author }: SongsItemProps) => {
 }
 
 type SongsItemProps = {
-  id: number
-  title: string
-  author: string
+  song: Song
 }
 
 export default SongsItem
