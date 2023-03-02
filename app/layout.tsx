@@ -1,11 +1,11 @@
 "use client"
 import "./globals.css"
 import Providers from "./providers"
-import { StyleProvider } from "@context/StyleContext"
-import { BooksProvider } from "@context/BookContext"
-import { SongProvider } from "@context/SongContext"
-import { SongsProvider } from "@context/SongsContext"
-import { ChapterProvider } from "@context/ChapterContext"
+import { StyleProvider } from "src/common/context/StyleContext"
+import { BooksProvider } from "src/common/context/BookContext"
+import { SongProvider } from "src/common/context/SongContext"
+import { SongsProvider } from "src/common/context/SongsContext"
+import { ChapterProvider } from "src/common/context/ChapterContext"
 
 export default function RootLayout({
   children,

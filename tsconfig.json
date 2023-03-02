@@ -2,12 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@modules/*": ["public/modules/*"],
-      "@components/*": ["public/components/*"],
-      "@icons/*": ["public/common/icons/*"],
-      "@interfaces/*": ["public/common/interfaces/*"],
-      "@services/*": ["public/common/services/*"],
-      "@context/*": ["public/common/context/*"]
+      "@modules/*": ["src/modules/*"],
+      "@components/*": ["src/components/*"],
+      "@icons/*": ["src/common/icons/*"],
+      "@interfaces/*": ["src/common/interfaces/*"],
+      "@services/*": ["src/common/services/*"],
+      "@context/*": ["src/common/context/*"]
     },
     "target": "es5",
     "lib": [
