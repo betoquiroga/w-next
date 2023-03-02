@@ -1,15 +1,17 @@
 import { IconSvg } from "public/common/interfaces/icon.interface"
 import classNames from "classnames"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
-const MainMenuItem = ({ icon, active }: MainMenuItemProps) => {
+const MainMenuItem = ({ icon, href }: MainMenuItemProps) => {
   const Icon = icon
+
   return (
     <Link
-      href="/"
+      href={href}
       className={classNames("w-full flex justify-center py-6 transition", {
-        "bg-ww-green-600": active,
-        "hover:bg-ww-alt": !active,
+        "bg-ww-green-600": usePathname() === href,
+        "hover:bg-ww-alt": usePathname() !== href,
       })}
     >
       <Icon />
@@ -19,7 +21,7 @@ const MainMenuItem = ({ icon, active }: MainMenuItemProps) => {
 
 type MainMenuItemProps = {
   icon: IconSvg
-  active?: boolean
+  href: string
 }
 
 export default MainMenuItem

@@ -2,6 +2,10 @@
 import "./globals.css"
 import Providers from "./providers"
 import { StyleProvider } from "@context/StyleContext"
+import { BooksProvider } from "@context/BookContext"
+import { SongProvider } from "@context/SongContext"
+import { SongsProvider } from "@context/SongsContext"
+import { ChapterProvider } from "@context/ChapterContext"
 
 export default function RootLayout({
   children,
@@ -12,9 +16,17 @@ export default function RootLayout({
     <html>
       <head />
       <body>
-        <StyleProvider>
-          <Providers>{children}</Providers>
-        </StyleProvider>
+        <Providers>
+          <BooksProvider>
+            <ChapterProvider>
+              <SongsProvider>
+                <SongProvider>
+                  <StyleProvider>{children}</StyleProvider>
+                </SongProvider>
+              </SongsProvider>
+            </ChapterProvider>
+          </BooksProvider>
+        </Providers>
       </body>
     </html>
   )
