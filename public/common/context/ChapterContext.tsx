@@ -1,7 +1,6 @@
 import { Chapter } from "@interfaces/chapter.interface"
 import { Verse } from "@interfaces/verses.interface"
 import axios from "axios"
-import jsdom from "jsdom"
 import {
   createContext,
   Dispatch,
