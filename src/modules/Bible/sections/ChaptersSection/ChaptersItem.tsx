@@ -1,14 +1,15 @@
 import { BookContext } from "src/common/context/BookContext"
 import { ChapterContext } from "src/common/context/ChapterContext"
 import { useContext } from "react"
+import classNames from "classnames"
 
-const ChaptersItem = ({ chapter }: ChaptersItemProps) => {
+const ChaptersItem = (props: ChaptersItemProps) => {
   const { book } = useContext(BookContext)
-  const { setChapter } = useContext(ChapterContext)
+  const { chapter, setChapter } = useContext(ChapterContext)
 
   const handleClick = async () => {
     setChapter({
-      chapter,
+      chapter: props.chapter,
       book,
     })
   }
@@ -16,9 +17,15 @@ const ChaptersItem = ({ chapter }: ChaptersItemProps) => {
   return (
     <div
       onClick={handleClick}
-      className="flex justify-center self-center bg-ww-scroll text-3xl p-4 hover:bg-ww-green-700 cursor-pointer"
+      className={classNames(
+        "flex justify-center self-center text-3xl p-4 hover:bg-ww-green-700 cursor-pointer",
+        {
+          "bg-ww-green-700": chapter.chapter === props.chapter,
+          "bg-ww-scroll": chapter.chapter !== props.chapter,
+        }
+      )}
     >
-      <span>{chapter}</span>
+      <span>{props.chapter}</span>
     </div>
   )
 }

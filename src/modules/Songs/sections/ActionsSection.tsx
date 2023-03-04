@@ -3,10 +3,6 @@ import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 
 const ActionsSection = () => {
-  const cleanScreen = () => {
-    socket.emit("lyric", "")
-  }
-
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") {
@@ -24,6 +20,11 @@ const ActionsSection = () => {
     })
   }, [])
 
+  const cleanScreen = () => {
+    socket.emit("lyric", "")
+    socket.emit("verse", "")
+  }
+
   const sendLogo = () => {
     cleanScreen()
     const data = {
@@ -34,6 +35,7 @@ const ActionsSection = () => {
       image: "/images/styles/logo.jpg",
     }
     socket.emit("style", JSON.stringify(data))
+    socket.emit("verse", "")
   }
 
   const sendMessageMode = () => {
@@ -46,6 +48,7 @@ const ActionsSection = () => {
       image: "/images/styles/arte-tv.jpg",
     }
     socket.emit("style", JSON.stringify(data))
+    socket.emit("verse", "")
   }
 
   const sendBlack = () => {
@@ -58,6 +61,7 @@ const ActionsSection = () => {
       image: "/images/styles/black.jpg",
     }
     socket.emit("style", JSON.stringify(data))
+    socket.emit("verse", "")
   }
 
   return (

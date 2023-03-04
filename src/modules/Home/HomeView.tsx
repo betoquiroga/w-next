@@ -5,11 +5,13 @@ import { socket } from "../../../socket/mainSocket"
 import ReactHtmlParser from "react-html-parser"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
+import classNames from "classnames"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
   const [content, setContent] = useState<string>("")
   const [styleData, setStyleData] = useState<Style>(style)
+  const [bibleVerse, setBibleVerse] = useState<string>("")
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
@@ -18,10 +20,21 @@ const HomeView = () => {
     socket.on("style", (data: string) => {
       setStyleData(JSON.parse(data))
     })
+    socket.on("verse", (data: string) => {
+      console.log(data)
+      setBibleVerse(data)
+    })
   }, [])
 
   return (
-    <div className="prueba bg-cover">
+    <div
+      className={classNames("prueba bg-cover", {
+        "otra-prueba": content.length > 180,
+      })}
+    >
+      <div className="verse fixed z-50 top-0 text-center w-full py-6">
+        {bibleVerse}
+      </div>
       <div className="wallpaper">
         {styleData.type === "Video" && (
           <video
@@ -37,8 +50,7 @@ const HomeView = () => {
           <img src={styleData.image} alt={style.title} />
         )}
       </div>
-
-      <p className="font-bold text-white">{ReactHtmlParser(content)}</p>
+      <p className="p-24 font-bold text-white">{ReactHtmlParser(content)}</p>
       <button
         className="bg-black"
         onClick={() => {

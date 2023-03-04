@@ -2,12 +2,17 @@ import { BookContext } from "src/common/context/BookContext"
 import { Book } from "src/common/interfaces/book.interface"
 import classNames from "classnames"
 import { useContext } from "react"
+import { ChapterContext } from "@context/ChapterContext"
+import { Chapter } from "@interfaces/chapter.interface"
 
 const BooksItem = ({ bookData }: BooksItemProps) => {
   const { book, setBook } = useContext(BookContext)
+  const { setChapter, setVerses } = useContext(ChapterContext)
 
   const handleClick = async () => {
     setBook(bookData)
+    setChapter({} as Chapter)
+    setVerses([])
   }
 
   const { title, section, abbreviation } = bookData

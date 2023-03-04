@@ -1,3 +1,7 @@
 .input {
   @apply mb-2 w-full p-3 focus:outline-none focus-visible:outline-none bg-ww-alt rounded-lg;
 }
+
+button.version {
+  @apply w-full py-2 px-4 rounded-lg mb-4;
+}

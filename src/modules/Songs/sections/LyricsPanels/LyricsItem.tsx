@@ -11,6 +11,7 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
     setActiveLyricId(id)
     if (id > 0) lyricsService.setActive(id)
     socket.emit("lyric", e.currentTarget.innerHTML)
+    socket.emit("verse", "")
   }
 
   return (

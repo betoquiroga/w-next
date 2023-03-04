@@ -17,11 +17,16 @@
   width: 100%;
 }
 
+.prueba .verse {
+  font-size: 3rem;
+}
+
+
 .wallpaper img, .wallpaper video {
   width: 100%;
 }
 
-.prueba p, .prueba span {
+.prueba p {
   z-index: 1;
   --sha-posi: 3px;
   --sha-nega: -3px;
@@ -29,6 +34,11 @@
   line-height: initial;
   text-align: center;
   text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+
+.otra-prueba p {
+  font-size: 3.5vw !important;
 }
 
 .prueba span {

@@ -5,4 +5,5 @@ export interface Book {
   abbreviation: string
   chapters: number
   part: string
+  engAbr: string
 }
