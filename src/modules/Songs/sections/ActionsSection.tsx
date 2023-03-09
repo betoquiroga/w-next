@@ -65,8 +65,11 @@ const ActionsSection = () => {
   }
 
   return (
-    <div className="bg-ww-content rounded col-span-2 p-4">
-      <div className="py-4">
+    <div className="bg-ww-content rounded col-span-2">
+      <div className="flex justify-between w-full border-b-2 border-b-ww-alt">
+        <span className="py-4">Acciones rapidas</span>
+      </div>
+      <div className="my-8">
         <ActionButton onClick={sendBlack} text="Pasar a negro - F3" />
         <ActionButton onClick={sendLogo} text="Enviar logotipo - F4" />
         <ActionButton onClick={cleanScreen} text="Limpiar pantalla - F5" />

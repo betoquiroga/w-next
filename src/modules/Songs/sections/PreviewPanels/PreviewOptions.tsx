@@ -1,6 +1,6 @@
 const PreviewOptions = () => {
   return (
-    <div className="pt-4">
+    <div className="pt-4 mb-6">
       <div className="mb-4">
         <label className="mb-4" htmlFor="transicion">
           Transición{" "}

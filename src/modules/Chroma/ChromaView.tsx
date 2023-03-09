@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
-import ReactHtmlParser from "react-html-parser"
 
 const HomeView = () => {
   const [content, setContent] = useState<string>("")
@@ -13,9 +12,39 @@ const HomeView = () => {
     })
   }, [])
 
+  const parseContent = (text: string) => {
+    const parser = new DOMParser()
+    const htmlObject = parser.parseFromString(text, "text/html")
+    const etiquetas = htmlObject.getElementsByTagName("span")
+    let textoExtraido = ""
+    if (etiquetas.length > 0) {
+      for (let i = 0; i < etiquetas.length; i++) {
+        const etiqueta = etiquetas[i] as HTMLElement
+        textoExtraido = `${textoExtraido} ${etiqueta.textContent} ` as string
+      }
+    } else {
+      textoExtraido = text
+    }
+
+    const palabras = textoExtraido.split(" ")
+    const mitad = Math.floor(palabras.length / 2)
+    const primeraMitad = palabras.slice(0, mitad)
+    const segundaMitad = palabras.slice(mitad)
+
+    return [primeraMitad, segundaMitad]
+  }
+
   return (
     <div className="chroma bg-cover">
-      <p className="font-bold text-white">{ReactHtmlParser(content)}</p>
+      <p className="font-bold text-white">
+        {parseContent(content)[0].map((c) => (
+          <>{`${c} `}</>
+        ))}
+        <br />
+        {parseContent(content)[1].map((c) => (
+          <>{` ${c}`}</>
+        ))}
+      </p>
       <button
         className="bg-black"
         onClick={() => {

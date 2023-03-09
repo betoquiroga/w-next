@@ -1,4 +1,5 @@
 import { Tab } from "@headlessui/react"
+import ActionsSection from "../ActionsSection"
 import PreviewCurrent from "./PreviewCurrent"
 import PreviewHeader from "./PreviewHeader"
 import PreviewOptions from "./PreviewOptions"
@@ -10,6 +11,7 @@ const PreviewPanel = () => {
       <PreviewCurrent />
       <PreviewHeader text="Opciones" />
       <PreviewOptions />
+      <ActionsSection />
     </Tab.Panel>
   )
 }

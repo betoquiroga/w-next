@@ -63,6 +63,8 @@
 }
 
 .preview .prueba {
+  width: 1920px !important;
+  height: 1080px !important;
   position: relative;
   transform-origin: top left;
   transform: scale(0.225);
