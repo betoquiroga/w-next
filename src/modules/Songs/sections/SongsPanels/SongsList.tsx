@@ -4,9 +4,8 @@ import SongsItem from "./SongsItem"
 const SongList = ({ data }: SongListProps) => {
   return (
     <div className="songs">
-      {data.map((i: Song) => (
-        <SongsItem key={i.id} song={i} />
-      ))}
+      {data?.length > 0 &&
+        data.map((i: Song) => <SongsItem key={i.id} song={i} />)}
     </div>
   )
 }
