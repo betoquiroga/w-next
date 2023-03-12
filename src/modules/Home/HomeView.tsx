@@ -21,7 +21,6 @@ const HomeView = () => {
       setStyleData(JSON.parse(data))
     })
     socket.on("verse", (data: string) => {
-      console.log(data)
       setBibleVerse(data)
     })
   }, [])
