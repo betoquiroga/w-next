@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
+import { parse } from "node-html-parser"
 
 const HomeView = () => {
   const [content, setContent] = useState<string>("")
@@ -13,13 +14,12 @@ const HomeView = () => {
   }, [])
 
   const parseContent = (text: string) => {
-    const parser = new DOMParser()
-    const htmlObject = parser.parseFromString(text, "text/html")
+    const htmlObject = parse(text)
     const etiquetas = htmlObject.getElementsByTagName("span")
     let textoExtraido = ""
     if (etiquetas.length > 0) {
       for (let i = 0; i < etiquetas.length; i++) {
-        const etiqueta = etiquetas[i] as HTMLElement
+        const etiqueta = etiquetas[i]
         textoExtraido = `${textoExtraido} ${etiqueta.textContent} ` as string
       }
     } else {

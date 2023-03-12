@@ -1,23 +1,23 @@
 import { Tab } from "@headlessui/react"
 import BooksList from "./BooksList"
-import { books } from "../../../../../__mock__/bible/books.json"
+import books from "../../../../../__mock__/bible/books.json"
 import BooksVersions from "./BooksVersions"
 import { ChangeEvent, useState } from "react"
 import BooksSearch from "./BooksSearch"
 
 const BooksPanel = () => {
-  const [data, setData] = useState(books)
+  const [data, setData] = useState(books.books)
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value: string = e.target.value
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
     if (value === "") {
-      setData(books)
+      setData(books.books)
       return
     }
 
-    const newData = books.filter(
+    const newData = books.books.filter(
       (b) =>
         b.title
           .normalize("NFD")
