@@ -5,18 +5,10 @@ import { useEffect } from "react"
 const ActionsSection = () => {
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
-      if (event.key === "F3") {
-        sendBlack()
-      }
-      if (event.key === "F4") {
-        sendLogo()
-      }
-      if (event.key === "F5") {
-        cleanScreen()
-      }
-      if (event.key === "F6") {
-        sendMessageMode()
-      }
+      if (event.key === "F3") handleAction("black.jpg")
+      if (event.key === "F4") handleAction("logo.jpg")
+      if (event.key === "F5") cleanScreen()
+      if (event.key === "F6") handleAction("arte-tv-052322.jpg")
     })
   }, [])
 
@@ -25,43 +17,16 @@ const ActionsSection = () => {
     socket.emit("verse", "")
   }
 
-  const sendLogo = () => {
-    cleanScreen()
-    const data = {
+  const handleAction = (image: string) => {
+    const defaultData = {
       id: 0,
       title: "Contexto espacial",
       type: "Imagen JPEG",
       details: "Manrope Black / 24px",
-      image: "/images/styles/logo.jpg",
+      image: `/images/styles/${image}`,
     }
-    socket.emit("style", JSON.stringify(data))
-    socket.emit("verse", "")
-  }
-
-  const sendMessageMode = () => {
     cleanScreen()
-    const data = {
-      id: 0,
-      title: "Contexto espacial",
-      type: "Imagen JPEG",
-      details: "Manrope Black / 24px",
-      image: "/images/styles/arte-tv.jpg",
-    }
-    socket.emit("style", JSON.stringify(data))
-    socket.emit("verse", "")
-  }
-
-  const sendBlack = () => {
-    cleanScreen()
-    const data = {
-      id: 0,
-      title: "Contexto espacial",
-      type: "Imagen JPEG",
-      details: "Manrope Black / 24px",
-      image: "/images/styles/black.jpg",
-    }
-    socket.emit("style", JSON.stringify(data))
-    socket.emit("verse", "")
+    socket.emit("style", JSON.stringify(defaultData))
   }
 
   return (
@@ -70,10 +35,19 @@ const ActionsSection = () => {
         <span className="py-4">Acciones rapidas</span>
       </div>
       <div className="my-8">
-        <ActionButton onClick={sendBlack} text="Pasar a negro - F3" />
-        <ActionButton onClick={sendLogo} text="Enviar logotipo - F4" />
+        <ActionButton
+          onClick={() => handleAction("black.jpg")}
+          text="Pasar a negro - F3"
+        />
+        <ActionButton
+          onClick={() => handleAction("logo.jpg")}
+          text="Enviar logotipo - F4"
+        />
         <ActionButton onClick={cleanScreen} text="Limpiar pantalla - F5" />
-        <ActionButton onClick={sendMessageMode} text="Modo prédica - F6" />
+        <ActionButton
+          onClick={() => handleAction("arte-tv-052322.jpg")}
+          text="Modo prédica - F6"
+        />
       </div>
     </div>
   )
