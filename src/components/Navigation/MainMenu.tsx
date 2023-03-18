@@ -13,8 +13,8 @@ const MainMenu = () => {
       <MainMenuItem icon={MenuIcon} href="/" />
       <MainMenuItem icon={SongIcon} href="/songs" />
       <MainMenuItem icon={BibleIcon} href="/bible" />
-      <MainMenuItem icon={PhotoIcon} href="/" />
-      <MainMenuItem icon={ConfigIcon} href="/" />
+      <MainMenuItem icon={PhotoIcon} href="/gallery" />
+      <MainMenuItem icon={ConfigIcon} href="/admin" />
       <MainMenuItem icon={ProfileIcon} href="/" />
     </nav>
   )

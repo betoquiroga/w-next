@@ -1,6 +1,6 @@
 "use client"
-import RegisterView from "@modules/User/RegisterView"
+import GalleryView from "@modules/Gallery/GalleryView"
 
 export default function Chroma() {
-  return <RegisterView />
+  return <GalleryView />
 }

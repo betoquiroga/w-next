@@ -5,3 +5,15 @@
 button.version {
   @apply w-full py-2 px-4 rounded-lg mb-4;
 }
+
+th {
+  @apply py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-100 uppercase;
+}
+
+tr {
+  @apply border-b border-ww-alt border-b-2 bg-ww-content;
+}
+
+td {
+  @apply py-4 px-6 text-sm font-medium text-ww-normal whitespace-nowrap;
+}

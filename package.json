@@ -27,6 +27,7 @@
     "node-html-parser": "^6.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.1",
     "react-html-parser": "^2.0.2",
     "socket.io-client": "^4.5.4",
