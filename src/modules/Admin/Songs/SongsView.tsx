@@ -77,7 +77,7 @@ const SongsView = () => {
                     <td>{song.title}</td>
                     <td>{song.author}</td>
                     <td>
-                      <button>View</button>
+                      <Link href={`/admin/songs/${song.id}`}>View</Link>
                     </td>
                     <td>
                       <button>Edit</button>

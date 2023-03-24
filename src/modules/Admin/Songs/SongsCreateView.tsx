@@ -20,7 +20,10 @@ const SongsCreateView = () => {
           },
         }
       )
-      .then((r) => console.log(r))
+      .then(() => {
+        target.reset()
+        alert("canción creada")
+      })
   }
 
   return (
