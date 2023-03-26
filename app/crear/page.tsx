@@ -7,6 +7,7 @@ export default function Page() {
   const [songID, setSongID] = useState(0)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const target = e.target as HTMLFormElement
     const verses = song.split("\n\n")
     verses.map((v, i) => {
       const hi = {
@@ -21,7 +22,13 @@ export default function Page() {
             Authorization: localStorage.getItem("tokenWW"),
           },
         })
-        .then((resp) => console.log(resp))
+        .then((resp) => {
+          target.reset()
+          console.log(resp)
+          setTimeout(() => {
+            alert("Letras creadas")
+          }, 2000)
+        })
     })
   }
 
