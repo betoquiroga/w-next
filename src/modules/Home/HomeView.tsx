@@ -28,7 +28,8 @@ const HomeView = () => {
   return (
     <div
       className={classNames("prueba bg-cover", {
-        "otra-prueba": content.length > 180,
+        "otra-prueba": content.length > 170 && content.length < 210,
+        "otra-prueba-mayor": content.length > 210,
       })}
     >
       <div className="verse fixed z-50 top-0 text-center w-full py-6">

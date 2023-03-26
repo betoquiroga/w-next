@@ -38,7 +38,11 @@
 
 
 .otra-prueba p {
-  font-size: 3.5vw !important;
+  font-size: 5.5rem !important;
+}
+
+.otra-prueba-mayor p {
+  font-size: 5rem !important;
 }
 
 .prueba span {
