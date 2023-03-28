@@ -1,4 +1,3 @@
-import { ErrorResponse } from "src/common/interfaces/http-response"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
 import { authenticate } from "src/common/api/auth/auth.api"
@@ -8,16 +7,13 @@ import { joiResolver } from "@hookform/resolvers/joi/dist/joi"
 import { LoginFormSchema } from "./helpers/login-form-schema.helper"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import MessageError from "./MessageError"
 
 const LoginView = () => {
   const router = useRouter()
-  const [messageError, setMessageError] = useState<string>()
+  const [messageError, setMessageError] = useState<string>("")
 
-  const {
-    register,
-    handleSubmit: onSubmit,
-    formState: { errors },
-  } = useForm<LoginFormValues>({
+  const { register, handleSubmit: onSubmit } = useForm<LoginFormValues>({
     resolver: joiResolver(LoginFormSchema),
     mode: "onChange",
   })
@@ -32,8 +28,8 @@ const LoginView = () => {
         queryClient.setQueryData([IS_AUTHENTICATED], true)
         router.push("/songs")
       },
-      onError: (err: ErrorResponse) => {
-        setMessageError(err.response.data.errors[0].message)
+      onError: () => {
+        setMessageError("Usuario y/o contraseña incorrectos")
       },
     }
   )
@@ -42,6 +38,7 @@ const LoginView = () => {
     username,
     password,
   }: LoginFormValues): Promise<void> => {
+    setMessageError("")
     mutate({ username, password })
   }
 
@@ -74,17 +71,18 @@ const LoginView = () => {
           </div>
           <button
             type="submit"
-            className="bg-ww-green-700 hover:bg-ww-green-600 text-ww-normal font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+            className="mb-4 bg-ww-green-700 hover:bg-ww-green-600 text-ww-normal font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           >
             {isLoading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
-        <div className="text-center mt-4">
+        <div className="text-center mb-4">
           ¿No tienes una cuenta?{" "}
           <Link href="/register" className="text-ww-green-600 hover:underline">
             Regístrate
           </Link>
         </div>
+        <MessageError message={messageError} />
       </div>
     </div>
   )
