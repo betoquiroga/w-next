@@ -2,9 +2,8 @@
 import { useState } from "react"
 import axios from "axios"
 
-export default function Page() {
+export default function Page({ params }: CrearProps) {
   const [song, setSong] = useState("")
-  const [songID, setSongID] = useState(0)
   const [loading, setLoading] = useState(false)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true)
@@ -17,7 +16,7 @@ export default function Page() {
     }, 2000)
     verses.map((v, i) => {
       const hi = {
-        song: songID,
+        song: Number(params.id),
         order: i + 1,
         verse: v,
         active: false,
@@ -37,22 +36,9 @@ export default function Page() {
 
   return (
     <div className="max-w-[64rem] mx-auto pt-8">
-      <h1 className="mb-4 text-3xl">Agregar letra</h1>
+      <h1 className="mb-4 text-3xl">Agregar letra a la canción {params.id}</h1>
       <div>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label className="mb-4" htmlFor="songId">
-              ID de la canción:
-            </label>
-            <input
-              className="text-ww-main text-xl input text-ww-normal"
-              type="number"
-              name="songid"
-              id="songid"
-              onChange={(e) => setSongID(Number(e.target.value))}
-              required
-            />
-          </div>
           <div>
             <label className="mb-4" htmlFor="song">
               Letra
@@ -76,4 +62,10 @@ export default function Page() {
       </div>
     </div>
   )
+}
+
+type CrearProps = {
+  params: {
+    id: string
+  }
 }

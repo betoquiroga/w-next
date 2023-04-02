@@ -36,15 +36,17 @@ const HomeView = () => {
 
   return (
     <div className="chroma bg-cover">
-      <p className="font-bold text-white">
-        {parseContent(content)[0].map((c) => (
-          <>{`${c} `}</>
-        ))}
-        <br />
-        {parseContent(content)[1].map((c) => (
-          <>{` ${c}`}</>
-        ))}
-      </p>
+      <div className="container">
+        <p className="font-bold text-white">
+          {parseContent(content)[0].map((c) => (
+            <>{`${c} `}</>
+          ))}
+          <br />
+          {parseContent(content)[1].map((c) => (
+            <>{` ${c}`}</>
+          ))}
+        </p>
+      </div>
       <button
         className="bg-black"
         onClick={() => {

@@ -80,7 +80,12 @@ const SongsView = () => {
                       <Link href={`/admin/songs/${song.id}`}>View</Link>
                     </td>
                     <td>
-                      <button>Edit</button>
+                      <Link
+                        className="text-ww-green-600"
+                        href={`/crear/${song.id}`}
+                      >
+                        Agregar letra
+                      </Link>
                     </td>
                     <td>
                       <button>Delete</button>

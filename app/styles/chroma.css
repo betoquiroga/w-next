@@ -7,8 +7,14 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 2rem;
+}
 
+.chroma .container {
+  min-height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chroma p, .chroma span {

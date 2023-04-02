@@ -45,6 +45,19 @@
   font-size: 5rem !important;
 }
 
+.otra-prueba-menor p {
+  font-size: 7.5rem !important;
+}
+
+.otra-prueba-mini p {
+  font-size: 10rem !important;
+}
+
+.otra-prueba-tiny p {
+  font-size: 11rem !important;
+}
+
+
 .prueba span {
   justify-content: center;
 }
@@ -82,4 +95,9 @@
   font-size: 3.5vw;
   font-weight: normal;
   opacity: .7;
+}
+
+.image.back {
+  height: 100vh;
+  width: 100vw;
 }
