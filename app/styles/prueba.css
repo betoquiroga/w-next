@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 6rem;
 }
 
 .prueba .wallpaper {
@@ -28,33 +29,11 @@
 
 .prueba p {
   z-index: 1;
-  --sha-posi: 3px;
-  --sha-nega: -3px;
-  font-size: 7.5rem;
+  --sha-posi: 2px;
+  --sha-nega: -2px;
   line-height: initial;
   text-align: center;
   text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-
-.otra-prueba p {
-  font-size: 5.5rem !important;
-}
-
-.otra-prueba-mayor p {
-  font-size: 5rem !important;
-}
-
-.otra-prueba-menor p {
-  font-size: 7.5rem !important;
-}
-
-.otra-prueba-mini p {
-  font-size: 10rem !important;
-}
-
-.otra-prueba-tiny p {
-  font-size: 11rem !important;
 }
 
 
