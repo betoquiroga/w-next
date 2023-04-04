@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import axios from "axios"
+import { WW_API_DOMAIN } from "src/common/constants/domains"
 
 export default function Page({ params }: CrearProps) {
   const [song, setSong] = useState("")
@@ -22,7 +23,7 @@ export default function Page({ params }: CrearProps) {
         active: false,
       }
       axios
-        .post("http://50.116.34.230:3040/lyrics", hi, {
+        .post(`http://${WW_API_DOMAIN}/lyrics`, hi, {
           headers: {
             Authorization: localStorage.getItem("tokenWW"),
           },

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import ReactHtmlParser from "react-html-parser"
 
-function DynamicFontSize({ text, minFontSize, maxFontSize }: DynamicTextProps) {
+function DynamicFontSize({ text }: DynamicTextProps) {
   const elementRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
@@ -14,7 +14,8 @@ function DynamicFontSize({ text, minFontSize, maxFontSize }: DynamicTextProps) {
     console.log("beto", text)
 
     if (element && text.length > 320) element.style.fontSize = "3.8vw"
-    if (element && text.includes("span class=")) element.style.fontSize = "7.8vw"
+    if (element && text.includes("span class="))
+      element.style.fontSize = "7.8vw"
   }, [text])
 
   return (
@@ -28,6 +29,4 @@ export default DynamicFontSize
 
 type DynamicTextProps = {
   text: string
-  minFontSize: number
-  maxFontSize: number
 }

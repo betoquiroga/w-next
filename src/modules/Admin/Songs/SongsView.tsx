@@ -1,7 +1,10 @@
 import { SongsContext } from "@context/SongsContext"
 import { Song } from "@interfaces/song.interface"
+import axios from "axios"
 import Link from "next/link"
 import { ChangeEvent, useContext, useEffect, useState } from "react"
+import { TOKEN_NAME } from "src/common/constants/auth"
+import { WW_API_DOMAIN } from "src/common/constants/domains"
 
 const SongsView = () => {
   const { data, isLoading, isError } = useContext(SongsContext)
@@ -35,6 +38,21 @@ const SongsView = () => {
     }
   }
 
+  const deleteSong = (id: number) => {
+    if (window.confirm("Se eliminará completamente la canción")) {
+      axios
+        .delete(`http://${WW_API_DOMAIN}/songs/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem(TOKEN_NAME),
+          },
+        })
+        .then((r) => {
+          console.log(r)
+          alert("Canción eliminada")
+        })
+    }
+  }
+
   if (isLoading) return <p>Cargando...</p>
   if (isError) return <p>Error</p>
   return (
@@ -64,9 +82,9 @@ const SongsView = () => {
                 <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
-                <th>Ver</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th>Ver canción</th>
+                <th>Agregar letra</th>
+                <th>Eliminar canción</th>
               </tr>
             </thead>
             <tbody>
@@ -77,7 +95,12 @@ const SongsView = () => {
                     <td>{song.title}</td>
                     <td>{song.author}</td>
                     <td>
-                      <Link href={`/admin/songs/${song.id}`}>View</Link>
+                      <Link
+                        className="text-ww-green-600"
+                        href={`/admin/songs/${song.id}`}
+                      >
+                        Ver canción
+                      </Link>
                     </td>
                     <td>
                       <Link
@@ -88,7 +111,12 @@ const SongsView = () => {
                       </Link>
                     </td>
                     <td>
-                      <button>Delete</button>
+                      <button
+                        onClick={() => deleteSong(song.id)}
+                        className="text-ww-green-600"
+                      >
+                        Eliminar
+                      </button>
                     </td>
                   </tr>
                 ))}

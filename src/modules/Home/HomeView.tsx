@@ -2,7 +2,6 @@
 
 import { useContext, useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
-import ReactHtmlParser from "react-html-parser"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
 import DynamicFontSize from "./DynamicText"
@@ -45,7 +44,7 @@ const HomeView = () => {
           <img src={styleData.image} alt={style.title} />
         )}
       </div>
-      <DynamicFontSize text={content} maxFontSize={100} minFontSize={10} />
+      <DynamicFontSize text={content} />
       <button
         className="bg-black"
         onClick={() => {
