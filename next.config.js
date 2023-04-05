@@ -7,6 +7,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3040",
+        pathname: "/uploads/**",
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

@@ -1,5 +1,6 @@
 import { Tab } from "@headlessui/react"
 import axios from "axios"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { socket } from "socket/mainSocket"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
@@ -9,7 +10,6 @@ const ImagesPanel = () => {
 
   useEffect(() => {
     axios.get(`http://${WW_API_DOMAIN}/uploads`).then((r) => {
-      console.log(r)
       setImages(r.data)
     })
   }, [])
@@ -47,13 +47,20 @@ const ImagesPanel = () => {
         {images.map((i) => {
           if (isImage(i)) {
             return (
-              <div key={i}>
-                <img
+              <div
+                key={i}
+                className="p-2 hover:bg-ww-scroll cursor-pointer transition-all"
+              >
+                <Image
+                  width={250}
+                  height={100}
                   src={`http://${WW_API_DOMAIN}/uploads/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)
                   }}
+                  placeholder="blur"
+                  blurDataURL={`http://${WW_API_DOMAIN}/uploads/${i}`}
                 />
               </div>
             )

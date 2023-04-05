@@ -5,6 +5,7 @@ import { socket } from "../../../socket/mainSocket"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
 import DynamicFontSize from "./DynamicText"
+import Image from "next/image"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
@@ -41,7 +42,12 @@ const HomeView = () => {
           />
         )}
         {styleData.type.includes("Imagen") && (
-          <img src={styleData.image} alt={style.title} />
+          <Image
+            src={styleData.image}
+            alt={style.title}
+            height={1080}
+            width={1920}
+          />
         )}
       </div>
       <DynamicFontSize text={content} />
