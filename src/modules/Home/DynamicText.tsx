@@ -13,7 +13,7 @@ function DynamicFontSize({ text }: DynamicTextProps) {
 
     if (element && text.length > 320) element.style.fontSize = "3.8vw"
     if (element && text.includes("span class="))
-      element.style.fontSize = "7.8vw"
+      element.style.fontSize = "7.5vw"
   }, [text])
 
   return (
