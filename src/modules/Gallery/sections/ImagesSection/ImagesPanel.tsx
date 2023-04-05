@@ -16,6 +16,7 @@ const ImagesPanel = () => {
 
   const sendData = (image: string) => {
     socket.emit("lyric", "")
+    socket.emit("verse", "")
     const defaultData = {
       id: 0,
       title: "Contexto espacial",
