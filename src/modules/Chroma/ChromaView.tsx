@@ -16,11 +16,14 @@ const HomeView = () => {
   const parseContent = (text: string) => {
     const htmlObject = parse(text)
     const etiquetas = htmlObject.getElementsByTagName("span")
+
     let textoExtraido = ""
     if (etiquetas.length > 0) {
       for (let i = 0; i < etiquetas.length; i++) {
-        const etiqueta = etiquetas[i]
-        textoExtraido = `${textoExtraido} ${etiqueta.textContent} ` as string
+        if (!etiquetas[i].classNames.includes("song-chroma")) {
+          const etiqueta = etiquetas[i]
+          textoExtraido = `${textoExtraido} ${etiqueta.textContent} ` as string
+        }
       }
     } else {
       textoExtraido = text

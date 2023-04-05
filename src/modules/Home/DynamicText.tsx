@@ -11,8 +11,6 @@ function DynamicFontSize({ text }: DynamicTextProps) {
       element.style.fontSize = `${fontSize}vw`
     }
 
-    console.log("beto", text)
-
     if (element && text.length > 320) element.style.fontSize = "3.8vw"
     if (element && text.includes("span class="))
       element.style.fontSize = "7.8vw"

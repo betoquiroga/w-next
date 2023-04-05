@@ -29,7 +29,10 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
         {content.split("\n").map((line, i) => (
           <span
             key={line}
-            className={classNames("flex", { "song-author": i > 0 && id < 0 })}
+            className={classNames("flex", {
+              "song-author": i > 0 && id < 0,
+              "song-chroma": id < 0,
+            })}
           >
             {line}
           </span>

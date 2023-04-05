@@ -47,3 +47,7 @@
   right: 25px;
   top: 25px;
 }
+
+.song-chroma {
+  display: none;
+}
