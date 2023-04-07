@@ -12,7 +12,7 @@ export default class LyricsService extends HttpRequest {
       endpoint: `${LYRICS_ENDPOINT}/song/${id}`,
     })
 
-    const response = await this.get<Lyric>()
+    const response = await this.get<Lyric[]>()
     return new ServiceResponse(response.data)
   }
 

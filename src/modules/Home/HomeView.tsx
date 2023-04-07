@@ -6,6 +6,7 @@ import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
 import DynamicFontSize from "./DynamicText"
 import Image from "next/image"
+import classNames from "classnames"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
@@ -26,10 +27,12 @@ const HomeView = () => {
   }, [])
 
   return (
-    <div className={"prueba bg-cover"}>
-      <div className="verse fixed z-50 top-0 text-center w-full py-6">
-        {bibleVerse}
-      </div>
+    <div className={classNames("prueba bg-cover", { "pt-24": bibleVerse })}>
+      {bibleVerse && (
+        <div className="verse fixed z-50 top-0 text-center w-full pt-6">
+          {bibleVerse}
+        </div>
+      )}
       <div className="wallpaper">
         {styleData.type === "Video" && (
           <video
@@ -47,6 +50,8 @@ const HomeView = () => {
             alt={style.title}
             height={1080}
             width={1920}
+            blurDataURL={styleData.image}
+            placeholder="blur"
           />
         )}
       </div>

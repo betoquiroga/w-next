@@ -7,11 +7,11 @@ function DynamicFontSize({ text }: DynamicTextProps) {
   useEffect(() => {
     const element = elementRef.current
     if (element) {
-      const fontSize = 7.5 - text.length / 100
+      const fontSize = 7.3 - text.length / 100
       element.style.fontSize = `${fontSize}vw`
     }
 
-    if (element && text.length > 320) element.style.fontSize = "3.8vw"
+    if (element && text.length > 320) element.style.fontSize = "3.5vw"
     if (element && text.includes("span class="))
       element.style.fontSize = "7.5vw"
   }, [text])

@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -11,11 +11,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "wiswords.com",
         port: "3040",
         pathname: "/uploads/**",
       },
     ],
+    domains: ["localhost", "wiswords.com"],
   },
 }
 

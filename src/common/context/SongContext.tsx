@@ -15,7 +15,7 @@ const SongContext = createContext({} as SongContextProps)
 const SongProvider = ({ children }: SongProviderProps) => {
   const [songId, setSongId] = useState(2)
   const [song, setSong] = useState({} as Song)
-  const { data, isLoading, isError, refetch } = useQuery<Lyric, Error>(
+  const { data, isLoading, isError, refetch } = useQuery<Lyric[], Error>(
     [`CURRENT_SONG_LYRICS-${songId}`],
     () => getLyrics(songId)
   )
@@ -37,7 +37,7 @@ type SongContextProps = {
   song: Song
   setSongId: Dispatch<SetStateAction<number>>
   setSong: Dispatch<SetStateAction<Song>>
-  data: Lyric | undefined
+  data: Lyric[] | undefined
   isLoading: boolean
   isError: boolean
 }

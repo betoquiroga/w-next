@@ -40,6 +40,15 @@ const ImagesPanel = () => {
     return false
   }
 
+  const deleteImage = (image: string) => {
+    if (confirm("Se eliminará esta imagen para siempre")) {
+      axios.delete(`http://${WW_API_DOMAIN}/uploads/${image}`).then((r) => {
+        console.log(r)
+        setImages(images.filter((i) => i !== image))
+      })
+    }
+  }
+
   return (
     <Tab.Panel>
       <h1>Galería de imágenes</h1>
@@ -49,7 +58,7 @@ const ImagesPanel = () => {
             return (
               <div
                 key={i}
-                className="p-2 hover:bg-ww-scroll cursor-pointer transition-all"
+                className="p-2 hover:bg-ww-scroll cursor-pointer transition-all relative"
               >
                 <Image
                   width={250}
@@ -62,6 +71,12 @@ const ImagesPanel = () => {
                   placeholder="blur"
                   blurDataURL={`http://${WW_API_DOMAIN}/uploads/${i}`}
                 />
+                <button
+                  className="bg-ww-scroll flex justify-center align-middle rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover:bg-red-600"
+                  onClick={() => deleteImage(i)}
+                >
+                  x
+                </button>
               </div>
             )
           }
