@@ -11,20 +11,26 @@ const PreviewOptions = () => {
       zoom: !effects.zoom,
       particles: effects.particles,
     } as Effect)
-    socket.emit("effects", {
-      zoom: !effects.zoom,
-      particles: effects.particles,
-    })
+    socket.emit(
+      "effects",
+      JSON.stringify({
+        zoom: !effects.zoom,
+        particles: effects.particles,
+      })
+    )
   }
   const setParticles = () => {
     setEffects({
       zoom: effects.zoom,
       particles: !effects.particles,
     } as Effect)
-    socket.emit("effects", {
-      zoom: effects.zoom,
-      particles: !effects.particles,
-    })
+    socket.emit(
+      "effects",
+      JSON.stringify({
+        zoom: effects.zoom,
+        particles: !effects.particles,
+      })
+    )
   }
   return (
     <div className="pt-4 mb-6 flex">
