@@ -67,7 +67,7 @@ const HomeView = () => {
             width={1920}
             blurDataURL={styleData.image}
             placeholder="blur"
-            className={`${effects.zoom ? "zoom" : ""}`}
+            className={`${effectsWs.zoom ? "zoom" : ""}`}
           />
         )}
       </div>
