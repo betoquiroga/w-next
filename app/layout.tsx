@@ -1,6 +1,7 @@
 "use client"
 import "./globals.css"
 import Providers from "./providers"
+import { EffectsProvider } from "src/common/context/EffectsContext"
 import { StyleProvider } from "src/common/context/StyleContext"
 
 export default function RootLayout({
@@ -13,7 +14,9 @@ export default function RootLayout({
       <head />
       <body>
         <Providers>
-          <StyleProvider>{children}</StyleProvider>
+          <EffectsProvider>
+            <StyleProvider>{children}</StyleProvider>
+          </EffectsProvider>
         </Providers>
       </body>
     </html>

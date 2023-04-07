@@ -1,3 +1,5 @@
+"use client"
+
 import HomeView from "@modules/Home/HomeView"
 
 export default function Page() {

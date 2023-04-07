@@ -7,9 +7,11 @@ import { Style } from "src/common/interfaces/style.interface"
 import DynamicFontSize from "./DynamicText"
 import Image from "next/image"
 import classNames from "classnames"
+import { EffectsContext } from "@context/EffectsContext"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
+  const { effects } = useContext(EffectsContext)
   const [content, setContent] = useState<string>("")
   const [styleData, setStyleData] = useState<Style>(style)
   const [bibleVerse, setBibleVerse] = useState<string>("")
@@ -27,7 +29,12 @@ const HomeView = () => {
   }, [])
 
   return (
-    <div className={classNames("prueba bg-cover", { "pt-24": bibleVerse })}>
+    <div
+      className={classNames("prueba bg-cover relative", {
+        "pt-24": bibleVerse,
+      })}
+    >
+      {effects.particles && <div className="snow"></div>}
       {bibleVerse && (
         <div className="verse fixed z-50 top-0 text-center w-full pt-6">
           {bibleVerse}
@@ -47,11 +54,12 @@ const HomeView = () => {
         {styleData.type.includes("Imagen") && (
           <Image
             src={styleData.image}
-            alt={style.title}
+            alt={styleData.title}
             height={1080}
             width={1920}
             blurDataURL={styleData.image}
             placeholder="blur"
+            className={`${effects.zoom ? "zoom" : ""}`}
           />
         )}
       </div>

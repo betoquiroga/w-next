@@ -26,7 +26,7 @@
   width: 100%;
 }
 
-.wallpaper img {
+.wallpaper img.zoom {
   animation-name: animacion-imagen;
   animation-duration: 60s; 
   animation-iteration-count: infinite;
@@ -74,7 +74,7 @@
 
 .preview .current {
   transform-origin: top left;
-  max-height: 320px;
+  max-height: 260px;
 }
 
 .preview .prueba {

@@ -1,0 +1,33 @@
+.snow, .snow:before, .snow:after {
+  position: absolute;
+  top: -1000px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: radial-gradient(37px 37px at 804px 664px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(53px 53px at 379px 603px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(60px 60px at 769px 935px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(45px 45px at 198px 280px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(15px 15px at 649px 774px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(21px 21px at 309px 312px, #fffac8 5%, rgba(0, 0, 0, 0)), radial-gradient(50px 50px at 925px 851px, rgba(255, 250, 200, 0.6) 5%, rgba(0, 0, 0, 0)), radial-gradient(44px 44px at 906px 450px, rgba(255, 250, 200, 0.9) 5%, rgba(0, 0, 0, 0)), radial-gradient(25px 25px at 39px 786px, rgba(255, 250, 200, 0.7) 5%, rgba(0, 0, 0, 0)), radial-gradient(58px 58px at 879px 718px, #fffac8 5%, rgba(0, 0, 0, 0));
+  background-size: 1000px 1000px;
+  animation: snow 15s linear infinite;
+  content: "";
+  z-index: 9999;
+  opacity: .3;
+}
+
+.snow:after {
+  margin-left: -333.3333333333px;
+  opacity: 0.4;
+  animation-duration: 30s;
+  filter: blur(6px);
+}
+
+.snow:before {
+  animation-duration: 45s;
+  margin-left: -500px;
+  opacity: 0.65;
+  filter: blur(3px);
+}
+
+@keyframes snow {
+  to {
+    transform: translateY(1000px);
+  }
+}
