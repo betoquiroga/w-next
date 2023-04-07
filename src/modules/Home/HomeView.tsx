@@ -8,6 +8,7 @@ import DynamicFontSize from "./DynamicText"
 import Image from "next/image"
 import classNames from "classnames"
 import { EffectsContext } from "@context/EffectsContext"
+import { Effect } from "@interfaces/effect.interface"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
@@ -15,6 +16,10 @@ const HomeView = () => {
   const [content, setContent] = useState<string>("")
   const [styleData, setStyleData] = useState<Style>(style)
   const [bibleVerse, setBibleVerse] = useState<string>("")
+  const [effectsWs, setEffectsWs] = useState<Effect>({
+    zoom: false,
+    particles: false,
+  })
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
@@ -26,6 +31,9 @@ const HomeView = () => {
     socket.on("verse", (data: string) => {
       setBibleVerse(data)
     })
+    socket.on("verse", (data: string) => {
+      setEffectsWs(JSON.parse(data))
+    })
   }, [])
 
   return (
@@ -34,7 +42,7 @@ const HomeView = () => {
         "pt-24": bibleVerse,
       })}
     >
-      {effects.particles && <div className="snow"></div>}
+      {effectsWs.particles && <div className="snow"></div>}
       {bibleVerse && (
         <div className="verse fixed z-50 top-0 text-center w-full pt-6">
           {bibleVerse}
