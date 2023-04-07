@@ -31,7 +31,7 @@ const HomeView = () => {
     socket.on("verse", (data: string) => {
       setBibleVerse(data)
     })
-    socket.on("verse", (data: string) => {
+    socket.on("effects", (data: string) => {
       setEffectsWs(JSON.parse(data))
     })
   }, [])
