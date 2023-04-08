@@ -31,8 +31,7 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
             key={line}
             className={classNames("flex", {
               "song-author":
-                (i > 0 && id < 0) ||
-                line.includes("(Hombres)" || line.includes("Mujeres")),
+                (i > 0 && id < 0) || line.includes("(" || line.includes(")")),
               "song-chroma": id < 0,
             })}
           >
