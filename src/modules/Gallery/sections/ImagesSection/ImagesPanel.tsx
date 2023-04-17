@@ -69,7 +69,7 @@ const ImagesPanel = () => {
                     sendData(i)
                   }}
                   placeholder="blur"
-                  blurDataURL={`http://${WW_API_DOMAIN}/uploads/blur/${i}`}
+                  blurDataURL="/images/blur/cruz4.jpg"
                 />
                 <button
                   className="bg-ww-scroll flex justify-center align-middle rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover:bg-red-600"
