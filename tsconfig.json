@@ -7,7 +7,8 @@
       "@icons/*": ["src/common/icons/*"],
       "@interfaces/*": ["src/common/interfaces/*"],
       "@services/*": ["src/common/services/*"],
-      "@context/*": ["src/common/context/*"]
+      "@context/*": ["src/common/context/*"],
+      "@helpers/*": ["src/common/helpers/*"]
     },
     "target": "es5",
     "lib": [

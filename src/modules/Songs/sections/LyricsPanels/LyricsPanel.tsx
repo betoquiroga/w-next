@@ -17,8 +17,6 @@ const LyricsPanel = () => {
   if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 
-  console.log("HOLAAAAA")
-
   return (
     <ActiveLyricProvider>
       <Tab.Panel>

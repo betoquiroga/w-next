@@ -7,12 +7,10 @@ import { Style } from "src/common/interfaces/style.interface"
 import DynamicFontSize from "./DynamicText"
 import Image from "next/image"
 import classNames from "classnames"
-import { EffectsContext } from "@context/EffectsContext"
 import { Effect } from "@interfaces/effect.interface"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
-  const { effects } = useContext(EffectsContext)
   const [content, setContent] = useState<string>("")
   const [styleData, setStyleData] = useState<Style>(style)
   const [bibleVerse, setBibleVerse] = useState<string>("")

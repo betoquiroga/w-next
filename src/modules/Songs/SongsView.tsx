@@ -1,3 +1,4 @@
+import withAuth from "src/common/hoc/withAuth"
 import LyricsSection from "./sections/LyricsSection"
 import PreviewSection from "./sections/PreviewSection"
 import SongsSection from "./sections/SongsSection"
@@ -14,4 +15,4 @@ const SongsView = () => {
   )
 }
 
-export default SongsView
+export default withAuth(SongsView)
