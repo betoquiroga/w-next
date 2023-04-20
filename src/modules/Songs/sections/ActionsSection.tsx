@@ -1,6 +1,7 @@
-import { socket } from "socket/mainSocket"
 import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
+import { defaultStyle } from "src/common/constants/style"
+import { clearEmit, styleEmit } from "@helpers/socket/emit"
 
 const ActionsSection = () => {
   useEffect(() => {
@@ -12,21 +13,11 @@ const ActionsSection = () => {
     })
   }, [])
 
-  const cleanScreen = () => {
-    socket.emit("lyric", "")
-    socket.emit("verse", "")
-  }
+  const cleanScreen = () => clearEmit()
 
   const handleAction = (image: string) => {
-    const defaultData = {
-      id: 0,
-      title: "Contexto espacial",
-      type: "Imagen JPEG",
-      details: "Manrope Black / 24px",
-      image: `/images/styles/${image}`,
-    }
     cleanScreen()
-    socket.emit("style", JSON.stringify(defaultData))
+    styleEmit(defaultStyle(image))
   }
 
   return (

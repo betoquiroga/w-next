@@ -1,9 +1,9 @@
 import { Song } from "src/common/interfaces/song.interface"
-import { socket } from "socket/mainSocket"
+import { coverEmit } from "@helpers/socket/emit"
 
 const LyricsCover = ({ song }: LyricsCoverProps) => {
   const addMessage = (e: React.SyntheticEvent) => {
-    socket.emit("lyric", e.currentTarget.innerHTML)
+    coverEmit(e.currentTarget.innerHTML)
   }
 
   return (

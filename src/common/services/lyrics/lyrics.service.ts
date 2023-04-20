@@ -17,11 +17,13 @@ export default class LyricsService extends HttpRequest {
   }
 
   async setActive(id: number) {
-    this.useToken(getToken())
-    this.configRequest({
-      endpoint: `${LYRICS_ENDPOINT}/active/${id}`,
-    })
-    const response = await this.patch<Lyric>({ active: true })
-    return new ServiceResponse(response.data)
+    if (id > 0) {
+      this.useToken(getToken())
+      this.configRequest({
+        endpoint: `${LYRICS_ENDPOINT}/active/${id}`,
+      })
+      const response = await this.patch<Lyric>({ active: true })
+      return new ServiceResponse(response.data)
+    }
   }
 }

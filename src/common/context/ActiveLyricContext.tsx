@@ -4,6 +4,7 @@ const ActiveLyricContext = createContext({} as ActiveLyricsContextProps)
 
 const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
   const [activeLyricId, setActiveLyricId] = useState(0)
+
   return (
     <ActiveLyricContext.Provider value={{ activeLyricId, setActiveLyricId }}>
       {children}

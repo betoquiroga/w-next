@@ -1,18 +1,33 @@
 import { ActiveLyricContext } from "src/common/context/ActiveLyricContext"
 import LyricsService from "src/common/services/lyrics/lyrics.service"
 import classNames from "classnames"
-import { useContext } from "react"
-import { socket } from "socket/mainSocket"
+import { useContext, useEffect } from "react"
+import { lyricEmit } from "@helpers/socket/emit"
 
 const LyricsItem = ({ content, id }: LyricsItemProps) => {
   const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
   const lyricsService = new LyricsService()
-  const addMessage = (e: React.SyntheticEvent) => {
+
+  const addMessage = () => {
     setActiveLyricId(id)
-    if (id > 0) lyricsService.setActive(id)
-    socket.emit("lyric", e.currentTarget.innerHTML)
-    socket.emit("verse", "")
+    lyricsService.setActive(id)
+    lyricEmit(content)
   }
+
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === "i") {
+      console.log("Tecla I presionada")
+    } else if (event.key === "k") {
+      console.log("Tecla K presionada")
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyUp)
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp)
+    }
+  }, [])
 
   return (
     <div

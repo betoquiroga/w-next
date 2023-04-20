@@ -1,18 +1,11 @@
 import { Style } from "src/common/interfaces/style.interface"
 import { createContext, Dispatch, SetStateAction, useState } from "react"
-
-const INITIAL_STATE: Style = {
-  id: 0,
-  title: "Contexto espacial",
-  type: "Imagen JPEG",
-  details: "Manrope Black / 24px",
-  image: "/images/styles/logo.jpg",
-}
+import { defaultStyle } from "../constants/style"
 
 const StyleContext = createContext({} as StyleContextProps)
 
 const StyleProvider = ({ children }: StyleProviderProps) => {
-  const [style, setStyle] = useState(INITIAL_STATE)
+  const [style, setStyle] = useState(defaultStyle("/images/styles/logo.jpg"))
 
   return (
     <StyleContext.Provider value={{ style, setStyle }}>

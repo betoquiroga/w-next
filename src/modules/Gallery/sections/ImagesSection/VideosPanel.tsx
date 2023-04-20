@@ -1,8 +1,9 @@
 import { Tab } from "@headlessui/react"
+import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { socket } from "socket/mainSocket"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { defaultStyle } from "src/common/constants/style"
 
 const VideosPanel = () => {
   const [images, setImages] = useState([])
@@ -15,15 +16,8 @@ const VideosPanel = () => {
   }, [])
 
   const sendData = (image: string) => {
-    socket.emit("lyric", "")
-    const defaultData = {
-      id: 0,
-      title: "Contexto espacial",
-      type: "Video",
-      details: "Manrope Black / 24px",
-      image: `http://${WW_API_DOMAIN}/uploads/${image}`,
-    }
-    socket.emit("style", JSON.stringify(defaultData))
+    clearEmit()
+    styleEmit(defaultStyle(`http://${WW_API_DOMAIN}/uploads/big/${image}`))
   }
 
   const isVideo = (filename: string): boolean => {

@@ -1,29 +1,33 @@
-import {
-  ActiveLyricContext,
-  ActiveLyricProvider,
-} from "src/common/context/ActiveLyricContext"
+import { ActiveLyricContext } from "src/common/context/ActiveLyricContext"
 import { SongContext } from "src/common/context/SongContext"
 import { Tab } from "@headlessui/react"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import LyricsList from "./LyricsList"
 import LyricsOptions from "./LyricsOptions"
-import { socket } from "socket/mainSocket"
+import { SongsContext } from "@context/SongsContext"
 import { Lyric } from "@interfaces/lyrics.interface"
 
 const LyricsPanel = () => {
-  const { data, isLoading, isError } = useContext(SongContext)
-  const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
+  const { data, isLoading, isError, setSongId } = useContext(SongContext)
+  const { activeSongId } = useContext(SongsContext)
+  const { setActiveLyricId } = useContext(ActiveLyricContext)
+
+  useEffect(() => {
+    setSongId(activeSongId)
+    const active = data?.find((d: Lyric) => d.active)
+    if (data && active) {
+      setActiveLyricId(active.id)
+    }
+  }, [activeSongId, data])
 
   if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 
   return (
-    <ActiveLyricProvider>
-      <Tab.Panel>
-        <LyricsOptions />
-        {data && <LyricsList data={data} />}
-      </Tab.Panel>
-    </ActiveLyricProvider>
+    <Tab.Panel>
+      <LyricsOptions />
+      {data && <LyricsList data={data} />}
+    </Tab.Panel>
   )
 }
 

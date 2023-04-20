@@ -1,9 +1,10 @@
 import { Verse } from "src/common/interfaces/verses.interface"
 import classNames from "classnames"
-import { socket } from "socket/mainSocket"
 import { useContext } from "react"
 import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
+import { bibleEmit, styleEmit, verseEmit } from "@helpers/socket/emit"
+import { defaultStyle } from "src/common/constants/style"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -11,17 +12,9 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
   const { version } = useContext(BookContext)
 
   const handleClick = async () => {
-    socket.emit("lyric", text)
-    const data = {
-      id: 0,
-      title: "Declaración",
-      type: "Imagen JPEG",
-      details: "Manrope Black / 24px",
-      image: "/images/styles/declaracion.jpg",
-    }
-    socket.emit("style", JSON.stringify(data))
-    socket.emit(
-      "verse",
+    bibleEmit(text)
+    styleEmit(defaultStyle("/images/styles/declaracion.jpg"))
+    verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
   }

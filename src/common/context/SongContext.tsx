@@ -13,7 +13,7 @@ import { getLyrics } from "../api/songs/lyrics.api"
 const SongContext = createContext({} as SongContextProps)
 
 const SongProvider = ({ children }: SongProviderProps) => {
-  const [songId, setSongId] = useState(2)
+  const [songId, setSongId] = useState(0)
   const [song, setSong] = useState({} as Song)
   const { data, isLoading, isError, refetch } = useQuery<Lyric[], Error>(
     [`CURRENT_SONG_LYRICS-${songId}`],

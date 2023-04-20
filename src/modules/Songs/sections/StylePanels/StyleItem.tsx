@@ -1,13 +1,13 @@
 import { StyleContext } from "src/common/context/StyleContext"
 import { SyntheticEvent, useContext } from "react"
-import { socket } from "socket/mainSocket"
+import { styleEmit } from "@helpers/socket/emit"
 
 const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
   const { setStyle } = useContext(StyleContext)
 
   const changeStyle = () => {
     const data = { id, title, type, details, image }
-    socket.emit("style", JSON.stringify(data))
+    styleEmit(data)
     setStyle(data)
   }
 

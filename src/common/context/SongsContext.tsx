@@ -12,18 +12,22 @@ import { getSongs } from "../api/songs/songs.api"
 const SongsContext = createContext({} as SongContextProps)
 
 const SongsProvider = ({ children }: SongProviderProps) => {
-  const [songId, setSongId] = useState(0)
+  const [activeSongId, setActiveSongId] = useState(0)
   const { data, isLoading, isError, refetch } = useQuery<Song[], Error>(
     ["ALL_SONGS"],
     getSongs
   )
   useEffect(() => {
+    const active = data?.find((d: Song) => d.active)
+    if (data && active) {
+      setActiveSongId(active.id)
+    }
     refetch()
-  }, [songId])
+  }, [activeSongId, data])
 
   return (
     <SongsContext.Provider
-      value={{ songId, setSongId, data, isLoading, isError }}
+      value={{ activeSongId, setActiveSongId, data, isLoading, isError }}
     >
       {children}
     </SongsContext.Provider>
@@ -31,8 +35,8 @@ const SongsProvider = ({ children }: SongProviderProps) => {
 }
 
 type SongContextProps = {
-  songId: number
-  setSongId: Dispatch<SetStateAction<number>>
+  activeSongId: number
+  setActiveSongId: Dispatch<SetStateAction<number>>
   data: Song[] | undefined
   isLoading: boolean
   isError: boolean

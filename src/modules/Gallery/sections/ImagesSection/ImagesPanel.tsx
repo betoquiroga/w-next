@@ -1,9 +1,10 @@
 import { Tab } from "@headlessui/react"
+import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { socket } from "socket/mainSocket"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
   const [images, setImages] = useState([])
@@ -15,16 +16,8 @@ const ImagesPanel = () => {
   }, [])
 
   const sendData = (image: string) => {
-    socket.emit("lyric", "")
-    socket.emit("verse", "")
-    const defaultData = {
-      id: 0,
-      title: "Contexto espacial",
-      type: "Imagen JPEG",
-      details: "Manrope Black / 24px",
-      image: `http://${WW_API_DOMAIN}/uploads/big/${image}`,
-    }
-    socket.emit("style", JSON.stringify(defaultData))
+    clearEmit()
+    styleEmit(defaultStyle(`http://${WW_API_DOMAIN}/uploads/big/${image}`))
   }
 
   const isImage = (filename: string): boolean => {
