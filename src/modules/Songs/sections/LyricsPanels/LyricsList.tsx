@@ -2,14 +2,13 @@ import { SongContext } from "src/common/context/SongContext"
 import { Lyric } from "src/common/interfaces/lyrics.interface"
 import { useContext } from "react"
 import LyricsItem from "./LyricsItem"
-import LyricsCover from "./LyricsCover"
 
 const LyricsList = ({ data }: LyricsListProps) => {
   const { song } = useContext(SongContext)
   return (
     <div className="songs border-t-2 border-t-ww-alt">
       {song?.title && song?.author && (
-        <LyricsCover content={`${song.title}\n${song.author}`} id={-1} />
+        <LyricsItem content={`${song.title}\n${song.author}`} id={-1} cover />
       )}
       {data
         ?.sort((a: Lyric, b: Lyric) => a.order - b.order)

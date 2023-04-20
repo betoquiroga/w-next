@@ -4,13 +4,15 @@ import { useContext, useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
-import DynamicFontSize from "./components/DynamicFontSize"
 import classNames from "classnames"
 import { Effect } from "@interfaces/effect.interface"
 import { Emit } from "@interfaces/emit.interface"
 import Wallpaper from "./components/Wallpaper"
 import FullScreenButton from "./components/FullScreenButton"
 import BibleVerse from "./components/BibleVerse"
+import SongContent from "./components/SongContent"
+import CoverContent from "./components/CoverContent"
+import BibleContent from "./components/BibleContent"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
@@ -24,7 +26,7 @@ const HomeView = () => {
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
-      setContent(JSON.parse(message))
+      if (message) setContent(JSON.parse(message))
     })
     socket.on("style", (data: string) => {
       setStyleData(JSON.parse(data))
@@ -46,7 +48,9 @@ const HomeView = () => {
       {effectsWs.particles && <div className="snow"></div>}
       {bibleVerse && <BibleVerse verse={bibleVerse} />}
       <Wallpaper style={styleData} effects={effectsWs} />
-      <DynamicFontSize data={content} />
+      {content.type === "song" && <SongContent data={content} />}
+      {content.type === "bible" && <BibleContent data={content} />}
+      {content.type === "cover" && <CoverContent data={content} />}
       <FullScreenButton />
     </div>
   )

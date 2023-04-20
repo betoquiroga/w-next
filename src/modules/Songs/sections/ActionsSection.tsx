@@ -27,16 +27,16 @@ const ActionsSection = () => {
       </div>
       <div className="my-8">
         <ActionButton
-          onClick={() => handleAction("black.jpg")}
+          onClick={() => handleAction("/images/styles/black.jpg")}
           text="Pasar a negro - F3"
         />
         <ActionButton
-          onClick={() => handleAction("logo.jpg")}
+          onClick={() => handleAction("/images/styles/logo.jpg")}
           text="Enviar logotipo - F4"
         />
         <ActionButton onClick={cleanScreen} text="Limpiar pantalla - F5" />
         <ActionButton
-          onClick={() => handleAction("arte-tv-052322.jpg")}
+          onClick={() => handleAction("/images/styles/arte-tv-052322.jpg")}
           text="Modo prédica - F6"
         />
       </div>

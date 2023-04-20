@@ -1,69 +1,44 @@
 "use client"
 
+import { parseContent } from "@helpers/text.helper"
+import { Emit } from "@interfaces/emit.interface"
 import { useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
-import { parse } from "node-html-parser"
+import BibleContent from "./components/BibleContent"
+import FullScreenButton from "./components/FullScreenButton"
+import LyricContent from "./components/LyricContent"
 
-const HomeView = () => {
-  const [content, setContent] = useState<string>("")
+const ChromaView = () => {
+  const [primeraMitad, setPrimeraMitad] = useState<string>("")
+  const [segundaMitad, setSegundaMitad] = useState<string>("")
+  const [contentData, setContentData] = useState<Emit>({} as Emit)
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
-      setContent(message)
+      const { content } = JSON.parse(message)
+
+      setPrimeraMitad(parseContent(content).primeraMitad)
+      setSegundaMitad(parseContent(content).segundaMitad)
+      setContentData(JSON.parse(message))
     })
   }, [])
-
-  const parseContent = (text: string) => {
-    const htmlObject = parse(text)
-    const etiquetas = htmlObject.getElementsByTagName("span")
-
-    let textoExtraido = ""
-    if (etiquetas.length > 0) {
-      for (let i = 0; i < etiquetas.length; i++) {
-        if (!etiquetas[i].classNames.includes("song-chroma")) {
-          const etiqueta = etiquetas[i]
-          textoExtraido = `${textoExtraido} ${etiqueta.textContent} ` as string
-        }
-      }
-    } else {
-      textoExtraido = text
-    }
-
-    const palabras = textoExtraido.split(" ")
-    const mitad = Math.floor(palabras.length / 2)
-    const primeraMitad = palabras.slice(0, mitad)
-    const segundaMitad = palabras.slice(mitad)
-
-    return [primeraMitad, segundaMitad]
-  }
 
   return (
     <div className="chroma bg-cover">
       <div className="container">
-        <p className="font-bold text-white">
-          {parseContent(content)[0].map((c) => (
-            <>{`${c} `}</>
-          ))}
-          <br />
-          {parseContent(content)[1].map((c) => (
-            <>{` ${c}`}</>
-          ))}
-        </p>
+        {contentData?.type === "song" && (
+          <LyricContent
+            primeraMitad={primeraMitad}
+            segundaMitad={segundaMitad}
+          />
+        )}
+        {contentData?.type === "bible" && (
+          <BibleContent text={contentData.content} />
+        )}
       </div>
-      <button
-        className="bg-black"
-        onClick={() => {
-          if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen()
-          } else if (document.exitFullscreen) {
-            document.exitFullscreen()
-          }
-        }}
-      >
-        [ Full ]
-      </button>
+      <FullScreenButton />
     </div>
   )
 }
 
-export default HomeView
+export default ChromaView

@@ -2,16 +2,16 @@ import { ActiveLyricContext } from "src/common/context/ActiveLyricContext"
 import LyricsService from "src/common/services/lyrics/lyrics.service"
 import classNames from "classnames"
 import { useContext, useEffect } from "react"
-import { lyricEmit } from "@helpers/socket/emit"
+import { coverEmit, lyricEmit } from "@helpers/socket/emit"
 
-const LyricsItem = ({ content, id }: LyricsItemProps) => {
+const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
   const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
   const lyricsService = new LyricsService()
 
   const addMessage = () => {
     setActiveLyricId(id)
     lyricsService.setActive(id)
-    lyricEmit(content)
+    cover ? coverEmit(content) : lyricEmit(content)
   }
 
   const handleKeyUp = (event: KeyboardEvent) => {
@@ -31,27 +31,21 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
 
   return (
     <div
-      className={classNames("song hover:bg-ww-alt cursor-pointer", {
-        "bg-ww-green-800 hover:bg-ww-green-800": activeLyricId === id,
-      })}
+      className={classNames(
+        "song text-ww-normal hover:bg-ww-alt cursor-pointer",
+        {
+          "bg-ww-green-800 hover:bg-ww-green-800": activeLyricId === id,
+        }
+      )}
     >
       <p
-        className={classNames("text-ww-normal p-4", {
-          "text-ww-green-300": id < 0,
+        className={classNames(" p-4", {
+          "text-ww-green-400": id < 0,
         })}
         onClick={addMessage}
       >
-        {content.split("\n").map((line, i) => (
-          <span
-            key={line}
-            className={classNames("flex", {
-              "song-author":
-                (i > 0 && id < 0) ||
-                line.includes("(Hombres)") ||
-                line.includes("(Mujeres)"),
-              "song-chroma": id < 0,
-            })}
-          >
+        {content.split("\n").map((line) => (
+          <span key={line} className="flex">
             {line}
           </span>
         ))}
@@ -63,6 +57,7 @@ const LyricsItem = ({ content, id }: LyricsItemProps) => {
 type LyricsItemProps = {
   id: number
   content: string
+  cover?: boolean
 }
 
 export default LyricsItem

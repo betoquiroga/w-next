@@ -95,6 +95,10 @@
   opacity: .7;
 }
 
+.prueba .song-content{
+  font-size: 7.5vw;
+}
+
 .image.back {
   height: 100vh;
   width: 100vw;
