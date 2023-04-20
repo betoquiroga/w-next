@@ -4,16 +4,19 @@ import { useContext, useEffect, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
-import DynamicFontSize from "./DynamicText"
-import Image from "next/image"
+import DynamicFontSize from "./components/DynamicFontSize"
 import classNames from "classnames"
 import { Effect } from "@interfaces/effect.interface"
+import { Emit } from "@interfaces/emit.interface"
+import Wallpaper from "./components/Wallpaper"
+import FullScreenButton from "./components/FullScreenButton"
+import BibleVerse from "./components/BibleVerse"
 
 const HomeView = () => {
   const { style } = useContext(StyleContext)
-  const [content, setContent] = useState<string>("")
+  const [content, setContent] = useState<Emit>({ content: "" } as Emit)
   const [styleData, setStyleData] = useState<Style>(style)
-  const [bibleVerse, setBibleVerse] = useState<string>("")
+  const [bibleVerse, setBibleVerse] = useState<Emit>({ content: "" } as Emit)
   const [effectsWs, setEffectsWs] = useState<Effect>({
     zoom: false,
     particles: false,
@@ -21,13 +24,13 @@ const HomeView = () => {
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
-      setContent(message)
+      setContent(JSON.parse(message))
     })
     socket.on("style", (data: string) => {
       setStyleData(JSON.parse(data))
     })
-    socket.on("verse", (data: string) => {
-      setBibleVerse(data)
+    socket.on("verse", (verse: string) => {
+      if (verse) setBibleVerse(JSON.parse(verse))
     })
     socket.on("effects", (data: string) => {
       setEffectsWs(JSON.parse(data))
@@ -41,47 +44,10 @@ const HomeView = () => {
       })}
     >
       {effectsWs.particles && <div className="snow"></div>}
-      {bibleVerse && (
-        <div className="verse fixed z-50 top-0 text-center w-full pt-6">
-          {bibleVerse}
-        </div>
-      )}
-      <div className="wallpaper">
-        {styleData.type === "Video" && (
-          <video
-            id="video-player"
-            autoPlay
-            muted
-            loop
-            className="main-video"
-            src={styleData.image}
-          />
-        )}
-        {styleData.type.includes("Imagen") && (
-          <Image
-            src={styleData.image}
-            alt={styleData.title}
-            height={1080}
-            width={1920}
-            blurDataURL={styleData.image}
-            placeholder="blur"
-            className={`${effectsWs.zoom ? "zoom" : ""}`}
-          />
-        )}
-      </div>
-      <DynamicFontSize text={content} />
-      <button
-        className="bg-black"
-        onClick={() => {
-          if (!window.document.fullscreenElement) {
-            window.document.documentElement.requestFullscreen()
-          } else if (window.document.exitFullscreen) {
-            window.document.exitFullscreen()
-          }
-        }}
-      >
-        [ ]
-      </button>
+      {bibleVerse && <BibleVerse verse={bibleVerse} />}
+      <Wallpaper style={styleData} effects={effectsWs} />
+      <DynamicFontSize data={content} />
+      <FullScreenButton />
     </div>
   )
 }

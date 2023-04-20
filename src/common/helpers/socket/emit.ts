@@ -41,12 +41,7 @@ export const verseEmit = (content: string) => {
 }
 
 export const styleEmit = (content: Style) => {
-  const emitObject: Emit = {
-    type: "style",
-    content,
-  }
-
-  socket.emit("style", JSON.stringify(emitObject))
+  socket.emit("style", JSON.stringify(content))
 }
 
 export const clearEmit = () => {
