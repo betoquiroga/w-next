@@ -1,3 +1,4 @@
+import { vwFontSizeCalculator } from "@helpers/fontSize.helper"
 import { Emit } from "@interfaces/emit.interface"
 import { useEffect, useRef } from "react"
 
@@ -6,11 +7,14 @@ const BibleContent = ({ data }: BibleContentProps) => {
 
   useEffect(() => {
     const element = elementRef.current
-    if (element) {
-      const fontSize = 7.3 - data.content.length / 100
-      element.style.fontSize = `${fontSize}vw`
-    }
-    if (element && data.content.length > 320) element.style.fontSize = "3.5vw"
+    if (element)
+      element.style.fontSize = vwFontSizeCalculator(
+        data.content,
+        7.3,
+        100,
+        320,
+        3.5
+      )
   }, [data])
 
   return (

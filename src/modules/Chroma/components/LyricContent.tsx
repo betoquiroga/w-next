@@ -2,12 +2,8 @@ const LyricContent = ({ primeraMitad, segundaMitad }: LyricContentProps) => {
   return (
     <p className="font-bold text-white">
       {primeraMitad && primeraMitad}
-      {segundaMitad && (
-        <>
-          <br />
-          {segundaMitad}
-        </>
-      )}
+      {primeraMitad && segundaMitad && <br />}
+      {segundaMitad && segundaMitad}
     </p>
   )
 }
