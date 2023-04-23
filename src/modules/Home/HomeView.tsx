@@ -46,7 +46,7 @@ const HomeView = () => {
       })}
     >
       {effectsWs.particles && <div className="snow"></div>}
-      {bibleVerse && <BibleVerse verse={bibleVerse} />}
+      {bibleVerse?.content.length > 0 && <BibleVerse verse={bibleVerse} />}
       <Wallpaper style={styleData} effects={effectsWs} />
       {content.type === "song" && <SongContent data={content} />}
       {content.type === "bible" && <BibleContent data={content} />}

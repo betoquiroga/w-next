@@ -17,12 +17,16 @@
   align-items: center;
 }
 
-.chroma p, .chroma span {
+.chroma p {
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
   color: white;
   text-shadow: -2px -2px 0 black, -2px 2px 0 black, 2px -2px 0 black, 2px 2px 0 black
+}
+
+.chroma span {
+  @apply text-yellow-100;
 }
 
 .chroma span {
