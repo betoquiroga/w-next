@@ -45,6 +45,7 @@ export const styleEmit = (content: Style) => {
 }
 
 export const clearEmit = () => {
-  socket.emit("lyric", "")
+  const data = { type: "song", content: "" }
+  socket.emit("lyric", JSON.stringify(data))
   socket.emit("verse", "")
 }
