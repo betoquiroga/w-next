@@ -29,7 +29,8 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
     onDrop,
   })
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (!file) return
 
     const formData = new FormData()

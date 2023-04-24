@@ -27,6 +27,7 @@ const StylesCreateView = () => {
   })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     let fileURL = ""
     if (!file) return
 
@@ -54,7 +55,6 @@ const StylesCreateView = () => {
       alert("Error uploading image")
     }
 
-    e.preventDefault()
     const target = e.target as HTMLFormElement
 
     axios
