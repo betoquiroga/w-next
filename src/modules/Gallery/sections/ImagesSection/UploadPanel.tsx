@@ -59,34 +59,38 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
   return (
     <Tab.Panel>
       <div>
-        {!preview && (
-          <div
-            {...getRootProps()}
-            className="bg-ww-scroll p-16 text-center mb-6"
-          >
-            <input {...getInputProps()} />
-            <p>
-              Arrastre un archivo aquí o haga click para seleccionar un archivo
-            </p>
-          </div>
-        )}
-        {preview && (
-          <>
-            <div className="mb-4">
-              <img
-                src={preview}
-                alt="Preview"
-                style={{ width: "100px", height: "100px", objectFit: "cover" }}
-              />
-            </div>
-            <button
-              className="transition-all py-2 px-4 rounded-lg mb-4 bg-ww-green-800"
-              onClick={handleSubmit}
+        <form onSubmit={handleSubmit}>
+          {!preview && (
+            <div
+              {...getRootProps()}
+              className="bg-ww-scroll p-16 text-center mb-6"
             >
-              Subir archivo
-            </button>
-          </>
-        )}
+              <input {...getInputProps()} />
+              <p>
+                Arrastre un archivo aquí o haga click para seleccionar un
+                archivo
+              </p>
+            </div>
+          )}
+          {preview && (
+            <>
+              <div className="mb-4">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+              <button className="transition-all py-2 px-4 rounded-lg mb-4 bg-ww-green-800">
+                Subir archivo
+              </button>
+            </>
+          )}
+        </form>
       </div>
     </Tab.Panel>
   )

@@ -42,7 +42,7 @@ const HomeView = () => {
   return (
     <div
       className={classNames("prueba bg-cover relative", {
-        "pt-24": bibleVerse,
+        "pt-24": bibleVerse?.content.length > 0,
       })}
     >
       {effectsWs.particles && <div className="snow"></div>}

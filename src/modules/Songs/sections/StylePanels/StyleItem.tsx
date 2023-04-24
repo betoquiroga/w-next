@@ -1,26 +1,32 @@
 import { StyleContext } from "src/common/context/StyleContext"
 import { SyntheticEvent, useContext } from "react"
 import { styleEmit } from "@helpers/socket/emit"
+import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { defaultStyle } from "src/common/constants/style"
 
 const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
   const { setStyle } = useContext(StyleContext)
 
   const changeStyle = () => {
     const data = { id, title, type, details, image }
-    styleEmit(data)
+    styleEmit(
+      defaultStyle(`http://${WW_API_DOMAIN}/uploads/styles/big/${image}`)
+    )
     setStyle(data)
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement
-    target.src = "/images/styles/video.jpeg"
+    target.src = type.includes("Video")
+      ? "/images/styles/video.jpeg"
+      : "/images/styles/error.jpeg"
   }
 
   return (
     <div className="song border-b-2 border-b-ww-alt last:border-none py-4 flex align-top">
       <img
         onClick={changeStyle}
-        src={image}
+        src={`http://${WW_API_DOMAIN}/uploads/styles/small/${image}`}
         alt={title}
         className="w-[7rem] mr-6 aspect-video hover:opacity-80 hover:cursor-pointer"
         onError={handleError}
