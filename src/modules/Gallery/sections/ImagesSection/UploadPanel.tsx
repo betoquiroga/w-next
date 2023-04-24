@@ -49,10 +49,10 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
         throw new Error("Error uploading image")
       }
 
-      alert("Image uploaded successfully!")
+      alert("Se subió la imagen correctamente")
     } catch (error) {
       console.error(error)
-      alert("Error uploading image")
+      alert("Error subiendo la imagen")
     }
   }
 
