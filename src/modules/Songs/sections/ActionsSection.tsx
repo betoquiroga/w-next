@@ -1,23 +1,21 @@
 import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 import { defaultStyle } from "src/common/constants/style"
-import { clearEmit, styleEmit } from "@helpers/socket/emit"
-import { WW_LOGO } from "src/common/constants/images"
+import { blackEmit, clearEmit, styleEmit } from "@helpers/socket/emit"
+import { WW_BIBLE, WW_LOGO } from "src/common/constants/images"
 
 const ActionsSection = () => {
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
-      if (event.key === "F3") handleAction("black.jpg")
-      if (event.key === "F4") handleAction("logo.jpg")
-      if (event.key === "F5") cleanScreen()
-      if (event.key === "F6") handleAction("arte-tv-052322.jpg")
+      if (event.key === "F3") blackEmit()
+      if (event.key === "F4") handleAction(WW_LOGO as string)
+      if (event.key === "F5") clearEmit()
+      if (event.key === "F6") handleAction(WW_BIBLE as string)
     })
   }, [])
 
-  const cleanScreen = () => clearEmit()
-
   const handleAction = (image: string) => {
-    cleanScreen()
+    clearEmit()
     styleEmit(defaultStyle(image))
   }
 
@@ -27,17 +25,17 @@ const ActionsSection = () => {
         <span className="py-4">Acciones rapidas</span>
       </div>
       <div className="my-8">
-        <ActionButton
-          onClick={() => handleAction("/images/styles/black.jpg")}
-          text="Pasar a negro - F3"
-        />
+        <ActionButton onClick={() => blackEmit()} text="Pasar a negro - F3" />
         <ActionButton
           onClick={() => handleAction(WW_LOGO as string)}
           text="Enviar logotipo - F4"
         />
-        <ActionButton onClick={cleanScreen} text="Limpiar pantalla - F5" />
         <ActionButton
-          onClick={() => handleAction("/images/styles/arte-tv-052322.jpg")}
+          onClick={() => clearEmit()}
+          text="Limpiar pantalla - F5"
+        />
+        <ActionButton
+          onClick={() => handleAction(WW_BIBLE as string)}
           text="Modo prédica - F6"
         />
       </div>

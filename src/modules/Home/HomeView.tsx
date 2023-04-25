@@ -23,6 +23,7 @@ const HomeView = () => {
     zoom: false,
     particles: false,
   })
+  const [black, setBlack] = useState<boolean>(false)
 
   useEffect(() => {
     socket.on("lyric", (message: string) => {
@@ -39,6 +40,14 @@ const HomeView = () => {
     })
   }, [])
 
+  useEffect(() => {
+    if (content.type === "black") {
+      setBlack(true)
+    } else {
+      setBlack(false)
+    }
+  }, [content])
+
   return (
     <div
       className={classNames("prueba bg-cover relative", {
@@ -47,7 +56,7 @@ const HomeView = () => {
     >
       {effectsWs.particles && <div className="snow"></div>}
       {bibleVerse?.content.length > 0 && <BibleVerse verse={bibleVerse} />}
-      <Wallpaper style={styleData} effects={effectsWs} />
+      {!black && <Wallpaper style={styleData} effects={effectsWs} />}
       {content.type === "song" && <SongContent data={content} />}
       {content.type === "bible" && <BibleContent data={content} />}
       {content.type === "cover" && <CoverContent data={content} />}

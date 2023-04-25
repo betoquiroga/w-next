@@ -50,3 +50,10 @@ export const clearEmit = () => {
   socket.emit("lyric", JSON.stringify(dataLyric))
   socket.emit("verse", JSON.stringify(dataVerse))
 }
+
+export const blackEmit = () => {
+  const dataLyric = { type: "black", content: "" }
+  const dataVerse = { type: "verse", content: "" }
+  socket.emit("lyric", JSON.stringify(dataLyric))
+  socket.emit("verse", JSON.stringify(dataVerse))
+}
