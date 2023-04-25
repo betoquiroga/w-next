@@ -82,6 +82,7 @@ const SongsView = () => {
                 <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
+                <th>Estilo</th>
                 <th>Ver canción</th>
                 <th>Agregar letra</th>
                 <th>Eliminar canción</th>
@@ -94,6 +95,7 @@ const SongsView = () => {
                     <td>{song.id}</td>
                     <td>{song.title}</td>
                     <td>{song.author}</td>
+                    <td>{song.style?.id || "-"}</td>
                     <td>
                       <Link
                         className="text-ww-green-600"

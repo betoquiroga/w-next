@@ -90,9 +90,15 @@
 }
 
 .prueba .song-author{
-  font-size: 4.5vw;
+  font-size: 4vw;
   font-weight: normal;
   opacity: .7;
+}
+
+.prueba .song-cover {
+  border-top: 6px solid white;
+  border-bottom: 6px solid white;
+  margin: 0 2rem;
 }
 
 .prueba .song-content{
