@@ -17,7 +17,6 @@ const withAuth = <P extends AuthProps>(WrappedComponent: ComponentType<P>) => {
             Authorization: getToken(),
           },
         })
-        .then((r) => console.log(r))
         .catch(() => {
           router.push("/login")
           logout()

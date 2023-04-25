@@ -74,6 +74,8 @@ const StylesCreateView = () => {
       )
       .then(() => {
         target.reset()
+        setFile(null)
+        setPreview(null)
         alert("Estilo creado")
       })
   }

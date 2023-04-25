@@ -2,6 +2,7 @@ import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 import { defaultStyle } from "src/common/constants/style"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import { WW_LOGO } from "src/common/constants/images"
 
 const ActionsSection = () => {
   useEffect(() => {
@@ -31,7 +32,7 @@ const ActionsSection = () => {
           text="Pasar a negro - F3"
         />
         <ActionButton
-          onClick={() => handleAction("/images/styles/logo.jpg")}
+          onClick={() => handleAction(WW_LOGO as string)}
           text="Enviar logotipo - F4"
         />
         <ActionButton onClick={cleanScreen} text="Limpiar pantalla - F5" />

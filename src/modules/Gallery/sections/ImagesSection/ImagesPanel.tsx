@@ -17,7 +17,7 @@ const ImagesPanel = () => {
 
   const sendData = (image: string) => {
     clearEmit()
-    styleEmit(defaultStyle(`http://${WW_API_DOMAIN}/uploads/big/${image}`))
+    styleEmit(defaultStyle(image))
   }
 
   const isImage = (filename: string): boolean => {

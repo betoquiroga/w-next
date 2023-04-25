@@ -4,6 +4,9 @@ import LyricsService from "src/common/services/lyrics/lyrics.service"
 const service = new LyricsService()
 
 export const getLyrics = async (id: number): Promise<Lyric[]> => {
-  const response = await service.getLyrics(id)
-  return response.data
+  if (id > 0) {
+    const response = await service.getLyrics(id)
+    return response.data
+  }
+  return []
 }
