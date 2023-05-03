@@ -109,7 +109,7 @@ const StylesView = () => {
                     <td>
                       <img
                         className="max-w-[5rem]"
-                        src={`http://${WW_API_DOMAIN}/uploads/styles/small/${style.image}`}
+                        src={`http://${WW_API_DOMAIN}/uploads/small/${style.image}`}
                         alt={`${style.id}-${style.title}`}
                         onError={(e) => handleError(e, style.type)}
                       />
