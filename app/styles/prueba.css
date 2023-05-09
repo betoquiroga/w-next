@@ -74,7 +74,7 @@
 
 .preview .current {
   transform-origin: top left;
-  max-height: 260px;
+  max-height: 230px;
 }
 
 .preview .prueba {
@@ -82,7 +82,6 @@
   height: 1080px !important;
   position: relative;
   transform-origin: top left;
-  transform: scale(0.225);
 }
 
 .preview .wallpaper {

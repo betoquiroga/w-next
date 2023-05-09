@@ -1,8 +1,7 @@
 import { Emit } from "@interfaces/emit.interface"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 const SongContent = ({ data }: SongContentProps) => {
-  const elementRef = useRef<HTMLParagraphElement>(null)
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
 
@@ -13,7 +12,7 @@ const SongContent = ({ data }: SongContentProps) => {
   }, [data])
 
   return (
-    <p ref={elementRef} className="font-bold text-white p-16 song-cover">
+    <p className="font-bold text-white p-16 song-cover">
       <span className="flex song-content">{title}</span>
       <span className="flex song-author">{author}</span>
     </p>

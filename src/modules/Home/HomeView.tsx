@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { socket } from "../../../socket/mainSocket"
 import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
@@ -14,7 +14,8 @@ import SongContent from "./components/SongContent"
 import CoverContent from "./components/CoverContent"
 import BibleContent from "./components/BibleContent"
 
-const HomeView = () => {
+const HomeView = ({ width }: HomeViewProps) => {
+  const preview = useRef<HTMLParagraphElement>(null)
   const { style } = useContext(StyleContext)
   const [content, setContent] = useState<Emit>({ content: "" } as Emit)
   const [styleData, setStyleData] = useState<Style>(style)
@@ -50,9 +51,11 @@ const HomeView = () => {
 
   return (
     <div
+      ref={preview}
       className={classNames("prueba bg-cover relative", {
         "pt-24": bibleVerse?.content.length > 0,
       })}
+      style={{ transform: `scale(${width})` }}
     >
       {effectsWs.particles && <div className="snow"></div>}
       {bibleVerse?.content.length > 0 && <BibleVerse verse={bibleVerse} />}
@@ -66,3 +69,7 @@ const HomeView = () => {
 }
 
 export default HomeView
+
+type HomeViewProps = {
+  width?: number
+}

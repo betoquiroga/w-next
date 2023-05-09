@@ -44,8 +44,8 @@ const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
         })}
         onClick={addMessage}
       >
-        {content.split("\n").map((line) => (
-          <span key={line} className="flex">
+        {content.split("\n").map((line, i) => (
+          <span key={`${line[0]}-${i}`} className="flex">
             {line}
           </span>
         ))}

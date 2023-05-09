@@ -1,16 +1,9 @@
-import { Style } from "@interfaces/style.interface"
-import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { useState } from "react"
-import { getStyles } from "src/common/api/styles/styles.api"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
 
 const SongsCreateView = () => {
   const [loading, setLoading] = useState<boolean>(false)
-  const { data, isLoading, isError } = useQuery<Style[], Error>(
-    ["ALL_STYLES"],
-    getStyles
-  )
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -24,7 +17,6 @@ const SongsCreateView = () => {
           title: target.songTitle.value,
           author: target.songAuthor.value,
           active: false,
-          style: Number(target.songStyle.value),
         },
         {
           headers: {
@@ -40,11 +32,6 @@ const SongsCreateView = () => {
         setLoading(false)
       })
   }
-
-  if (!data) {
-    return <p>Cargando data</p>
-  }
-
   return (
     <div className="p-4 pl-[5rem] bg-ww-content pb-16">
       <div className="max-w-[80rem] m-auto">
@@ -65,14 +52,6 @@ const SongsCreateView = () => {
               placeholder="Autor de la canción"
               name="songAuthor"
             />
-            <select name="songStyle" className="input mb-4">
-              <option value="">Seleccionar estilo</option>
-              {data?.map((style) => (
-                <option key={style.id} value={style.id}>
-                  {style.title}
-                </option>
-              ))}
-            </select>
             <input
               className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800"
               type="submit"
