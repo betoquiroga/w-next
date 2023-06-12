@@ -10,7 +10,7 @@ const ImagesPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`http://${WW_API_DOMAIN}/uploads`).then((r) => {
+    axios.get(`http://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
       setImages(r.data)
     })
   }, [])
@@ -56,7 +56,7 @@ const ImagesPanel = () => {
                 <Image
                   width={250}
                   height={100}
-                  src={`http://${WW_API_DOMAIN}/uploads/small/${i}`}
+                  src={`http://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)

@@ -9,7 +9,7 @@ const VideosPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`http://${WW_API_DOMAIN}/uploads`).then((r) => {
+    axios.get(`http://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
       console.log(r)
       setImages(r.data)
     })
