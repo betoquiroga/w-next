@@ -2,8 +2,11 @@ import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 import { defaultStyle } from "src/common/constants/style"
 import { blackEmit, clearEmit, styleEmit } from "@helpers/socket/emit"
-import { WW_BIBLE, WW_LOGO } from "src/common/constants/images"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import {
+  WW_BIBLE,
+  WW_LOGO,
+  WW_STYLES_FOLDER,
+} from "src/common/constants/images"
 
 const ActionsSection = () => {
   useEffect(() => {
@@ -17,7 +20,7 @@ const ActionsSection = () => {
 
   const handleAction = (image: string) => {
     clearEmit()
-    styleEmit(defaultStyle(image))
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
   }
 
   return (
@@ -28,11 +31,7 @@ const ActionsSection = () => {
       <div className="my-8">
         <ActionButton onClick={() => blackEmit()} text="Pasar a negro - F3" />
         <ActionButton
-          onClick={() =>
-            handleAction(
-              `http://${WW_API_DOMAIN}/uploads/styles/big/${WW_LOGO}`
-            )
-          }
+          onClick={() => handleAction(WW_LOGO as string)}
           text="Enviar logotipo - F4"
         />
         <ActionButton
@@ -40,11 +39,7 @@ const ActionsSection = () => {
           text="Limpiar pantalla - F5"
         />
         <ActionButton
-          onClick={() =>
-            handleAction(
-              `http://${WW_API_DOMAIN}/uploads/styles/big/${WW_BIBLE}`
-            )
-          }
+          onClick={() => handleAction(WW_BIBLE as string)}
           text="Modo prédica - F6"
         />
       </div>

@@ -35,7 +35,7 @@ const StylesCreateView = () => {
     formData.append("file", file)
 
     try {
-      const response = await fetch(`http://${WW_API_DOMAIN}/uploads`, {
+      const response = await fetch(`http://${WW_API_DOMAIN}/uploads/styles`, {
         method: "POST",
         body: formData,
         headers: {

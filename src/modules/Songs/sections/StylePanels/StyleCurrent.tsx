@@ -12,7 +12,6 @@ const StyleCurrent = () => {
         type={style.type}
         details={style.details}
         image={style.image}
-        current
       />
     </div>
   )

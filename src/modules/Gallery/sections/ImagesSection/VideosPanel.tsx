@@ -3,6 +3,7 @@ import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { defaultStyle } from "src/common/constants/style"
 
 const VideosPanel = () => {
@@ -17,7 +18,7 @@ const VideosPanel = () => {
 
   const sendData = (image: string) => {
     clearEmit()
-    styleEmit(defaultStyle(image))
+    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
   }
 
   const isVideo = (filename: string): boolean => {

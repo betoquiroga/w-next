@@ -4,6 +4,7 @@ import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
@@ -17,9 +18,7 @@ const ImagesPanel = () => {
 
   const sendData = (image: string) => {
     clearEmit()
-    styleEmit(
-      defaultStyle(`http://${WW_API_DOMAIN}/uploads/gallery/big/${image}`)
-    )
+    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
   }
 
   const isImage = (filename: string): boolean => {

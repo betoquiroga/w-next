@@ -5,7 +5,7 @@ import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
 import { bibleEmit, styleEmit, verseEmit } from "@helpers/socket/emit"
 import { defaultStyle } from "src/common/constants/style"
-import { WW_BIBLE } from "src/common/constants/images"
+import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -14,7 +14,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
 
   const handleClick = async () => {
     bibleEmit(text)
-    styleEmit(defaultStyle(WW_BIBLE as string))
+    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
     verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )

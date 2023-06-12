@@ -6,6 +6,8 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
 import { getStyles } from "src/common/api/styles/styles.api"
 import { TOKEN_NAME } from "src/common/constants/auth"
 import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_STYLES_FOLDER } from "src/common/constants/images"
+import { buildImageURL } from "src/common/constants/style"
 
 const StylesView = () => {
   const { data, isLoading, isError } = useQuery<Style[], Error>(
@@ -109,7 +111,11 @@ const StylesView = () => {
                     <td>
                       <img
                         className="max-w-[5rem]"
-                        src={`http://${WW_API_DOMAIN}/uploads/small/${style.image}`}
+                        src={buildImageURL(
+                          style.image,
+                          WW_STYLES_FOLDER,
+                          "small"
+                        )}
                         alt={`${style.id}-${style.title}`}
                         onError={(e) => handleError(e, style.type)}
                       />

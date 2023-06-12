@@ -1,14 +1,13 @@
 import { Style } from "src/common/interfaces/style.interface"
 import { createContext, Dispatch, SetStateAction, useState } from "react"
 import { defaultStyle } from "../constants/style"
-import { WW_LOGO } from "../constants/images"
-import { WW_API_DOMAIN } from "../constants/domains"
+import { WW_LOGO, WW_STYLES_FOLDER } from "../constants/images"
 
 const StyleContext = createContext({} as StyleContextProps)
 
 const StyleProvider = ({ children }: StyleProviderProps) => {
   const [style, setStyle] = useState(
-    defaultStyle(`http://${WW_API_DOMAIN}/uploads/styles/big/${WW_LOGO}`)
+    defaultStyle(WW_LOGO as string, WW_STYLES_FOLDER)
   )
 
   return (
