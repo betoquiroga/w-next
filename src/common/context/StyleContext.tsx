@@ -8,7 +8,7 @@ const StyleContext = createContext({} as StyleContextProps)
 
 const StyleProvider = ({ children }: StyleProviderProps) => {
   const [style, setStyle] = useState(
-    defaultStyle(`http://${WW_API_DOMAIN}/uploads/gallery/big/${WW_LOGO}`)
+    defaultStyle(`http://${WW_API_DOMAIN}/uploads/styles/big/${WW_LOGO}`)
   )
 
   return (
