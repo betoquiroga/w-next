@@ -1,4 +1,3 @@
-import { bigImage } from "@helpers/images.helper"
 import { Effect } from "@interfaces/effect.interface"
 import { Style } from "@interfaces/style.interface"
 import Image from "next/image"
@@ -18,7 +17,7 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
       )}
       {style.type.includes("Imagen") && (
         <Image
-          src={bigImage(style.image)}
+          src={style.image}
           alt={style.title}
           height={1080}
           width={1920}
