@@ -36,10 +36,12 @@ const ImagesPanel = () => {
 
   const deleteImage = (image: string) => {
     if (confirm("Se eliminará esta imagen para siempre")) {
-      axios.delete(`http://${WW_API_DOMAIN}/uploads/${image}`).then((r) => {
-        console.log(r)
-        setImages(images.filter((i) => i !== image))
-      })
+      axios
+        .delete(`http://${WW_API_DOMAIN}/uploads/gallery/${image}`)
+        .then((r) => {
+          console.log(r)
+          setImages(images.filter((i) => i !== image))
+        })
     }
   }
 
