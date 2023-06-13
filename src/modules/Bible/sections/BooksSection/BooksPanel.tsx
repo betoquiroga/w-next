@@ -34,7 +34,7 @@ const BooksPanel = () => {
     <Tab.Panel>
       <BooksVersions />
       <BooksSearch onSearch={handleSearch} />
-      <BooksList data={data} />
+      <BooksList data={data as []} />
     </Tab.Panel>
   )
 }
