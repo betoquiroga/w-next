@@ -14,14 +14,19 @@ import { BookContext } from "./BookContext"
 const ChapterContext = createContext({} as ChapterContextProps)
 
 const ChapterProvider = ({ children }: ChaptersProviderProps) => {
-  const [chapter, setChapter] = useState({} as Chapter)
+  const [chapter, setChapter] = useState(
+    JSON.parse(localStorage.getItem("currentChapter") || "{}") as Chapter
+  )
   const [loading, setLoading] = useState(false)
   const [verses, setVerses] = useState([] as Verse[])
+  const [activeVerse, setActiveVerse] = useState(
+    JSON.parse(localStorage.getItem("currentVerse") || "{}") as Verse
+  )
 
   const { version } = useContext(BookContext)
 
   useEffect(() => {
-    if (chapter?.chapter) {
+    if (chapter?.chapter && version) {
       axios
         .get(
           `/bible/${version.abbreviation}/${chapter.book.engAbr}${chapter.chapter}.json`
@@ -32,7 +37,15 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
 
   return (
     <ChapterContext.Provider
-      value={{ chapter, setChapter, verses, setVerses, loading }}
+      value={{
+        chapter,
+        setChapter,
+        verses,
+        setVerses,
+        loading,
+        activeVerse,
+        setActiveVerse,
+      }}
     >
       {children}
     </ChapterContext.Provider>
@@ -45,6 +58,8 @@ type ChapterContextProps = {
   verses: Verse[]
   setVerses: Dispatch<SetStateAction<Verse[]>>
   loading: boolean
+  activeVerse: Verse
+  setActiveVerse: Dispatch<SetStateAction<Verse>>
 }
 
 type ChaptersProviderProps = {
