@@ -9,6 +9,14 @@
 @import "./styles/snow.css";
 
 
+:focus {
+  outline: none; 
+}
+
+:focus-visible {
+  outline: none; 
+}
+
 html {
   @apply bg-ww-main;
   @apply text-ww-normal;

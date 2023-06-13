@@ -10,6 +10,7 @@ import {
 } from "react"
 import axios from "axios"
 import { BookContext } from "./BookContext"
+import { bibleEmit, verseEmit } from "@helpers/socket/emit"
 
 const ChapterContext = createContext({} as ChapterContextProps)
 
@@ -35,6 +36,24 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
     }
   }, [chapter])
 
+  const setNextVerse = () => {
+    const nextVerse = verses.find((v) => activeVerse.verse + 1 === v.verse)
+    if (nextVerse) sendVerse(nextVerse)
+  }
+
+  const setPrevVerse = () => {
+    const prevVerse = verses.find((v) => activeVerse.verse - 1 === v.verse)
+    if (prevVerse) sendVerse(prevVerse)
+  }
+
+  const sendVerse = (data: Verse) => {
+    setActiveVerse(data)
+    bibleEmit(data?.text)
+    verseEmit(
+      `${chapter.book.title} ${chapter.chapter}:${data.verse} (${version.abbreviation})`
+    )
+  }
+
   return (
     <ChapterContext.Provider
       value={{
@@ -45,6 +64,8 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
         loading,
         activeVerse,
         setActiveVerse,
+        setNextVerse,
+        setPrevVerse,
       }}
     >
       {children}
@@ -60,6 +81,8 @@ type ChapterContextProps = {
   loading: boolean
   activeVerse: Verse
   setActiveVerse: Dispatch<SetStateAction<Verse>>
+  setNextVerse: () => void
+  setPrevVerse: () => void
 }
 
 type ChaptersProviderProps = {
