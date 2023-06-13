@@ -10,7 +10,7 @@ const BooksItem = ({ bookData }: BooksItemProps) => {
   const { setChapter, setVerses } = useContext(ChapterContext)
 
   const handleClick = async () => {
-    localStorage.setItem("currentBook", JSON.stringify(bookData))
+    localStorage?.setItem("currentBook", JSON.stringify(bookData))
     setBook(bookData)
     setChapter({} as Chapter)
     setVerses([])

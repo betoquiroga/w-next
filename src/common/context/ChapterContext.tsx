@@ -16,12 +16,12 @@ const ChapterContext = createContext({} as ChapterContextProps)
 
 const ChapterProvider = ({ children }: ChaptersProviderProps) => {
   const [chapter, setChapter] = useState(
-    JSON.parse(localStorage.getItem("currentChapter") || "{}") as Chapter
+    JSON.parse(localStorage?.getItem("currentChapter") || "{}") as Chapter
   )
   const [loading, setLoading] = useState(false)
   const [verses, setVerses] = useState([] as Verse[])
   const [activeVerse, setActiveVerse] = useState(
-    JSON.parse(localStorage.getItem("currentVerse") || "{}") as Verse
+    JSON.parse(localStorage?.getItem("currentVerse") || "{}") as Verse
   )
 
   const { version } = useContext(BookContext)

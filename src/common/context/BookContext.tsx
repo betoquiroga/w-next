@@ -6,7 +6,7 @@ const BookContext = createContext({} as BookContextProps)
 
 const BooksProvider = ({ children }: BooksProviderProps) => {
   const [book, setBook] = useState(
-    JSON.parse(localStorage.getItem("currentBook") || "{}") as Book
+    JSON.parse(localStorage?.getItem("currentBook") || "{}") as Book
   )
   const [version, setVersion] = useState({
     title: "Nueva Biblia de las Américas",

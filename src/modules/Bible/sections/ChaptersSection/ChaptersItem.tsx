@@ -12,11 +12,11 @@ const ChaptersItem = (props: ChaptersItemProps) => {
       chapter: props.chapter,
       book,
     })
-    localStorage.setItem("currentChapter", JSON.stringify(chapter))
+    localStorage?.setItem("currentChapter", JSON.stringify(chapter))
   }
 
   useEffect(() => {
-    localStorage.setItem("currentChapter", JSON.stringify(chapter))
+    localStorage?.setItem("currentChapter", JSON.stringify(chapter))
   }, [chapter])
 
   return (
