@@ -7,7 +7,7 @@ const ChaptersPanel = () => {
   const { book } = useContext(BookContext)
 
   const data = []
-  for (let i = 1; i <= book.chapters; i++) {
+  for (let i = 1; i <= book?.chapters; i++) {
     data.push(i)
   }
 
