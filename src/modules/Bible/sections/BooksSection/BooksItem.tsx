@@ -24,7 +24,7 @@ const BooksItem = ({ bookData }: BooksItemProps) => {
         "book p-2 border-t-2 border-t-ww-alt hover:bg-ww-alt cursor-pointer flex items-center justify-items-stretch",
         {
           "bg-ww-green-800 hover:bg-ww-green-800":
-            book.abbreviation === bookData.abbreviation,
+            book?.abbreviation === bookData?.abbreviation,
         }
       )}
     >
