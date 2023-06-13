@@ -5,7 +5,10 @@ import { Version } from "@interfaces/version.interface"
 const BookContext = createContext({} as BookContextProps)
 
 const BooksProvider = ({ children }: BooksProviderProps) => {
-  const currentBook = localStorage?.getItem("currentBook") || "{}"
+  let currentBook = "{}"
+  if (typeof localStorage !== "undefined") {
+    currentBook = localStorage?.getItem("currentBook") as string
+  }
   const [book, setBook] = useState(JSON.parse(currentBook) as Book)
   const [version, setVersion] = useState({
     title: "Nueva Biblia de las Américas",

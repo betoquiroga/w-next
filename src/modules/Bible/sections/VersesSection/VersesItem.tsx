@@ -18,7 +18,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       text,
     }
     setActiveVerse(currentVerse)
-    localStorage.setItem("currentVerse", JSON.stringify(currentVerse))
+    localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(text)
     styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
     verseEmit(
