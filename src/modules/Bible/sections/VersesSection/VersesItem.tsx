@@ -9,10 +9,16 @@ import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
-  const { chapter } = useContext(ChapterContext)
+  const { chapter, activeVerse, setActiveVerse } = useContext(ChapterContext)
   const { version } = useContext(BookContext)
 
   const handleClick = async () => {
+    const currentVerse = {
+      verse,
+      text,
+    }
+    setActiveVerse(currentVerse)
+    localStorage.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(text)
     styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
     verseEmit(
@@ -32,8 +38,8 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
         className={classNames(
           "flex justify-center self-center h-full min-w-[6rem] text-3xl p-4",
           {
-            "bg-ww-green-700": false,
-            "bg-ww-scroll": true,
+            "bg-ww-green-700": verseData.text === activeVerse.text,
+            "bg-ww-scroll": verseData.text !== activeVerse.text,
           }
         )}
       >

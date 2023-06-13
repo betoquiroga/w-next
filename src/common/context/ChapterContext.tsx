@@ -19,6 +19,9 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
   )
   const [loading, setLoading] = useState(false)
   const [verses, setVerses] = useState([] as Verse[])
+  const [activeVerse, setActiveVerse] = useState(
+    JSON.parse(localStorage.getItem("currentVerse") || "{}") as Verse
+  )
 
   const { version } = useContext(BookContext)
 
@@ -34,7 +37,15 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
 
   return (
     <ChapterContext.Provider
-      value={{ chapter, setChapter, verses, setVerses, loading }}
+      value={{
+        chapter,
+        setChapter,
+        verses,
+        setVerses,
+        loading,
+        activeVerse,
+        setActiveVerse,
+      }}
     >
       {children}
     </ChapterContext.Provider>
@@ -47,6 +58,8 @@ type ChapterContextProps = {
   verses: Verse[]
   setVerses: Dispatch<SetStateAction<Verse[]>>
   loading: boolean
+  activeVerse: Verse
+  setActiveVerse: Dispatch<SetStateAction<Verse>>
 }
 
 type ChaptersProviderProps = {
