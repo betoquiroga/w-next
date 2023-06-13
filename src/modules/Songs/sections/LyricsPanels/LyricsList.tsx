@@ -15,9 +15,6 @@ const LyricsList = ({ data }: LyricsListProps) => {
         .map((i: Lyric) => (
           <LyricsItem key={i.id} content={i.verse} id={i.id} />
         ))}
-      {song?.title && song?.author && (
-        <LyricsItem content={`${song.title}\n${song.author}`} id={-2} cover />
-      )}
     </div>
   )
 }
