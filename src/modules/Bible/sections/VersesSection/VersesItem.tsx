@@ -38,8 +38,8 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
         className={classNames(
           "flex justify-center self-center h-full min-w-[6rem] text-3xl p-4",
           {
-            "bg-ww-green-700": verseData.text === activeVerse.text,
-            "bg-ww-scroll": verseData.text !== activeVerse.text,
+            "bg-ww-green-700": verseData?.text === activeVerse?.text,
+            "bg-ww-scroll": verseData?.text !== activeVerse?.text,
           }
         )}
       >
