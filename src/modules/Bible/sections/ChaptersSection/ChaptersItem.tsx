@@ -1,6 +1,6 @@
 import { BookContext } from "src/common/context/BookContext"
 import { ChapterContext } from "src/common/context/ChapterContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import classNames from "classnames"
 
 const ChaptersItem = (props: ChaptersItemProps) => {
@@ -12,7 +12,12 @@ const ChaptersItem = (props: ChaptersItemProps) => {
       chapter: props.chapter,
       book,
     })
+    localStorage.setItem("currentChapter", JSON.stringify(chapter))
   }
+
+  useEffect(() => {
+    localStorage.setItem("currentChapter", JSON.stringify(chapter))
+  }, [chapter])
 
   return (
     <div

@@ -14,14 +14,16 @@ import { BookContext } from "./BookContext"
 const ChapterContext = createContext({} as ChapterContextProps)
 
 const ChapterProvider = ({ children }: ChaptersProviderProps) => {
-  const [chapter, setChapter] = useState({} as Chapter)
+  const [chapter, setChapter] = useState(
+    JSON.parse(localStorage.getItem("currentChapter") || "{}") as Chapter
+  )
   const [loading, setLoading] = useState(false)
   const [verses, setVerses] = useState([] as Verse[])
 
   const { version } = useContext(BookContext)
 
   useEffect(() => {
-    if (chapter?.chapter) {
+    if (chapter?.chapter && version) {
       axios
         .get(
           `/bible/${version.abbreviation}/${chapter.book.engAbr}${chapter.chapter}.json`
