@@ -32,8 +32,8 @@ const BooksItem = ({ bookData }: BooksItemProps) => {
         className={classNames(
           "flex justify-center self-center h-full min-w-[6rem] text-3xl p-4",
           {
-            "bg-ww-green-700": book.abbreviation === bookData.abbreviation,
-            "bg-ww-scroll": book.abbreviation !== bookData.abbreviation,
+            "bg-ww-green-700": book?.abbreviation === bookData?.abbreviation,
+            "bg-ww-scroll": book?.abbreviation !== bookData?.abbreviation,
           }
         )}
       >
