@@ -1,7 +1,7 @@
 import { ActiveLyricContext } from "src/common/context/ActiveLyricContext"
 import LyricsService from "src/common/services/lyrics/lyrics.service"
 import classNames from "classnames"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { coverEmit, lyricEmit } from "@helpers/socket/emit"
 
 const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
@@ -13,21 +13,6 @@ const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
     lyricsService.setActive(id)
     cover ? coverEmit(content) : lyricEmit(content)
   }
-
-  const handleKeyUp = (event: KeyboardEvent) => {
-    if (event.key === "i") {
-      console.log("Tecla I presionada")
-    } else if (event.key === "k") {
-      console.log("Tecla K presionada")
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("keyup", handleKeyUp)
-    return () => {
-      document.removeEventListener("keyup", handleKeyUp)
-    }
-  }, [])
 
   return (
     <div
