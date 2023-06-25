@@ -9,10 +9,10 @@ const BibleView = () => {
   const { setNextVerse, setPrevVerse } = useContext(ChapterContext)
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "k") {
+    if (event.key === "x") {
       setNextVerse()
     }
-    if (event.key === "i") {
+    if (event.key === "z") {
       setPrevVerse()
     }
   }
