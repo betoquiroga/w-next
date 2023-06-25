@@ -10,10 +10,10 @@ const SongsView = () => {
   const { setNextSongVerse, setPrevSongVerse } = useContext(ActiveLyricContext)
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "k") {
+    if (event.key === "x") {
       setNextSongVerse()
     }
-    if (event.key === "i") {
+    if (event.key === "z") {
       setPrevSongVerse()
     }
   }
