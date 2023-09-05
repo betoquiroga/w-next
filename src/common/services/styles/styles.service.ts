@@ -16,4 +16,37 @@ export default class StyleService extends HttpRequest {
     const response = await this.get<Style[]>()
     return new ServiceResponse(response.data)
   }
+
+  async createStyle(newStyleData: Style) {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: ALL_STYLES_ENDPOINT,
+    })
+
+    const response = await this.post<Style>(newStyleData)
+    return new ServiceResponse(response.data)
+  }
+
+  async deleteStyle(id: number) {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `styles/${id}`,
+    })
+
+    const response = await this.delete<Style>()
+    return new ServiceResponse(response.data)
+  }
+
+  async updateStyle(id: number, updatedStyleData: Style) {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `styles/${id}`,
+    })
+
+    const response = await this.patch<Style>(updatedStyleData)
+    return new ServiceResponse(response.data)
+  }
 }

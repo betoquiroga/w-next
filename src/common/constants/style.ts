@@ -23,3 +23,5 @@ export const currentImageUrl = (image: string): string => {
     ? image
     : buildImageURL(image, WW_STYLES_FOLDER, "small")
 }
+
+export { WW_STYLES_FOLDER }
