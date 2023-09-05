@@ -45,7 +45,7 @@ const StyleForm = () => {
       target.reset()
       setFile(null)
       setPreview(null)
-      alert("Estilo creado si funcionaaaa")
+      alert("Estilo creado")
     } catch (error) {
       console.error(error)
       alert("Error creating style")

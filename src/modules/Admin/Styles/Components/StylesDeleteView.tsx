@@ -18,7 +18,7 @@ const StylesDeleteView = ({
           alert("Error al eliminar el estilo")
         },
         onSuccess: () => {
-          alert("Estilo eliminado siiii")
+          alert("Estilo eliminado")
           onDeleteSuccess()
         },
       })

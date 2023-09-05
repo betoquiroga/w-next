@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from "react"
 import { Style } from "@interfaces/style.interface"
 import { buildImageURL, WW_STYLES_FOLDER } from "src/common/constants/style"
-import StylesDeleteView from "@modules/Admin/Styles/StylesDeleteView"
+import StylesDeleteView from "@modules/Admin/Styles/Components/StylesDeleteView"
 
 interface StylesTableProps {
   styles: Style[]
