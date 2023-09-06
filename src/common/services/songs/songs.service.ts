@@ -1,7 +1,7 @@
-import { SongCreate } from "src/common/interfaces/song.interface"
 import HttpRequest from "src/common/services/http-request"
 import { ServiceResponse } from "src/common/services/response"
 import { getToken } from "src/common/helpers/auth.helper"
+import { SongBase } from "@interfaces/song.interface"
 
 const SONGS_ENDPOINT = "songs"
 
@@ -13,29 +13,29 @@ export default class SongsService extends HttpRequest {
       endpoint: SONGS_ENDPOINT,
     })
 
-    const response = await this.get<SongCreate[]>()
+    const response = await this.get<SongBase[]>()
     return new ServiceResponse(response.data)
   }
 
-  async createSongs(newSongData: SongCreate) {
+  async createSongs(newSongData: SongBase) {
     this.useToken(getToken())
 
     this.configRequest({
       endpoint: SONGS_ENDPOINT,
     })
 
-    const response = await this.post<SongCreate>(newSongData)
+    const response = await this.post<SongBase>(newSongData)
     return new ServiceResponse(response.data)
   }
 
-  async updateSong(songId: number, updatedData: Partial<SongCreate>) {
+  async updateSong(songId: number, updatedData: Partial<SongBase>) {
     this.useToken(getToken())
 
     this.configRequest({
       endpoint: `${SONGS_ENDPOINT}/${songId}`,
     })
 
-    const response = await this.patch<Partial<SongCreate>>(updatedData)
+    const response = await this.patch<Partial<SongBase>>(updatedData)
     return new ServiceResponse(response.data)
   }
 
@@ -56,7 +56,7 @@ export default class SongsService extends HttpRequest {
       endpoint: `${SONGS_ENDPOINT}/active/${id}`,
     })
 
-    const response = await this.patch<SongCreate>({ active: true })
+    const response = await this.patch<SongBase>({ active: true })
     return new ServiceResponse(response.data)
   }
 }
