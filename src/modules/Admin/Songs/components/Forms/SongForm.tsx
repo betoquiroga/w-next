@@ -34,7 +34,7 @@ const SongForm = () => {
         <input
           className="input mb-4"
           type="text"
-          placeholder="Título de la canción"
+          placeholder=" de la canción"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required

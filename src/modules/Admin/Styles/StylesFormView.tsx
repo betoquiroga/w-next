@@ -1,7 +1,7 @@
 import React from "react"
 import StyleForm from "@modules/Admin/Styles/Components/Form/StylesForm"
 
-const StylesCreateView = () => {
+const StylesFormView = () => {
   return (
     <div className="p-4 pl-[5rem] bg-ww-content pb-16">
       <div className="max-w-[80rem] m-auto">
@@ -14,4 +14,4 @@ const StylesCreateView = () => {
   )
 }
 
-export default StylesCreateView
+export default StylesFormView
