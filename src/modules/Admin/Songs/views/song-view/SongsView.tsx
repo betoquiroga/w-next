@@ -3,9 +3,9 @@ import { Song } from "@interfaces/song.interface"
 import { SongsContext } from "@context/SongsContext"
 import SongTable from "./SongTable"
 import { handleSearch } from "@helpers/handlers"
-import SongTitle from "./views/create-view/SongTitle"
-import SongAddButton from "./views/create-view/SongAddButton"
-import SongSearchInput from "./views/create-view/SongSearchInput"
+import SongTitle from "./SongTitle"
+import SongAddButton from "./SongAddButton"
+import SongSearchInput from "./SongSearchInput"
 
 const SongsView = () => {
   const { data = [], isLoading, isError } = useContext(SongsContext)
