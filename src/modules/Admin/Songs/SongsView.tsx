@@ -1,11 +1,11 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { Song } from "@interfaces/song.interface"
 import { SongsContext } from "@context/SongsContext"
-import SongTable from "./SongTable"
 import { handleSearch } from "@helpers/handlers"
-import SongTitle from "./SongTitle"
-import SongAddButton from "./SongAddButton"
-import SongSearchInput from "./SongSearchInput"
+import SongTitle from "./components/SongViewComponents/SongTitle"
+import SongAddButton from "./components/SongViewComponents/SongAddButton"
+import SongSearchInput from "./components/SongViewComponents/SongSearchInput"
+import SongTable from "./components/SongViewComponents/SongTable"
 
 const SongsView = () => {
   const { data = [], isLoading, isError } = useContext(SongsContext)
@@ -18,7 +18,7 @@ const SongsView = () => {
   }, [data])
 
   const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    handleSearch(e.target.value, data || [], setFilteredSongs)
+    setFilteredSongs(handleSearch(e.target.value, data))
   }
   const renderContent = () => {
     if (isLoading) return <p>Cargando...</p>

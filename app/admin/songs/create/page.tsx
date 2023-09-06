@@ -1,5 +1,5 @@
 "use client"
-import SongsCreateView from "@modules/Admin/Songs/views/song-create/SongsCreateView"
+import SongsCreateView from "@modules/Admin/Songs/SongsCreateView"
 
 export default function Chroma() {
   return <SongsCreateView />

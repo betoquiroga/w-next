@@ -1,4 +1,4 @@
-import SongForm from "../../forms/SongForm"
+import SongForm from "./components/Forms/SongForm"
 
 const SongsCreateView = () => {
   return (

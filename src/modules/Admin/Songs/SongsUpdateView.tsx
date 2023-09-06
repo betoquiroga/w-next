@@ -1,8 +1,5 @@
 import SongsService from "@services/songs/songs.service"
-import { Song } from "src/common/interfaces/song.interface"
-import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { ChangeEvent, useState } from "react"
 
 const SongsUpdateView = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -40,9 +37,6 @@ const SongsUpdateView = () => {
     }
   }
 
-  useEffect(() => {
-    const songId = 1
-  }, [])
   return (
     <div className="p-4 pl-[5rem] bg-ww-content pb-16">
       <div className="max-w-[80rem] m-auto">

@@ -1,6 +1,6 @@
 import { Song } from "@interfaces/song.interface"
 import Link from "next/link"
-import SongsDeleteButton from "../../components/SongsDeleteButton"
+import SongsDeleteButton from "../SongsDeleteButton"
 
 const SongTable = ({ songs }: SongTableProps) => {
   return (
