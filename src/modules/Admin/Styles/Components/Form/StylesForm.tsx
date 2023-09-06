@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { createStyle } from "src/common/api/styles/styles.api"
 import { uploadImage } from "@modules/Admin/Styles/Components/Form/StylesUploadImages"
+import { WW_FILETYPE_ACCEPT } from "src/common/constants/images"
 
 const StyleForm = () => {
   const [preview, setPreview] = useState<string | null>(null)
@@ -16,19 +17,17 @@ const StyleForm = () => {
   }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "image/png": [".png"],
-      "image/jpg": [".jpg"],
-      "image/jpeg": [".jpeg"],
-      "video/mp4": [".mp4"],
-      "video/mpeg": [".mpeg"],
-    },
+    accept: WW_FILETYPE_ACCEPT,
     onDrop,
   })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!file) return
+    console.log("HEY!")
+    if (!file) {
+      alert("No pusiste imagen")
+      return
+    }
     const fileURL = await uploadImage(file)
 
     const target = e.target as HTMLFormElement
@@ -37,7 +36,7 @@ const StyleForm = () => {
       await createStyle({
         title: target.styleTitle.value,
         details: target.styleDetails.value,
-        type: target.styleType.value,
+        type: "Imagen",
         image: fileURL,
       })
 
@@ -59,15 +58,20 @@ const StyleForm = () => {
           type="text"
           placeholder="Nombre del estilo"
           name="styleTitle"
+          required
         />
         <input
           className="input mb-4"
           type="text"
           placeholder="Detalles"
           name="styleDetails"
+          required
         />
         {!preview && (
-          <div {...getRootProps()} className="input mb-4">
+          <div
+            {...getRootProps()}
+            className="input mb-4 col-span-2 text-center"
+          >
             <input {...getInputProps()} />
             <p>De click o arrastre una imagen aquí</p>
           </div>
@@ -79,11 +83,6 @@ const StyleForm = () => {
             style={{ width: "192px", height: "108px", objectFit: "cover" }}
           />
         )}
-        <select className="input mb-4" name="styleType">
-          <option value="">- Tipo de archivo -</option>
-          <option value="Imagen">Imagen</option>
-          <option value="Video">Video</option>
-        </select>
         <input
           className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800"
           type="submit"

@@ -1,20 +1,18 @@
-export const handleSearch = <T>(
-  value: string,
-  data: T[] | null,
-  setData: (data: T[]) => void
-) => {
-  const normalizedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+export const handleSearch = <T>(value: string, data: T[] = []) => {
+  const normalizedValue = normalizeValue(value)
 
   if (normalizedValue === "") {
-    setData(data || [])
-  } else if (data) {
+    return data
+  } else {
     const newData = data.filter((item) =>
-      JSON.stringify(item)
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
+      normalizeValue(JSON.stringify(item))
         .toLowerCase()
         .includes(normalizedValue.toLowerCase())
     )
-    setData(newData)
+    return newData
   }
+}
+
+export const normalizeValue = (value: string) => {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 }

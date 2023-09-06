@@ -1,5 +1,5 @@
 import StyleService from "src/common/services/styles/styles.service"
-import { Style, StyleCreate } from "src/common/interfaces/style.interface"
+import { Style, StyleBase } from "src/common/interfaces/style.interface"
 
 const service = new StyleService()
 
@@ -8,7 +8,7 @@ export const getStyles = async () => {
   return response.data
 }
 
-export const createStyle = async (newStyleData: StyleCreate) => {
+export const createStyle = async (newStyleData: StyleBase) => {
   const response = await service.createStyle(newStyleData)
   return response.data
 }

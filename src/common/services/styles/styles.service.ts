@@ -1,4 +1,4 @@
-import { Style, StyleCreate } from "src/common/interfaces/style.interface"
+import { Style, StyleBase } from "src/common/interfaces/style.interface"
 import HttpRequest from "src/common/services/http-request"
 import { ServiceResponse } from "src/common/services/response"
 import { getToken } from "src/common/helpers/auth.helper"
@@ -17,7 +17,7 @@ export default class StyleService extends HttpRequest {
     return new ServiceResponse(response.data)
   }
 
-  async createStyle(newStyleData: StyleCreate) {
+  async createStyle(newStyleData: StyleBase) {
     this.useToken(getToken())
 
     this.configRequest({
@@ -25,17 +25,6 @@ export default class StyleService extends HttpRequest {
     })
 
     const response = await this.post<Style>(newStyleData)
-    return new ServiceResponse(response.data)
-  }
-
-  async deleteStyle(id: number) {
-    this.useToken(getToken())
-
-    this.configRequest({
-      endpoint: `styles/${id}`,
-    })
-
-    const response = await this.delete<Style>()
     return new ServiceResponse(response.data)
   }
 
@@ -47,6 +36,17 @@ export default class StyleService extends HttpRequest {
     })
 
     const response = await this.patch<Style>(updatedStyleData)
+    return new ServiceResponse(response.data)
+  }
+
+  async deleteStyle(id: number) {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `styles/${id}`,
+    })
+
+    const response = await this.delete<Style>()
     return new ServiceResponse(response.data)
   }
 }

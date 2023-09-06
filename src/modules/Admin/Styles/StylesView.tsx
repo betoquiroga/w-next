@@ -20,7 +20,7 @@ const StylesView = () => {
   }, [data])
 
   const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    handleSearch(e.target.value, data || [], setStyles)
+    setStyles(handleSearch(e.target.value, data))
   }
 
   return (
