@@ -1,64 +1,26 @@
-import React, { useEffect, useState, ChangeEvent, SyntheticEvent } from "react"
-import { useQuery } from "@tanstack/react-query"
+import React, { useEffect, useState, ChangeEvent, useContext } from "react"
 import { Style } from "@interfaces/style.interface"
-import { getStyles } from "src/common/api/styles/styles.api"
 import StylesHeader from "./Components/StyleViewsComponents/StylesHeader"
 import StylesAddButton from "./Components/StyleViewsComponents/StylesAddButton"
 import StylesSearchInput from "./Components/StyleViewsComponents/StylesSearchInput"
 import StylesTable from "./Components/StyleViewsComponents/StylesTable"
 import StylesLoadingError from "./Components/StyleViewsComponents/StylesLoadingError"
+import { handleError } from "./Helpers/Handlers"
+import { StyleContext } from "@context/StyleContext"
+import { handleSearch } from "@helpers/handlers"
 
 const StylesView = () => {
-  const { data, isLoading, isError } = useQuery<Style[], Error>(
-    ["ALL_STYLES"],
-    getStyles
-  )
+  const { data, isLoading, isError } = useContext(StyleContext)
   const [styles, setStyles] = useState<Style[]>([])
-
-  const handleDeleteSuccess = () => {
-    window.location.reload()
-  }
 
   useEffect(() => {
     if (data) {
-      setStyles(data)
+      setStyles(data as Style[])
     }
   }, [data])
 
-  const handleError = (
-    e: SyntheticEvent<HTMLImageElement, Event>,
-    type: string
-  ) => {
-    const target = e.target as HTMLImageElement
-    target.src = type.includes("Video")
-      ? "/images/styles/video.jpeg"
-      : "/images/styles/error.jpeg"
-  }
-
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: string = e.target.value
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-    if (value === "") {
-      if (data) {
-        setStyles(data)
-      }
-      return
-    }
-
-    if (data) {
-      const newData = data.filter(
-        (b) =>
-          b.title
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
-            .includes(value.toLowerCase()) ||
-          b.details.toLowerCase().includes(value.toLowerCase())
-      )
-
-      setStyles(newData)
-    }
+  const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    handleSearch(e.target.value, data || [], setStyles)
   }
 
   return (
@@ -66,14 +28,10 @@ const StylesView = () => {
       <div className="max-w-[80rem] m-auto">
         <StylesHeader />
         <StylesAddButton />
-        <StylesSearchInput handleSearch={handleSearch} />
+        <StylesSearchInput handleSearch={onSearch} />
         <StylesLoadingError isLoading={isLoading} isError={isError} />
         {!isLoading && !isError && (
-          <StylesTable
-            styles={styles}
-            handleError={handleError}
-            handleDeleteSuccess={handleDeleteSuccess}
-          />
+          <StylesTable styles={styles} handleError={handleError} />
         )}
       </div>
     </div>

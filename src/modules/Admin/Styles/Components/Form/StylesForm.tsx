@@ -39,7 +39,6 @@ const StyleForm = () => {
         details: target.styleDetails.value,
         type: target.styleType.value,
         image: fileURL,
-        id: 0,
       })
 
       target.reset()

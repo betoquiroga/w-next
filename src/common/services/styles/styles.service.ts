@@ -1,4 +1,4 @@
-import { Style } from "src/common/interfaces/style.interface"
+import { Style, StyleCreate } from "src/common/interfaces/style.interface"
 import HttpRequest from "src/common/services/http-request"
 import { ServiceResponse } from "src/common/services/response"
 import { getToken } from "src/common/helpers/auth.helper"
@@ -17,7 +17,7 @@ export default class StyleService extends HttpRequest {
     return new ServiceResponse(response.data)
   }
 
-  async createStyle(newStyleData: Style) {
+  async createStyle(newStyleData: StyleCreate) {
     this.useToken(getToken())
 
     this.configRequest({

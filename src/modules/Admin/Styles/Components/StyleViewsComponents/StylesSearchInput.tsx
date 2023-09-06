@@ -1,12 +1,6 @@
 import React, { ChangeEvent } from "react"
 
-interface StylesSearchInputProps {
-  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
-}
-
-const StylesSearchInput: React.FC<StylesSearchInputProps> = ({
-  handleSearch,
-}) => {
+const StylesSearchInput = ({ handleSearch }: StylesSearchInputProps) => {
   return (
     <input
       className="input mb-4"
@@ -15,6 +9,10 @@ const StylesSearchInput: React.FC<StylesSearchInputProps> = ({
       onChange={handleSearch}
     />
   )
+}
+
+interface StylesSearchInputProps {
+  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export default StylesSearchInput

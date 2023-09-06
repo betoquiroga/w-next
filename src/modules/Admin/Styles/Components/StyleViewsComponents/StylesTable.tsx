@@ -1,22 +1,9 @@
 import React, { SyntheticEvent } from "react"
 import { Style } from "@interfaces/style.interface"
 import { buildImageURL, WW_STYLES_FOLDER } from "src/common/constants/style"
-import StylesDeleteView from "@modules/Admin/Styles/Components/StylesDeleteView"
+import StylesDeleteButton from "@modules/Admin/Styles/Components/StylesDeleteButton"
 
-interface StylesTableProps {
-  styles: Style[]
-  handleError: (
-    e: SyntheticEvent<HTMLImageElement, Event>,
-    type: string
-  ) => void
-  handleDeleteSuccess: () => void
-}
-
-const StylesTable: React.FC<StylesTableProps> = ({
-  styles,
-  handleError,
-  handleDeleteSuccess,
-}) => {
+const StylesTable = ({ styles, handleError }: StylesTableProps) => {
   return (
     <table className="w-full">
       <thead>
@@ -46,10 +33,7 @@ const StylesTable: React.FC<StylesTableProps> = ({
               <td>{style.details}</td>
               <td>{style.type}</td>
               <td>
-                <StylesDeleteView
-                  id={style.id}
-                  onDeleteSuccess={handleDeleteSuccess}
-                />
+                <StylesDeleteButton id={style.id} />
               </td>
             </tr>
           ))}
@@ -61,6 +45,14 @@ const StylesTable: React.FC<StylesTableProps> = ({
       </tbody>
     </table>
   )
+}
+
+interface StylesTableProps {
+  styles: Style[]
+  handleError: (
+    e: SyntheticEvent<HTMLImageElement, Event>,
+    type: string
+  ) => void
 }
 
 export default StylesTable

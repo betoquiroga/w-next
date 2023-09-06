@@ -1,14 +1,9 @@
 import React from "react"
 
-interface StylesLoadingErrorProps {
-  isLoading: boolean
-  isError: boolean
-}
-
-const StylesLoadingError: React.FC<StylesLoadingErrorProps> = ({
+const StylesLoadingError = ({
   isLoading,
   isError,
-}) => {
+}: StylesLoadingErrorProps) => {
   if (isLoading) {
     return <p>Cargando...</p>
   } else if (isError) {
@@ -16,6 +11,11 @@ const StylesLoadingError: React.FC<StylesLoadingErrorProps> = ({
   } else {
     return <p>No hay estilos disponibles.</p>
   }
+}
+
+interface StylesLoadingErrorProps {
+  isLoading: boolean
+  isError: boolean
 }
 
 export default StylesLoadingError
