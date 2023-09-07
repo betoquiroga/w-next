@@ -17,7 +17,7 @@ const SongsDeleteButton = ({ id }: SongsDeleteButtonProps) => {
       })
     }
   }
-  return <button onClick={deleteSongById}>Eliminar canción</button>
+  return <button onClick={deleteSongById}>Eliminar</button>
 }
 
 interface SongsDeleteButtonProps {

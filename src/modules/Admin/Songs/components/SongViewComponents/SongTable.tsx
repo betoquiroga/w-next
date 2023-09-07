@@ -10,10 +10,10 @@ const SongTable = ({ songs }: SongTableProps) => {
           <th>ID</th>
           <th>Título</th>
           <th>Autor</th>
-          <th>Ver canción</th>
-          <th>Editar canción</th>
+          <th>Ver</th>
+          <th>Editar</th>
           <th>Agregar letra</th>
-          <th>Eliminar canción</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@ const SongTable = ({ songs }: SongTableProps) => {
                 className="text-ww-green-600"
                 href={`/admin/songs/${song.id}`}
               >
-                Ver canción
+                Ver
               </Link>
             </td>
             <td>
@@ -35,7 +35,7 @@ const SongTable = ({ songs }: SongTableProps) => {
                 className="text-ww-green-600"
                 href={`/admin/songs/create?id=${song.id}&title=${song.title}&author=${song.author}&edit=true`}
               >
-                Editar canción
+                Editar
               </Link>
             </td>
             <td>
