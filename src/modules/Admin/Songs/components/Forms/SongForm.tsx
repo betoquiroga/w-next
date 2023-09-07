@@ -1,28 +1,32 @@
 import { useState } from "react"
-import { createSongs } from "src/common/api/songs/songs.api"
+import { createSongs, updateSong } from "src/common/api/songs/songs.api"
 
-const SongForm = () => {
+const SongForm = ({ isEditing, initialData }: SongFormProps) => {
   const [loading, setLoading] = useState(false)
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
+  const [title, setTitle] = useState(isEditing ? initialData.title : "")
+  const [author, setAuthor] = useState(isEditing ? initialData.author : "")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
 
-    const newSong = {
+    const songData = {
       title,
       author,
       active: false,
     }
 
     try {
-      await createSongs(newSong)
+      if (isEditing) {
+        await updateSong(initialData.id, songData)
+      } else {
+        await createSongs(songData)
+      }
       setTitle("")
       setAuthor("")
-      alert("Canción creada")
+      alert(isEditing ? "Canción actualizada" : "Canción creada")
     } catch (error) {
-      alert("Hubo un error al crear la canción")
+      alert("Hubo un error al guardar la canción")
     } finally {
       setLoading(false)
     }
@@ -58,6 +62,15 @@ const SongForm = () => {
       </div>
     </form>
   )
+}
+
+interface SongFormProps {
+  isEditing: boolean
+  initialData: {
+    id: number
+    title: string
+    author: string
+  }
 }
 
 export default SongForm
