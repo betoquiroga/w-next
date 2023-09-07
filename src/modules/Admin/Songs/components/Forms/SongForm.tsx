@@ -1,9 +1,7 @@
+import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import {
-  createSongs,
-  getSongById,
-  updateSong,
-} from "src/common/api/songs/songs.api"
+import { getSongById } from "src/common/api/songs/songs.api"
+import { handleSubmit } from "../Helpers/handlers"
 
 const SongForm = () => {
   const [loading, setLoading] = useState(false)
@@ -11,43 +9,40 @@ const SongForm = () => {
   const [author, setAuthor] = useState("")
   const [isEditing, setIsEditing] = useState(false)
 
+  const router = useParams()
+  const { id } = router
+  const idSong = typeof id === "string" ? parseInt(id, 10) : null
+
   useEffect(() => {
-    getSongById()
-  }, [])
+    if (idSong !== null) {
+      getSongById(idSong).then((data) => {
+        setTitle(data.title || "")
+        setAuthor(data.author || "")
+        setIsEditing(true)
+      })
+    }
+  }, [idSong])
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setLoading(true)
-
-    const songData = {
+    handleSubmit(
       title,
       author,
-      active: false,
-    }
-
-    try {
-      if (isEditing) {
-        await updateSong(initialData.id, songData)
-      } else {
-        await createSongs(songData)
-      }
-      setTitle("")
-      setAuthor("")
-      alert(isEditing ? "Canción actualizada" : "Canción creada")
-    } catch (error) {
-      alert("Hubo un error al guardar la canción")
-    } finally {
-      setLoading(false)
-    }
+      isEditing,
+      idSong,
+      setLoading,
+      setTitle,
+      setAuthor
+    )
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitForm}>
       <div className="grid gap-6 grid-cols-2">
         <input
           className="input mb-4"
           type="text"
-          placeholder=" de la canción"
+          placeholder=" Titulo de la canción"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -62,7 +57,7 @@ const SongForm = () => {
         />
         <input
           className={`col-span-2 transition-all py-2 px-4 rounded-lg ${
-            loading ? "bg-gray-300" : "bg-ww-green-800"
+            loading ? "bg-ww-green-900" : "bg-ww-green-800"
           }`}
           type="submit"
           value={loading ? "Cargando" : "Enviar"}

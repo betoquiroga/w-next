@@ -33,7 +33,7 @@ const SongTable = ({ songs }: SongTableProps) => {
             <td>
               <Link
                 className="text-ww-green-600"
-                href={`/admin/songs/create?id=${song.id}&title=${song.title}&author=${song.author}&edit=true`}
+                href={`/admin/songs/edit/${song.id}`}
               >
                 Editar
               </Link>
