@@ -2,7 +2,7 @@ import React, { SyntheticEvent } from "react"
 import { Style } from "@interfaces/style.interface"
 import { buildImageURL, WW_STYLES_FOLDER } from "src/common/constants/style"
 import StylesDeleteButton from "@modules/Admin/Styles/Components/StylesDeleteButton"
-
+import Link from "next/link"
 const StylesTable = ({ styles, handleError }: StylesTableProps) => {
   return (
     <table className="w-full">
@@ -13,6 +13,7 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
           <th>Título</th>
           <th>Detalles</th>
           <th>Tipo de archivo</th>
+          <th>Editar estilo</th>
           <th>Eliminar estilo</th>
         </tr>
       </thead>
@@ -33,6 +34,14 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
               <td>{style.details}</td>
               <td>{style.type}</td>
               <td>
+                <Link
+                  className="text-ww-green-600"
+                  href={`/admin/styles/create?id=${style.id}&title=${style.title}&details=${style.details}&edit=true`}
+                >
+                  Editar
+                </Link>
+              </td>
+              <td>
                 <StylesDeleteButton id={style.id} />
               </td>
             </tr>
@@ -46,7 +55,6 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
     </table>
   )
 }
-
 interface StylesTableProps {
   styles: Style[]
   handleError: (
@@ -54,5 +62,4 @@ interface StylesTableProps {
     type: string
   ) => void
 }
-
 export default StylesTable
