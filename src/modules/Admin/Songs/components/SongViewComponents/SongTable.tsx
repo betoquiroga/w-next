@@ -20,8 +20,8 @@ const SongTable = ({ songs }: SongTableProps) => {
         {songs.map((song) => (
           <tr key={song.id}>
             <td>{song.id}</td>
-            <td>{song.title}</td>
-            <td>{song.author}</td>
+            <td style={{ whiteSpace: "pre-wrap" }}>{song.title}</td>
+            <td style={{ whiteSpace: "pre-wrap" }}>{song.author}</td>
             <td>
               <Link
                 className="text-ww-green-600"
