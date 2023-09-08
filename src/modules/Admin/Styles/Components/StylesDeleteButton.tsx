@@ -19,7 +19,7 @@ const StylesDeleteView = ({ id }: SytlesDeleteButtonProps) => {
     }
   }
   return (
-    <button onClick={deleteStyleById} className="text-ww-green-600">
+    <button onClick={deleteStyleById} className="text-ww-green-600 link-hover">
       Eliminar
     </button>
   )

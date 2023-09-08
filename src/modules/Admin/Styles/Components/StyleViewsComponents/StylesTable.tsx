@@ -1,7 +1,8 @@
-import React, { SyntheticEvent } from "react"
+import { SyntheticEvent } from "react"
 import { Style } from "@interfaces/style.interface"
 import { buildImageURL, WW_STYLES_FOLDER } from "src/common/constants/style"
 import StylesDeleteButton from "@modules/Admin/Styles/Components/StylesDeleteButton"
+import Link from "next/link"
 
 const StylesTable = ({ styles, handleError }: StylesTableProps) => {
   return (
@@ -13,6 +14,7 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
           <th>Título</th>
           <th>Detalles</th>
           <th>Tipo de archivo</th>
+          <th>Editar estilo</th>
           <th>Eliminar estilo</th>
         </tr>
       </thead>
@@ -29,9 +31,17 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
                   onError={(e) => handleError(e, style.type)}
                 />
               </td>
-              <td>{style.title}</td>
-              <td>{style.details}</td>
+              <td className="whitespace-pre-wrap">{style.title}</td>
+              <td className="whitespace-pre-wrap">{style.details}</td>
               <td>{style.type}</td>
+              <td>
+                <Link
+                  className="text-ww-green-600 link-hover"
+                  href={`/admin/styles/edit/${style.id}`}
+                >
+                  Editar
+                </Link>
+              </td>
               <td>
                 <StylesDeleteButton id={style.id} />
               </td>
@@ -46,7 +56,6 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
     </table>
   )
 }
-
 interface StylesTableProps {
   styles: Style[]
   handleError: (
@@ -54,5 +63,4 @@ interface StylesTableProps {
     type: string
   ) => void
 }
-
 export default StylesTable
