@@ -23,8 +23,6 @@ const StyleForm = () => {
         setStyleTitle(data.title || "")
         setStyleDetails(data.details || "")
         setIsEditing(true)
-        console.log(preview)
-        console.log(data)
       })
     }
   }, [idStyle, isEditing])
