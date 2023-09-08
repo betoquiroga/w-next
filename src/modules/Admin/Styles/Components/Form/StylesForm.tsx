@@ -2,26 +2,32 @@ import { useCallback, useEffect, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { useParams } from "next/navigation"
 import { uploadImage } from "@modules/Admin/Styles/Components/Form/StylesUploadImages"
-import { WW_FILETYPE_ACCEPT } from "src/common/constants/images"
+import {
+  WW_FILETYPE_ACCEPT,
+  WW_STYLES_FOLDER,
+} from "src/common/constants/images"
 import {
   createStyle,
   getStyleById,
   updateStyle,
 } from "src/common/api/styles/styles.api"
+import { buildImageURL } from "src/common/constants/style"
 const StyleForm = () => {
   const [preview, setPreview] = useState<string | null>(null)
   const [file, setFile] = useState<File | null>(null)
   const [styleTitle, setStyleTitle] = useState("")
   const [styleDetails, setStyleDetails] = useState("")
+  const [styleImage, setStyleImage] = useState<string | null>()
   const [isEditing, setIsEditing] = useState(false)
   const router = useParams()
   const { id } = router
-  const idStyle = typeof id === "string" ? parseInt(id, 10) : null
+  const idStyle = Number(id)
   useEffect(() => {
-    if (idStyle !== null) {
+    if (idStyle > 0) {
       getStyleById(idStyle).then((data) => {
         setStyleTitle(data.title || "")
         setStyleDetails(data.details || "")
+        setStyleImage(data.image)
         setIsEditing(true)
       })
     }
@@ -52,6 +58,7 @@ const StyleForm = () => {
           type: "Imagen",
           image: fileURL,
         })
+        setStyleImage(null)
         alert("Estilo actualizado")
       } else {
         await createStyle({
@@ -92,6 +99,18 @@ const StyleForm = () => {
           onChange={(e) => setStyleDetails(e.target.value)}
           required
         />
+        {styleImage && (
+          <div>
+            <span>Imagen actual:</span>
+            {
+              <img
+                className="max-w-[5rem]"
+                src={buildImageURL(styleImage, WW_STYLES_FOLDER, "small")}
+                alt="Imagen previa"
+              />
+            }
+          </div>
+        )}
         {!preview && (
           <div
             {...getRootProps()}

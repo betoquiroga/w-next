@@ -3,7 +3,7 @@ import { Style } from "@interfaces/style.interface"
 import { buildImageURL, WW_STYLES_FOLDER } from "src/common/constants/style"
 import StylesDeleteButton from "@modules/Admin/Styles/Components/StylesDeleteButton"
 import Link from "next/link"
-import "app/styles/style.css"
+
 const StylesTable = ({ styles, handleError }: StylesTableProps) => {
   return (
     <table className="w-full">
@@ -31,8 +31,8 @@ const StylesTable = ({ styles, handleError }: StylesTableProps) => {
                   onError={(e) => handleError(e, style.type)}
                 />
               </td>
-              <td className="cell-text">{style.title}</td>
-              <td className="cell-text">{style.details}</td>
+              <td className="whitespace-pre-wrap">{style.title}</td>
+              <td className="whitespace-pre-wrap">{style.details}</td>
               <td>{style.type}</td>
               <td>
                 <Link
