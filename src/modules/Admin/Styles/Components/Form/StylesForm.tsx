@@ -1,17 +1,33 @@
-import React, { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDropzone } from "react-dropzone"
-import { createStyle, updateStyle } from "src/common/api/styles/styles.api"
+import { useParams } from "next/navigation"
 import { uploadImage } from "@modules/Admin/Styles/Components/Form/StylesUploadImages"
 import { WW_FILETYPE_ACCEPT } from "src/common/constants/images"
-const StyleForm = ({ isEditing, initialData }: StyleFormProps) => {
+import {
+  createStyle,
+  getStyleById,
+  updateStyle,
+} from "src/common/api/styles/styles.api"
+const StyleForm = () => {
   const [preview, setPreview] = useState<string | null>(null)
   const [file, setFile] = useState<File | null>(null)
-  const [styleTitle, setStyleTitle] = useState<string>(initialData.title)
-  const [styleDetails, setStyleDetails] = useState<string>(initialData.details)
+  const [styleTitle, setStyleTitle] = useState("")
+  const [styleDetails, setStyleDetails] = useState("")
+  const [isEditing, setIsEditing] = useState(false)
+  const router = useParams()
+  const { id } = router
+  const idStyle = typeof id === "string" ? parseInt(id, 10) : null
   useEffect(() => {
-    setStyleTitle(initialData.title)
-    setStyleDetails(initialData.details)
-  }, [initialData])
+    if (idStyle !== null) {
+      getStyleById(idStyle).then((data) => {
+        setStyleTitle(data.title || "")
+        setStyleDetails(data.details || "")
+        setIsEditing(true)
+        console.log(preview)
+        console.log(data)
+      })
+    }
+  }, [idStyle, isEditing])
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
       const imageFile = acceptedFiles[0]
@@ -26,45 +42,42 @@ const StyleForm = ({ isEditing, initialData }: StyleFormProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!file) {
-      alert("no pusiste imagen!!!")
+      alert("¡No has seleccionado una imagen!")
       return
     }
-
-    const fileURL = await uploadImage(file)
-    const target = e.target as HTMLFormElement
     try {
-      if (isEditing) {
-        await updateStyle(initialData.id, {
-          title: target.styleTitle.value,
-          details: target.styleDetails.value,
+      const fileURL = await uploadImage(file)
+      if (isEditing && idStyle !== null) {
+        await updateStyle(idStyle, {
+          title: styleTitle,
+          details: styleDetails,
           type: "Imagen",
           image: fileURL,
         })
         alert("Estilo actualizado")
       } else {
         await createStyle({
-          title: target.styleTitle.value,
-          details: target.styleDetails.value,
+          title: styleTitle,
+          details: styleDetails,
           type: "Imagen",
           image: fileURL,
         })
         alert("Estilo creado")
       }
-
       setStyleTitle("")
       setStyleDetails("")
       setFile(null)
       setPreview(null)
     } catch (error) {
       console.error(error)
-      alert("Error creating/updating style")
+      alert("Error al crear/actualizar el estilo")
     }
   }
   return (
     <form onSubmit={handleSubmit}>
       <div className="grid gap-6 grid-cols-2">
         <input
-          className="input mb-4"
+          className="input mb-4 input-effect"
           type="text"
           placeholder="Nombre del estilo"
           name="styleTitle"
@@ -73,7 +86,7 @@ const StyleForm = ({ isEditing, initialData }: StyleFormProps) => {
           required
         />
         <input
-          className="input mb-4"
+          className="input mb-4 input-effect"
           type="text"
           placeholder="Detalles"
           name="styleDetails"
@@ -102,20 +115,12 @@ const StyleForm = ({ isEditing, initialData }: StyleFormProps) => {
           />
         )}
         <input
-          className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800"
+          className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800 link-hover button-effect"
           type="submit"
           value={isEditing ? "Editar" : "Crear"}
         />
       </div>
     </form>
   )
-}
-interface StyleFormProps {
-  isEditing: boolean
-  initialData: {
-    id: number
-    title: string
-    details: string
-  }
 }
 export default StyleForm

@@ -3,7 +3,7 @@ import React, { ChangeEvent } from "react"
 const StylesSearchInput = ({ handleSearch }: StylesSearchInputProps) => {
   return (
     <input
-      className="input mb-4"
+      className="input mb-4 input-effect"
       type="text"
       placeholder="Ingrese texto para filtrar"
       onChange={handleSearch}

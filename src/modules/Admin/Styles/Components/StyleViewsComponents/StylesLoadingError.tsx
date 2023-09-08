@@ -8,8 +8,6 @@ const StylesLoadingError = ({
     return <p>Cargando...</p>
   } else if (isError) {
     return <p>Error</p>
-  } else {
-    return <p>No hay estilos disponibles.</p>
   }
 }
 
