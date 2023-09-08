@@ -8,6 +8,11 @@ export const getSongs = async () => {
   return response.data
 }
 
+export const getSongById = async (id: number) => {
+  const response = await service.getSongById(id)
+  return response.data
+}
+
 export const createSongs = async (newSongData: SongBase) => {
   const response = await service.createSongs(newSongData)
   return response.data

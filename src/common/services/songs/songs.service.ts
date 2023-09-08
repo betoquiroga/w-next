@@ -1,7 +1,7 @@
 import HttpRequest from "src/common/services/http-request"
 import { ServiceResponse } from "src/common/services/response"
 import { getToken } from "src/common/helpers/auth.helper"
-import { SongBase } from "@interfaces/song.interface"
+import { Song, SongBase } from "@interfaces/song.interface"
 
 const SONGS_ENDPOINT = "songs"
 
@@ -14,6 +14,17 @@ export default class SongsService extends HttpRequest {
     })
 
     const response = await this.get<SongBase[]>()
+    return new ServiceResponse(response.data)
+  }
+
+  async getSongById(id: number) {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `${SONGS_ENDPOINT}/${id}`,
+    })
+
+    const response = await this.get<Partial<Song>>()
     return new ServiceResponse(response.data)
   }
 

@@ -26,7 +26,7 @@ const SongsView = () => {
 
     return (
       <div className="p-4 pl-[5rem] bg-ww-content pb-16">
-        <div className="max-w-[80rem] m-auto">
+        <div className="m-auto">
           <SongTitle />
           <SongAddButton />
           <SongSearchInput handleSearch={onSearch} />
@@ -37,7 +37,7 @@ const SongsView = () => {
   }
   return (
     <div className="p-4 pl-[5rem] bg-ww-content pb-16">
-      <div className="max-w-[80rem] m-auto">{renderContent()}</div>
+      <div className="m-auto">{renderContent()}</div>
     </div>
   )
 }

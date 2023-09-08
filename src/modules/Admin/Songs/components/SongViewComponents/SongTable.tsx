@@ -10,23 +10,32 @@ const SongTable = ({ songs }: SongTableProps) => {
           <th>ID</th>
           <th>Título</th>
           <th>Autor</th>
-          <th>Ver canción</th>
+          <th>Ver</th>
+          <th>Editar</th>
           <th>Agregar letra</th>
-          <th>Eliminar canción</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
         {songs.map((song) => (
           <tr key={song.id}>
             <td>{song.id}</td>
-            <td>{song.title}</td>
-            <td>{song.author}</td>
+            <td style={{ whiteSpace: "pre-wrap" }}>{song.title}</td>
+            <td style={{ whiteSpace: "pre-wrap" }}>{song.author}</td>
             <td>
               <Link
                 className="text-ww-green-600"
                 href={`/admin/songs/${song.id}`}
               >
-                Ver canción
+                Ver
+              </Link>
+            </td>
+            <td>
+              <Link
+                className="text-ww-green-600"
+                href={`/admin/songs/edit/${song.id}`}
+              >
+                Editar
               </Link>
             </td>
             <td>
