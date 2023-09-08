@@ -3,6 +3,7 @@ import { createSongs, updateSong } from "src/common/api/songs/songs.api"
 export const handleSubmit = async (
   title: string,
   author: string,
+  active: boolean,
   isEditing: boolean,
   idSong: number | null,
   setLoading: (loading: boolean) => void,
@@ -14,7 +15,7 @@ export const handleSubmit = async (
   const songData = {
     title,
     author,
-    active: false,
+    active,
   }
 
   try {
