@@ -1,38 +1,63 @@
 "use client"
-import { useState } from "react"
-import axios from "axios"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { Lyric } from "@interfaces/lyrics.interface"
+import { useState, useEffect } from "react"
+import {
+  createLyric,
+  deleteLyricById,
+  getLyrics,
+} from "src/common/api/songs/lyrics.api"
 
 export default function Page({ params }: CrearProps) {
   const [song, setSong] = useState("")
   const [loading, setLoading] = useState(false)
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [lyrics, setLyrics] = useState<Lyric[] | undefined>([])
+
+  useEffect(() => {
+    async function fetchLyrics() {
+      try {
+        const lyricResponse = await getLyrics(Number(params.id))
+        setLyrics(lyricResponse)
+        if (lyricResponse.length > 0) {
+          const allVerses = lyricResponse
+            .map((lyric) => lyric.verse)
+            .join("\n\n")
+          setSong(allVerses)
+        }
+      } catch (error) {
+        // la cancion esta vacia aun
+      }
+    }
+    fetchLyrics()
+  }, [params.id])
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true)
     e.preventDefault()
     const target = e.target as HTMLFormElement
     const verses = song.split("\n\n")
-    setTimeout(() => {
-      alert("Letras creadas")
-      setLoading(false)
-    }, 2000)
-    verses.map((v, i) => {
-      const hi = {
-        song: Number(params.id),
-        order: i + 1,
-        verse: v,
-        active: false,
+
+    try {
+      if (lyrics && lyrics.length > 0) {
+        await deleteLyricById(Number(params.id))
       }
-      axios
-        .post(`http://${WW_API_DOMAIN}/lyrics`, hi, {
-          headers: {
-            Authorization: localStorage.getItem("tokenWW"),
-          },
+      await Promise.all(
+        verses.map((v, i) => {
+          const newLyricData = {
+            song: Number(params.id),
+            order: i + 1,
+            verse: v,
+            active: false,
+          }
+          return createLyric(newLyricData)
         })
-        .then((resp) => {
-          target.reset()
-          console.log(resp)
-        })
-    })
+      )
+      target.reset()
+      alert("Letras creadas")
+    } catch (error) {
+      console.error("Error al crear letras:", error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -49,6 +74,7 @@ export default function Page({ params }: CrearProps) {
               name="song"
               id="song"
               rows={25}
+              value={song}
               onChange={(e) => setSong(e.target.value)}
               required
             />
