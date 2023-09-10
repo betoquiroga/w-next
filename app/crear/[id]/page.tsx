@@ -1,11 +1,9 @@
 "use client"
-import { Lyric } from "@interfaces/lyrics.interface"
 import { useState, useEffect } from "react"
-import {
-  createLyric,
-  deleteLyricById,
-  getLyrics,
-} from "src/common/api/songs/lyrics.api"
+import { getLyrics } from "src/common/api/songs/lyrics.api"
+import { handleFormSubmit } from "../Helpers/hundlerSubmit"
+import { Lyric } from "@interfaces/lyrics.interface"
+import Link from "next/link"
 
 export default function Page({ params }: CrearProps) {
   const [song, setSong] = useState("")
@@ -30,34 +28,16 @@ export default function Page({ params }: CrearProps) {
     fetchLyrics()
   }, [params.id])
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true)
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const target = e.target as HTMLFormElement
-    const verses = song.split("\n\n")
-
-    try {
-      if (lyrics && lyrics.length > 0) {
-        await deleteLyricById(Number(params.id))
-      }
-      await Promise.all(
-        verses.map((v, i) => {
-          const newLyricData = {
-            song: Number(params.id),
-            order: i + 1,
-            verse: v,
-            active: false,
-          }
-          return createLyric(newLyricData)
-        })
-      )
-      target.reset()
-      alert("Letras creadas")
-    } catch (error) {
-      console.error("Error al crear letras:", error)
-    } finally {
-      setLoading(false)
-    }
+    handleFormSubmit(
+      Number(params.id),
+      song,
+      lyrics,
+      setSong,
+      setLoading,
+      setLyrics
+    )
   }
 
   return (
@@ -79,6 +59,7 @@ export default function Page({ params }: CrearProps) {
               required
             />
           </div>
+          <div></div>
           <input
             className="p-2 bg-ww-green-700 hover:bg-ww-green-800 input"
             type="submit"
@@ -90,7 +71,6 @@ export default function Page({ params }: CrearProps) {
     </div>
   )
 }
-
 type CrearProps = {
   params: {
     id: string
