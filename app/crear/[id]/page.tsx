@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import { getLyrics } from "src/common/api/songs/lyrics.api"
 import { handleFormSubmit } from "../Helpers/hundlerSubmit"
 import { Lyric } from "@interfaces/lyrics.interface"
-import Link from "next/link"
 
 export default function Page({ params }: CrearProps) {
   const [song, setSong] = useState("")
@@ -30,14 +29,7 @@ export default function Page({ params }: CrearProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    handleFormSubmit(
-      Number(params.id),
-      song,
-      lyrics,
-      setSong,
-      setLoading,
-      setLyrics
-    )
+    handleFormSubmit(Number(params.id), song, lyrics, setSong, setLoading)
   }
 
   return (

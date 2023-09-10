@@ -6,8 +6,7 @@ export const handleFormSubmit = async (
   songValue: string,
   lyrics: Lyric[] | undefined,
   setSong: (song: string) => void,
-  setLoading: (loading: boolean) => void,
-  setLyrics: (lyrics: Lyric[] | undefined) => void
+  setLoading: (loading: boolean) => void
 ) => {
   setLoading(true)
   const verses = songValue.split("\n\n")
