@@ -1,14 +1,14 @@
-"use client"
 import { useState, useEffect } from "react"
 import { getLyrics } from "src/common/api/songs/lyrics.api"
 import { Lyric } from "@interfaces/lyrics.interface"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { handleFormSubmit } from "./Helpers/hundlerSubmit"
 export default function SongLyricsView() {
   const [song, setSong] = useState("")
   const [loading, setLoading] = useState(false)
   const [lyrics, setLyrics] = useState<Lyric[] | undefined>([])
   const router = useParams()
+  const nextRouter = useRouter()
   const { id } = router
   const idSong = Number(id)
   useEffect(() => {
@@ -25,20 +25,26 @@ export default function SongLyricsView() {
             .join("\n\n")
           setSong(allVerses)
         }
-      } catch (error) {
-        // la canción está vacía aún
+      } catch {
+        // letra vacia
       }
     }
     fetchLyrics()
   }, [idSong])
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    handleFormSubmit(Number(idSong), song, lyrics, setSong, setLoading)
+    await handleFormSubmit(Number(idSong), song, lyrics, setSong, setLoading)
+
+    // Check if setLoading is now false
+    if (!loading) {
+      // Navigate to the desired route
+      nextRouter.push(`/admin/songs/${idSong}`)
+    }
   }
 
   return (
     <div className="max-w-[64rem] mx-auto pt-8">
-      <h1 className="mb-4 text-3xl">Agregar letra a la canción {idSong}</h1>
+      <h1 className="mb-4 text-3xl">Editar letra a la canción {idSong}</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <div>
