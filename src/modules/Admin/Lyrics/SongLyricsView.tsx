@@ -1,40 +1,44 @@
 "use client"
 import { useState, useEffect } from "react"
 import { getLyrics } from "src/common/api/songs/lyrics.api"
-import { handleFormSubmit } from "../Helpers/hundlerSubmit"
+// import { handleFormSubmit } from "../../../../app/crear/Helpers/hundlerSubmit"
 import { Lyric } from "@interfaces/lyrics.interface"
-
-export default function Page({ params }: CrearProps) {
+import { useParams } from "next/navigation"
+import { handleFormSubmit } from "./Helpers/hundlerSubmit"
+export default function SongLyricsView() {
   const [song, setSong] = useState("")
   const [loading, setLoading] = useState(false)
   const [lyrics, setLyrics] = useState<Lyric[] | undefined>([])
-
+  const router = useParams()
+  const { id } = router
+  const idSong = Number(id)
   useEffect(() => {
     async function fetchLyrics() {
       try {
-        const lyricResponse = await getLyrics(Number(params.id))
-        setLyrics(lyricResponse)
-        if (lyricResponse.length > 0) {
-          const allVerses = lyricResponse
+        const lyricResponse = await getLyrics(idSong)
+        const sortedLyrics = lyricResponse.sort(
+          (a: Lyric, b: Lyric) => a.order - b.order
+        )
+        setLyrics(sortedLyrics)
+        if (sortedLyrics.length > 0) {
+          const allVerses = sortedLyrics
             .map((lyric) => lyric.verse)
             .join("\n\n")
           setSong(allVerses)
         }
       } catch (error) {
-        // la cancion esta vacia aun
+        // la canción está vacía aún
       }
     }
     fetchLyrics()
-  }, [params.id])
-
+  }, [idSong])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    handleFormSubmit(Number(params.id), song, lyrics, setSong, setLoading)
+    handleFormSubmit(Number(idSong), song, lyrics, setSong, setLoading)
   }
-
   return (
     <div className="max-w-[64rem] mx-auto pt-8">
-      <h1 className="mb-4 text-3xl">Agregar letra a la canción {params.id}</h1>
+      <h1 className="mb-4 text-3xl">Agregar letra a la canción {idSong}</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -62,9 +66,4 @@ export default function Page({ params }: CrearProps) {
       </div>
     </div>
   )
-}
-type CrearProps = {
-  params: {
-    id: string
-  }
 }
