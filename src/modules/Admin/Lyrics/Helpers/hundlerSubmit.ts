@@ -1,4 +1,5 @@
 import { Lyric } from "@interfaces/lyrics.interface"
+import { useRouter } from "next/router"
 import { createLyric, deleteLyricById } from "src/common/api/songs/lyrics.api"
 
 export const handleFormSubmit = async (
@@ -29,9 +30,9 @@ export const handleFormSubmit = async (
     )
 
     setSong("")
-    alert("Letras creadas")
+    alert("Letra editada")
   } catch (error) {
-    console.error("Error al crear letras:", error)
+    console.error("Error al editar letra:", error)
   } finally {
     setLoading(false)
   }

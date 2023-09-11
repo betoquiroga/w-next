@@ -43,7 +43,7 @@ const SongTable = ({ songs }: SongTableProps) => {
                 className="text-ww-green-600"
                 href={`/admin/songs/lyrics/${song.id}`}
               >
-                Agregar letra
+                Editar letra
               </Link>
             </td>
             <td className="text-ww-green-600">
