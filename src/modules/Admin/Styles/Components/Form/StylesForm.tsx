@@ -1,17 +1,15 @@
-import { useCallback, useEffect, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { useParams } from "next/navigation"
-import { uploadImage } from "@modules/Admin/Styles/Components/Form/StylesUploadImages"
+import { getStyleById } from "src/common/api/styles/styles.api"
+import { buildImageURL } from "src/common/constants/style"
+import { handleSubmit } from "../Helpers/handlers"
+import { useHandleDrop } from "../Helpers/handleDrop"
+import { useEffect, useState } from "react"
 import {
   WW_FILETYPE_ACCEPT,
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
-import {
-  createStyle,
-  getStyleById,
-  updateStyle,
-} from "src/common/api/styles/styles.api"
-import { buildImageURL } from "src/common/constants/style"
+
 const StyleForm = () => {
   const [preview, setPreview] = useState<string | null>(null)
   const [file, setFile] = useState<File | null>(null)
@@ -19,9 +17,11 @@ const StyleForm = () => {
   const [styleDetails, setStyleDetails] = useState("")
   const [styleImage, setStyleImage] = useState<string | null>()
   const [isEditing, setIsEditing] = useState(false)
+
   const router = useParams()
   const { id } = router
   const idStyle = Number(id)
+
   useEffect(() => {
     if (idStyle > 0) {
       getStyleById(idStyle).then((data) => {
@@ -32,54 +32,30 @@ const StyleForm = () => {
       })
     }
   }, [idStyle, isEditing])
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      const imageFile = acceptedFiles[0]
-      setFile(imageFile)
-      setPreview(URL.createObjectURL(imageFile))
-    }
-  }, [])
+
+  const { onDrop } = useHandleDrop(setFile, setPreview)
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: WW_FILETYPE_ACCEPT,
     onDrop,
   })
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!file) {
-      alert("¡No has seleccionado una imagen!")
-      return
-    }
-    try {
-      const fileURL = await uploadImage(file)
-      if (isEditing && idStyle !== null) {
-        await updateStyle(idStyle, {
-          title: styleTitle,
-          details: styleDetails,
-          type: "Imagen",
-          image: fileURL,
-        })
-        setStyleImage(null)
-        alert("Estilo actualizado")
-      } else {
-        await createStyle({
-          title: styleTitle,
-          details: styleDetails,
-          type: "Imagen",
-          image: fileURL,
-        })
-        alert("Estilo creado")
-      }
-      setStyleTitle("")
-      setStyleDetails("")
-      setFile(null)
-      setPreview(null)
-    } catch (error) {
-      console.error(error)
-      alert("Error al crear/actualizar el estilo")
-    }
+    await handleSubmit(
+      file,
+      styleTitle,
+      styleDetails,
+      isEditing,
+      idStyle,
+      setStyleTitle,
+      setStyleDetails,
+      setPreview,
+      setStyleImage
+    )
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitForm}>
       <div className="grid gap-6 grid-cols-2">
         <input
           className="input mb-4 input-effect"
@@ -104,7 +80,7 @@ const StyleForm = () => {
             <span>Imagen actual:</span>
             {
               <img
-                className="max-w-[5rem]"
+                className="max-w-[20rem]"
                 src={buildImageURL(styleImage, WW_STYLES_FOLDER, "small")}
                 alt="Imagen previa"
               />
@@ -132,7 +108,7 @@ const StyleForm = () => {
           />
         )}
         <input
-          className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800 link-hover button-effect"
+          className="col-span-2 transition-all py-2 px-4 rounded-lg bg-ww-green-800 hover:bg-ww-green-700"
           type="submit"
           value={isEditing ? "Editar" : "Crear"}
         />

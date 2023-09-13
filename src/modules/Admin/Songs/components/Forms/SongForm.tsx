@@ -59,7 +59,7 @@ const SongForm = () => {
           required
         />
         <input
-          className={`col-span-2 transition-all py-2 px-4 rounded-lg ${
+          className={`col-span-2 transition-all py-2 px-4 rounded-lg hover:bg-ww-green-700 ${
             loading ? "bg-ww-green-900 text-ww-lighter" : "bg-ww-green-800"
           }`}
           type="submit"

@@ -39,8 +39,11 @@ const SongTable = ({ songs }: SongTableProps) => {
               </Link>
             </td>
             <td>
-              <Link className="text-ww-green-600" href={`/crear/${song.id}`}>
-                Agregar letra
+              <Link
+                className="text-ww-green-600"
+                href={`/admin/songs/lyrics/${song.id}`}
+              >
+                Editar letra
               </Link>
             </td>
             <td className="text-ww-green-600">
