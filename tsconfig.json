@@ -8,7 +8,8 @@
       "@interfaces/*": ["src/common/interfaces/*"],
       "@services/*": ["src/common/services/*"],
       "@context/*": ["src/common/context/*"],
-      "@helpers/*": ["src/common/helpers/*"]
+      "@helpers/*": ["src/common/helpers/*"],
+      "@hooks/*": ["src/common/hooks/*"],
     },
     "target": "es5",
     "lib": [

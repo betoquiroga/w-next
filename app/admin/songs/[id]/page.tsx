@@ -51,10 +51,7 @@ export default function SongId({ params }: SongIdProps) {
   }
   return (
     <div className="px-24 py-10">
-      <button
-        onClick={redirectToSongList}
-        className="top-0 right-0 m-0 p-2 bg-ww-green-700 hover:bg-ww-green-800"
-      >
+      <button onClick={redirectToSongList} className="ww-button mb-8">
         Ir a la lista de canciones
       </button>
       <div className="mb-4">
