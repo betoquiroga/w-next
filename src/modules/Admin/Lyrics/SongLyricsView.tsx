@@ -1,32 +1,25 @@
-import { useState, useEffect } from "react"
-import { Lyric } from "@interfaces/lyrics.interface"
+import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { handleFormSubmit } from "./Helpers/hundlerSubmit"
-import { fetchLyrics } from "./FetchLyrics"
+import useFetchLyrics from "@hooks/useFetchLyrics"
 import SongLyricsForm from "./SongLyricsForm"
 export default function SongLyricsView() {
-  const [song, setSong] = useState("")
   const [loading, setLoading] = useState(false)
-  const [lyrics, setLyrics] = useState<Lyric[] | undefined>([])
   const router = useParams()
   const nextRouter = useRouter()
   const { id } = router
   const idSong = Number(id)
+
+  const { lyrics } = useFetchLyrics(idSong)
+  const [song, setSong] = useState("")
   useEffect(() => {
-    async function fetchData() {
-      const lyricsData = await fetchLyrics(idSong)
-      setLyrics(lyricsData)
-      if (lyricsData.length > 0) {
-        const allVerses = lyricsData.map((lyric) => lyric.verse).join("\n\n")
-        setSong(allVerses)
-      }
-    }
-    fetchData()
-  }, [idSong])
+    const allVerses = lyrics.map((lyric) => lyric.verse).join("\n\n")
+    setSong(allVerses)
+  }, [lyrics])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await handleFormSubmit(Number(idSong), song, lyrics, setSong, setLoading)
+    await handleFormSubmit(Number(idSong), song, lyrics, setLoading)
     if (!loading) {
       nextRouter.push(`/admin/songs/${idSong}`)
     }

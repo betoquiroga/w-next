@@ -1,12 +1,10 @@
 import { Lyric } from "@interfaces/lyrics.interface"
-import { useRouter } from "next/router"
 import { createLyric, deleteLyricById } from "src/common/api/songs/lyrics.api"
 
 export const handleFormSubmit = async (
   paramsId: number,
   songValue: string,
   lyrics: Lyric[] | undefined,
-  setSong: (song: string) => void,
   setLoading: (loading: boolean) => void
 ) => {
   setLoading(true)
@@ -28,8 +26,6 @@ export const handleFormSubmit = async (
         return createLyric(newLyricData)
       })
     )
-
-    setSong("")
     alert("Letra editada")
   } catch (error) {
     console.error("Error al editar letra:", error)

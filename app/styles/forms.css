@@ -11,7 +11,7 @@ th {
 }
 
 tr {
-  @apply border-b border-ww-alt border-b-2 bg-ww-content;
+  @apply border-ww-alt border-b-2 bg-ww-content;
 }
 
 td {
