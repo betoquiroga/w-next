@@ -2,6 +2,7 @@ export interface StyleBase {
   title: string
   type: string
   details: string
+  active: boolean
   image: string
 }
 

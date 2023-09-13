@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react"
-import { getSongs } from "../api/songs/songs.api"
+import { getSong } from "../api/songs/songs.api"
 
 const SongsContext = createContext({} as SongContextProps)
 
@@ -15,7 +15,7 @@ const SongsProvider = ({ children }: SongProviderProps) => {
   const [activeSongId, setActiveSongId] = useState(0)
   const { data, isLoading, isError, refetch } = useQuery<Song[], Error>(
     ["ALL_SONGS"],
-    getSongs
+    getSong
   )
   useEffect(() => {
     const active = data?.find((d: Song) => d.active)

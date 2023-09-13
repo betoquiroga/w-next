@@ -52,7 +52,7 @@ const HomeView = ({ width }: HomeViewProps) => {
   return (
     <div
       ref={preview}
-      className={classNames("prueba bg-cover relative", {
+      className={classNames("prueba", {
         "pt-24": bibleVerse?.content.length > 0,
       })}
       style={{ transform: `scale(${width})` }}

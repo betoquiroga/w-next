@@ -36,7 +36,7 @@ export default class StyleService extends HttpRequest {
   async updateStyle(id: number, updatedStyleData: StyleBase) {
     this.useToken(getToken())
     this.configRequest({
-      endpoint: `styles/${id}`,
+      endpoint: `${ALL_STYLES_ENDPOINT}/${id}`,
     })
     const response = await this.patch<StyleBase>(updatedStyleData)
     return new ServiceResponse(response.data)
@@ -45,9 +45,20 @@ export default class StyleService extends HttpRequest {
   async deleteStyle(id: number) {
     this.useToken(getToken())
     this.configRequest({
-      endpoint: `styles/${id}`,
+      endpoint: `${ALL_STYLES_ENDPOINT}/${id}`,
     })
     const response = await this.delete<Style>()
     return new ServiceResponse(response.data)
+  }
+
+  async setActive(id: number) {
+    if (id > 0) {
+      this.useToken(getToken())
+      this.configRequest({
+        endpoint: `${ALL_STYLES_ENDPOINT}/active/${id}`,
+      })
+      const response = await this.patch<Style>({ active: true })
+      return new ServiceResponse(response.data)
+    }
   }
 }
