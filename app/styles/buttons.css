@@ -1,0 +1,3 @@
+.ww-button {
+  @apply transition-all py-2 px-4 rounded-lg bg-ww-green-800 hover:bg-ww-green-700;
+}
