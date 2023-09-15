@@ -1,6 +1,7 @@
 import { Emit } from "@interfaces/emit.interface"
 import { Style } from "@interfaces/style.interface"
 import { socket } from "socket/mainSocket"
+import { setActive } from "src/common/api/songs/lyrics.api"
 
 export const lyricEmit = (content: string) => {
   const emitObject: Emit = {
@@ -45,6 +46,7 @@ export const styleEmit = (content: Style) => {
 }
 
 export const clearEmit = () => {
+  setActive(0)
   const dataLyric = { type: "song", content: "" }
   const dataVerse = { type: "verse", content: "" }
   socket.emit("lyric", JSON.stringify(dataLyric))
