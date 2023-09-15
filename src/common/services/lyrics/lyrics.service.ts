@@ -26,6 +26,16 @@ export default class LyricsService extends HttpRequest {
     return new ServiceResponse(response.data)
   }
 
+  async getActive() {
+    this.useToken(getToken())
+    this.configRequest({
+      endpoint: `${LYRICS_ENDPOINT}/active`,
+    })
+
+    const response = await this.get<Lyric>()
+    return new ServiceResponse(response.data)
+  }
+
   async updateLyric(id: number, updatedData: Partial<Lyric>) {
     if (id > 0) {
       this.useToken(getToken())
@@ -49,13 +59,11 @@ export default class LyricsService extends HttpRequest {
   }
 
   async setActive(id: number) {
-    if (id > 0) {
-      this.useToken(getToken())
-      this.configRequest({
-        endpoint: `${LYRICS_ENDPOINT}/active/${id}`,
-      })
-      const response = await this.patch<Lyric>({ active: true })
-      return new ServiceResponse(response.data)
-    }
+    this.useToken(getToken())
+    this.configRequest({
+      endpoint: `${LYRICS_ENDPOINT}/active/${id}`,
+    })
+    const response = await this.patch<Lyric>({ active: true })
+    return new ServiceResponse(response.data)
   }
 }

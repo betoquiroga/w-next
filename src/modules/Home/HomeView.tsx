@@ -13,6 +13,7 @@ import BibleVerse from "./components/BibleVerse"
 import SongContent from "./components/SongContent"
 import CoverContent from "./components/CoverContent"
 import BibleContent from "./components/BibleContent"
+import { getActive } from "src/common/api/songs/lyrics.api"
 
 const HomeView = ({ width }: HomeViewProps) => {
   const preview = useRef<HTMLParagraphElement>(null)
@@ -49,10 +50,23 @@ const HomeView = ({ width }: HomeViewProps) => {
     }
   }, [content])
 
+  useEffect(() => {
+    const fetchActive = async () => {
+      const active = await getActive()
+      if (active) {
+        setContent({
+          type: "song",
+          content: active.verse,
+        })
+      }
+    }
+    fetchActive()
+  }, [])
+
   return (
     <div
       ref={preview}
-      className={classNames("prueba bg-cover relative", {
+      className={classNames("prueba", {
         "pt-24": bibleVerse?.content.length > 0,
       })}
       style={{ transform: `scale(${width})` }}

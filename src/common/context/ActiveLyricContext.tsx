@@ -27,8 +27,8 @@ const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
       nextSongVerse = lyrics[active() + 1]
     }
     if (nextSongVerse) {
-      lyricEmit(nextSongVerse.verse)
       setActiveLyricId(nextSongVerse.id)
+      lyricEmit(nextSongVerse.verse)
     }
   }
 

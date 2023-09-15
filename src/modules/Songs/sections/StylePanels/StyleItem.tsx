@@ -3,32 +3,43 @@ import { SyntheticEvent, useContext } from "react"
 import { styleEmit } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
+import { setActiveStyle } from "src/common/api/styles/styles.api"
 
-const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
+const StyleItem = ({
+  id,
+  title,
+  type,
+  details,
+  active,
+  image,
+}: StyleItemProps) => {
   const { setStyle } = useContext(StyleContext)
 
-  const changeStyle = () => {
-    const data = { id, title, type, details, image }
+  const changeStyle = async () => {
+    const data = { id, title, type, details, active, image }
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+    await setActiveStyle(id)
     setStyle(data)
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement
-    target.src = type.includes("Video")
+    target.src = type?.includes("Video")
       ? "/images/styles/video.jpeg"
       : "/images/styles/error.jpeg"
   }
 
   return (
     <div className="song border-b-2 border-b-ww-alt last:border-none py-4 flex align-top">
-      <img
-        onClick={changeStyle}
-        src={currentImageUrl(image)}
-        alt={title}
-        className="w-[7rem] mr-6 aspect-video hover:opacity-80 hover:cursor-pointer"
-        onError={handleError}
-      />
+      {image && (
+        <img
+          onClick={changeStyle}
+          src={currentImageUrl(image)}
+          alt={title}
+          className="w-[7rem] mr-6 aspect-video hover:opacity-80 hover:cursor-pointer"
+          onError={handleError}
+        />
+      )}
       <div>
         <p className="text-ww-normal">{title}</p>
         <span className="text-ww-lighter flex">{type}</span>
@@ -43,6 +54,7 @@ type StyleItemProps = {
   title: string
   type: string
   details: string
+  active: boolean
   image: string
 }
 

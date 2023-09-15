@@ -1,9 +1,8 @@
-
 .prueba {
   background: black;
   width: 100vw;
-  overflow: hidden;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,15 +14,17 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
 }
 
 .prueba .verse {
   font-size: 3rem;
 }
 
-
 .wallpaper img, .wallpaper video {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .wallpaper img.zoom {
@@ -54,7 +55,6 @@
   text-align: center;
   text-shadow: var(--sha-nega) var(--sha-nega) 0 black, var(--sha-nega) var(--sha-posi) 0 black, var(--sha-posi) var(--sha-nega) 0 black, var(--sha-posi) var(--sha-posi) 0 black, 0 0 20px rgba(0, 0, 0, 0.5);
 }
-
 
 .prueba span {
   justify-content: center;

@@ -15,7 +15,7 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
           src={style.image}
         />
       )}
-      {style.type.includes("Imagen") && (
+      {style?.type?.includes("Imagen") && (
         <Image
           src={style.image}
           alt={style.title}
