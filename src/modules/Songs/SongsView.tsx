@@ -20,7 +20,7 @@ const SongsView = () => {
   return (
     <div
       onKeyDown={handleKeyPress}
-      className="grid grid-cols-12 gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch pl-[5rem] h-[calc(100vh-1px)] grid-rows-none"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch pl-[5rem] grid-rows-none"
     >
       <SongsSection />
       <LyricsSection />
