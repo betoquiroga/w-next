@@ -4,7 +4,7 @@ import LyricsPanel from "./LyricsPanels/LyricsPanel"
 
 const LyricsSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
+    <div className="song-section">
       <Tab.Group>
         <TabsHeader items={["Letras", "Detalles", "Configuración"]} />
         <Tab.Panels className="p-4">

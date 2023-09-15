@@ -4,7 +4,7 @@ import SongsPanel from "./SongsPanels/SongsPanel"
 
 const SongsSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
+    <div className="song-section">
       <Tab.Group>
         <TabsHeader items={["Canciones", "Listas", "Historial"]} />
         <Tab.Panels className="p-4">
