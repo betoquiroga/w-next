@@ -21,7 +21,7 @@ export const buildImageURL = (
 }
 
 export const currentImageUrl = (image: string): string => {
-  return image.includes("http")
+  return image?.includes("http")
     ? image
     : buildImageURL(image, WW_STYLES_FOLDER, "small")
 }
