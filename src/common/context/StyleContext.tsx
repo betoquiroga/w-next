@@ -34,7 +34,9 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
     fetchData()
   }, [isLoading])
 
-  const [style, setStyle] = useState({} as Style)
+  const [style, setStyle] = useState(
+    defaultStyle(WW_LOGO as string, WW_STYLES_FOLDER)
+  )
 
   return (
     <StyleContext.Provider
