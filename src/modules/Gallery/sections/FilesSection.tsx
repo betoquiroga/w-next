@@ -7,7 +7,7 @@ import VideosPanel from "./ImagesSection/VideosPanel"
 
 const FilesSection = () => {
   return (
-    <div className="bg-ww-content rounded col-span-9 overflow-y-scroll">
+    <div className="bg-ww-content rounded lg:col-span-2 overflow-y-scroll max-h-[97vh]">
       <Tab.Group>
         <TabsHeader items={["Imagenes", "Videos", "Subir archivos"]} />
         <Tab.Panels className="p-4">

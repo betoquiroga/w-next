@@ -6,20 +6,24 @@ import PhotoIcon from "src/common/icons/misc/photo"
 import ProfileIcon from "src/common/icons/misc/profile"
 import SongIcon from "src/common/icons/misc/song"
 import MainMenuItem from "./MainMenuItem"
-import MenuNav from "./MenuNav"
 import { useState } from "react"
 import MenuIconNav from "@icons/misc/menu-nav"
 import MainMenuItemNav from "./MainMenuItemNav"
+import Page from "app/menuResponsive/page"
+import MenuNavResponsive from "./MenuNavResponsive"
 
 const MainMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const togleOpen = () => {
-    setIsOpen(!isOpen)
+  const toggleOpen = () => {
+    setIsOpen(isOpen)
   }
   return (
     <>
-      <nav className="bg-ww-content text-ww-normal w-[4rem] fixed h-screen hidden md:block">
+      <div className="h-screen flex flex-col grid grid-rows-5 text-center items-center bg-black lg:hidden">
+        {!isOpen && <Page />}
+      </div>
+      <nav className="bg-ww-content text-ww-normal w-[4rem] fixed h-screen hidden lg:block">
         <MainMenuItem icon={MenuIcon} href="/" />
         <MainMenuItem icon={SongIcon} href="/songs" />
         <MainMenuItem icon={BibleIcon} href="/bible" />
@@ -27,14 +31,11 @@ const MainMenu = () => {
         <MainMenuItem icon={ConfigIcon} href="/admin" />
         <MainMenuItem icon={ProfileIcon} href="/" />
       </nav>
-      <div className="px-8 h-15 bg-white text:black relative md:hidden">
-        <MainMenuItemNav icon={MenuIconNav} href="/" />
-      </div>
-      <div className="h-screen flex flex-col grid grid-rows-5 text-center items-center bg-black md:hidden">
-        <MenuNav />
+      <div className="px-8 h-15 bg-white text:black lg:hidden w-full flex py-6 transition">
+        <MenuNavResponsive openClose={toggleOpen} />
       </div>
     </>
   )
 }
 
-export default MenuIconNav
+export default MainMenu
