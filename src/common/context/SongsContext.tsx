@@ -8,6 +8,7 @@ import {
   useState,
 } from "react"
 import { getSong } from "../api/songs/songs.api"
+import { coverEmit } from "@helpers/socket/emit"
 
 const SongsContext = createContext({} as SongContextProps)
 
@@ -18,12 +19,18 @@ const SongsProvider = ({ children }: SongProviderProps) => {
     getSong
   )
   useEffect(() => {
-    const active = data?.find((d: Song) => d.active)
-    if (data && active) {
-      setActiveSongId(active.id)
+    const fetchData = async () => {
+      await refetch()
+      const active = data?.find((d: Song) => d.active)
+      if (active) {
+        setActiveSongId(active.id)
+        coverEmit(active.title)
+        console.log(active.title)
+      }
     }
-    refetch()
-  }, [activeSongId, data])
+
+    fetchData()
+  }, [isLoading])
 
   return (
     <SongsContext.Provider

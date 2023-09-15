@@ -7,7 +7,7 @@ import {
   useState,
 } from "react"
 import { defaultStyle } from "../constants/style"
-import { WW_LOGO, WW_STYLES_FOLDER } from "../constants/images"
+import { WW_STYLES_FOLDER } from "../constants/images"
 import { useQuery } from "@tanstack/react-query"
 import { getStyles } from "../api/styles/styles.api"
 import { styleEmit } from "@helpers/socket/emit"
@@ -22,7 +22,7 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await refetch() // Obtener datos actualizados
+      await refetch()
       const active = data?.find((d: Style) => d.active)
       if (active) {
         const newBackground = defaultStyle(active.image, WW_STYLES_FOLDER)
