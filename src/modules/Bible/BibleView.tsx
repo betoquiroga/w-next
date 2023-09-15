@@ -20,7 +20,7 @@ const BibleView = () => {
   return (
     <div
       onKeyDown={handleKeyPress}
-      className="grid grid-cols-12 gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch pl-[5rem] h-[calc(100vh-1px)] grid-rows-none"
+      className="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch pl-[5rem] h-[calc(100vh-1px)] grid-rows-none"
     >
       <BooksSection />
       <ChaptersSection />

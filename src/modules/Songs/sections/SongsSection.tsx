@@ -7,7 +7,7 @@ const SongsSection = () => {
     <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
       <Tab.Group>
         <TabsHeader items={["Canciones", "Listas", "Historial"]} />
-        <Tab.Panels className="p-4">
+        <Tab.Panels className="sm:grid-cols-1 md:grid-cols-2 p-4">
           <SongsPanel />
           <Tab.Panel>No hay nada aún</Tab.Panel>
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>
