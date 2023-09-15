@@ -11,6 +11,11 @@ export const getStyleById = async (id: number) => {
   return response.data
 }
 
+export const getStyleActive = async () => {
+  const response = await service.getStyleActive()
+  return response.data
+}
+
 export const createStyle = async (newStyleData: StyleBase) => {
   const response = await service.createStyle(newStyleData)
   return response.data
@@ -23,5 +28,10 @@ export const updateStyle = async (id: number, updatedStyleData: StyleBase) => {
 
 export const deleteStyle = async (id: number) => {
   const response = await service.deleteStyle(id)
+  return response.data
+}
+
+export const setActiveStyle = async (id: number) => {
+  const response = await service.setActive(id)
   return response.data
 }

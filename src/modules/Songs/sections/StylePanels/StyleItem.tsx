@@ -3,13 +3,22 @@ import { SyntheticEvent, useContext } from "react"
 import { styleEmit } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
+import { setActiveStyle } from "src/common/api/styles/styles.api"
 
-const StyleItem = ({ id, title, type, details, image }: StyleItemProps) => {
+const StyleItem = ({
+  id,
+  title,
+  type,
+  details,
+  active,
+  image,
+}: StyleItemProps) => {
   const { setStyle } = useContext(StyleContext)
 
-  const changeStyle = () => {
-    const data = { id, title, type, details, image }
+  const changeStyle = async () => {
+    const data = { id, title, type, details, active, image }
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+    await setActiveStyle(id)
     setStyle(data)
   }
 
@@ -43,6 +52,7 @@ type StyleItemProps = {
   title: string
   type: string
   details: string
+  active: boolean
   image: string
 }
 

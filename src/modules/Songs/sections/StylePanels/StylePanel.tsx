@@ -3,16 +3,17 @@ import StyleList from "./StyleList"
 import StyleHeader from "./StyleHeader"
 import StylesSearch from "./StylesSearch"
 import StyleCurrent from "./StyleCurrent"
-import { useQuery } from "@tanstack/react-query"
 import { Style } from "src/common/interfaces/style.interface"
-import { getStyles } from "src/common/api/styles/styles.api"
+import { useContext, useEffect, useState } from "react"
+import { StyleContext } from "@context/StyleContext"
 
 const StylePanel = () => {
-  const { data, isLoading, isError } = useQuery<Style[], Error>(
-    ["ALL_STYLES"],
-    getStyles
-  )
+  const { data, isLoading, isError } = useContext(StyleContext)
+  const [style, setStyle] = useState<Style[]>([])
 
+  useEffect(() => {
+    setStyle(data as Style[])
+  }, [data])
   if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 
@@ -22,7 +23,7 @@ const StylePanel = () => {
       <StyleCurrent />
       <StyleHeader text="Otros estilos" />
       <StylesSearch />
-      <StyleList data={data} />
+      <StyleList data={style} />
     </Tab.Panel>
   )
 }
