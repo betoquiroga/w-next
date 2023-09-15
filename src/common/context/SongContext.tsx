@@ -9,7 +9,6 @@ import {
   useState,
 } from "react"
 import { getLyrics } from "../api/songs/lyrics.api"
-import { lyricEmit } from "@helpers/socket/emit"
 
 const SongContext = createContext({} as SongContextProps)
 
@@ -21,18 +20,8 @@ const SongProvider = ({ children }: SongProviderProps) => {
     () => getLyrics(songId)
   )
   useEffect(() => {
-    const fetchData = async () => {
-      await refetch()
-      const active = data?.find((d: Lyric) => d.active)
-      if (active) {
-        setSongId(active.id)
-        lyricEmit(active.verse)
-        console.log(active.verse)
-      }
-    }
-
-    fetchData()
-  }, [isLoading])
+    refetch()
+  }, [songId])
 
   return (
     <SongContext.Provider
