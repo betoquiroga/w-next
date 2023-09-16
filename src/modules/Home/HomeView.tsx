@@ -67,7 +67,7 @@ const HomeView = ({ width }: HomeViewProps) => {
     <div
       ref={preview}
       className={classNames("prueba", {
-        "pt-24": bibleVerse?.content.length > 0,
+        "landscape:pt-24 portrait:pt-12": bibleVerse?.content.length > 0,
       })}
       style={{ transform: `scale(${width || 1})` }}
     >
