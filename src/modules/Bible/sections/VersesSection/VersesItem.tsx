@@ -3,7 +3,12 @@ import classNames from "classnames"
 import { useContext } from "react"
 import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
-import { bibleEmit, styleEmit, verseEmit } from "@helpers/socket/emit"
+import {
+  bibleEmit,
+  clearEmit,
+  styleEmit,
+  verseEmit,
+} from "@helpers/socket/emit"
 import { defaultStyle } from "src/common/constants/style"
 import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
@@ -18,6 +23,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
+    clearEmit()
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(text)
