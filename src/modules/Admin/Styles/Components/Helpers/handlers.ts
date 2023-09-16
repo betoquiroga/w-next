@@ -26,6 +26,7 @@ export async function handleSubmit(
         details: styleDetails,
         type: "Imagen",
         image: fileURL,
+        active: false,
       })
       alert("Estilo actualizado")
     } else {
@@ -34,6 +35,7 @@ export async function handleSubmit(
         details: styleDetails,
         type: "Imagen",
         image: fileURL,
+        active: false,
       })
       alert("Estilo creado")
     }
