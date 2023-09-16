@@ -11,10 +11,12 @@ import { WW_STYLES_FOLDER } from "../constants/images"
 import { useQuery } from "@tanstack/react-query"
 import { getStyles } from "../api/styles/styles.api"
 import { styleEmit } from "@helpers/socket/emit"
+import { usePathname } from "next/navigation"
 
 const StyleContext = createContext({} as StyleContextProps)
 
 const StyleProvider = ({ children }: StyleProviderProps) => {
+  const pathname = usePathname()
   const { data, isLoading, isError, refetch } = useQuery<Style[], Error>(
     ["ALL_STYLES"],
     getStyles
@@ -27,7 +29,9 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
       if (active) {
         const newBackground = defaultStyle(active.image, WW_STYLES_FOLDER)
         setStyle(newBackground)
-        styleEmit(newBackground)
+        if (pathname === "/") {
+          styleEmit(newBackground)
+        }
       }
     }
 
