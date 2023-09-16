@@ -2,7 +2,7 @@
   background: black;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +101,11 @@
 }
 
 .prueba .song-content{
-  font-size: 7.5vw;
+  font-size: 7.8vw;
+}
+
+.prueba .song-content{
+  @apply portrait:text-[14vw];
 }
 
 .image.back {

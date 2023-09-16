@@ -1,7 +1,7 @@
 const FullScreenButton = () => {
   return (
     <button
-      className="bg-black"
+      className="bg-black hidden lg:block"
       onClick={() => {
         if (!window.document.fullscreenElement) {
           window.document.documentElement.requestFullscreen()

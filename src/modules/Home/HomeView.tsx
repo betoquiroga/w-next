@@ -69,7 +69,7 @@ const HomeView = ({ width }: HomeViewProps) => {
       className={classNames("prueba", {
         "pt-24": bibleVerse?.content.length > 0,
       })}
-      style={{ transform: `scale(${width})` }}
+      style={{ transform: `scale(${width || 1})` }}
     >
       {effectsWs.particles && <div className="snow"></div>}
       {bibleVerse?.content.length > 0 && <BibleVerse verse={bibleVerse} />}
