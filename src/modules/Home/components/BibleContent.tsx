@@ -18,7 +18,10 @@ const BibleContent = ({ data }: BibleContentProps) => {
   }, [data])
 
   return (
-    <p ref={elementRef} className="font-bold text-white p-16 bible-text">
+    <p
+      ref={elementRef}
+      className="font-bold text-white p-16 bible-text portrait:!text-[3rem]"
+    >
       {data.content}
     </p>
   )

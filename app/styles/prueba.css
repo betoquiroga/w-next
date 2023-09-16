@@ -112,7 +112,3 @@
   height: 100vh;
   width: 100vw;
 }
-
-.prueba .bible-text {
-  @apply !portrait:text-[3rem];
-}
