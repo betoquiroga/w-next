@@ -10,7 +10,7 @@ const VideosPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`http://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
+    axios.get(`https://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
       console.log(r)
       setImages(r.data)
     })
@@ -43,7 +43,7 @@ const VideosPanel = () => {
             return (
               <div key={i}>
                 <img
-                  src={`http://${WW_API_DOMAIN}/uploads/${i}`}
+                  src={`https://${WW_API_DOMAIN}/uploads/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)

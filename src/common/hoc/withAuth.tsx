@@ -12,7 +12,7 @@ const withAuth = <P extends AuthProps>(WrappedComponent: ComponentType<P>) => {
     const router = useRouter()
     useEffect(() => {
       axios
-        .get(`http://${WW_API_DOMAIN}/users/validate`, {
+        .get(`https://${WW_API_DOMAIN}/users/validate`, {
           headers: {
             Authorization: getToken(),
           },

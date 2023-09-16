@@ -4,7 +4,7 @@ import { WW_API_DOMAIN } from "../constants/domains"
 
 export default class HttpRequest implements HttpRequestParam {
   constructor(
-    public http = "http://",
+    public http = "https://",
     public endpoint = "",
     public headers: Record<string, string> = {
       "Content-Type": "application/json",

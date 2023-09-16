@@ -11,7 +11,7 @@ const ImagesPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`http://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
+    axios.get(`https://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
       setImages(r.data)
     })
   }, [])
@@ -37,7 +37,7 @@ const ImagesPanel = () => {
   const deleteImage = (image: string) => {
     if (confirm("Se eliminará esta imagen para siempre")) {
       axios
-        .delete(`http://${WW_API_DOMAIN}/uploads/gallery/${image}`)
+        .delete(`https://${WW_API_DOMAIN}/uploads/gallery/${image}`)
         .then((r) => {
           console.log(r)
           setImages(images.filter((i) => i !== image))
@@ -59,7 +59,7 @@ const ImagesPanel = () => {
                 <Image
                   width={250}
                   height={100}
-                  src={`http://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
+                  src={`https://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)

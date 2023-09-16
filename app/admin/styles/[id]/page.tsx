@@ -12,7 +12,7 @@ export default function SongId({ params }: SongIdProps) {
 
   useEffect(() => {
     axios
-      .get(`http://${WW_API_DOMAIN}/songs/${params.id}`, {
+      .get(`https://${WW_API_DOMAIN}/songs/${params.id}`, {
         headers: {
           Authorization: `${localStorage.getItem("tokenWW")}`,
         },
@@ -20,7 +20,7 @@ export default function SongId({ params }: SongIdProps) {
       .then((r) => {
         setSong(r.data)
         axios
-          .get(`http://${WW_API_DOMAIN}/lyrics/song/${params.id}`, {
+          .get(`https://${WW_API_DOMAIN}/lyrics/song/${params.id}`, {
             headers: {
               Authorization: `${localStorage.getItem("tokenWW")}`,
             },

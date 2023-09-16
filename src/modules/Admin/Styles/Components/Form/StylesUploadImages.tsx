@@ -6,7 +6,7 @@ export const uploadImage = async (file: string | Blob) => {
     formData.append("file", file)
 
     const uploadResponse = await fetch(
-      `http://${WW_API_DOMAIN}/uploads/styles`,
+      `https://${WW_API_DOMAIN}/uploads/styles`,
       {
         method: "POST",
         body: formData,
