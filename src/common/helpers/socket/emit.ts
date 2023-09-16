@@ -4,6 +4,7 @@ import { socket } from "socket/mainSocket"
 import { setActive } from "src/common/api/songs/lyrics.api"
 
 export const lyricEmit = (content: string) => {
+  clearEmit()
   const emitObject: Emit = {
     type: "song",
     content,
