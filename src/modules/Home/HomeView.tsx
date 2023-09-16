@@ -43,6 +43,10 @@ const HomeView = ({ width }: HomeViewProps) => {
   }, [])
 
   useEffect(() => {
+    setStyleData(style)
+  }, [style])
+
+  useEffect(() => {
     if (content.type === "black") {
       setBlack(true)
     } else {
