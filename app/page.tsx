@@ -1,6 +1,8 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
+  title: "En Su Palabra - Wiswords",
+  description: "Cancionero digital en vivo durante nuestras reuniones.",
   openGraph: {
     title: "En Su Palabra - Wiswords",
     description: "Cancionero digital en vivo",
@@ -8,12 +10,12 @@ export const metadata: Metadata = {
     siteName: "Wiswords - ESP",
     images: [
       {
-        url: "https://wiswords.com/og.jpg",
+        url: "https://esp.wiswords.com/og.jpg",
         width: 1280,
         height: 720,
       },
       {
-        url: "https://wiswords.com/og-alt.jpg",
+        url: "https://esp.wiswords.com/og-alt.jpg",
         width: 1280,
         height: 720,
         alt: "En Su Palabra - Wiswords",
