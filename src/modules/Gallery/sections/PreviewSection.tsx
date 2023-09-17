@@ -4,7 +4,7 @@ import PreviewPanel from "@modules/Songs/sections/PreviewPanels/PreviewPanel"
 
 const PreviewSection = () => {
   return (
-    <div className="song-section hidden lg:block">
+    <div className="song-section hidden md:block lg:block">
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
         <Tab.Panels className="p-4">

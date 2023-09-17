@@ -7,8 +7,6 @@ import ProfileIcon from "src/common/icons/misc/profile"
 import SongIcon from "src/common/icons/misc/song"
 import MainMenuItem from "./MainMenuItem"
 import { useState } from "react"
-import MenuIconNav from "@icons/misc/menu-nav"
-import MainMenuItemNav from "./MainMenuItemNav"
 import Page from "app/menuResponsive/page"
 import MenuNavResponsive from "./MenuNavResponsive"
 

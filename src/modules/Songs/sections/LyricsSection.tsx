@@ -4,7 +4,7 @@ import LyricsPanel from "./LyricsPanels/LyricsPanel"
 
 const LyricsSection = () => {
   return (
-    <div className="song-section">
+    <div className="song-section hidden md:block lg:block">
       <Tab.Group>
         <TabsHeader items={["Letras", "Detalles", "Configuración"]} />
         <Tab.Panels className="p-4">

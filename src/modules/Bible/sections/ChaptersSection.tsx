@@ -4,7 +4,7 @@ import ChaptersPanel from "./ChaptersSection/ChaptersPanel"
 
 const ChaptersSection = () => {
   return (
-    <div className="song-section">
+    <div className="song-section hidden md:block lg:block">
       <Tab.Group>
         <TabsHeader items={["Capítulos", "Opciones"]} />
         <Tab.Panels className="p-4">

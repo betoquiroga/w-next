@@ -4,7 +4,7 @@ import VersesPanel from "./VersesSection/VersesPanel"
 
 const VersesSection = () => {
   return (
-    <div className="song-section">
+    <div className="song-section hidden lg:block">
       <Tab.Group>
         <TabsHeader items={["Versículos", "Versiones", "Ajustes"]} />
         <Tab.Panels className="p-4">

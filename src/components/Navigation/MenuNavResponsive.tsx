@@ -1,7 +1,15 @@
 "use client"
-import { MouseEventHandler } from "react"
+import { ColumnContext } from "@context/ColumnContext"
+import { MouseEventHandler, useContext } from "react"
 
 const MenuNavResponsive = ({ openClose }: toggleOpenProps) => {
+  const context = useContext(ColumnContext)
+
+  if (!context) {
+    return null // Puedes decidir cómo manejar el caso en que no hay contexto
+  }
+
+  const { columns } = context
   return (
     <nav className="flex justify-between items-center h-16 bg-white text-black relative shadow-sm">
       <div

@@ -4,7 +4,7 @@ import StylePanel from "./StylePanels/StylePanel"
 
 const StyleSection = () => {
   return (
-    <div className="song-section">
+    <div className="song-section hidden lg:block">
       <Tab.Group>
         <TabsHeader items={["Estilos", "Ajustes del estilo"]} />
         <Tab.Panels className="p-4">
