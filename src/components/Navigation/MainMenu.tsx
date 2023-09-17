@@ -14,12 +14,15 @@ const MainMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleOpen = () => {
-    setIsOpen(isOpen)
+    setIsOpen(!isOpen)
   }
   return (
     <>
       <div className="h-screen flex flex-col grid grid-rows-5 text-center items-center bg-black lg:hidden">
         {!isOpen && <Page />}
+      </div>
+      <div className="px-8 bg-white text:black lg:hidden w-full flex py-5 transition">
+        <MenuNavResponsive openClose={toggleOpen} isOpen={isOpen} />
       </div>
       <nav className="bg-ww-content text-ww-normal w-[4rem] fixed h-screen hidden lg:block">
         <MainMenuItem icon={MenuIcon} href="/" />
@@ -29,9 +32,6 @@ const MainMenu = () => {
         <MainMenuItem icon={ConfigIcon} href="/admin" />
         <MainMenuItem icon={ProfileIcon} href="/" />
       </nav>
-      <div className="px-8 h-15 bg-white text:black lg:hidden w-full flex py-6 transition">
-        <MenuNavResponsive openClose={toggleOpen} />
-      </div>
     </>
   )
 }

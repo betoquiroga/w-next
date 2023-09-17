@@ -3,5 +3,5 @@
 }
 
 .ww-button-nav-responsive {
-  @apply bg-ww-alt hover:bg-ww-green-800 text-white font-bold py-2 px-4 rounded mx-2
+  @apply bg-ww-alt hover:bg-ww-green-800 text-white font-bold py-2 px-4 rounded mx-2 my-2
 }
