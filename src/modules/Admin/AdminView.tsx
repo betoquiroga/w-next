@@ -3,7 +3,7 @@ import Link from "next/link"
 const AdminView = () => {
   return (
     <div className="p-4">
-      <div className="max-w-[80rem] m-auto">
+      <div className="max-w-[80rem] m-auto pl-[3rem]">
         <div className="mb-12 pt-8">
           <h1 className="text-4xl">Administración del sistema</h1>
           <p className="text-gray-400">Solo para admins facheros</p>
