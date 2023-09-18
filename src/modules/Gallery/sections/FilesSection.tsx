@@ -1,6 +1,6 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import ImagesPanel from "./ImagesSection/ImagesPanel"
 import UploadPanel from "./ImagesSection/UploadPanel"
 import VideosPanel from "./ImagesSection/VideosPanel"
@@ -13,7 +13,9 @@ const FilesSection = () => {
         <Tab.Panels className="p-4">
           <ImagesPanel />
           <VideosPanel />
-          <UploadPanel endpoint={`https://${WW_API_DOMAIN}/uploads/gallery`} />
+          <UploadPanel
+            endpoint={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery`}
+          />
         </Tab.Panels>
       </Tab.Group>
     </div>

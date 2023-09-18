@@ -3,7 +3,7 @@ import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { defaultStyle } from "src/common/constants/style"
 
@@ -11,9 +11,11 @@ const ImagesPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`https://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
-      setImages(r.data)
-    })
+    axios
+      .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small`)
+      .then((r) => {
+        setImages(r.data)
+      })
   }, [])
 
   const sendData = (image: string) => {
@@ -37,7 +39,7 @@ const ImagesPanel = () => {
   const deleteImage = (image: string) => {
     if (confirm("Se eliminará esta imagen para siempre")) {
       axios
-        .delete(`https://${WW_API_DOMAIN}/uploads/gallery/${image}`)
+        .delete(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/${image}`)
         .then((r) => {
           console.log(r)
           setImages(images.filter((i) => i !== image))
@@ -59,7 +61,7 @@ const ImagesPanel = () => {
                 <Image
                   width={250}
                   height={100}
-                  src={`https://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
+                  src={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)

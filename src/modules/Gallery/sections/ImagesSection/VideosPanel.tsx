@@ -2,7 +2,7 @@ import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { defaultStyle } from "src/common/constants/style"
 
@@ -10,10 +10,12 @@ const VideosPanel = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    axios.get(`https://${WW_API_DOMAIN}/uploads/gallery/small`).then((r) => {
-      console.log(r)
-      setImages(r.data)
-    })
+    axios
+      .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small`)
+      .then((r) => {
+        console.log(r)
+        setImages(r.data)
+      })
   }, [])
 
   const sendData = (image: string) => {
@@ -43,7 +45,7 @@ const VideosPanel = () => {
             return (
               <div key={i}>
                 <img
-                  src={`https://${WW_API_DOMAIN}/uploads/${i}`}
+                  src={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/${i}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)

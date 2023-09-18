@@ -1,4 +1,4 @@
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 
 export const uploadImage = async (file: string | Blob) => {
   try {
@@ -6,7 +6,7 @@ export const uploadImage = async (file: string | Blob) => {
     formData.append("file", file)
 
     const uploadResponse = await fetch(
-      `https://${WW_API_DOMAIN}/uploads/styles`,
+      `${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/styles`,
       {
         method: "POST",
         body: formData,

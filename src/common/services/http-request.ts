@@ -1,10 +1,10 @@
 import { HttpRequestParam } from "src/common/interfaces/http-request"
 import axios, { AxiosResponse } from "axios"
-import { WW_API_DOMAIN } from "../constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "../constants/domains"
 
 export default class HttpRequest implements HttpRequestParam {
   constructor(
-    public http = "https://",
+    public http = `${WW_PROTOCOL}://`,
     public endpoint = "",
     public headers: Record<string, string> = {
       "Content-Type": "application/json",
