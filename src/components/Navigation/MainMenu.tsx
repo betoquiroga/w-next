@@ -19,7 +19,7 @@ const MainMenu = () => {
   return (
     <>
       <div className="h-screen flex flex-col grid grid-rows-5 text-center items-center bg-black lg:hidden">
-        {!isOpen && <Page />}
+        <Page />
       </div>
       <div className="px-8 bg-white text:black lg:hidden w-full flex py-5 transition">
         <MenuNavResponsive openClose={toggleOpen} isOpen={isOpen} />
