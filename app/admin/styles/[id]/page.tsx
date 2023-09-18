@@ -4,7 +4,7 @@ import { Lyric } from "@interfaces/lyrics.interface"
 import { Song } from "@interfaces/song.interface"
 import axios, { HttpStatusCode } from "axios"
 import { useEffect, useState } from "react"
-import { WW_API_DOMAIN } from "src/common/constants/domains"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 
 export default function SongId({ params }: SongIdProps) {
   const [song, setSong] = useState<Song | undefined>()
@@ -12,7 +12,7 @@ export default function SongId({ params }: SongIdProps) {
 
   useEffect(() => {
     axios
-      .get(`https://${WW_API_DOMAIN}/songs/${params.id}`, {
+      .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/songs/${params.id}`, {
         headers: {
           Authorization: `${localStorage.getItem("tokenWW")}`,
         },
@@ -20,7 +20,7 @@ export default function SongId({ params }: SongIdProps) {
       .then((r) => {
         setSong(r.data)
         axios
-          .get(`https://${WW_API_DOMAIN}/lyrics/song/${params.id}`, {
+          .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/lyrics/song/${params.id}`, {
             headers: {
               Authorization: `${localStorage.getItem("tokenWW")}`,
             },

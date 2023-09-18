@@ -6,16 +6,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "En Su Palabra - Wiswords",
     description: "Cancionero digital en vivo",
-    url: "https://esp.wiswords.com",
+    url: `${WW_PROTOCOL}://esp.wiswords.com`,
     siteName: "Wiswords - ESP",
     images: [
       {
-        url: "https://esp.wiswords.com/og.jpg",
+        url: `${WW_PROTOCOL}://esp.wiswords.com/og.jpg`,
         width: 1280,
         height: 720,
       },
       {
-        url: "https://esp.wiswords.com/og-alt.jpg",
+        url: `${WW_PROTOCOL}://esp.wiswords.com/og-alt.jpg`,
         width: 1280,
         height: 720,
         alt: "En Su Palabra - Wiswords",
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 }
 
 import HomeView from "@modules/Home/HomeView"
+import { WW_PROTOCOL } from "src/common/constants/domains"
 
 export default function Page() {
   return <HomeView />
