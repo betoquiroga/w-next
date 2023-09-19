@@ -15,17 +15,26 @@ const SongContext = createContext({} as SongContextProps)
 const SongProvider = ({ children }: SongProviderProps) => {
   const [songId, setSongId] = useState(0)
   const [song, setSong] = useState({} as Song)
-  const { data, isLoading, isError, refetch } = useQuery<Lyric[], Error>(
-    [`CURRENT_SONG_LYRICS-${songId}`],
-    () => getLyrics(songId)
-  )
+  const { data, isLoading, isError, refetch, isFetching } = useQuery<
+    Lyric[],
+    Error
+  >([`CURRENT_SONG_LYRICS-${songId}`], () => getLyrics(songId))
   useEffect(() => {
     refetch()
   }, [songId])
 
   return (
     <SongContext.Provider
-      value={{ songId, song, setSongId, setSong, data, isLoading, isError }}
+      value={{
+        songId,
+        song,
+        setSongId,
+        setSong,
+        data,
+        isLoading,
+        isError,
+        isFetching,
+      }}
     >
       {children}
     </SongContext.Provider>
@@ -40,6 +49,7 @@ type SongContextProps = {
   data: Lyric[] | undefined
   isLoading: boolean
   isError: boolean
+  isFetching: boolean
 }
 
 type SongProviderProps = {
