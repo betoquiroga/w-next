@@ -1,4 +1,3 @@
-"use client"
 import MainMenuResponsive from "@components/Navigation/MainMenuResponsive"
 import { MouseEventHandler, useContext } from "react"
 import { ColumnContext } from "@context/ColumnContext"

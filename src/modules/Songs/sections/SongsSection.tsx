@@ -3,7 +3,6 @@ import { Tab } from "@headlessui/react"
 import SongsPanel from "./SongsPanels/SongsPanel"
 import { useContext } from "react"
 import { ColumnContext } from "@context/ColumnContext"
-import { SectionContext } from "@context/SectionContext"
 
 const SongsSection = () => {
   const { activeColumn } = useContext(ColumnContext)

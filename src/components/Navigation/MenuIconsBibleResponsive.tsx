@@ -1,5 +1,3 @@
-import React from "react"
-
 const MenuIconsBibleResponsive = ({ setActiveColumn }: SubMenuColumnProps) => {
   return (
     <div className="w-full flex justify-between justify-center">

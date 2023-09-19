@@ -8,7 +8,7 @@ const PreviewSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
     <div
-      className={`md:block lg:col-span-1 md:col-span-1 ${
+      className={`md:block general-section lg:col-span-1 md:col-span-1 ${
         activeColumn !== 2 && "hidden"
       }`}
     >

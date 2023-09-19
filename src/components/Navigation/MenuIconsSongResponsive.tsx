@@ -1,5 +1,3 @@
-import React from "react"
-
 const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
   return (
     <div className="w-full flex justify-between justify-center">
