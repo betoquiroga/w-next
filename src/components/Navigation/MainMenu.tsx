@@ -7,7 +7,6 @@ import ProfileIcon from "src/common/icons/misc/profile"
 import SongIcon from "src/common/icons/misc/song"
 import MainMenuItem from "./MainMenuItem"
 import { useState } from "react"
-import Page from "app/menuResponsive/page"
 import MenuNavResponsive from "./MenuNavResponsive"
 
 const MainMenu = () => {
@@ -18,10 +17,7 @@ const MainMenu = () => {
   }
   return (
     <>
-      <div className="h-screen flex flex-col grid grid-rows-5 text-center items-center bg-black lg:hidden">
-        <Page />
-      </div>
-      <div className="px-8 bg-white text:black lg:hidden w-full flex py-5 transition">
+      <div className="px-4 bg-white text:black lg:hidden w-full flex py-1 transition bg-ww-content">
         <MenuNavResponsive openClose={toggleOpen} isOpen={isOpen} />
       </div>
       <nav className="bg-ww-content text-ww-normal w-[4rem] fixed h-screen hidden lg:block">

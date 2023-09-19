@@ -1,11 +1,13 @@
 import { BookContext } from "src/common/context/BookContext"
 import { ChapterContext } from "src/common/context/ChapterContext"
 import { useContext, useEffect } from "react"
+import { ColumnContext } from "@context/ColumnContext"
 import classNames from "classnames"
 
 const ChaptersItem = (props: ChaptersItemProps) => {
   const { book } = useContext(BookContext)
   const { chapter, setChapter } = useContext(ChapterContext)
+  const { setActiveColumn } = useContext(ColumnContext)
 
   const handleClick = async () => {
     setChapter({
@@ -13,6 +15,7 @@ const ChaptersItem = (props: ChaptersItemProps) => {
       book,
     })
     localStorage?.setItem("currentChapter", JSON.stringify(chapter))
+    setActiveColumn(3)
   }
 
   useEffect(() => {

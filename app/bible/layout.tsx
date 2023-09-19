@@ -1,4 +1,7 @@
+"use client"
 import MainMenu from "@components/Navigation/MainMenu"
+import { ColumnProvider } from "@context/ColumnContext"
+import { SectionProvider } from "@context/SectionContext"
 
 export default function BibleLayout({
   children,
@@ -6,9 +9,9 @@ export default function BibleLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <ColumnProvider>
       <MainMenu />
       <main>{children}</main>
-    </>
+    </ColumnProvider>
   )
 }

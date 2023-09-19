@@ -1,27 +1,24 @@
-import { number } from "joi"
-import React, { ReactNode, createContext, useState } from "react"
+import { Dispatch, createContext, useState } from "react"
 
-interface ColumnContextProps {
-  columns: number
-  setColumns: React.Dispatch<React.SetStateAction<number>>
-}
-
-export const ColumnContext = createContext<ColumnContextProps>({
-  columns: 1,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setColumns: () => {},
-})
-
-interface ColumnProviderProps {
-  children: React.ReactNode
-}
+export const ColumnContext = createContext<ColumnContextProps>(
+  {} as ColumnContextProps
+)
 
 export const ColumnProvider = ({ children }: ColumnProviderProps) => {
-  const [columns, setColumns] = useState<number>(1)
+  const [activeColumn, setActiveColumn] = useState<number>(1)
 
   return (
-    <ColumnContext.Provider value={{ columns, setColumns }}>
+    <ColumnContext.Provider value={{ activeColumn, setActiveColumn }}>
       {children}
     </ColumnContext.Provider>
   )
+}
+
+interface ColumnContextProps {
+  activeColumn: number
+  setActiveColumn: Dispatch<React.SetStateAction<number>>
+}
+
+interface ColumnProviderProps {
+  children: React.ReactNode
 }

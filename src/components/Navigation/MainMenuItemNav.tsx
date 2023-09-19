@@ -9,9 +9,9 @@ const MainMenuItemNav = ({ icon, href }: MainMenuItemProps) => {
   return (
     <Link
       href={href}
-      className={classNames("w-full flex py-6 transition", {
+      className={classNames("w-full flex justify-center px-6 py-6 transition", {
         "bg-ww-green-600": usePathname()?.split("/")[1] === href.split("/")[1],
-        "": usePathname()?.split("/")[1] !== href.split("/")[1],
+        "hover:bg-ww-alt": usePathname()?.split("/")[1] !== href.split("/")[1],
       })}
     >
       <Icon />

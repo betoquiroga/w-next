@@ -1,10 +1,13 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
 import PreviewPanel from "@modules/Songs/sections/PreviewPanels/PreviewPanel"
+import { useContext } from "react"
+import { ColumnContext } from "@context/ColumnContext"
 
 const PreviewSection = () => {
+  const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className="song-section hidden lg:block">
+    <div className={`song-section md:block ${activeColumn !== 4 && "hidden"}`}>
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
         <Tab.Panels className="p-4">

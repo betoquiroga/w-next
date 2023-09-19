@@ -12,11 +12,13 @@ import {
 import { defaultStyle } from "src/common/constants/style"
 import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
+import { ColumnContext } from "@context/ColumnContext"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
   const { chapter, activeVerse, setActiveVerse } = useContext(ChapterContext)
   const { version } = useContext(BookContext)
+  const { setActiveColumn } = useContext(ColumnContext)
 
   const handleClick = async () => {
     const currentVerse = {
@@ -32,6 +34,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
     verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
+    setActiveColumn(4)
   }
 
   return (

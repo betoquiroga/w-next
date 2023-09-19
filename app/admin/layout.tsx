@@ -1,3 +1,4 @@
+"use client"
 import MainMenu from "@components/Navigation/MainMenu"
 
 export default function AdminLayout({

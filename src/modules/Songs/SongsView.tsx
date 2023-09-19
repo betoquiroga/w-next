@@ -5,9 +5,11 @@ import LyricsSection from "./sections/LyricsSection"
 import PreviewSection from "./sections/PreviewSection"
 import SongsSection from "./sections/SongsSection"
 import StyleSection from "./sections/StyleSection"
+import { SectionContext } from "@context/SectionContext"
 
 const SongsView = () => {
   const { setNextSongVerse, setPrevSongVerse } = useContext(ActiveLyricContext)
+  const { activeSection } = useContext(SectionContext)
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "x") {
@@ -18,14 +20,16 @@ const SongsView = () => {
     }
   }
   return (
-    <div
-      onKeyDown={handleKeyPress}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch lg:pl-[5rem] grid-rows-none"
-    >
-      <SongsSection />
-      <LyricsSection />
-      <StyleSection />
-      <PreviewSection />
+    <div className={`song-section ${activeSection !== 1}`}>
+      <div
+        onKeyDown={handleKeyPress}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch lg:pl-[5rem] grid-rows-none"
+      >
+        <SongsSection />
+        <LyricsSection />
+        <StyleSection />
+        <PreviewSection />
+      </div>
     </div>
   )
 }
