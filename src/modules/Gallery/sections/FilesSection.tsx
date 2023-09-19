@@ -11,7 +11,7 @@ const FilesSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
     <div
-      className={`gallery-section md:block md:col-span-1 lg:col-span-3 ${
+      className={`general-section block md:col-span-1 lg:col-span-3 ${
         activeColumn !== 1 && "hidden"
       }`}
     >

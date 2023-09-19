@@ -4,16 +4,18 @@ const MenuIconsGalleryResponsive = ({
   setActiveColumn,
 }: SubMenuColumnProps) => {
   return (
-    <div className="w-full flex justify-between justify-center px-6 py-6 transition pr-8 px-6 py-6">
-      <div className="group mr-4">
+    <div className="w-full flex justify-between justify-center">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(1)}
+      >
         <svg
-          className="w-6 h-6 mr-8 sm:hidden"
+          className="w-6 h-6 tooltip md:hidden"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2.5}
           stroke="currentColor"
-          onClick={() => setActiveColumn(1)}
         >
           <path
             strokeLinecap="round"
@@ -25,15 +27,17 @@ const MenuIconsGalleryResponsive = ({
           Estilos
         </div>
       </div>
-      <div className="group mr-4">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(2)}
+      >
         <svg
-          className="w-6 h-6 md:hidden"
+          className="w-6 h-6 tooltip md:hidden"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          onClick={() => setActiveColumn(2)}
         >
           <path
             strokeLinecap="round"

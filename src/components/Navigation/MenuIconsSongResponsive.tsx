@@ -2,10 +2,13 @@ import React from "react"
 
 const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
   return (
-    <div className="w-full flex justify-between justify-center px-6 py-6 transition pr-8 px-6 py-6">
-      <div className="group mr-4">
+    <div className="w-full flex justify-between justify-center">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(1)}
+      >
         <svg
-          className="mr-8 tooltip"
+          className="tooltip"
           width="20"
           height="20"
           viewBox="0 0 16 16"
@@ -13,7 +16,6 @@ const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
           strokeWidth={0.5}
           stroke="currentColor"
           xmlns="http://www.w3.org/2000/svg"
-          onClick={() => setActiveColumn(1)}
         >
           <path
             fillRule="evenodd"
@@ -26,15 +28,17 @@ const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
           Canciones
         </div>
       </div>
-      <div className="group mr-4">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(2)}
+      >
         <svg
-          className="w-6 h-6 mr-8 tooltip"
+          className="w-6 h-6 tooltip"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2.5}
           stroke="currentColor"
-          onClick={() => setActiveColumn(2)}
         >
           <path
             strokeLinecap="round"
@@ -46,15 +50,17 @@ const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
           Letras
         </div>
       </div>
-      <div className="group mr-4">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(3)}
+      >
         <svg
-          className="w-6 h-6 mr-8"
+          className="w-6 h-6 tooltip"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2.5}
           stroke="currentColor"
-          onClick={() => setActiveColumn(3)}
         >
           <path
             strokeLinecap="round"
@@ -66,15 +72,17 @@ const MenuIconsSongResponsive = ({ setActiveColumn }: SubMenuIconsProps) => {
           Estilos
         </div>
       </div>
-      <div className="group mr-4">
+      <div
+        className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+        onClick={() => setActiveColumn(4)}
+      >
         <svg
-          className="w-6 h-6 md:hidden"
+          className="w-6 h-6 md:hidden tooltip"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2.5}
           stroke="currentColor"
-          onClick={() => setActiveColumn(4)}
         >
           <path
             strokeLinecap="round"

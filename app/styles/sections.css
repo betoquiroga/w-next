@@ -1,3 +1,5 @@
-.song-section {
-  @apply bg-ww-content rounded overflow-y-scroll max-h-[97vh]
+.general-section {
+  @apply bg-ww-content rounded overflow-y-scroll max-h-[100vh]
 }
+
+

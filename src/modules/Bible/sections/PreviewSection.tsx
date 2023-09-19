@@ -7,7 +7,7 @@ import { ColumnContext } from "@context/ColumnContext"
 const PreviewSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className={`song-section md:block ${activeColumn !== 4 && "hidden"}`}>
+    <div className={`md:block ${activeColumn !== 4 && "hidden"}`}>
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
         <Tab.Panels className="p-4">

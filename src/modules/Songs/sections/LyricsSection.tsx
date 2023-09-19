@@ -7,7 +7,9 @@ import { ColumnContext } from "@context/ColumnContext"
 const LyricsSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className={`song-section lg:block ${activeColumn !== 2 && "hidden"}`}>
+    <div
+      className={`general-section lg:block ${activeColumn !== 2 && "hidden"}`}
+    >
       <Tab.Group>
         <TabsHeader items={["Letras", "Detalles", "Configuración"]} />
         <Tab.Panels className="p-4">

@@ -7,7 +7,9 @@ import { ColumnContext } from "@context/ColumnContext"
 const VersesSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className={`song-section lg:block ${activeColumn !== 3 && "hidden"}`}>
+    <div
+      className={`general-section lg:block ${activeColumn !== 3 && "hidden"}`}
+    >
       <Tab.Group>
         <TabsHeader items={["Versículos", "Versiones", "Ajustes"]} />
         <Tab.Panels className="p-4">

@@ -24,7 +24,7 @@ const StylesView = () => {
   }
 
   return (
-    <div className="p-4 pl-[5rem] bg-ww-content pb-16">
+    <div className="p-4 pl-[5rem] bg-ww-content pb-16 general-section">
       <div className="max-w-[80rem] m-auto">
         <StylesHeader />
         <StylesAddButton />

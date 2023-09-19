@@ -22,4 +22,6 @@
 html {
   @apply bg-ww-main;
   @apply text-ww-normal;
+  @apply overflow-hidden;
+  @apply  h-screen;
 }

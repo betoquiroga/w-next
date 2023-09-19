@@ -16,11 +16,11 @@ const MenuNavResponsive = ({ openClose, isOpen }: toggleOpenProps) => {
         <div className="flex items-center cursor-pointer">
           <div
             onClick={openClose}
-            className="pr-4 transition py-6 px-6 hover:bg-ww-alt"
+            className="pr-18 transition py-6 px-6 hover:bg-ww-alt"
           >
             <svg
-              width="30"
-              height="30"
+              width="23"
+              height="23"
               viewBox="0 0 14 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -45,11 +45,11 @@ const MenuNavResponsive = ({ openClose, isOpen }: toggleOpenProps) => {
         </div>
       </nav>
       <div
-        className={`fixed inset-0 flex flex-col justify-center items-center bg-black text-white ${
+        className={`fixed inset-0 bg-black text-white z-10 general-section ${
           isOpen ? "block" : "hidden"
         }`}
       >
-        <MainMenuResponsive />
+        <MainMenuResponsive openClose={openClose} />
       </div>
     </>
   )
