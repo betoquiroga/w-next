@@ -22,10 +22,10 @@ const ImagesPanel = () => {
   const sendData = (image: string) => {
     clearEmit()
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
-
     updateScreen(1, {
       type: "cover",
-      background: image,
+      content: " ",
+      verse: " ",
     })
   }
 

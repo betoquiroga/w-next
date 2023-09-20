@@ -3,7 +3,6 @@ import LyricsService from "src/common/services/lyrics/lyrics.service"
 import classNames from "classnames"
 import { useContext } from "react"
 import { coverEmit, lyricEmit } from "@helpers/socket/emit"
-import { updateScreen } from "src/common/api/screen/screen.api"
 
 const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
   const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
@@ -13,11 +12,6 @@ const LyricsItem = ({ content, id, cover }: LyricsItemProps) => {
     setActiveLyricId(id)
     lyricsService.setActive(id)
     cover ? coverEmit(content) : lyricEmit(content)
-    updateScreen(1, {
-      type: "lyric",
-      content: content,
-      verse: "",
-    })
   }
 
   return (
