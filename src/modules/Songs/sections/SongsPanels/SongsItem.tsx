@@ -4,16 +4,19 @@ import SongsService from "src/common/services/songs/songs.service"
 import classNames from "classnames"
 import { useContext } from "react"
 import { SongsContext } from "@context/SongsContext"
+import { ColumnContext } from "@context/ColumnContext"
 
 const SongsItem = ({ song }: SongsItemProps) => {
   const songService = new SongsService()
   const { setSong, setSongId } = useContext(SongContext)
   const { activeSongId, setActiveSongId } = useContext(SongsContext)
+  const { setActiveColumn } = useContext(ColumnContext)
 
   const handleClick = async () => {
     setSongId(id)
     setActiveSongId(id)
     setSong(song)
+    setActiveColumn(2)
     await songService.setActive(id)
   }
 

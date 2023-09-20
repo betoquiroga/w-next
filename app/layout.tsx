@@ -1,4 +1,5 @@
 "use client"
+import { SectionProvider } from "@context/SectionContext"
 import "./globals.css"
 import Providers from "./providers"
 import { EffectsProvider } from "src/common/context/EffectsContext"
@@ -15,7 +16,9 @@ export default function RootLayout({
       <body>
         <Providers>
           <EffectsProvider>
-            <StyleProvider>{children}</StyleProvider>
+            <SectionProvider>
+              <StyleProvider>{children}</StyleProvider>
+            </SectionProvider>
           </EffectsProvider>
         </Providers>
       </body>

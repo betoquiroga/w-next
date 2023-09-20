@@ -25,7 +25,7 @@ const SongsView = () => {
     if (isError) return <p>Error</p>
 
     return (
-      <div className="p-4 pl-[5rem] bg-ww-content pb-16">
+      <div className="p-4 pl-[5rem] bg-ww-content pb-16 general-section">
         <div className="m-auto">
           <SongTitle />
           <SongAddButton />
