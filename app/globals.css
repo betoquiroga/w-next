@@ -9,6 +9,7 @@
 @import "./styles/snow.css";
 @import "./styles/sections.css";
 @import "./styles/buttons.css";
+@import "./styles/menu.css";
 
 
 :focus {

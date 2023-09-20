@@ -24,7 +24,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
       </div>
       <div className="flex flex-col items-center justify-center">
         <Link
-          className="py-6 text-4xl hover:text-ww-green-800"
+          className="responsive-link"
           href={"/songs"}
           onClick={() => {
             setActiveSection(1)
@@ -33,7 +33,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
           Canciones
         </Link>
         <Link
-          className="py-6 text-4xl hover:text-ww-green-800"
+          className="responsive-link"
           href={"/bible"}
           onClick={() => {
             setActiveSection(2)
@@ -42,7 +42,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
           Biblia
         </Link>
         <Link
-          className="py-6 text-4xl hover:text-ww-green-800"
+          className="responsive-link"
           href={"/gallery"}
           onClick={() => {
             setActiveSection(3)
@@ -51,7 +51,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
           Galería
         </Link>
         <Link
-          className="py-6 text-4xl hover:text-ww-green-800"
+          className="responsive-link"
           href={"/admin"}
           onClick={() => {
             setActiveSection(4)
@@ -60,7 +60,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
           Administración
         </Link>
         <Link
-          className="py-6 text-4xl hover:text-ww-green-800"
+          className="responsive-link"
           href={"/"}
           onClick={() => {
             setActiveSection(5)
