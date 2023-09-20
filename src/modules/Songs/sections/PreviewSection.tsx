@@ -1,10 +1,15 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
 import PreviewPanel from "./PreviewPanels/PreviewPanel"
+import { useContext } from "react"
+import { ColumnContext } from "@context/ColumnContext"
 
 const PreviewSection = () => {
+  const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className="bg-ww-content rounded col-span-3">
+    <div
+      className={`md:block general-section ${activeColumn !== 4 && "hidden"}`}
+    >
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
         <Tab.Panels className="p-4">

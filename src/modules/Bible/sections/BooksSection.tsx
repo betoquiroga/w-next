@@ -1,10 +1,15 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
 import BooksPanel from "./BooksSection/BooksPanel"
+import { useContext } from "react"
+import { ColumnContext } from "@context/ColumnContext"
 
 const BooksSection = () => {
+  const { activeColumn } = useContext(ColumnContext)
   return (
-    <div className="bg-ww-content rounded col-span-3 overflow-y-scroll">
+    <div
+      className={`general-section lg:block ${activeColumn !== 1 && "hidden"}`}
+    >
       <Tab.Group>
         <TabsHeader items={["Libros", "Secciones", "Historial"]} />
         <Tab.Panels className="p-4">

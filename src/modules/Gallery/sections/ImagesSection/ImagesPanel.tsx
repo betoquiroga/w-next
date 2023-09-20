@@ -56,7 +56,7 @@ const ImagesPanel = () => {
   return (
     <Tab.Panel>
       <h1>Galería de imágenes</h1>
-      <div className="grid gap-8 grid-cols-5 py-4">
+      <div className="grid gap-4 lg:gap-8 grid-cols-2 lg:grid-cols-5 py-4">
         {images.map((i) => {
           if (isImage(i)) {
             return (

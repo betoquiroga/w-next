@@ -10,7 +10,11 @@ import {
   verseEmit,
 } from "@helpers/socket/emit"
 import { defaultStyle } from "src/common/constants/style"
-import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
+import {
+  WW_BIBLE,
+  WW_DEFAULT_STYLE_ID,
+  WW_STYLES_FOLDER,
+} from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
 import { updateScreen } from "src/common/api/screen/screen.api"
 
@@ -41,7 +45,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
       bibleEmit(text)
       styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
-      setActiveStyle(146)
+      setActiveStyle(Number(WW_DEFAULT_STYLE_ID))
       verseEmit(
         `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
       )

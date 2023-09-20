@@ -20,10 +20,10 @@ const StyleItem = ({
     const data = { id, title, type, details, active, image }
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
     await setActiveStyle(id)
-    setStyle(data)
     updateScreen(1, {
       background: image,
     })
+    setStyle({ ...data, image: currentImageUrl(image) })
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
