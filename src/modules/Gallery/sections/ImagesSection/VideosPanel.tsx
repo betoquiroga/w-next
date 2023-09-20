@@ -2,6 +2,7 @@ import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { updateScreen } from "src/common/api/screen/screen.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { defaultStyle } from "src/common/constants/style"
@@ -13,7 +14,6 @@ const VideosPanel = () => {
     axios
       .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small`)
       .then((r) => {
-        console.log(r)
         setImages(r.data)
       })
   }, [])
@@ -21,6 +21,11 @@ const VideosPanel = () => {
   const sendData = (image: string) => {
     clearEmit()
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
+
+    updateScreen(1, {
+      type: "cover",
+      background: image,
+    })
   }
 
   const isVideo = (filename: string): boolean => {

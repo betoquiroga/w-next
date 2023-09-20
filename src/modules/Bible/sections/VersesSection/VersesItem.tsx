@@ -12,6 +12,7 @@ import {
 import { defaultStyle } from "src/common/constants/style"
 import { WW_BIBLE, WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
+import { updateScreen } from "src/common/api/screen/screen.api"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -23,15 +24,28 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
-    clearEmit()
-    setActiveVerse(currentVerse)
-    localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
-    bibleEmit(text)
-    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
-    setActiveStyle(146)
-    verseEmit(
-      `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
-    )
+
+    const updateData = {
+      type: "bible",
+      content: text,
+      background: WW_BIBLE as string,
+      verse: `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`,
+      active: true,
+    }
+
+    const response = await updateScreen(1, updateData)
+
+    if (response) {
+      clearEmit()
+      setActiveVerse(currentVerse)
+      localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
+      bibleEmit(text)
+      styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
+      setActiveStyle(146)
+      verseEmit(
+        `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
+      )
+    }
   }
 
   return (

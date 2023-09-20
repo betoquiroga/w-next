@@ -4,6 +4,7 @@ import { styleEmit } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
+import { updateScreen } from "src/common/api/screen/screen.api"
 
 const StyleItem = ({
   id,
@@ -20,6 +21,9 @@ const StyleItem = ({
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
     await setActiveStyle(id)
     setStyle(data)
+    updateScreen(1, {
+      background: image,
+    })
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
