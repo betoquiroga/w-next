@@ -74,6 +74,10 @@ export function useHome() {
           console.error("Tipo de pantalla no válido:", type)
           return
         }
+        setContent({
+          type,
+          content: screenData.content || "",
+        })
         setBibleVerse({
           type,
           content: screenData.verse || "",

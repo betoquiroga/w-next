@@ -13,7 +13,6 @@ import { useHome } from "../../common/hooks/useHome"
 const HomeView = ({ width }: HomeViewProps) => {
   const preview = useRef<HTMLParagraphElement>(null)
   const { content, styleData, bibleVerse, effectsWs, black } = useHome()
-
   return (
     <div
       ref={preview}
