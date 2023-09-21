@@ -24,7 +24,7 @@ const SongsPanel = () => {
     }
 
     if (data) {
-      const newData = data.filter(
+      const newData = songs.filter(
         (b) =>
           b.title
             .normalize("NFD")

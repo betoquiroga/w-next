@@ -9,7 +9,6 @@ import SongsMenuSort from "./SongsMenuSort"
 
 const SongsOptions = ({ data, setSongs }: SongOptionsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isReversed, setIsReversed] = useState(false)
   const [originalData, setOriginalData] = useState<Song[]>([])
 
   useEffect(() => {
@@ -19,25 +18,28 @@ const SongsOptions = ({ data, setSongs }: SongOptionsProps) => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const handleOptionClick = (option: string) => {
-    let sortedData: Song[] = []
-    if (option === "Opción 3") {
-      sortedData = isReversed ? [...originalData] : [...originalData].reverse()
-      setIsReversed(isReversed)
-    } else if (option === "Opción 4") {
-      sortedData = isReversed ? [...originalData].reverse() : [...originalData]
-      setIsReversed(isReversed)
-    } else {
-      sortedData = [...originalData].sort((a, b) =>
-        option === "Opción 1"
-          ? a.author.localeCompare(b.author)
-          : a.title.localeCompare(b.title)
-      )
-      setIsReversed(false)
-    }
-    setSongs(sortedData)
+
+  const handleOptionClick = (option: number) => {
     setIsMenuOpen(false)
+
+    if (option === 3) {
+      setSongs([...originalData].reverse())
+      return
+    }
+
+    if (option === 4) {
+      setSongs([...originalData])
+      return
+    }
+
+    const sortedData: Song[] = [...originalData].sort((a, b) =>
+      option === 1
+        ? a.author.localeCompare(b.author)
+        : a.title.localeCompare(b.title)
+    )
+    setSongs(sortedData)
   }
+
   return (
     <div className="pb-4 flex justify-between w-full">
       <div className="grid-cols-5 grid gap-4 self-center">
@@ -49,15 +51,12 @@ const SongsOptions = ({ data, setSongs }: SongOptionsProps) => {
       </div>
       <div className="relative">
         <span
-          className="cursor-pointer hover:bg-ww-alt py-4 px-2"
+          className="cursor-pointer hover:text-ww-green-200 py-4 px-2"
           onClick={toggleMenu}
         >
           Ordenar por
         </span>
-        <SongsMenuSort
-          isMenuOpen={isMenuOpen}
-          handleOptionClick={handleOptionClick}
-        />
+        {isMenuOpen && <SongsMenuSort handleOptionClick={handleOptionClick} />}
       </div>
     </div>
   )
