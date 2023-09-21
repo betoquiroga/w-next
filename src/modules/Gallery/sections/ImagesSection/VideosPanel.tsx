@@ -18,7 +18,7 @@ const VideosPanel = () => {
   }, [])
 
   const sendData = (image: string) => {
-    clearEmit()
+    clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
   }
 

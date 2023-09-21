@@ -8,11 +8,11 @@ import BibleVerse from "./components/BibleVerse"
 import SongContent from "./components/SongContent"
 import CoverContent from "./components/CoverContent"
 import BibleContent from "./components/BibleContent"
-import { helperHome } from "./helper/helper"
+import { useHome } from "../../common/hooks/useHome"
 
 const HomeView = ({ width }: HomeViewProps) => {
   const preview = useRef<HTMLParagraphElement>(null)
-  const { content, styleData, bibleVerse, effectsWs, black } = helperHome()
+  const { content, styleData, bibleVerse, effectsWs, black } = useHome()
 
   return (
     <div

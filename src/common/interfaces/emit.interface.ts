@@ -1,4 +1,4 @@
 export interface Emit {
-  type: string
+  type: "bible" | "black" | "cover" | "gallery" | "song" 
   content: string
 }

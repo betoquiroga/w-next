@@ -1,5 +1,5 @@
 export interface ScreenBase {
-  type: string
+  type: "bible" | "black" | "cover" | "gallery" | "song"
   content: string
   active: boolean
   background: string

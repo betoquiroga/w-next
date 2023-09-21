@@ -1,11 +1,12 @@
 import { Emit } from "@interfaces/emit.interface"
 import { Style } from "@interfaces/style.interface"
+import path from "path"
 import { socket } from "socket/mainSocket"
 import { updateScreen } from "src/common/api/screen/screen.api"
 import { setActive } from "src/common/api/songs/lyrics.api"
 
 export const lyricEmit = (content: string) => {
-  clearEmit()
+  clearEmit("song")
   const emitObject: Emit = {
     type: "song",
     content,
@@ -46,7 +47,7 @@ export const bibleEmit = (content: string) => {
 
 export const verseEmit = (content: string) => {
   const emitObject: Emit = {
-    type: "verse",
+    type: "bible",
     content,
   }
   updateScreen(1, {
@@ -56,16 +57,19 @@ export const verseEmit = (content: string) => {
 }
 
 export const styleEmit = (content: Style) => {
+  const image = path.basename(content.image)
   updateScreen(1, {
-    background: content.image,
+    background: image,
   })
   socket.emit("style", JSON.stringify(content))
 }
 
-export const clearEmit = () => {
+export const clearEmit = (
+  type: "bible" | "black" | "cover" | "gallery" | "song"
+) => {
   setActive(0)
-  const dataLyric = { type: "song", content: " " }
-  const dataVerse = { type: "verse", content: " " }
+  const dataLyric = { type, content: " " }
+  const dataVerse = { content: " " }
   updateScreen(1, {
     type: dataLyric.type,
     content: dataLyric.content,
@@ -75,9 +79,11 @@ export const clearEmit = () => {
   socket.emit("verse", JSON.stringify(dataVerse))
 }
 
-export const blackEmit = () => {
-  const dataLyric = { type: "black", content: " " }
-  const dataVerse = { type: "verse", content: " " }
+export const blackEmit = (
+  type: "bible" | "black" | "cover" | "gallery" | "song"
+) => {
+  const dataLyric = { type, content: " " }
+  const dataVerse = { content: " " }
   updateScreen(1, {
     type: dataLyric.type,
     verse: dataVerse.content,

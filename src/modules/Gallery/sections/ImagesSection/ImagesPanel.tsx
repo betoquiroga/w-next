@@ -20,10 +20,10 @@ const ImagesPanel = () => {
   }, [])
 
   const sendData = (image: string) => {
-    clearEmit()
+    clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
     updateScreen(1, {
-      type: "cover",
+      type: "gallery",
       content: " ",
       verse: " ",
     })

@@ -5,8 +5,9 @@ import { Effect } from "@interfaces/effect.interface"
 import { Emit } from "@interfaces/emit.interface"
 import { getScreenById } from "src/common/api/screen/screen.api"
 import { socket } from "socket/mainSocket"
+import { WW_STYLES_FOLDER, defaultStyle } from "src/common/constants/style"
 
-export function helperHome() {
+export function useHome() {
   const { style } = useContext(StyleContext)
   const [content, setContent] = useState<Emit>({ content: "" } as Emit)
   const [styleData, setStyleData] = useState<Style>(style)
@@ -16,6 +17,13 @@ export function helperHome() {
     particles: false,
   })
   const [black, setBlack] = useState<boolean>(false)
+  const validTypes: Emit["type"][] = [
+    "bible",
+    "black",
+    "cover",
+    "gallery",
+    "song",
+  ]
 
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
@@ -48,10 +56,6 @@ export function helperHome() {
   }, [])
 
   useEffect(() => {
-    setStyleData(style)
-  }, [style])
-
-  useEffect(() => {
     if (content.type === "black") {
       setBlack(true)
     } else {
@@ -64,15 +68,19 @@ export function helperHome() {
       try {
         const screenId = 1
         const screenData = await getScreenById(screenId)
+        const type = screenData.type || "song"
 
-        setContent({
-          type: screenData.type || "",
-          content: screenData.content || "",
-        })
+        if (!validTypes.includes(type)) {
+          console.error("Tipo de pantalla no válido:", type)
+          return
+        }
         setBibleVerse({
-          type: screenData.type || "",
+          type,
           content: screenData.verse || "",
         })
+        setStyleData(
+          defaultStyle(screenData.background || "", WW_STYLES_FOLDER)
+        )
       } catch (error) {
         console.error("Error al obtener datos del Screen:", error)
       }
