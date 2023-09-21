@@ -44,7 +44,7 @@ const SongsPanel = () => {
   return (
     <Tab.Panel>
       <SongsSearch onSearch={handleSearch} />
-      <SongsOptions />
+      <SongsOptions data={songs} setSongs={setSongs} />
       <SongList data={songs} />
     </Tab.Panel>
   )
