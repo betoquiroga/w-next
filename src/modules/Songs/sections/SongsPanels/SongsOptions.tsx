@@ -1,45 +1,17 @@
 import { Song } from "@interfaces/song.interface"
-import { useEffect, useState } from "react"
 import BibleIcon from "src/common/icons/misc/bible"
 import ConfigIcon from "src/common/icons/misc/config"
 import PhotoIcon from "src/common/icons/misc/photo"
 import ProfileIcon from "src/common/icons/misc/profile"
 import SongIcon from "src/common/icons/misc/song"
 import SongsMenuSort from "./SongsMenuSort"
+import useSongsOptions from "@modules/Songs/helper/helper"
 
 const SongsOptions = ({ data, setSongs }: SongOptionsProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [originalData, setOriginalData] = useState<Song[]>([])
-
-  useEffect(() => {
-    setOriginalData(data)
-  }, [originalData])
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const handleOptionClick = (option: number) => {
-    setIsMenuOpen(false)
-
-    if (option === 3) {
-      setSongs([...originalData].reverse())
-      return
-    }
-
-    if (option === 4) {
-      setSongs([...originalData])
-      return
-    }
-
-    const sortedData: Song[] = [...originalData].sort((a, b) =>
-      option === 1
-        ? a.author.localeCompare(b.author)
-        : a.title.localeCompare(b.title)
-    )
-    setSongs(sortedData)
-  }
-
+  const { isMenuOpen, toggleMenu, handleOptionClick } = useSongsOptions(
+    data,
+    setSongs
+  )
   return (
     <div className="pb-4 flex justify-between w-full">
       <div className="grid-cols-5 grid gap-4 self-center">
