@@ -8,7 +8,8 @@ import { SongsContext } from "@context/SongsContext"
 import { Lyric } from "@interfaces/lyrics.interface"
 
 const LyricsPanel = () => {
-  const { data, isLoading, isError, setSongId } = useContext(SongContext)
+  const { data, isLoading, isError, setSongId, isFetching } =
+    useContext(SongContext)
   const { activeSongId } = useContext(SongsContext)
   const { setActiveLyricId } = useContext(ActiveLyricContext)
 
@@ -20,7 +21,7 @@ const LyricsPanel = () => {
     }
   }, [activeSongId, data])
 
-  if (isLoading) return <Tab.Panel>Cargando...</Tab.Panel>
+  if (isLoading || isFetching) return <Tab.Panel>Cargando...</Tab.Panel>
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 
   return (

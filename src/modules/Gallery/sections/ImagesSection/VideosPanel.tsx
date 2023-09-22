@@ -13,13 +13,12 @@ const VideosPanel = () => {
     axios
       .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small`)
       .then((r) => {
-        console.log(r)
         setImages(r.data)
       })
   }, [])
 
   const sendData = (image: string) => {
-    clearEmit()
+    clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
   }
 

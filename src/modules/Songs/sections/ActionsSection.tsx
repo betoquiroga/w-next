@@ -11,15 +11,15 @@ import {
 const ActionsSection = () => {
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
-      if (event.key === "F3") blackEmit()
+      if (event.key === "F3") blackEmit("black")
       if (event.key === "F4") handleAction(WW_LOGO as string)
-      if (event.key === "F5") clearEmit()
+      if (event.key === "F5") clearEmit("song")
       if (event.key === "F6") handleAction(WW_BIBLE as string)
     })
   }, [])
 
   const handleAction = (image: string) => {
-    clearEmit()
+    clearEmit("bible")
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
   }
 
@@ -29,13 +29,16 @@ const ActionsSection = () => {
         <span className="py-4">Acciones rapidas</span>
       </div>
       <div className="my-8">
-        <ActionButton onClick={() => blackEmit()} text="Pasar a negro - F3" />
+        <ActionButton
+          onClick={() => blackEmit("black")}
+          text="Pasar a negro - F3"
+        />
         <ActionButton
           onClick={() => handleAction(WW_LOGO as string)}
           text="Enviar logotipo - F4"
         />
         <ActionButton
-          onClick={() => clearEmit()}
+          onClick={() => clearEmit("song")}
           text="Limpiar pantalla - F5"
         />
         <ActionButton
