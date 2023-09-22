@@ -3,8 +3,10 @@ import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { updateScreen } from "src/common/api/screen/screen.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
+import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
@@ -19,8 +21,13 @@ const ImagesPanel = () => {
   }, [])
 
   const sendData = (image: string) => {
-    clearEmit()
+    clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
+    updateScreen(WW_DEFAULT_SCREEN_ID, {
+      type: "gallery",
+      content: " ",
+      verse: " ",
+    })
   }
 
   const isImage = (filename: string): boolean => {
