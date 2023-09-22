@@ -1,21 +1,26 @@
 import { Song } from "@interfaces/song.interface"
+import {
+  WW_ORDER_PREVIOUS,
+  WW_ORDER_RECENT,
+  WW_ORDER_TITLE,
+} from "src/common/constants/order"
 
-export const orderSongs = (option: number, arr: Song[]) => {
+export const orderSongs = (option: string, arr: Song[]) => {
   let sortedData: Song[] = []
   sortedData = arr.sort((a, b) => a.id - b.id)
 
-  if (option === 3) {
-    return [...sortedData].reverse()
-  }
-
-  if (option === 4) {
+  if (option === WW_ORDER_PREVIOUS) {
     return [...sortedData]
   }
 
+  if (option === WW_ORDER_RECENT) {
+    return [...sortedData].reverse()
+  }
+
   sortedData = [...arr].sort((a, b) =>
-    option === 1
-      ? a.author.localeCompare(b.author)
-      : a.title.localeCompare(b.title)
+    option === WW_ORDER_TITLE
+      ? a.title.localeCompare(b.title)
+      : a.author.localeCompare(b.author)
   )
   return sortedData
 }

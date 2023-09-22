@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Song } from "@interfaces/song.interface"
-import { orderSongs } from "./orderSongs"
+import { orderSongs } from "@modules/Songs/helper/orderSongs"
 
 const useSongsOptions = (
   data: any,
@@ -17,7 +17,7 @@ const useSongsOptions = (
     setOriginalData(data)
   }, [originalData])
 
-  const handleOptionClick = (option: number) => {
+  const handleOptionClick = (option: string) => {
     setIsMenuOpen(false)
     setSongs(orderSongs(option, originalData))
   }

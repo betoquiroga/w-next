@@ -6,6 +6,7 @@ import SongsOptions from "./SongsOptions"
 import SongsSearch from "./SongsSearch"
 import { Song } from "@interfaces/song.interface"
 import { orderSongs } from "@modules/Songs/helper/orderSongs"
+import { SongsOrderOptions } from "./SongsOrderOptions"
 
 const SongsPanel = () => {
   const { data, isLoading, isError } = useContext(SongsContext)
@@ -13,17 +14,14 @@ const SongsPanel = () => {
 
   useEffect(() => {
     const option = localStorage.getItem("song-order")
-    let optionOrder = 4
-
-    if (option === "previous") optionOrder = 4
-    if (option === "recent") optionOrder = 3
-    if (option === "title") optionOrder = 2
-    if (option === "author") optionOrder = 1
-
-    if (option && data) {
-      setSongs(orderSongs(optionOrder, data))
-    } else {
-      setSongs(data as Song[])
+    if (option) {
+      const optionOrder =
+        SongsOrderOptions[option] || SongsOrderOptions["previous"]
+      if (option && data) {
+        setSongs(orderSongs(optionOrder, data))
+      } else {
+        setSongs(data as Song[])
+      }
     }
   }, [data])
 

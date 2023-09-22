@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react"
+import {
+  WW_ORDER_AUTHOR,
+  WW_ORDER_PREVIOUS,
+  WW_ORDER_RECENT,
+  WW_ORDER_TITLE,
+} from "src/common/constants/order"
 
 const SongsMenuSort = ({ handleOptionClick }: SongsMenuSortProps) => {
   const [order, setOrder] = useState(() => {
@@ -6,7 +12,7 @@ const SongsMenuSort = ({ handleOptionClick }: SongsMenuSortProps) => {
     return storedOrder ? storedOrder : "previous"
   })
 
-  const handleClick = (clickedOrder: string, option: number) => {
+  const handleClick = (clickedOrder: string, option: string) => {
     handleOptionClick(option)
     setOrder(clickedOrder)
     localStorage.setItem("song-order", clickedOrder)
@@ -26,25 +32,25 @@ const SongsMenuSort = ({ handleOptionClick }: SongsMenuSortProps) => {
           className={`sort-song ${
             order === "previous" ? "bg-ww-green-700" : ""
           }`}
-          onClick={() => handleClick("previous", 4)}
+          onClick={() => handleClick("previous", WW_ORDER_PREVIOUS)}
         >
           Anteriores
         </div>
         <div
           className={`sort-song ${order === "recent" ? "bg-ww-green-700" : ""}`}
-          onClick={() => handleClick("recent", 3)}
+          onClick={() => handleClick("recent", WW_ORDER_RECENT)}
         >
           Recientes
         </div>
         <div
           className={`sort-song ${order === "title" ? "bg-ww-green-700" : ""}`}
-          onClick={() => handleClick("title", 2)}
+          onClick={() => handleClick("title", WW_ORDER_TITLE)}
         >
           Título
         </div>
         <div
           className={`sort-song ${order === "author" ? "bg-ww-green-700" : ""}`}
-          onClick={() => handleClick("author", 1)}
+          onClick={() => handleClick("author", WW_ORDER_AUTHOR)}
         >
           Autor
         </div>
@@ -56,5 +62,5 @@ const SongsMenuSort = ({ handleOptionClick }: SongsMenuSortProps) => {
 export default SongsMenuSort
 
 type SongsMenuSortProps = {
-  handleOptionClick: (option: number) => void
+  handleOptionClick: (option: string) => void
 }

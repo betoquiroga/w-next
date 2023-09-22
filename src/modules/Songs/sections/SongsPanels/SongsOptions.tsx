@@ -5,7 +5,7 @@ import PhotoIcon from "src/common/icons/misc/photo"
 import ProfileIcon from "src/common/icons/misc/profile"
 import SongIcon from "src/common/icons/misc/song"
 import SongsMenuSort from "./SongsMenuSort"
-import useSongsOptions from "@modules/Songs/helper/helper"
+import useSongsOptions from "@hooks/useSongsOptions"
 
 const SongsOptions = ({ data, setSongs }: SongOptionsProps) => {
   const { isMenuOpen, toggleMenu, handleOptionClick } = useSongsOptions(
