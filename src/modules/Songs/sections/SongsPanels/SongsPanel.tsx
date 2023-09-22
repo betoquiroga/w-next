@@ -14,14 +14,13 @@ const SongsPanel = () => {
 
   useEffect(() => {
     const option = localStorage.getItem("song-order")
-    if (option) {
+    if (option && data) {
       const optionOrder =
         SongsOrderOptions[option] || SongsOrderOptions["previous"]
-      if (option && data) {
-        setSongs(orderSongs(optionOrder, data))
-      } else {
-        setSongs(data as Song[])
-      }
+
+      setSongs(orderSongs(optionOrder, data))
+    } else {
+      setSongs(data as Song[])
     }
   }, [data])
 
