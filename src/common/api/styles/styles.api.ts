@@ -1,6 +1,8 @@
 import StyleService from "src/common/services/styles/styles.service"
 import { StyleBase } from "src/common/interfaces/style.interface"
+
 const service = new StyleService()
+
 export const getStyles = async () => {
   const response = await service.getStyles()
   return response.data
@@ -26,12 +28,12 @@ export const updateStyle = async (id: number, updatedStyleData: StyleBase) => {
   return response.data
 }
 
-export const deleteStyle = async (id: number) => {
-  const response = await service.deleteStyle(id)
+export const setActiveStyle = async (id: number) => {
+  const response = await service.setActive(id)
   return response.data
 }
 
-export const setActiveStyle = async (id: number) => {
-  const response = await service.setActive(id)
+export const deleteStyle = async (id: number) => {
+  const response = await service.deleteStyle(id)
   return response.data
 }
