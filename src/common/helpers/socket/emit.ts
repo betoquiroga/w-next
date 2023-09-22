@@ -4,6 +4,7 @@ import path from "path"
 import { socket } from "socket/mainSocket"
 import { updateScreen } from "src/common/api/screen/screen.api"
 import { setActive } from "src/common/api/songs/lyrics.api"
+import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 
 export const lyricEmit = (content: string) => {
   clearEmit("song")
@@ -11,7 +12,7 @@ export const lyricEmit = (content: string) => {
     type: "song",
     content,
   }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     content: emitObject.content,
     verse: " ",
   })
@@ -24,7 +25,7 @@ export const coverEmit = (content: string) => {
     type: "cover",
     content,
   }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
     content: emitObject.content,
     verse: " ",
@@ -38,7 +39,7 @@ export const bibleEmit = (content: string) => {
     type: "bible",
     content,
   }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
     content: emitObject.content,
   })
@@ -50,7 +51,7 @@ export const verseEmit = (content: string) => {
     type: "bible",
     content,
   }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     verse: emitObject.content,
   })
   socket.emit("verse", JSON.stringify(emitObject))
@@ -58,7 +59,7 @@ export const verseEmit = (content: string) => {
 
 export const styleEmit = (content: Style) => {
   const image = path.basename(content.image)
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
@@ -70,7 +71,7 @@ export const clearEmit = (
   setActive(0)
   const dataLyric = { type, content: " " }
   const dataVerse = { content: " " }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: dataLyric.type,
     content: dataLyric.content,
     verse: dataVerse.content,
@@ -84,7 +85,7 @@ export const blackEmit = (
 ) => {
   const dataLyric = { type, content: " " }
   const dataVerse = { content: " " }
-  updateScreen(1, {
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: dataLyric.type,
     verse: dataVerse.content,
   })

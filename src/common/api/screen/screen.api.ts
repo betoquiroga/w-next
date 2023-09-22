@@ -24,7 +24,7 @@ export const createScreen = async (newStyleData: ScreenBase) => {
 }
 
 export const updateScreen = async (
-  id: number,
+  id: string,
   updatedScreenData: Partial<ScreenBase>
 ) => {
   const response = await service.updateScreen(id, updatedScreenData)

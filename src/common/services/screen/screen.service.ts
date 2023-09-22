@@ -30,7 +30,7 @@ export default class ScreenService extends HttpRequest {
     this.useToken(getToken())
 
     this.configRequest({
-      endpoint: `${ALL_SCREEN_ENDPOINT}/active/id`,
+      endpoint: `${ALL_SCREEN_ENDPOINT}/active`,
     })
     const response = await this.get<Screen>()
     return new ServiceResponse(response.data)
@@ -45,7 +45,7 @@ export default class ScreenService extends HttpRequest {
     return new ServiceResponse(response.data)
   }
 
-  async updateScreen(id: number, updatedScreenData: Partial<ScreenBase>) {
+  async updateScreen(id: string, updatedScreenData: Partial<ScreenBase>) {
     this.useToken(getToken())
     this.configRequest({
       endpoint: `${ALL_SCREEN_ENDPOINT}/${id}`,

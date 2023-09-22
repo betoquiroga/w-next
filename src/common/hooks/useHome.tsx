@@ -3,7 +3,7 @@ import { StyleContext } from "src/common/context/StyleContext"
 import { Style } from "src/common/interfaces/style.interface"
 import { Effect } from "@interfaces/effect.interface"
 import { Emit } from "@interfaces/emit.interface"
-import { getScreenById } from "src/common/api/screen/screen.api"
+import { getScreenActive } from "src/common/api/screen/screen.api"
 import { socket } from "socket/mainSocket"
 import { WW_STYLES_FOLDER, defaultStyle } from "src/common/constants/style"
 
@@ -66,8 +66,7 @@ export function useHome() {
   useEffect(() => {
     const fetchScreenData = async () => {
       try {
-        const screenId = 1
-        const screenData = await getScreenById(screenId)
+        const screenData = await getScreenActive()
         const type = screenData.type || "song"
 
         if (!validTypes.includes(type)) {

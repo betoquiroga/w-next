@@ -18,7 +18,7 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
       {style?.type?.includes("Imagen") && (
         <Image
           src={style.image}
-          alt={style.title}
+          alt={style.image}
           height={1080}
           width={1920}
           blurDataURL="/images/styles/logo.jpeg"
