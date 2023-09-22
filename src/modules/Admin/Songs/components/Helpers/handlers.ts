@@ -6,6 +6,7 @@ export const handleSubmit = async (
   active: boolean,
   isEditing: boolean,
   idSong: number | null,
+  idStyle: number | null,
   setLoading: (loading: boolean) => void,
   setTitle: (title: string) => void,
   setAuthor: (author: string) => void
@@ -16,6 +17,7 @@ export const handleSubmit = async (
     title,
     author,
     active,
+    idStyle,
   }
 
   try {
