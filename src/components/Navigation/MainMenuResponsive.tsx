@@ -22,7 +22,10 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
           />
         </svg>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div
+        className="flex flex-col items-center justify-center"
+        onClick={openClose}
+      >
         <Link
           className="responsive-link"
           href={"/songs"}
