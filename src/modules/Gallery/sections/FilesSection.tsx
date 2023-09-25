@@ -11,13 +11,13 @@ const FilesSection = () => {
   const { activeColumn } = useContext(ColumnContext)
   return (
     <div
-      className={`general-section block md:col-span-1 lg:col-span-3 ${
+      className={`block md:col-span-1 lg:col-span-3 ${
         activeColumn !== 1 && "hidden"
       }`}
     >
       <Tab.Group>
         <TabsHeader items={["Imagenes", "Videos", "Subir archivos"]} />
-        <Tab.Panels className="p-4">
+        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[40vh] lg:max-h-[100vh] p-4">
           <ImagesPanel />
           <VideosPanel />
           <UploadPanel

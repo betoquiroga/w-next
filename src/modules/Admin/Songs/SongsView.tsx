@@ -25,12 +25,14 @@ const SongsView = () => {
     if (isError) return <p>Error</p>
 
     return (
-      <div className="p-4 pl-[5rem] bg-ww-content pb-16 general-section">
+      <div className="p-4 pl-[5rem] bg-ww-content pb-16">
         <div className="m-auto">
           <SongTitle />
           <SongAddButton />
           <SongSearchInput handleSearch={onSearch} />
-          <SongTable songs={filteredSongs} />
+          <div className="m-auto general-section max-h-[50vh] md:max-h-[35vh] lg:max-h-[70vh]">
+            <SongTable songs={filteredSongs} />
+          </div>
         </div>
       </div>
     )

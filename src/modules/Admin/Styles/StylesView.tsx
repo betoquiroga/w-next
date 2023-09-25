@@ -24,15 +24,17 @@ const StylesView = () => {
   }
 
   return (
-    <div className="p-4 pl-[5rem] bg-ww-content pb-16 general-section">
+    <div className="p-4 pl-[5rem] bg-ww-content pb-16">
       <div className="max-w-[80rem] m-auto">
         <StylesHeader />
         <StylesAddButton />
         <StylesSearchInput handleSearch={onSearch} />
-        <StylesLoadingError isLoading={isLoading} isError={isError} />
-        {!isLoading && !isError && (
-          <StylesTable styles={styles} handleError={handleError} />
-        )}
+        <div className="m-auto general-section max-h-[50vh] md:max-h-[35vh] lg:max-h-[70vh]">
+          <StylesLoadingError isLoading={isLoading} isError={isError} />
+          {!isLoading && !isError && (
+            <StylesTable styles={styles} handleError={handleError} />
+          )}
+        </div>
       </div>
     </div>
   )

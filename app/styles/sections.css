@@ -1,5 +1,3 @@
 .general-section {
-  @apply bg-ww-content rounded overflow-y-scroll max-h-[100vh]
+  @apply bg-ww-content rounded overflow-y-scroll
 }
-
-
