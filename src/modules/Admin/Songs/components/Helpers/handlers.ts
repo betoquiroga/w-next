@@ -1,3 +1,4 @@
+import { Style } from "@interfaces/style.interface"
 import { createSongs, updateSong } from "src/common/api/songs/songs.api"
 
 export const handleSubmit = async (
@@ -9,7 +10,8 @@ export const handleSubmit = async (
   idStyle: number | null,
   setLoading: (loading: boolean) => void,
   setTitle: (title: string) => void,
-  setAuthor: (author: string) => void
+  setAuthor: (author: string) => void,
+  setSelectedStyle: (style: Style | null) => void
 ) => {
   setLoading(true)
 
@@ -22,12 +24,14 @@ export const handleSubmit = async (
 
   try {
     if (isEditing && idSong !== null) {
+      console.log(songData)
       await updateSong(idSong, songData)
     } else {
       await createSongs(songData)
     }
     setTitle("")
     setAuthor("")
+    setSelectedStyle(null)
     alert(isEditing ? "Canción actualizada" : "Canción creada")
   } catch (error) {
     alert("Hubo un error al guardar la canción")

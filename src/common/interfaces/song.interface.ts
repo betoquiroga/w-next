@@ -5,6 +5,7 @@ export interface SongBase {
   author: string
   active: boolean
   style?: Style
+  idStyle?: number | null
 }
 
 export interface Song extends SongBase {

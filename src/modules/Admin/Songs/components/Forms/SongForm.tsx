@@ -1,10 +1,12 @@
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { getSongById } from "src/common/api/songs/songs.api"
 import { handleSubmit } from "../Helpers/handlers"
-import { getStyles } from "src/common/api/styles/styles.api"
+import { getStyleById, getStyles } from "src/common/api/styles/styles.api"
 import { Style } from "@interfaces/style.interface"
-import { WW_STYLES_FOLDER, buildImageURL } from "src/common/constants/style"
+import SongInfoForm from "./SongInfoForm"
+import SongButtonForm from "./SongButtonForm"
+import Dropdown from "./StyleDropdown"
 
 const SongForm = () => {
   const [loading, setLoading] = useState(false)
@@ -14,6 +16,8 @@ const SongForm = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [selectedStyle, setSelectedStyle] = useState<Style | null>(null)
   const [styles, setStyles] = useState<Style[]>([])
+  const [dropdownOpen, toggleDropdown] = useState(false)
+  const nextRouter = useRouter()
 
   const router = useParams()
   const { id } = router
@@ -27,17 +31,29 @@ const SongForm = () => {
         setActive(data.active || false)
         setIsEditing(true)
         setSelectedStyle(data.style || null)
+        const idStyle = data.idStyle || undefined
+
+        if (idStyle !== undefined) {
+          getStyleById(idStyle).then((styleData) => {
+            setSelectedStyle(styleData as Style)
+          })
+        }
       })
     }
+
     getStyles().then((stylesData) => {
       setStyles(stylesData)
     })
   }, [idSong])
 
+  const handleStyleSelect = (style: Style | null) => {
+    setSelectedStyle(style)
+    toggleDropdown(false)
+  }
+
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
     const selectedStyleId = selectedStyle ? selectedStyle.id : null
-    console.log(selectedStyleId)
+    e.preventDefault()
     handleSubmit(
       title,
       author,
@@ -47,71 +63,31 @@ const SongForm = () => {
       selectedStyleId,
       setLoading,
       setTitle,
-      setAuthor
+      setAuthor,
+      setSelectedStyle
     )
+    if (isEditing && !loading) {
+      nextRouter.push("/admin/songs")
+    }
   }
 
   return (
     <form onSubmit={handleSubmitForm}>
       <div className="grid gap-6 grid-cols-2">
-        <input
-          className="input mb-4"
-          type="text"
-          placeholder="Título de la canción"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
+        <SongInfoForm
+          title={title}
+          author={author}
+          setTitle={setTitle}
+          setAuthor={setAuthor}
         />
-        <input
-          className="input mb-4"
-          type="text"
-          placeholder="Autor de la canción"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          required
+        <Dropdown
+          selectedStyle={selectedStyle}
+          styles={styles}
+          handleStyleSelect={handleStyleSelect}
+          dropdownOpen={dropdownOpen}
+          toggleDropdown={() => toggleDropdown(!dropdownOpen)}
         />
-        <select
-          className="input mb-4"
-          value={selectedStyle ? selectedStyle.id.toString() : ""}
-          onChange={(e) =>
-            setSelectedStyle(
-              styles.find((style) => style.id === Number(e.target.value)) ||
-                null
-            )
-          }
-          required
-        >
-          <option value="">Seleccione un estilo</option>
-          {styles.map((style) => (
-            <option key={style.id} value={style.id}>
-              {style.title}
-            </option>
-          ))}
-        </select>
-        <div className="mb-4">
-          <p> Vista Previa del Estilo:</p>
-          {selectedStyle ? (
-            <img
-              className="max-w-[20rem]"
-              src={buildImageURL(
-                selectedStyle.image,
-                WW_STYLES_FOLDER,
-                "small"
-              )}
-              alt="Imagen previa"
-            />
-          ) : (
-            <p>Sin estilo definido</p>
-          )}
-        </div>
-        <input
-          className={`col-span-2 transition-all py-2 px-4 rounded-lg hover:bg-ww-green-700 ${
-            loading ? "bg-ww-green-900 text-ww-lighter" : "bg-ww-green-800"
-          }`}
-          type="submit"
-          value={loading ? "Cargando" : "Enviar"}
-          disabled={loading}
-        />
+        <SongButtonForm loading={loading} />
       </div>
     </form>
   )
