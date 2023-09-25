@@ -1,3 +1,4 @@
+import { SongBase } from "@interfaces/song.interface"
 import { Style } from "@interfaces/style.interface"
 import { createSongs, updateSong } from "src/common/api/songs/songs.api"
 
@@ -7,27 +8,32 @@ export const handleSubmit = async (
   active: boolean,
   isEditing: boolean,
   idSong: number | null,
-  idStyle: number | null,
+  style: Style | number | null,
   setLoading: (loading: boolean) => void,
   setTitle: (title: string) => void,
   setAuthor: (author: string) => void,
   setSelectedStyle: (style: Style | null) => void
 ) => {
   setLoading(true)
-
+  const idStyle = typeof style === "number" ? style : style?.id
   const songData = {
     title,
     author,
     active,
-    idStyle,
+    style: idStyle !== undefined ? { id: idStyle } : null,
   }
-
+  const createData = {
+    title,
+    author,
+    active,
+    style: idStyle,
+  }
   try {
     if (isEditing && idSong !== null) {
-      console.log(songData)
-      await updateSong(idSong, songData)
+      await updateSong(idSong, songData as SongBase)
     } else {
-      await createSongs(songData)
+      console.log(createData)
+      await createSongs(createData as SongBase)
     }
     setTitle("")
     setAuthor("")

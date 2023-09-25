@@ -7,6 +7,7 @@ import { Style } from "@interfaces/style.interface"
 import SongInfoForm from "./SongInfoForm"
 import SongButtonForm from "./SongButtonForm"
 import Dropdown from "./StyleDropdown"
+import { LoadingForm } from "./LoadingForm"
 
 const SongForm = () => {
   const [loading, setLoading] = useState(false)
@@ -15,7 +16,7 @@ const SongForm = () => {
   const [active, setActive] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [selectedStyle, setSelectedStyle] = useState<Style | null>(null)
-  const [styles, setStyles] = useState<Style[]>([])
+  const [styles, setStyles] = useState<Style[]>()
   const [dropdownOpen, toggleDropdown] = useState(false)
   const nextRouter = useRouter()
 
@@ -31,7 +32,7 @@ const SongForm = () => {
         setActive(data.active || false)
         setIsEditing(true)
         setSelectedStyle(data.style || null)
-        const idStyle = data.idStyle || undefined
+        const idStyle = data.style?.id || undefined
 
         if (idStyle !== undefined) {
           getStyleById(idStyle).then((styleData) => {
@@ -52,24 +53,31 @@ const SongForm = () => {
   }
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    const selectedStyleId = selectedStyle ? selectedStyle.id : null
     e.preventDefault()
+    let styleParam: Style | number | null = selectedStyle
+
+    if (isEditing && selectedStyle === null) {
+      styleParam = 0
+    }
     handleSubmit(
       title,
       author,
       active,
       isEditing,
       idSong,
-      selectedStyleId,
+      styleParam,
       setLoading,
       setTitle,
       setAuthor,
       setSelectedStyle
     )
+
     if (isEditing && !loading) {
       nextRouter.push("/admin/songs")
     }
   }
+
+  if (!styles) return <LoadingForm />
 
   return (
     <form onSubmit={handleSubmitForm}>
