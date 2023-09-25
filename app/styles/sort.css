@@ -1,0 +1,3 @@
+.sort-song {
+  @apply cursor-pointer hover:bg-ww-green-700 py-3 px-5
+}
