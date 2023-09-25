@@ -14,7 +14,7 @@ const PreviewSection = () => {
     >
       <Tab.Group>
         <TabsHeader items={["Vista previa", "Configuraciones rápidas"]} />
-        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[40vh] lg:max-h-[100vh] p-4">
+        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[40vh] lg:max-h-[90vh] p-4">
           <PreviewPanel />
           <Tab.Panel>Aquí irán los listados creados</Tab.Panel>
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>

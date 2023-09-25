@@ -10,7 +10,7 @@ const BooksSection = () => {
     <div className={`lg:block ${activeColumn !== 1 && "hidden"}`}>
       <Tab.Group>
         <TabsHeader items={["Libros", "Secciones", "Historial"]} />
-        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[45vh] lg:max-h-[90vh] p-4">
+        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[45vh] lg:max-h-[85vh] p-4">
           <BooksPanel />
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>
