@@ -5,9 +5,12 @@ const PreviewCurrent = () => {
   const [scale, setScale] = useState<number | null>()
   const preview = useRef<HTMLParagraphElement>(null)
 
+  const minScale = 0.12
+
   useEffect(() => {
     if (preview.current) {
-      setScale(preview.current?.clientWidth / 1920)
+      const calculatedScale = preview.current?.clientWidth / 1920
+      setScale(Math.max(calculatedScale, minScale))
     }
   }, [preview])
 

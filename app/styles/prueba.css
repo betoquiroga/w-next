@@ -74,12 +74,12 @@
 
 .preview .current {
   transform-origin: top left;
-  max-height: 230px;
+  max-height: 200px;
 }
 
 .preview .prueba {
-  width: 1920px !important;
-  height: 1080px !important;
+  width: 2000px !important;
+  height: 1280px !important;
   position: relative;
   transform-origin: top left;
 }
