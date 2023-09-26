@@ -44,7 +44,7 @@ const MenuNavResponsive = ({ openClose, isOpen }: toggleOpenProps) => {
         </div>
       </nav>
       <div
-        className={`fixed inset-0 bg-black text-white z-10 general-section ${
+        className={`fixed inset-0 bg-black text-white z-10 general-section max-h-[100vh] ${
           isOpen ? "block" : "hidden"
         }`}
       >
