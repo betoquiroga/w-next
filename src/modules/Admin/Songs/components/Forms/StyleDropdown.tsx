@@ -24,7 +24,7 @@ const Dropdown = ({
                   "small"
                 )}
                 alt={selectedStyle.title}
-                className="w-[7rem] mr-6 aspect-video"
+                className="w-[7rem] mr-6 aspect-video hover:opacity-80 border border-gray-800 rounded-lg"
               />
               <span className="flex-grow">{selectedStyle.title}</span>
             </>
@@ -64,7 +64,7 @@ const Dropdown = ({
               <img
                 src={buildImageURL(style.image, WW_STYLES_FOLDER, "small")}
                 alt={style.title}
-                className="w-[7rem] mr-6 aspect-video hover:opacity-80"
+                className="w-[7rem] ml-4 mr-6 aspect-video hover:opacity-80 border border-gray-800 rounded-lg"
               />
               <span className="flex-grow">{style.title}</span>
             </li>
