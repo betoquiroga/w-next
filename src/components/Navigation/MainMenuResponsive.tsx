@@ -1,9 +1,26 @@
 import { SectionContext } from "@context/SectionContext"
 import Link from "next/link"
-import { MouseEventHandler, useContext } from "react"
+import { MouseEventHandler, useContext, useEffect, useState } from "react"
 
 const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
   const { setActiveSection } = useContext(SectionContext)
+
+  const [isSelect, setIsSelect] = useState<string>(() => {
+    return localStorage.getItem("menu-select") || "songs"
+  })
+
+  const handleClick = (clickedSelect: string) => {
+    setIsSelect(clickedSelect)
+    localStorage.setItem("menu-select", clickedSelect)
+  }
+
+  useEffect(() => {
+    const storedSelect = localStorage.getItem("menu-select")
+    if (storedSelect) {
+      setIsSelect(storedSelect)
+    }
+  }, [])
+
   return (
     <>
       <div className="pr-4 cursor-pointer py-5 px-8" onClick={openClose}>
@@ -23,54 +40,89 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
         </svg>
       </div>
       <div
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col items-center justify-center responsive-link"
         onClick={openClose}
       >
-        <Link
-          className="responsive-link"
-          href={"/songs"}
-          onClick={() => {
-            setActiveSection(1)
-          }}
+        <div
+          className={`menu-select py-4 ${
+            isSelect === "songs" ? "text-ww-green-600" : ""
+          }`}
+          onClick={() => handleClick("songs")}
         >
-          Canciones
-        </Link>
-        <Link
-          className="responsive-link"
-          href={"/bible"}
-          onClick={() => {
-            setActiveSection(2)
-          }}
+          <Link
+            className="py-20"
+            href={"/songs"}
+            onClick={() => {
+              setActiveSection(1)
+            }}
+          >
+            Canciones
+          </Link>
+        </div>
+        <div
+          className={`menu-select py-4 ${
+            isSelect === "bible" ? "text-ww-green-600" : ""
+          }`}
+          onClick={() => handleClick("bible")}
         >
-          Biblia
-        </Link>
-        <Link
-          className="responsive-link"
-          href={"/gallery"}
-          onClick={() => {
-            setActiveSection(3)
-          }}
+          <Link
+            className=""
+            href={"/bible"}
+            onClick={() => {
+              setActiveSection(2)
+            }}
+          >
+            Biblia
+          </Link>
+        </div>
+        <div
+          className={`menu-select py-4 ${
+            isSelect === "gallery" ? "text-ww-green-600" : ""
+          }`}
+          onClick={() => handleClick("gallery")}
         >
-          Galería
-        </Link>
-        <Link
-          className="responsive-link"
-          href={"/admin"}
-          onClick={() => {
-            setActiveSection(4)
-          }}
+          <Link
+            className=""
+            href={"/gallery"}
+            onClick={() => {
+              setActiveSection(3)
+            }}
+          >
+            Galería
+          </Link>
+        </div>
+        <div
+          className={`menu-select py-4 ${
+            isSelect === "admin" ? "text-ww-green-600" : ""
+          }`}
+          onClick={() => handleClick("admin")}
         >
-          Administración
-        </Link>
-        <Link
-          className="responsive-link"
-          href={"/"}
-          onClick={() => {
-            setActiveSection(5)
-          }}
+          <Link
+            className=""
+            href={"/admin"}
+            onClick={() => {
+              setActiveSection(4)
+            }}
+          >
+            Administración
+          </Link>
+        </div>
+        <div
+          className={`menu-select py-4 ${
+            isSelect === "profile" ? "text-ww-green-600" : ""
+          }`}
+          onClick={() => handleClick("profile")}
         >
-          Perfil
-        </Link>
+          <Link
+            className=""
+            href={"/"}
+            onClick={() => {
+              setActiveSection(5)
+            }}
+          >
+            Perfil
+          </Link>
+        </div>
       </div>
     </>
   )
