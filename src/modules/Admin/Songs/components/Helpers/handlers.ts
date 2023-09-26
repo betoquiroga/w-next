@@ -32,7 +32,6 @@ export const handleSubmit = async (
     if (isEditing && idSong !== null) {
       await updateSong(idSong, songData as SongBase)
     } else {
-      console.log(createData)
       await createSongs(createData as SongBase)
     }
     setTitle("")

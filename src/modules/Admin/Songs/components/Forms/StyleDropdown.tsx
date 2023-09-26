@@ -48,7 +48,7 @@ const Dropdown = ({
         </svg>
       </div>
       {dropdownOpen && (
-        <ul className="style-dropdown max-h-[200px] overflow-y-auto mt-2">
+        <ul className="style-dropdown max-h-[400px] overflow-y-auto mt-2">
           <li
             onClick={() => handleStyleSelect(null)}
             className="flex items-center border-b border-gray-900 py-2 hover:bg-gray-900 cursor-pointer"
