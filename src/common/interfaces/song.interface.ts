@@ -4,7 +4,7 @@ export interface SongBase {
   title: string
   author: string
   active: boolean
-  style?: Style
+  style?: Style | null
 }
 
 export interface Song extends SongBase {

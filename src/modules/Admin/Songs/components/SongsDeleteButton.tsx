@@ -12,7 +12,6 @@ const SongsDeleteButton = ({ id }: SongsDeleteButtonProps) => {
         },
         onSuccess: () => {
           alert("Canción eliminada siiiiuuu")
-          window.location.reload()
         },
       })
     }

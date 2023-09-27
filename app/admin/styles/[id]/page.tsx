@@ -1,5 +1,6 @@
 "use client"
 
+import { Spinner } from "@components/Spinner"
 import { Lyric } from "@interfaces/lyrics.interface"
 import { Song } from "@interfaces/song.interface"
 import axios, { HttpStatusCode } from "axios"
@@ -40,6 +41,7 @@ export default function SongId({ params }: SongIdProps) {
     return (
       <div className="px-24 py-16">
         <h1>Cargando...</h1>
+        <Spinner />
       </div>
     )
   }

@@ -1,7 +1,13 @@
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { getSongById } from "src/common/api/songs/songs.api"
 import { handleSubmit } from "../Helpers/handlers"
+import { getStyleById, getStyles } from "src/common/api/styles/styles.api"
+import { Style } from "@interfaces/style.interface"
+import SongInfoForm from "./SongInfoForm"
+import SongButtonForm from "./SongButtonForm"
+import Dropdown from "./StyleDropdown"
+import { LoadingForm } from "./LoadingForm"
 
 const SongForm = () => {
   const [loading, setLoading] = useState(false)
@@ -9,6 +15,10 @@ const SongForm = () => {
   const [author, setAuthor] = useState("")
   const [active, setActive] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
+  const [selectedStyle, setSelectedStyle] = useState<Style | null>(null)
+  const [styles, setStyles] = useState<Style[]>()
+  const [dropdownOpen, toggleDropdown] = useState(false)
+  const nextRouter = useRouter()
 
   const router = useParams()
   const { id } = router
@@ -21,51 +31,71 @@ const SongForm = () => {
         setAuthor(data.author || "")
         setActive(data.active || false)
         setIsEditing(true)
+        setSelectedStyle(data.style || null)
+        const idStyle = data.style?.id || undefined
+
+        if (idStyle !== undefined) {
+          getStyleById(idStyle).then((styleData) => {
+            setSelectedStyle(styleData as Style)
+          })
+        }
       })
     }
+
+    getStyles().then((stylesData) => {
+      setStyles(stylesData)
+    })
   }, [idSong])
+
+  const handleStyleSelect = (style: Style | null) => {
+    setSelectedStyle(style)
+    toggleDropdown(false)
+  }
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    let styleParam: Style | number | null = selectedStyle
+
+    if (isEditing && selectedStyle === null) {
+      styleParam = 0
+    }
     handleSubmit(
       title,
       author,
       active,
       isEditing,
       idSong,
+      styleParam,
       setLoading,
       setTitle,
-      setAuthor
+      setAuthor,
+      setSelectedStyle
     )
+
+    if (isEditing && !loading) {
+      nextRouter.push("/admin/songs")
+    }
   }
+
+  if (!styles) return <LoadingForm />
 
   return (
     <form onSubmit={handleSubmitForm}>
       <div className="grid gap-6 grid-cols-2">
-        <input
-          className="input mb-4"
-          type="text"
-          placeholder=" Título de la canción"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
+        <SongInfoForm
+          title={title}
+          author={author}
+          setTitle={setTitle}
+          setAuthor={setAuthor}
         />
-        <input
-          className="input mb-4"
-          type="text"
-          placeholder="Autor de la canción"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          required
+        <Dropdown
+          selectedStyle={selectedStyle}
+          styles={styles}
+          handleStyleSelect={handleStyleSelect}
+          dropdownOpen={dropdownOpen}
+          toggleDropdown={() => toggleDropdown(!dropdownOpen)}
         />
-        <input
-          className={`col-span-2 transition-all py-2 px-4 rounded-lg hover:bg-ww-green-700 ${
-            loading ? "bg-ww-green-900 text-ww-lighter" : "bg-ww-green-800"
-          }`}
-          type="submit"
-          value={loading ? "Cargando" : "Enviar"}
-          disabled={loading}
-        />
+        <SongButtonForm loading={loading} />
       </div>
     </form>
   )
