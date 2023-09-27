@@ -17,7 +17,7 @@ const FilesSection = () => {
     >
       <Tab.Group>
         <TabsHeader items={["Imagenes", "Videos", "Subir archivos"]} />
-        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[40vh] lg:max-h-[90vh] p-4">
+        <Tab.Panels className="general-section max-h-[60vh] md:max-h-[40vh] lg:max-h-[90vh] p-4">
           <ImagesPanel />
           <VideosPanel />
           <UploadPanel

@@ -10,7 +10,7 @@ const StyleSection = () => {
     <div className={`lg:block ${activeColumn !== 3 && "hidden"}`}>
       <Tab.Group>
         <TabsHeader items={["Estilos", "Ajustes del estilo"]} />
-        <Tab.Panels className="general-section max-h-[70vh] md:max-h-[45vh] lg:max-h-[85vh] p-4">
+        <Tab.Panels className="general-section max-h-[60vh] md:max-h-[50vh] lg:max-h-[90vh] p-4">
           <StylePanel />
           <Tab.Panel>Aquí irán los listados creados</Tab.Panel>
           <Tab.Panel>Mostrará el historial del usuario</Tab.Panel>
