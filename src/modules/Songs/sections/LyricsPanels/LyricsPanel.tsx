@@ -6,6 +6,7 @@ import LyricsList from "./LyricsList"
 import LyricsOptions from "./LyricsOptions"
 import { SongsContext } from "@context/SongsContext"
 import { Lyric } from "@interfaces/lyrics.interface"
+import { Spinner } from "@components/Spinner"
 
 const LyricsPanel = () => {
   const { data, isLoading, isError, setSongId, isFetching } =
@@ -21,7 +22,13 @@ const LyricsPanel = () => {
     }
   }, [activeSongId, data])
 
-  if (isLoading || isFetching) return <Tab.Panel>Cargando...</Tab.Panel>
+  if (isLoading || isFetching)
+    return (
+      <>
+        <Tab.Panel>Cargando...</Tab.Panel>
+        <Spinner />
+      </>
+    )
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 
   return (

@@ -1,3 +1,4 @@
+import { Spinner } from "@components/Spinner"
 import React from "react"
 
 const StylesLoadingError = ({
@@ -5,7 +6,12 @@ const StylesLoadingError = ({
   isError,
 }: StylesLoadingErrorProps) => {
   if (isLoading) {
-    return <p>Cargando...</p>
+    return (
+      <>
+        <p>Cargando...</p>
+        <Spinner />
+      </>
+    )
   }
   if (isError) {
     return <p>Error</p>
