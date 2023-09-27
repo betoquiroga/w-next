@@ -1,3 +1,3 @@
 .responsive-link {
-  @apply py-6 text-4xl;
+  @apply py-6 text-4xl hover:text-ww-green-600;
 }
