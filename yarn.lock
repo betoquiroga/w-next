@@ -14,6 +14,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+  version: 7.23.1
+  resolution: "@babel/runtime@npm:7.23.1"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 8310b192816468f60d8289f3671991acb14785fb28dd3f86a6f6dbbe2e6d5e2212c4cefd0c6fb67e38881a8f83d5c6d811c9f51ab59f3e810e0fa019eda1d229
+  languageName: node
+  linkType: hard
+
 "@eslint-community/eslint-utils@npm:^4.2.0":
   version: 4.4.0
   resolution: "@eslint-community/eslint-utils@npm:4.4.0"
@@ -441,6 +450,15 @@ __metadata:
     "@types/htmlparser2": "npm:*"
     "@types/react": "npm:*"
   checksum: 1bbb9446669cd284a57baf103ed6073869cdc65fb61702830d18b78e8853af26d84511c8cee1ff68970e94a09d7a3088b60d2ac3ca46083d84af0d6b8d867923
+  languageName: node
+  linkType: hard
+
+"@types/react-transition-group@npm:^4":
+  version: 4.4.6
+  resolution: "@types/react-transition-group@npm:4.4.6"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 67cb6a41704655d5cc1708952b13cbfad74911290928a78a0f27febd3798d2d2838fb501d54439ddac684cb08f26f47d8099f7a8028f52c67264226e105bb128
   languageName: node
   linkType: hard
 
@@ -1338,6 +1356,16 @@ __metadata:
   dependencies:
     esutils: "npm:^2.0.2"
   checksum: 6b38a63fa66847d80e130bb85c83c173b1050037fffac3d5f740c8c691243d5b6fadc5ec502ae8297c474680d879eb24ad8ec7f901673704fe40c8dedc1bee62
+  languageName: node
+  linkType: hard
+
+"dom-helpers@npm:^5.0.1":
+  version: 5.2.1
+  resolution: "dom-helpers@npm:5.2.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.8.7"
+    csstype: "npm:^3.0.2"
+  checksum: 4744ec87fd4f09ab51037350ef915371ed0479e7920a23edbb08a9a268c16bcbdbe4a6df76e923956a7465d1d4a5e861f7f5e8bdbfe03546a60b100200f9307a
   languageName: node
   linkType: hard
 
@@ -3681,6 +3709,7 @@ __metadata:
     "@types/react": "npm:18.0.26"
     "@types/react-dom": "npm:18.0.9"
     "@types/react-html-parser": "npm:^2.0.2"
+    "@types/react-transition-group": "npm:^4"
     "@typescript-eslint/eslint-plugin": "npm:^5.48.2"
     "@typescript-eslint/parser": "npm:^5.48.2"
     add: "npm:^2.0.6"
@@ -3704,6 +3733,7 @@ __metadata:
     react-hook-form: "npm:^7.43.1"
     react-html-parser: "npm:^2.0.2"
     react-player: "npm:^2.12.0"
+    react-transition-group: "npm:^4.4.5"
     socket.io-client: "npm:^4.5.4"
     tailwindcss: "npm:^3.2.4"
     typescript: "npm:4.9.4"
@@ -3747,7 +3777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -3860,6 +3890,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-transition-group@npm:^4.4.5":
+  version: 4.4.5
+  resolution: "react-transition-group@npm:4.4.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.5.5"
+    dom-helpers: "npm:^5.0.1"
+    loose-envify: "npm:^1.4.0"
+    prop-types: "npm:^15.6.2"
+  peerDependencies:
+    react: ">=16.6.0"
+    react-dom: ">=16.6.0"
+  checksum: e1280cefba98ac056e57d39d008771901bb6d4b36f2a6b3288a106b29af024f0b355320fd5387e1ab6b93da7e27f2a507a9b16e40649a96336013898c360d748
+  languageName: node
+  linkType: hard
+
 "react@npm:18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
@@ -3902,6 +3947,13 @@ __metadata:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 0485db63ce47760e28329590cb9f8b208365d076dbf2edaa32e551a7c0451fc6f7557b225268422c960ffa4fbc6ff86d63d6a747aacbf6b10ed6a747b432e3c8
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "regenerator-runtime@npm:0.14.0"
+  checksum: 7e3bbf049c59c5fe9091baff243fef420197f186a9d3325b747bc480aed3d48ad6d89f23c135142885cbc9bb390cacbb0e8620d2f4564f1db8819f318dc7a155
   languageName: node
   linkType: hard
 
