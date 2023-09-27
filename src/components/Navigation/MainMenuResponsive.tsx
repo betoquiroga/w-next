@@ -2,10 +2,10 @@ import CloseMenu from "@icons/menuResponsive/close-menu"
 import Link from "next/link"
 import { MouseEventHandler } from "react"
 
-const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
+const MainMenuResponsive = ({ toggleOpen }: toggleOpenProps) => {
   return (
     <>
-      <div className="pr-4 cursor-pointer py-5 px-8" onClick={openClose}>
+      <div className="pr-4 cursor-pointer py-5 px-8" onClick={toggleOpen}>
         <CloseMenu />
       </div>
       <div className="flex flex-col items-center justify-center">
@@ -30,7 +30,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
 }
 
 interface toggleOpenProps {
-  openClose: MouseEventHandler
+  toggleOpen: MouseEventHandler
 }
 
 export default MainMenuResponsive

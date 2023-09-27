@@ -9,12 +9,12 @@ import Preview from "@icons/menuResponsive/bible/preview"
 const MenuTopBarBible = () => {
   const { setActiveColumn } = useContext(ColumnContext)
   return (
-    <div className="w-full flex justify-between justify-center">
+    <>
       <Books setActiveColumn={setActiveColumn} />
       <Chapters setActiveColumn={setActiveColumn} />
       <Verses setActiveColumn={setActiveColumn} />
       <Preview setActiveColumn={setActiveColumn} />
-    </div>
+    </>
   )
 }
 

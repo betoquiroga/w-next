@@ -9,12 +9,12 @@ import { useContext } from "react"
 const MenuTopBarSong = () => {
   const { setActiveColumn } = useContext(ColumnContext)
   return (
-    <div className="w-full flex justify-between justify-center">
+    <>
       <Songs setActiveColumn={setActiveColumn} />
       <Lirycs setActiveColumn={setActiveColumn} />
       <Styles setActiveColumn={setActiveColumn} />
       <Preview setActiveColumn={setActiveColumn} />
-    </div>
+    </>
   )
 }
 

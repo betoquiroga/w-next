@@ -7,10 +7,10 @@ import Preview from "@icons/menuResponsive/gallery/preview"
 const MenuTopBarGallery = () => {
   const { setActiveColumn } = useContext(ColumnContext)
   return (
-    <div className="w-full flex justify-between justify-center">
+    <>
       <Styles setActiveColumn={setActiveColumn} />
       <Preview setActiveColumn={setActiveColumn} />
-    </div>
+    </>
   )
 }
 

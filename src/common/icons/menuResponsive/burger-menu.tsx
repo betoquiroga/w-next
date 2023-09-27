@@ -1,9 +1,9 @@
 import MainMenuResponsive from "@components/Navigation/MainMenuResponsive"
 import { MouseEventHandler } from "react"
 
-const BurgerMenu = ({ openClose, isOpen }: toggleOpenProps) => {
+const BurgerMenu = ({ toggleOpen, isOpen }: toggleOpenProps) => {
   return (
-    <>
+    <div className="responsive-item" onClick={toggleOpen}>
       <svg
         width="20"
         height="20"
@@ -23,14 +23,14 @@ const BurgerMenu = ({ openClose, isOpen }: toggleOpenProps) => {
           isOpen ? "block" : "hidden"
         }`}
       >
-        <MainMenuResponsive openClose={openClose} />
+        <MainMenuResponsive toggleOpen={toggleOpen} />
       </div>
-    </>
+    </div>
   )
 }
 
 interface toggleOpenProps {
-  openClose: MouseEventHandler
+  toggleOpen: MouseEventHandler
   isOpen: boolean
 }
 

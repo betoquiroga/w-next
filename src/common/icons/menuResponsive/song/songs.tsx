@@ -1,11 +1,8 @@
 const Songs = ({ setActiveColumn }: SubMenuIconsProps) => {
   return (
-    <div
-      className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
-      onClick={() => setActiveColumn(1)}
-    >
+    <div className="responsive-item group" onClick={() => setActiveColumn(1)}>
       <svg
-        className="tooltip"
+        className="w-6 h-6"
         width="20"
         height="20"
         viewBox="0 0 16 16"
@@ -21,9 +18,7 @@ const Songs = ({ setActiveColumn }: SubMenuIconsProps) => {
           fill="#D9F5EE"
         />
       </svg>
-      <div className="hidden group-hover:block absolute bg-black text-white text-sm p-2 rounded mt-2">
-        Canciones
-      </div>
+      <div className="group-hover:block tooltip">Canciones</div>
     </div>
   )
 }

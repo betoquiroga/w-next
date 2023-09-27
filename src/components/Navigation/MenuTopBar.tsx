@@ -9,20 +9,15 @@ const MenuTopBar = ({ children }: MenuProps) => {
   }
 
   return (
-    <>
-      <div
-        className="pr-18 transition py-6 px-6 hover:bg-ww-alt"
-        onClick={toggleOpen}
-      >
-        <BurgerMenu openClose={toggleOpen} isOpen={isOpen} />
-      </div>
+    <nav className="flex h-[4rem] text:black lg:hidden w-full bg-ww-content">
+      <BurgerMenu toggleOpen={toggleOpen} isOpen={isOpen} />
       {children}
-    </>
+    </nav>
   )
 }
 
 type MenuProps = {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export default MenuTopBar

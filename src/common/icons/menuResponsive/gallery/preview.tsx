@@ -1,11 +1,11 @@
 const Preview = ({ setActiveColumn }: SubMenuIconsProps) => {
   return (
     <div
-      className="group pr-6 pl-6 py-6 transition hover:bg-ww-alt"
+      className="responsive-item group md:hidden"
       onClick={() => setActiveColumn(2)}
     >
       <svg
-        className="w-6 h-6 tooltip md:hidden"
+        className="w-6 h-6"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -23,9 +23,7 @@ const Preview = ({ setActiveColumn }: SubMenuIconsProps) => {
           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
         />
       </svg>
-      <div className="hidden group-hover:block absolute bg-black text-white text-sm p-2 rounded mt-2">
-        Vista previa
-      </div>
+      <div className="group-hover:block tooltip">Vista previa</div>
     </div>
   )
 }
