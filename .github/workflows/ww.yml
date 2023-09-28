@@ -1,0 +1,22 @@
+name: Linode CD - Wiswords
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Conectar via SSH y desplegar
+      env:
+        PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        eval "$(ssh-agent -s)"
+        echo "$PRIVATE_KEY" | ssh-add -
+        ssh -o StrictHostKeyChecking=no beto@wiswords.com '~/ww.sh'
