@@ -31,7 +31,7 @@ const useSongsEffects = (
     }
 
     if (data) {
-      const newData = songs.filter(
+      const newData = data.filter(
         (b) =>
           b.title
             .normalize("NFD")

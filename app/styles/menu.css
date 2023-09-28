@@ -1,3 +1,11 @@
 .responsive-link {
   @apply py-6 text-4xl hover:text-ww-green-600;
 }
+
+.responsive-item {
+  @apply p-6 transition hover:bg-ww-alt;
+}
+
+.responsive-item .tooltip {
+  @apply hidden absolute bg-black text-white text-sm p-2 rounded mt-2;
+}

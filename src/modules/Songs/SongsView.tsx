@@ -18,16 +18,14 @@ const SongsView = () => {
     }
   }
   return (
-    <div className="">
-      <div
-        onKeyDown={handleKeyPress}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch lg:pl-[5rem] grid-rows-none"
-      >
-        <SongsSection />
-        <LyricsSection />
-        <StyleSection />
-        <PreviewSection />
-      </div>
+    <div
+      onKeyDown={handleKeyPress}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 p-4 w-[calc(100%-2px)] justify-items-stretch lg:pl-[5rem] grid-rows-none"
+    >
+      <SongsSection />
+      <LyricsSection />
+      <StyleSection />
+      <PreviewSection />
     </div>
   )
 }
