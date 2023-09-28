@@ -31,12 +31,14 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
   const { version } = useContext(BookContext)
 
   useEffect(() => {
+    setLoading(true)
     if (chapter?.chapter && version) {
       axios
         .get(
           `/bible/${version.abbreviation}/${chapter.book.engAbr}${chapter.chapter}.json`
         )
         .then((resp) => setVerses(resp.data))
+        .finally(() => setLoading(false))
     }
   }, [chapter])
 
