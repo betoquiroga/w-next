@@ -17,10 +17,9 @@ const StylePanel = () => {
   }, [data])
   if (isLoading)
     return (
-      <>
-        <Tab.Panel>Cargando...</Tab.Panel>
+      <Tab.Panel>
         <Spinner />
-      </>
+      </Tab.Panel>
     )
   if (isError) return <Tab.Panel>Error...</Tab.Panel>
 

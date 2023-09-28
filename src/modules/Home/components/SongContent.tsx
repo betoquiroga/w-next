@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from "react"
-import { CSSTransition } from "react-transition-group"
+import { useState, useEffect } from "react"
 import { Emit } from "@interfaces/emit.interface"
 
 const SongContent = ({ data }: SongContentProps) => {
-  const [show, setShow] = useState(true)
-  const [localData, setLocalData] = useState(data)
+  const [animationClass, setAnimationClass] = useState<string>("fade-in")
+  const [displayedData, setDisplayedData] = useState<Emit>(data)
 
   useEffect(() => {
-    if (localData.content !== data.content) {
-      setShow(false) // Ocultar el contenido actual
+    if (displayedData.content !== data.content) {
+      setAnimationClass("fade-out")
 
       setTimeout(() => {
-        setLocalData(data) // Actualizar el contenido local
-      }, 300)
-
-      setTimeout(() => {
-        setShow(true) // Mostrar el nuevo contenido
-      }, 600) // Asegúrate de darle tiempo suficiente para que la animación de salida se complete antes de comenzar la animación de entrada
+        setDisplayedData(data) // Cambiamos al nuevo contenido
+        setAnimationClass("fade-in")
+      }, 500)
     }
-  }, [data, localData])
+  }, [data, displayedData])
 
   return (
-    <CSSTransition in={show} timeout={300} classNames="fade">
-      <p className="font-bold text-white portrait:p-4 landscape:p-16">
-        {localData.content.split("\n").map((line, i) => (
-          <span className="flex song-content" key={`${line[0]}-${i}`}>
-            {line}
-          </span>
-        ))}
-      </p>
-    </CSSTransition>
+    <p
+      className={`font-bold text-white portrait:p-4 landscape:p-16 ${animationClass}`}
+    >
+      {displayedData.content.split("\n").map((line, i) => (
+        <span className="flex song-content" key={`${line[0]}-${i}`}>
+          {line}
+        </span>
+      ))}
+    </p>
   )
 }
 
