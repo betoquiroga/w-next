@@ -1,6 +1,9 @@
 const Preview = ({ setActiveColumn }: SubMenuIconsProps) => {
   return (
-    <div className="responsive-item group" onClick={() => setActiveColumn(4)}>
+    <div
+      className="responsive-item group md:hidden"
+      onClick={() => setActiveColumn(4)}
+    >
       <svg
         className="w-6 h-6"
         xmlns="http://www.w3.org/2000/svg"

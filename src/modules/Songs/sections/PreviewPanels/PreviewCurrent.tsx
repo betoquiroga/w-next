@@ -6,7 +6,6 @@ const PreviewCurrent = () => {
   const preview = useRef<HTMLParagraphElement>(null)
 
   const minScale = 0.16
-
   useEffect(() => {
     if (preview.current) {
       let calculatedScale = minScale
