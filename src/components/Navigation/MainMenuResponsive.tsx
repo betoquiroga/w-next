@@ -1,71 +1,27 @@
-import { SectionContext } from "@context/SectionContext"
+import CloseMenu from "@icons/menuResponsive/close-menu"
 import Link from "next/link"
-import { MouseEventHandler, useContext } from "react"
+import { MouseEventHandler } from "react"
 
-const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
-  const { setActiveSection } = useContext(SectionContext)
+const MainMenuResponsive = ({ toggleOpen }: toggleOpenProps) => {
   return (
     <>
-      <div className="pr-4 cursor-pointer py-5 px-8" onClick={openClose}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-9 h-9"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
+      <div className="pr-4 cursor-pointer py-5 px-8" onClick={toggleOpen}>
+        <CloseMenu />
       </div>
       <div className="flex flex-col items-center justify-center">
-        <Link
-          className="responsive-link"
-          href={"/songs"}
-          onClick={() => {
-            setActiveSection(1)
-          }}
-        >
+        <Link className="responsive-link" href={"/songs"}>
           Canciones
         </Link>
-        <Link
-          className="responsive-link"
-          href={"/bible"}
-          onClick={() => {
-            setActiveSection(2)
-          }}
-        >
+        <Link className="responsive-link" href={"/bible"}>
           Biblia
         </Link>
-        <Link
-          className="responsive-link"
-          href={"/gallery"}
-          onClick={() => {
-            setActiveSection(3)
-          }}
-        >
+        <Link className="responsive-link" href={"/gallery"}>
           Galería
         </Link>
-        <Link
-          className="responsive-link"
-          href={"/admin"}
-          onClick={() => {
-            setActiveSection(4)
-          }}
-        >
+        <Link className="responsive-link" href={"/admin"}>
           Administración
         </Link>
-        <Link
-          className="responsive-link"
-          href={"/"}
-          onClick={() => {
-            setActiveSection(5)
-          }}
-        >
+        <Link className="responsive-link" href={"/"}>
           Perfil
         </Link>
       </div>
@@ -74,7 +30,7 @@ const MainMenuResponsive = ({ openClose }: toggleOpenProps) => {
 }
 
 interface toggleOpenProps {
-  openClose: MouseEventHandler
+  toggleOpen: MouseEventHandler
 }
 
 export default MainMenuResponsive

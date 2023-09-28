@@ -1,5 +1,7 @@
 "use client"
 import MainMenu from "@components/Navigation/MainMenu"
+import MenuTopBar from "@components/Navigation/MenuTopBar"
+import MenuTopBarSong from "@components/Navigation/MenuTopBarSong"
 import { ColumnProvider } from "@context/ColumnContext"
 
 export default function SongsLayout({
@@ -10,6 +12,9 @@ export default function SongsLayout({
   return (
     <ColumnProvider>
       <MainMenu />
+      <MenuTopBar>
+        <MenuTopBarSong />
+      </MenuTopBar>
       <main>{children}</main>
     </ColumnProvider>
   )
