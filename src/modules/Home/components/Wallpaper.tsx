@@ -1,10 +1,17 @@
+import useAnimation from "@hooks/useAnimation"
 import { Effect } from "@interfaces/effect.interface"
 import { Style } from "@interfaces/style.interface"
 import Image from "next/image"
 
 const Wallpaper = ({ style, effects }: WallpaperProps) => {
+  const { animationClass, displayedData } = useAnimation(
+    "fade",
+    style.image,
+    500
+  )
+
   return (
-    <div className="wallpaper">
+    <div className={`wallpaper ${animationClass}`}>
       {style.type === "Video" && (
         <video
           id="video-player"
@@ -17,8 +24,8 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
       )}
       {style?.type?.includes("Imagen") && (
         <Image
-          src={style.image}
-          alt={style.image}
+          src={displayedData}
+          alt={"."}
           height={1080}
           width={1920}
           blurDataURL="/images/styles/logo.jpeg"

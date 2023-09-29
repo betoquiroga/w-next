@@ -117,14 +117,48 @@ Prueba de transiciones
 */
 
 .fade-in {
-  animation: fadeIn 700ms linear;
+  animation: fadeIn 800ms linear;
 }
 
 .fade-out {
   animation: fadeOut 500ms linear;
 }
 
+.art-in {
+  animation: artIn 700ms linear;
+}
+
+.art-out {
+  animation: artOut 500ms linear;
+}
+
+.cover-in {
+  animation: coverIn 2000ms ease-in;
+}
+
+.cover-out {
+  animation: coverOut 500ms linear;
+}
+
 @keyframes fadeIn {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1; 
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+@keyframes artIn {
   from {
     opacity: 0;
     transform: translateY(-12px);
@@ -135,7 +169,7 @@ Prueba de transiciones
   }
 }
 
-@keyframes fadeOut {
+@keyframes artOut {
   from {
     opacity: 1;
     transform: translateY(0);
@@ -143,5 +177,34 @@ Prueba de transiciones
   to {
     opacity: 0;
     transform: translateY(15px);
+  }
+}
+
+@keyframes coverIn {
+  0% {
+    color: transparent;
+    text-shadow: none;
+    transform: scaleX(0);
+  }
+  40% {
+    color: transparent;
+    text-shadow: none;
+    transform: scaleX(1);
+  }
+  100% {
+    color: inherit;
+    text-shadow: inherit;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes coverOut {
+  from {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    opacity: 0;
+    transform: scaleX(1);
   }
 }

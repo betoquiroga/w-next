@@ -21,7 +21,7 @@ const HomeView = ({ width }: HomeViewProps) => {
       })}
       style={{ transform: `scale(${width || 1})` }}
     >
-      {effectsWs.particles && <div className="snow"></div>}
+      {effectsWs.particles && <div className="snow" />}
       {bibleVerse?.content.length > 1 && <BibleVerse verse={bibleVerse} />}
       {!black && <Wallpaper style={styleData} effects={effectsWs} />}
       {content.type === "song" && <SongContent data={content} />}
