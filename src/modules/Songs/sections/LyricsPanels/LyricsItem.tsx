@@ -1,7 +1,7 @@
 import { ActiveLyricContext } from "src/common/context/ActiveLyricContext"
 import LyricsService from "src/common/services/lyrics/lyrics.service"
 import classNames from "classnames"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { coverEmit, lyricEmit, styleEmit } from "@helpers/socket/emit"
 import { Style } from "@interfaces/style.interface"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
@@ -10,26 +10,36 @@ import { StyleContext } from "@context/StyleContext"
 import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { updateScreen } from "src/common/api/screen/screen.api"
 
-const LyricsItem = ({ content, id, cover, idSong, style }: LyricsItemProps) => {
+const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
   const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
   const { setStyle } = useContext(StyleContext)
+  const [styleChanged, setStyleChanged] = useState(false)
   const lyricsService = new LyricsService()
+
+  useEffect(() => {
+    setStyleChanged(false)
+  }, [idSong])
 
   const addMessage = () => {
     setActiveLyricId(id)
     lyricsService.setActive(id)
     cover ? coverEmit(content) : lyricEmit(content)
-  }
-  useEffect(() => {
-    if (style !== null && style !== undefined) {
+
+    if (
+      !styleChanged &&
+      style !== null &&
+      style !== undefined &&
+      cover === true
+    ) {
       const image = style.image
       styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
       setStyle({ ...style, image: currentImageUrl(image) })
       updateScreen(WW_DEFAULT_SCREEN_ID, {
         verse: " ",
       })
+      setStyleChanged(true)
     }
-  }, [style])
+  }
 
   return (
     <div
@@ -60,8 +70,8 @@ type LyricsItemProps = {
   id: number
   content: string
   cover?: boolean
-  idSong?: number
   style?: Style | null
+  idSong?: number | null
 }
 
 export default LyricsItem

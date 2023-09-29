@@ -12,8 +12,8 @@ const LyricsList = ({ data }: LyricsListProps) => {
           content={`${song.title}\n${song.author}`}
           id={-1}
           cover
-          idSong={song.id}
           style={song.style}
+          idSong={song.id}
         />
       )}
       {data
