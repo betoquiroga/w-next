@@ -74,16 +74,12 @@
 
 .preview .current {
   transform-origin: top left;
-<<<<<<< HEAD
-  max-height: 280px;
-=======
->>>>>>> 557d40bc0f88454e77e742ff87b4068807575e19
+  max-height: 250px;
 }
 
 .preview .prueba {
   width: 1920px !important;
   height: 1080px !important;
-  /* height: calc(100vh - 100px); */
   position: relative;
   transform-origin: top left;
 }

@@ -1,73 +1,91 @@
 import { EffectsContext } from "@context/EffectsContext"
 import { Effect } from "@interfaces/effect.interface"
-<<<<<<< HEAD
-import { useContext, useEffect } from "react"
-=======
+import OptionsService from "@services/options/options.service"
 import { useContext, useEffect, useState } from "react"
->>>>>>> 557d40bc0f88454e77e742ff87b4068807575e19
 import { socket } from "socket/mainSocket"
-
+import { updateOption } from "src/common/api/options/options.api"
+import {
+  WW_DEFAULT_PARTICLES_ID,
+  WW_DEFAULT_ZOOM_ID,
+} from "src/common/constants/options"
 const PreviewOptions = () => {
+  const optionsService = new OptionsService()
   const { effects, setEffects } = useContext(EffectsContext)
   const [effectsWs, setEffectsWs] = useState({ zoom: true, particles: false })
-
   useEffect(() => {
+    let zoomActive = false
+    optionsService
+      .getOptions()
+      .then((response) => {
+        zoomActive =
+          response.data.find((zoom) => zoom.id === Number(WW_DEFAULT_ZOOM_ID))
+            ?.active || false
+        const particlesActive =
+          response.data.find(
+            (particles) => particles.id === Number(WW_DEFAULT_PARTICLES_ID)
+          )?.active || false
+        const newEffectsWs = {
+          zoom: zoomActive,
+          particles: particlesActive,
+        }
+        setEffectsWs(newEffectsWs)
+        updateOption(1, { active: zoomActive })
+          .then(() => {
+            // Maneja el éxito si es necesario
+          })
+          .catch((error) => {
+            console.error("Error al actualizar la opción de Zoom:", error)
+          })
+      })
+      .catch((error) => {
+        console.error("Error al obtener las opciones:", error)
+      })
     socket.on("effects", (data: string) => {
       setEffectsWs(JSON.parse(data))
     })
   }, [])
-
   const setZoom = () => {
-    const newZoomState = !effects.zoom
+    const newZoomValue = !effects.zoom
     setEffects({
-      zoom: newZoomState,
+      zoom: newZoomValue,
       particles: effects.particles,
     } as Effect)
-    socket.emit("updateZoom", newZoomState)
-
-    // updateDatabaseState(newZoomState, effects.particles)
+    updateOption(1, { active: newZoomValue })
+      .then(() => {
+        // Maneja el éxito si es necesario
+      })
+      .catch((error) => {
+        console.error("Error al actualizar la opción de Zoom:", error)
+      })
+    socket.emit(
+      "effects",
+      JSON.stringify({
+        zoom: newZoomValue,
+        particles: effects.particles,
+      })
+    )
   }
-
   const setParticles = () => {
-    const newParticlesState = !effects.particles
+    const newParticlesValue = !effects.particles
     setEffects({
       zoom: effects.zoom,
-      particles: newParticlesState,
+      particles: newParticlesValue,
     } as Effect)
-    socket.emit("updateParticles", newParticlesState)
-
-    // updateDatabaseState(effects.zoom, newParticlesState)
+    updateOption(2, { active: newParticlesValue })
+      .then(() => {
+        // Maneja el éxito si es necesario
+      })
+      .catch((error) => {
+        console.error("Error al actualizar la opción de Partículas:", error)
+      })
+    socket.emit(
+      "effects",
+      JSON.stringify({
+        zoom: effects.zoom,
+        particles: newParticlesValue,
+      })
+    )
   }
-
-  // const updateDatabaseState = async (zoom, particles) => {
-  //   try {
-  //     await api.updateEffectsState({ zoom, particles })
-  //   } catch (error) {
-  //     console.error("Error updating database state:", error)
-  //   }
-  // }
-
-  useEffect(() => {
-    socket.on("updateZoom", (newZoomState) => {
-      setEffects((prevEffects) => ({
-        ...prevEffects,
-        zoom: newZoomState,
-      }))
-    })
-
-    socket.on("updateParticles", (newParticlesState) => {
-      setEffects((prevEffects) => ({
-        ...prevEffects,
-        particles: newParticlesState,
-      }))
-    })
-
-    return () => {
-      socket.off("updateZoom")
-      socket.off("updateParticles")
-    }
-  }, [])
-
   return (
     <div className="pt-4 mb-6 flex">
       <div className="mr-6 flex items-center">
@@ -95,5 +113,4 @@ const PreviewOptions = () => {
     </div>
   )
 }
-
 export default PreviewOptions

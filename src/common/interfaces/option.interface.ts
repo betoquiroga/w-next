@@ -1,6 +1,7 @@
 export interface Option {
+  id: number
   name: string
   details?: string
-  active: string
+  active: boolean
   value: string
 }
