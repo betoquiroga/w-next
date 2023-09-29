@@ -8,7 +8,13 @@ const LyricsList = ({ data }: LyricsListProps) => {
   return (
     <div className="songs border-t-2 border-t-ww-alt">
       {song?.title && song?.author && (
-        <LyricsItem content={`${song.title}\n${song.author}`} id={-1} cover />
+        <LyricsItem
+          content={`${song.title}\n${song.author}`}
+          id={-1}
+          cover
+          style={song.style}
+          idSong={song.id}
+        />
       )}
       {data
         ?.sort((a: Lyric, b: Lyric) => a.order - b.order)
