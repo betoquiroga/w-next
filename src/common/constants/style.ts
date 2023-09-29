@@ -1,4 +1,4 @@
-import { Style, StyleBase } from "@interfaces/style.interface"
+import { Style } from "@interfaces/style.interface"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "./domains"
 import { WW_STYLES_FOLDER } from "./images"
 

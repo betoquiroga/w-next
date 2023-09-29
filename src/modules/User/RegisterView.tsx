@@ -14,11 +14,7 @@ const RegisterView = () => {
   const router = useRouter()
   const [messageError, setMessageError] = useState<string>()
 
-  const {
-    register,
-    handleSubmit: onSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormValues>({
+  const { register, handleSubmit: onSubmit } = useForm<RegisterFormValues>({
     resolver: joiResolver(RegisterFormSchema),
     mode: "onChange",
   })
@@ -118,6 +114,7 @@ const RegisterView = () => {
             {isLoading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
+        {messageError && <>{messageError}</>}
         <div className="text-center mt-4">
           ¿Ya tienes una cuenta?{" "}
           <Link href="/login" className="text-ww-green-600 hover:underline">
