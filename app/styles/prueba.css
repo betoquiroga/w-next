@@ -74,7 +74,10 @@
 
 .preview .current {
   transform-origin: top left;
+<<<<<<< HEAD
   max-height: 280px;
+=======
+>>>>>>> 557d40bc0f88454e77e742ff87b4068807575e19
 }
 
 .preview .prueba {

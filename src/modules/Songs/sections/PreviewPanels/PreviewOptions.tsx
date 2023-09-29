@@ -1,10 +1,21 @@
 import { EffectsContext } from "@context/EffectsContext"
 import { Effect } from "@interfaces/effect.interface"
+<<<<<<< HEAD
 import { useContext, useEffect } from "react"
+=======
+import { useContext, useEffect, useState } from "react"
+>>>>>>> 557d40bc0f88454e77e742ff87b4068807575e19
 import { socket } from "socket/mainSocket"
 
 const PreviewOptions = () => {
   const { effects, setEffects } = useContext(EffectsContext)
+  const [effectsWs, setEffectsWs] = useState({ zoom: true, particles: false })
+
+  useEffect(() => {
+    socket.on("effects", (data: string) => {
+      setEffectsWs(JSON.parse(data))
+    })
+  }, [])
 
   const setZoom = () => {
     const newZoomState = !effects.zoom
@@ -66,7 +77,7 @@ const PreviewOptions = () => {
         <input
           type="checkbox"
           id="toogleZoomP"
-          checked={effects.zoom}
+          checked={effectsWs?.zoom}
           onChange={setZoom}
         />
       </div>
@@ -77,7 +88,7 @@ const PreviewOptions = () => {
         <input
           type="checkbox"
           id="toogleZoomP"
-          checked={effects.particles}
+          checked={effectsWs?.particles}
           onChange={setParticles}
         />
       </div>
