@@ -58,6 +58,7 @@ export const verseEmit = (content: string) => {
 }
 
 export const styleEmit = (content: Style) => {
+  console.log(content)
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     background: image,
