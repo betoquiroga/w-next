@@ -17,7 +17,11 @@ const PreviewCurrent = () => {
   }, [preview])
 
   return (
-    <div ref={preview} className="current mb-4 pt-4">
+    <div
+      ref={preview}
+      className="current mb-4 pt-4"
+      style={{ maxHeight: "270px" }}
+    >
       {scale && <HomeView width={scale} />}
     </div>
   )
