@@ -12,6 +12,7 @@ const PreviewOptions = () => {
   const optionsService = new OptionsService()
   const { effects, setEffects } = useContext(EffectsContext)
   const [effectsWs, setEffectsWs] = useState({ zoom: true, particles: false })
+
   useEffect(() => {
     let zoomActive = false
     optionsService
@@ -50,7 +51,7 @@ const PreviewOptions = () => {
       zoom: newZoomValue,
       particles: effects.particles,
     } as Effect)
-    updateOption(1, { active: newZoomValue })
+    updateOption(Number(WW_DEFAULT_PARTICLES_ID), { active: newZoomValue })
       .then(() => {
         // Maneja el éxito si es necesario
       })
@@ -71,7 +72,7 @@ const PreviewOptions = () => {
       zoom: effects.zoom,
       particles: newParticlesValue,
     } as Effect)
-    updateOption(2, { active: newParticlesValue })
+    updateOption(Number(WW_DEFAULT_PARTICLES_ID), { active: newParticlesValue })
       .then(() => {
         // Maneja el éxito si es necesario
       })
