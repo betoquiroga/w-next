@@ -1,28 +1,24 @@
 import { EffectsContext } from "@context/EffectsContext"
 import { Effect } from "@interfaces/effect.interface"
-import OptionsService from "@services/options/options.service"
 import { useContext, useEffect, useState } from "react"
 import { socket } from "socket/mainSocket"
-import { updateOption } from "src/common/api/options/options.api"
+import { getOptions, updateOption } from "src/common/api/options/options.api"
 import {
   WW_DEFAULT_PARTICLES_ID,
   WW_DEFAULT_ZOOM_ID,
 } from "src/common/constants/options"
 const PreviewOptions = () => {
-  const optionsService = new OptionsService()
   const { effects, setEffects } = useContext(EffectsContext)
-  const [effectsWs, setEffectsWs] = useState({ zoom: true, particles: false })
+  const [effectsWs, setEffectsWs] = useState<Effect | undefined>()
 
   useEffect(() => {
-    let zoomActive = false
-    optionsService
-      .getOptions()
+    getOptions()
       .then((response) => {
-        zoomActive =
-          response.data.find((zoom) => zoom.id === Number(WW_DEFAULT_ZOOM_ID))
+        const zoomActive =
+          response.find((zoom) => zoom.id === Number(WW_DEFAULT_ZOOM_ID))
             ?.active || false
         const particlesActive =
-          response.data.find(
+          response.find(
             (particles) => particles.id === Number(WW_DEFAULT_PARTICLES_ID)
           )?.active || false
         const newEffectsWs = {
@@ -30,13 +26,6 @@ const PreviewOptions = () => {
           particles: particlesActive,
         }
         setEffectsWs(newEffectsWs)
-        updateOption(1, { active: zoomActive })
-          .then(() => {
-            // Maneja el éxito si es necesario
-          })
-          .catch((error) => {
-            console.error("Error al actualizar la opción de Zoom:", error)
-          })
       })
       .catch((error) => {
         console.error("Error al obtener las opciones:", error)
@@ -44,7 +33,8 @@ const PreviewOptions = () => {
     socket.on("effects", (data: string) => {
       setEffectsWs(JSON.parse(data))
     })
-  }, [])
+  }, [effectsWs])
+
   const setZoom = () => {
     const newZoomValue = !effects.zoom
     setEffects({
@@ -66,6 +56,7 @@ const PreviewOptions = () => {
       })
     )
   }
+
   const setParticles = () => {
     const newParticlesValue = !effects.particles
     setEffects({
@@ -87,6 +78,9 @@ const PreviewOptions = () => {
       })
     )
   }
+
+  if (!effectsWs) return <>...</>
+
   return (
     <div className="pt-4 mb-6 flex">
       <div className="mr-6 flex items-center">
