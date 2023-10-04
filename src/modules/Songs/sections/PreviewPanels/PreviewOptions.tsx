@@ -1,6 +1,5 @@
-import { EffectsContext } from "@context/EffectsContext"
 import { Effect } from "@interfaces/effect.interface"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { socket } from "socket/mainSocket"
 import { getOptions, updateOption } from "src/common/api/options/options.api"
 import {
@@ -8,7 +7,6 @@ import {
   WW_DEFAULT_ZOOM_ID,
 } from "src/common/constants/options"
 const PreviewOptions = () => {
-  const { effects, setEffects } = useContext(EffectsContext)
   const [effectsWs, setEffectsWs] = useState<Effect | undefined>()
 
   useEffect(() => {
@@ -33,13 +31,13 @@ const PreviewOptions = () => {
     socket.on("effects", (data: string) => {
       setEffectsWs(JSON.parse(data))
     })
-  }, [effectsWs])
+  }, [])
 
   const setZoom = () => {
-    const newZoomValue = !effects.zoom
-    setEffects({
+    const newZoomValue = !effectsWs?.zoom
+    setEffectsWs({
       zoom: newZoomValue,
-      particles: effects.particles,
+      particles: effectsWs?.particles,
     } as Effect)
     updateOption(Number(WW_DEFAULT_ZOOM_ID), { active: newZoomValue })
       .then(() => {
@@ -52,15 +50,15 @@ const PreviewOptions = () => {
       "effects",
       JSON.stringify({
         zoom: newZoomValue,
-        particles: effects.particles,
+        particles: effectsWs?.particles,
       })
     )
   }
 
   const setParticles = () => {
-    const newParticlesValue = !effects.particles
-    setEffects({
-      zoom: effects.zoom,
+    const newParticlesValue = !effectsWs?.particles
+    setEffectsWs({
+      zoom: effectsWs?.zoom,
       particles: newParticlesValue,
     } as Effect)
     updateOption(Number(WW_DEFAULT_PARTICLES_ID), { active: newParticlesValue })
@@ -73,7 +71,7 @@ const PreviewOptions = () => {
     socket.emit(
       "effects",
       JSON.stringify({
-        zoom: effects.zoom,
+        zoom: effectsWs?.zoom,
         particles: newParticlesValue,
       })
     )
