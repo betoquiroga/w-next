@@ -51,7 +51,7 @@ const PreviewOptions = () => {
       zoom: newZoomValue,
       particles: effects.particles,
     } as Effect)
-    updateOption(Number(WW_DEFAULT_PARTICLES_ID), { active: newZoomValue })
+    updateOption(Number(WW_DEFAULT_ZOOM_ID), { active: newZoomValue })
       .then(() => {
         // Maneja el éxito si es necesario
       })
