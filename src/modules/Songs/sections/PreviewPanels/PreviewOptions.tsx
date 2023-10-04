@@ -95,7 +95,7 @@ const PreviewOptions = () => {
         </label>
         <input
           type="checkbox"
-          id="toogleZoomP"
+          id="toogleZoom"
           checked={effectsWs?.zoom}
           onChange={setZoom}
         />
@@ -106,7 +106,7 @@ const PreviewOptions = () => {
         </label>
         <input
           type="checkbox"
-          id="toogleZoomP"
+          id="toogleParticles"
           checked={effectsWs?.particles}
           onChange={setParticles}
         />
