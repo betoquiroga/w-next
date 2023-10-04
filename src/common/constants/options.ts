@@ -1,0 +1,5 @@
+export const WW_DEFAULT_ZOOM_ID =
+  process.env.NEXT_PUBLIC_WW_DEFAULT_ZOOM_ID || "1"
+
+export const WW_DEFAULT_PARTICLES_ID =
+  process.env.NEXT_PUBLIC_WW_DEFAULT_PARTICLES_ID || "2"
