@@ -4,17 +4,24 @@ import { useDropzone } from "react-dropzone"
 
 const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
   const [files, setFiles] = useState<File[]>([])
+  const MAX_FILES = 10
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles])
-    }
-  }, [])
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles.length > 0) {
+        if (files.length + acceptedFiles.length > MAX_FILES) {
+          alert("Solo se permiten un máximo de 10 archivos.")
+        } else {
+          setFiles((prevFiles) => [...prevFiles, ...acceptedFiles])
+        }
+      }
+    },
+    [files]
+  )
 
-  const removeFile = (fileIndex: number) => {
+  const removeFile = (fileToRemove: File) => {
     setFiles((prevFiles) => {
-      const updatedFiles = [...prevFiles]
-      updatedFiles.splice(fileIndex, 1)
+      const updatedFiles = prevFiles.filter((file) => file !== fileToRemove)
       return updatedFiles
     })
   }
@@ -46,12 +53,11 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
         body: formData,
         headers: {
           Authorization: `${localStorage.getItem("tokenWW")}`,
-          ContentType: "multipart/form-data",
         },
       })
 
       if (!response.ok) {
-        throw new Error("Error uploading images")
+        throw new Error("Error cargando las imágenes")
       }
 
       alert("Se subieron las imágenes correctamente")
@@ -66,44 +72,81 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
     <Tab.Panel>
       <div>
         <form onSubmit={handleSubmit}>
-          {!files.length && (
-            <div
-              {...getRootProps()}
-              className="bg-ww-scroll p-16 text-center mb-6"
+          <div
+            {...getRootProps()}
+            className={`border-2 border-gray-300 border-dashed rounded-lg p-4 cursor-pointer ${
+              files.length > 0 ? "hidden" : ""
+            } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-600 flex flex-col items-center justify-center`}
+          >
+            <input {...getInputProps()} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+              fill="none"
+              viewBox="0 0 20 16"
             >
-              <input {...getInputProps()} />
-              <p>
-                Arrastre archivos aquí o haga clic para seleccionar archivos
-              </p>
-            </div>
-          )}
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+              />
+            </svg>
+            <p>Arrastre archivos aquí o haga clic para seleccionar archivos</p>
+          </div>
           {files.length > 0 && (
-            <>
-              <div className="mb-4">
-                {files.map((file, index) => (
-                  <div key={index} className="relative inline-block mr-4">
-                    <img
-                      src={URL.createObjectURL(file)}
-                      alt={`Preview ${index + 1}`}
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <button
-                      onClick={() => removeFile(index)}
-                      className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 rounded-full text-white p-2"
-                    >
-                      <span className="text-xs">&times;</span>
-                    </button>
-                  </div>
-                ))}
+            <div className="mb-4">
+              {files.map((file) => (
+                <div
+                  key={file.name}
+                  className="relative inline-block mr-4 mb-4"
+                >
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={`Preview ${file.name}`}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <button
+                    className="bg-ww-scroll flex justify-center align-middle rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover:bg-red-600"
+                    onClick={() => removeFile(file)}
+                  >
+                    x
+                  </button>
+                </div>
+              ))}
+
+              <div
+                {...getRootProps()}
+                className={`border-2 border-gray-300 border-dashed rounded-lg p-4 cursor-pointer ${
+                  files.length === 0 ? "hidden" : ""
+                } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-600 flex flex-col items-center justify-center`}
+              >
+                <input {...getInputProps()} />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+                <p>Añadir más archivos</p>
               </div>
-              <button className="transition-all py-2 px-4 rounded-lg mb-4 bg-ww-green-800">
+              <button className="transition-all py-2 px-4 rounded-lg mt-4 mb-4 bg-ww-green-800">
                 Subir archivos
               </button>
-            </>
+            </div>
           )}
         </form>
       </div>
@@ -114,4 +157,5 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
 interface ImageUploaderProps {
   endpoint: string
 }
+
 export default UploadPanel
