@@ -2,21 +2,22 @@ import { Tab } from "@headlessui/react"
 import React, { useState, useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 
-interface ImageUploaderProps {
-  endpoint: string
-}
-
 const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
-  const [preview, setPreview] = useState<string | null>(null)
-  const [file, setFile] = useState<File | null>(null)
+  const [files, setFiles] = useState<File[]>([])
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
-      const imageFile = acceptedFiles[0]
-      setFile(imageFile)
-      setPreview(URL.createObjectURL(imageFile))
+      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles])
     }
   }, [])
+
+  const removeFile = (fileIndex: number) => {
+    setFiles((prevFiles) => {
+      const updatedFiles = [...prevFiles]
+      updatedFiles.splice(fileIndex, 1)
+      return updatedFiles
+    })
+  }
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -31,10 +32,13 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!file) return
+    if (files.length === 0) return
 
     const formData = new FormData()
-    formData.append("file", file)
+
+    files.forEach((file) => {
+      formData.append("file", file)
+    })
 
     try {
       const response = await fetch(endpoint, {
@@ -47,13 +51,14 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
       })
 
       if (!response.ok) {
-        throw new Error("Error uploading image")
+        throw new Error("Error uploading images")
       }
 
-      alert("Se subió la imagen correctamente")
+      alert("Se subieron las imágenes correctamente")
+      setFiles([])
     } catch (error) {
       console.error(error)
-      alert("Error subiendo la imagen")
+      alert("Error subiendo las imágenes")
     }
   }
 
@@ -61,33 +66,42 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
     <Tab.Panel>
       <div>
         <form onSubmit={handleSubmit}>
-          {!preview && (
+          {!files.length && (
             <div
               {...getRootProps()}
               className="bg-ww-scroll p-16 text-center mb-6"
             >
               <input {...getInputProps()} />
               <p>
-                Arrastre un archivo aquí o haga click para seleccionar un
-                archivo
+                Arrastre archivos aquí o haga clic para seleccionar archivos
               </p>
             </div>
           )}
-          {preview && (
+          {files.length > 0 && (
             <>
               <div className="mb-4">
-                <img
-                  src={preview}
-                  alt="Preview"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
+                {files.map((file, index) => (
+                  <div key={index} className="relative inline-block mr-4">
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`Preview ${index + 1}`}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <button
+                      onClick={() => removeFile(index)}
+                      className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 rounded-full text-white p-2"
+                    >
+                      <span className="text-xs">&times;</span>
+                    </button>
+                  </div>
+                ))}
               </div>
               <button className="transition-all py-2 px-4 rounded-lg mb-4 bg-ww-green-800">
-                Subir archivo
+                Subir archivos
               </button>
             </>
           )}
@@ -97,4 +111,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
   )
 }
 
+interface ImageUploaderProps {
+  endpoint: string
+}
 export default UploadPanel
