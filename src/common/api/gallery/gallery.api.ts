@@ -7,7 +7,10 @@ export const uploadFiles = async (files: File[], folder: string) => {
   return response.data
 }
 
-export const getFiles = async (folder: string, type: string) => {
+export const getFiles = async (
+  folder: string,
+  type: string
+): Promise<string[]> => {
   const response = await uploadService.getFiles(folder, type)
   return response.data
 }

@@ -31,7 +31,7 @@ export default class UploadService extends HttpRequest {
       endpoint: `${UPLOADS_ENDPOINT}/${folder}/${type}`,
     })
 
-    const response = await this.get()
+    const response = await this.get<string[]>()
     return new ServiceResponse(response.data)
   }
 

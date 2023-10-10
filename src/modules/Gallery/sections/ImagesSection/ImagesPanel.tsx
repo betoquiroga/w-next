@@ -1,7 +1,7 @@
 import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
-import { useEffect, useState } from "react"
 import { deleteFile, getFiles } from "src/common/api/gallery/gallery.api"
 import { updateScreen } from "src/common/api/screen/screen.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
@@ -10,19 +10,10 @@ import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
-  const [images, setImages] = useState<string[]>([])
-
-  useEffect(() => {
-    getImages()
-  }, [])
-
-  const getImages = () => {
-    getFiles("gallery", "small").then((data) => {
-      if (Array.isArray(data)) {
-        setImages(data)
-      }
-    })
-  }
+  const { data, isLoading, refetch } = useQuery<string[], Error>(
+    ["ALL_IMAGES"],
+    () => getFiles("gallery", "small")
+  )
 
   const sendData = (image: string) => {
     clearEmit("gallery")
@@ -50,8 +41,8 @@ const ImagesPanel = () => {
   const deleteImage = (image: string) => {
     if (confirm("Se eliminará esta imagen para siempre")) {
       deleteFile("gallery", image)
-        .then((response) => {
-          getImages()
+        .then(() => {
+          refetch()
         })
         .catch((error) => {
           alert("error al eliminar la iamgen" + error)
@@ -59,11 +50,15 @@ const ImagesPanel = () => {
     }
   }
 
+  if (isLoading) {
+    return <Tab.Panel>Cargando...</Tab.Panel>
+  }
+
   return (
     <Tab.Panel>
       <h1>Galería de imágenes</h1>
       <div className="grid gap-4 lg:gap-8 grid-cols-2 lg:grid-cols-5 py-4">
-        {images.map((i) => {
+        {data?.map((i) => {
           if (isImage(i)) {
             return (
               <div
