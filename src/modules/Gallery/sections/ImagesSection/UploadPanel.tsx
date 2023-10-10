@@ -2,7 +2,7 @@ import { Tab } from "@headlessui/react"
 import React, { useState, useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 
-const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
+const UploadPanel = ({ endpoint, UpdateImagesPanel }: ImageUploaderProps) => {
   const [files, setFiles] = useState<File[]>([])
   const MAX_FILES = 10
 
@@ -61,6 +61,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
       }
 
       alert("Se subieron las imágenes correctamente")
+      UpdateImagesPanel()
       setFiles([])
     } catch (error) {
       console.error(error)
@@ -156,6 +157,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
 
 interface ImageUploaderProps {
   endpoint: string
+  UpdateImagesPanel: () => void
 }
 
 export default UploadPanel
