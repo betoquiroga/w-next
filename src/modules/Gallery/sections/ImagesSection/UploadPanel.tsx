@@ -76,7 +76,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
             {...getRootProps()}
             className={`border-2 border-gray-300 border-dashed rounded-lg p-4 cursor-pointer ${
               files.length > 0 ? "hidden" : ""
-            } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-600 flex flex-col items-center justify-center`}
+            } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-800 flex flex-col items-center justify-center`}
           >
             <input {...getInputProps()} />
             <svg
@@ -124,7 +124,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
                 {...getRootProps()}
                 className={`border-2 border-gray-300 border-dashed rounded-lg p-4 cursor-pointer ${
                   files.length === 0 ? "hidden" : ""
-                } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-600 flex flex-col items-center justify-center`}
+                } hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-800 flex flex-col items-center justify-center`}
               >
                 <input {...getInputProps()} />
                 <svg
@@ -143,7 +143,7 @@ const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
                 </svg>
                 <p>Añadir más archivos</p>
               </div>
-              <button className="transition-all py-2 px-4 rounded-lg mt-4 mb-4 bg-ww-green-800">
+              <button className="transition-all py-2 px-4 rounded-lg mt-4 mb-4 bg-ww-green-800 w-full">
                 Subir archivos
               </button>
             </div>

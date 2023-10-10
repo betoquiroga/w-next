@@ -1,8 +1,8 @@
 import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
-import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { deleteFile, getFiles } from "src/common/api/gallery/gallery.api"
 import { updateScreen } from "src/common/api/screen/screen.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
@@ -10,15 +10,19 @@ import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState<string[]>([])
 
   useEffect(() => {
-    axios
-      .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small`)
-      .then((r) => {
-        setImages(r.data)
-      })
+    getImages()
   }, [])
+
+  const getImages = () => {
+    getFiles("gallery", "small").then((data) => {
+      if (Array.isArray(data)) {
+        setImages(data)
+      }
+    })
+  }
 
   const sendData = (image: string) => {
     clearEmit("gallery")
@@ -45,11 +49,12 @@ const ImagesPanel = () => {
 
   const deleteImage = (image: string) => {
     if (confirm("Se eliminará esta imagen para siempre")) {
-      axios
-        .delete(`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/${image}`)
-        .then((r) => {
-          console.log(r)
-          setImages(images.filter((i) => i !== image))
+      deleteFile("gallery", image)
+        .then((response) => {
+          getImages()
+        })
+        .catch((error) => {
+          alert("error al eliminar la iamgen" + error)
         })
     }
   }
@@ -63,12 +68,12 @@ const ImagesPanel = () => {
             return (
               <div
                 key={i}
-                className="p-2 hover:bg-ww-scroll cursor-pointer transition-all relative"
+                className="p-2 hover-bg-ww-scroll cursor-pointer transition-all relative"
               >
                 <Image
                   width={250}
                   height={100}
-                  src={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small/${i}`}
+                  src={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery/small/${i}?${Math.random()}`}
                   alt={i}
                   onClick={() => {
                     sendData(i)
