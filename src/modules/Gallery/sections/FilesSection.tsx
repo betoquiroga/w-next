@@ -1,14 +1,15 @@
 import TabsHeader from "@components/Tabs/TabsHeader"
 import { Tab } from "@headlessui/react"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
-import { useContext } from "react"
 import { ColumnContext } from "@context/ColumnContext"
 import ImagesPanel from "./ImagesSection/ImagesPanel"
 import UploadPanel from "./ImagesSection/UploadPanel"
 import VideosPanel from "./ImagesSection/VideosPanel"
+import { useContext } from "react"
 
 const FilesSection = () => {
   const { activeColumn } = useContext(ColumnContext)
+
   return (
     <div
       className={`block md:col-span-1 lg:col-span-3 ${

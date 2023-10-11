@@ -1,100 +1,66 @@
+import { useCallback, useState } from "react"
+import FileUpload from "./components/FileUpload"
 import { Tab } from "@headlessui/react"
-import React, { useState, useCallback } from "react"
-import { useDropzone } from "react-dropzone"
-
-interface ImageUploaderProps {
-  endpoint: string
-}
+import handleFileUpload from "./components/handleFileUpload"
 
 const UploadPanel = ({ endpoint }: ImageUploaderProps) => {
-  const [preview, setPreview] = useState<string | null>(null)
-  const [file, setFile] = useState<File | null>(null)
+  const [files, setFiles] = useState<File[]>([])
+  const [isUploading, setIsUploading] = useState(false)
+  const MAX_FILES = 10
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      const imageFile = acceptedFiles[0]
-      setFile(imageFile)
-      setPreview(URL.createObjectURL(imageFile))
-    }
-  }, [])
-
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "image/png": [".png"],
-      "image/jpg": [".jpg"],
-      "image/jpeg": [".jpeg"],
-      "video/mp4": [".mp4"],
-      "video/mpeg": [".mpeg"],
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles.length > 0) {
+        if (files.length + acceptedFiles.length > MAX_FILES) {
+          alert("Solo se permiten un máximo de 10 archivos.")
+        } else {
+          setFiles((prevFiles) => [...prevFiles, ...acceptedFiles])
+        }
+      }
     },
-    onDrop,
-  })
+    [files]
+  )
+
+  const removeFile = (fileToRemove: File) => {
+    setFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((file) => file !== fileToRemove)
+      return updatedFiles
+    })
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!file) return
+    if (isUploading) return
 
-    const formData = new FormData()
-    formData.append("file", file)
+    setIsUploading(true)
 
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `${localStorage.getItem("tokenWW")}`,
-          ContentType: "multipart/form-data",
-        },
-      })
+    const uploadSuccess = await handleFileUpload(files, endpoint)
 
-      if (!response.ok) {
-        throw new Error("Error uploading image")
-      }
-
-      alert("Se subió la imagen correctamente")
-    } catch (error) {
-      console.error(error)
-      alert("Error subiendo la imagen")
+    if (uploadSuccess) {
+      setFiles([])
     }
+
+    setIsUploading(false)
   }
 
   return (
     <Tab.Panel>
       <div>
         <form onSubmit={handleSubmit}>
-          {!preview && (
-            <div
-              {...getRootProps()}
-              className="bg-ww-scroll p-16 text-center mb-6"
-            >
-              <input {...getInputProps()} />
-              <p>
-                Arrastre un archivo aquí o haga click para seleccionar un
-                archivo
-              </p>
-            </div>
-          )}
-          {preview && (
-            <>
-              <div className="mb-4">
-                <img
-                  src={preview}
-                  alt="Preview"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
-              </div>
-              <button className="transition-all py-2 px-4 rounded-lg mb-4 bg-ww-green-800">
-                Subir archivo
-              </button>
-            </>
-          )}
+          <FileUpload
+            onDrop={onDrop}
+            files={files}
+            isUploading={isUploading}
+            removeFile={removeFile}
+          />
         </form>
       </div>
     </Tab.Panel>
   )
+}
+
+interface ImageUploaderProps {
+  endpoint: string
 }
 
 export default UploadPanel
