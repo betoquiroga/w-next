@@ -57,6 +57,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
 
   return (
     <div
+      onClick={handleClick}
       className={classNames(
         "flex justify-between items-center border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
         {
@@ -64,21 +65,20 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
         }
       )}
     >
-      <div>
-        <p
-          className={classNames(" p-4", {
-            "text-ww-green-400": id < 0,
-          })}
-          onClick={handleClick}
-        >
+      <p
+        className={classNames("flex justify-between items-center w-full", {
+          "text-ww-green-400": id < 0,
+        })}
+      >
+        <span>
           {content.split("\n").map((line, i) => (
             <span key={`${line[0]}-${i}`} className="flex">
               {line}
             </span>
           ))}
-        </p>
-      </div>
-      {activeLyricId === id && <ProyectIcon />}
+        </span>
+        {activeLyricId === id && <ProyectIcon />}
+      </p>
     </div>
   )
 }
