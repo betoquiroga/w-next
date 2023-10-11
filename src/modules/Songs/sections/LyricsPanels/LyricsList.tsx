@@ -5,6 +5,7 @@ import LyricsItem from "./LyricsItem"
 
 const LyricsList = ({ data }: LyricsListProps) => {
   const { song } = useContext(SongContext)
+
   return (
     <div className="songs border-t-2 border-t-ww-alt">
       {song?.title && song?.author && (
@@ -19,7 +20,7 @@ const LyricsList = ({ data }: LyricsListProps) => {
       {data
         ?.sort((a: Lyric, b: Lyric) => a.order - b.order)
         .map((i: Lyric) => (
-          <LyricsItem key={i.id} content={i.verse} id={i.id} />
+          <LyricsItem key={i.id} content={i.verse} id={i.id} idSong={song.id} />
         ))}
     </div>
   )

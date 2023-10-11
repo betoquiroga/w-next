@@ -1,23 +1,22 @@
 import { SongContext } from "src/common/context/SongContext"
 import { Song } from "src/common/interfaces/song.interface"
-import SongsService from "src/common/services/songs/songs.service"
 import classNames from "classnames"
 import { useContext } from "react"
 import { SongsContext } from "@context/SongsContext"
 import { ColumnContext } from "@context/ColumnContext"
+import ProyectIcon from "@icons/misc/proyect"
 
 const SongsItem = ({ song }: SongsItemProps) => {
-  const songService = new SongsService()
   const { setSong, setSongId } = useContext(SongContext)
-  const { activeSongId, setActiveSongId } = useContext(SongsContext)
+  const { activeSongId, selectedSongId, setSelectedSongId } =
+    useContext(SongsContext)
   const { setActiveColumn } = useContext(ColumnContext)
 
   const handleClick = async () => {
     setSongId(id)
-    setActiveSongId(id)
+    setSelectedSongId(id)
     setSong(song)
     setActiveColumn(2)
-    await songService.setActive(id)
   }
 
   const { id, title, author } = song
@@ -25,12 +24,15 @@ const SongsItem = ({ song }: SongsItemProps) => {
     <div
       onClick={handleClick}
       className={classNames(
-        "song border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
-        { "bg-ww-green-800 hover:bg-ww-green-800": id === activeSongId }
+        "flex justify-between items-center border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
+        { "bg-ww-green-800 hover:bg-ww-green-800": id === selectedSongId }
       )}
     >
-      <p className="text-ww-normal">{title}</p>
-      <span className="text-ww-lighter">{author}</span>
+      <div>
+        <p className="text-ww-normal">{title}</p>
+        <span className="text-ww-lighter">{author}</span>
+      </div>
+      <div>{id === activeSongId && <ProyectIcon />}</div>
     </div>
   )
 }

@@ -10,16 +10,16 @@ import { Spinner } from "@components/Spinner"
 
 const LyricsPanel = () => {
   const { data, isLoading, isError, setSongId } = useContext(SongContext)
-  const { activeSongId } = useContext(SongsContext)
+  const { selectedSongId } = useContext(SongsContext)
   const { setActiveLyricId } = useContext(ActiveLyricContext)
 
   useEffect(() => {
-    setSongId(activeSongId)
+    setSongId(selectedSongId)
     const active = data?.find((d: Lyric) => d.active)
     if (data && active) {
       setActiveLyricId(active.id)
     }
-  }, [activeSongId, data])
+  }, [data])
 
   if (isLoading)
     return (
