@@ -6,6 +6,10 @@ import { updateScreen } from "src/common/api/screen/screen.api"
 import { setActive } from "src/common/api/songs/lyrics.api"
 import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 
+export const activeSongEmit = (content: string) => {
+  socket.emit("activeSong", content)
+}
+
 export const lyricEmit = (content: string) => {
   const emitObject: Emit = {
     type: "song",

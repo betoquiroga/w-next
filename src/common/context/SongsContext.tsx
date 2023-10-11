@@ -8,27 +8,47 @@ import {
   useState,
 } from "react"
 import { getSong } from "../api/songs/songs.api"
+import { socket } from "socket/mainSocket"
 
 const SongsContext = createContext({} as SongContextProps)
 
 const SongsProvider = ({ children }: SongProviderProps) => {
   const [activeSongId, setActiveSongId] = useState(0)
-  const { data, isLoading, isError, refetch } = useQuery<Song[], Error>(
+  const [selectedSongId, setSelectedSongId] = useState(0)
+  const { data, isLoading, isError } = useQuery<Song[], Error>(
     ["ALL_SONGS"],
     getSong
   )
+
+  const handleActiveSong = (data: string) => {
+    setActiveSongId(Number(data))
+  }
+
+  useEffect(() => {
+    socket.on("activeSong", handleActiveSong)
+    return () => {
+      socket.off("activeSong")
+    }
+  }, [])
 
   useEffect(() => {
     const active = data?.find((d: Song) => d.active)
     if (data && active) {
       setActiveSongId(active.id)
-      refetch()
     }
-  }, [activeSongId, data])
+  }, [data])
 
   return (
     <SongsContext.Provider
-      value={{ activeSongId, setActiveSongId, data, isLoading, isError }}
+      value={{
+        activeSongId,
+        setActiveSongId,
+        data,
+        isLoading,
+        isError,
+        selectedSongId,
+        setSelectedSongId,
+      }}
     >
       {children}
     </SongsContext.Provider>
@@ -38,6 +58,8 @@ const SongsProvider = ({ children }: SongProviderProps) => {
 type SongContextProps = {
   activeSongId: number
   setActiveSongId: Dispatch<SetStateAction<number>>
+  selectedSongId: number
+  setSelectedSongId: Dispatch<SetStateAction<number>>
   data: Song[] | undefined
   isLoading: boolean
   isError: boolean

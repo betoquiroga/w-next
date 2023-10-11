@@ -19,7 +19,7 @@ const LyricsList = ({ data }: LyricsListProps) => {
       {data
         ?.sort((a: Lyric, b: Lyric) => a.order - b.order)
         .map((i: Lyric) => (
-          <LyricsItem key={i.id} content={i.verse} id={i.id} />
+          <LyricsItem key={i.id} content={i.verse} id={i.id} idSong={song.id} />
         ))}
     </div>
   )

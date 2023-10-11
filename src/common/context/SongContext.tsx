@@ -16,9 +16,10 @@ const SongProvider = ({ children }: SongProviderProps) => {
   const [songId, setSongId] = useState(0)
   const [song, setSong] = useState({} as Song)
   const { data, isLoading, isError, refetch } = useQuery<Lyric[], Error>(
-    [`CURRENT_SONG_LYRICS-${songId}`],
+    ["CURRENT_SONG_LYRICS"],
     () => getLyrics(songId)
   )
+
   useEffect(() => {
     refetch()
   }, [songId])
