@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { useContext } from "react"
 import { SongsContext } from "@context/SongsContext"
 import { ColumnContext } from "@context/ColumnContext"
-import SongIcon from "@icons/misc/song"
+import ProyectIcon from "@icons/misc/proyect"
 
 const SongsItem = ({ song }: SongsItemProps) => {
   const { setSong, setSongId } = useContext(SongContext)
@@ -24,13 +24,15 @@ const SongsItem = ({ song }: SongsItemProps) => {
     <div
       onClick={handleClick}
       className={classNames(
-        "song border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
+        "flex justify-between items-center border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
         { "bg-ww-green-800 hover:bg-ww-green-800": id === selectedSongId }
       )}
     >
-      <p className="text-ww-normal">{title}</p>
-      <span className="text-ww-lighter">{author}</span>
-      {id === activeSongId && <SongIcon />}
+      <div>
+        <p className="text-ww-normal">{title}</p>
+        <span className="text-ww-lighter">{author}</span>
+      </div>
+      <div>{id === activeSongId && <ProyectIcon />}</div>
     </div>
   )
 }

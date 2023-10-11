@@ -5,6 +5,7 @@ import LyricsItem from "./LyricsItem"
 
 const LyricsList = ({ data }: LyricsListProps) => {
   const { song } = useContext(SongContext)
+
   return (
     <div className="songs border-t-2 border-t-ww-alt">
       {song?.title && song?.author && (

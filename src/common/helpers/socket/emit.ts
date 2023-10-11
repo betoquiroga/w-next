@@ -10,6 +10,10 @@ export const activeSongEmit = (content: string) => {
   socket.emit("activeSong", content)
 }
 
+export const activeLyricEmit = (content: string) => {
+  socket.emit("activeLyric", content)
+}
+
 export const lyricEmit = (content: string) => {
   const emitObject: Emit = {
     type: "song",

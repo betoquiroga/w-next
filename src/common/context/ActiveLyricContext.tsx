@@ -5,9 +5,11 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react"
 import { SongContext } from "./SongContext"
+import { socket } from "socket/mainSocket"
 
 const ActiveLyricContext = createContext({} as ActiveLyricsContextProps)
 
@@ -18,6 +20,17 @@ const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
   const lyrics = data?.sort((a: Lyric, b: Lyric) => a.order - b.order) || []
   const active = () =>
     lyrics.indexOf(lyrics.find((l) => activeLyricId === l.id) as Lyric)
+
+  const handleActiveLyric = (data: string) => {
+    setActiveLyricId(Number(data))
+  }
+
+  useEffect(() => {
+    socket.on("activeLyric", handleActiveLyric)
+    return () => {
+      socket.off("activeLyric")
+    }
+  }, [])
 
   const setNextSongVerse = () => {
     let nextSongVerse
