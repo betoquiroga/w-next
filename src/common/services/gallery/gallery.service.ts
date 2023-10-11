@@ -5,15 +5,8 @@ import { getToken } from "src/common/helpers/auth.helper"
 const UPLOADS_ENDPOINT = "uploads"
 
 export default class UploadService extends HttpRequest {
-  constructor() {
-    super()
-    this.useToken(getToken())
-    this.configRequest({
-      endpoint: UPLOADS_ENDPOINT,
-    })
-  }
-
   async uploadFiles(files: File[], folder: string) {
+    this.useToken(getToken())
     const formData = new FormData()
     files.forEach((file) => {
       formData.append("file", file)
@@ -27,6 +20,7 @@ export default class UploadService extends HttpRequest {
   }
 
   async getFiles(folder: string, type: string) {
+    this.useToken(getToken())
     this.configRequest({
       endpoint: `${UPLOADS_ENDPOINT}/${folder}/${type}`,
     })
@@ -36,6 +30,7 @@ export default class UploadService extends HttpRequest {
   }
 
   async deleteFile(folder: string, file: string) {
+    this.useToken(getToken())
     this.configRequest({
       endpoint: `${UPLOADS_ENDPOINT}/${folder}/${file}`,
     })
