@@ -35,7 +35,7 @@ const FileUpload = ({
               />
               <button
                 type="button"
-                className="bg-ww-scroll flex justify-center items-center rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover-bg-red-600"
+                className="bg-ww-scroll flex justify-center items-center rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover:bg-red-600"
                 onClick={() => removeFile(file)}
               >
                 x
@@ -45,15 +45,15 @@ const FileUpload = ({
         </div>
         <div
           {...getRootProps()}
-          className={`border-dashed border-2 border-gray-300 rounded-lg text-center cursor-pointer ${
+          className={`border-dashed border-2 border-ww-lighter rounded-lg text-center cursor-pointer ${
             isDragActive ? "bg-ww-alt" : ""
           }`}
         >
           <input {...getInputProps()} />
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center p-6 text-ww-normal">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8 mb-4 text-gray-500 dark-text-gray-400"
+              className="w-8 h-8 mb-4 text-ww-normal"
               fill="none"
               viewBox="0 0 20 16"
             >
@@ -66,9 +66,9 @@ const FileUpload = ({
               />
             </svg>
             {isDragActive ? (
-              <p className="text-gray-500">Suelta las imágenes aquí...</p>
+              <p>Suelta las imágenes aquí...</p>
             ) : (
-              <p className="text-gray-500">
+              <p>
                 Arrastra y suelta imágenes aquí o haz clic para seleccionar.
               </p>
             )}

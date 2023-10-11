@@ -6,7 +6,7 @@ const UploadButton = ({ isUploading }: UploadButtonProps) => {
         isUploading ? "bg-ww-green-900 text-ww-lighter" : "bg-ww-green-800"
       }`}
     >
-      {isUploading ? "Cargando..." : "Subir archivos"}
+      {isUploading ? "Enviando archivos" : "Subir archivos"}
     </button>
   )
 }
