@@ -1,3 +1,4 @@
+import { Spinner } from "@components/Spinner"
 import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
 import { useQuery } from "@tanstack/react-query"
@@ -51,7 +52,12 @@ const ImagesPanel = () => {
   }
 
   if (isLoading) {
-    return <Tab.Panel>Cargando...</Tab.Panel>
+    return (
+      <Tab.Panel>
+        Cargando...
+        <Spinner />
+      </Tab.Panel>
+    )
   }
 
   return (

@@ -5,15 +5,10 @@ import { ColumnContext } from "@context/ColumnContext"
 import ImagesPanel from "./ImagesSection/ImagesPanel"
 import UploadPanel from "./ImagesSection/UploadPanel"
 import VideosPanel from "./ImagesSection/VideosPanel"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 
 const FilesSection = () => {
   const { activeColumn } = useContext(ColumnContext)
-  const [currentTab, setCurrentTab] = useState("uploads")
-
-  const UpdateImagesPanel = () => {
-    setCurrentTab("images")
-  }
 
   return (
     <div
@@ -25,11 +20,10 @@ const FilesSection = () => {
         <Tab.Group>
           <TabsHeader items={["Imagenes", "Videos", "Subir archivos"]} />
           <Tab.Panels className="p-4">
-            <ImagesPanel key={currentTab} />
+            <ImagesPanel />
             <VideosPanel />
             <UploadPanel
               endpoint={`${WW_PROTOCOL}://${WW_API_DOMAIN}/uploads/gallery`}
-              UpdateImagesPanel={UpdateImagesPanel}
             />
           </Tab.Panels>
         </Tab.Group>
