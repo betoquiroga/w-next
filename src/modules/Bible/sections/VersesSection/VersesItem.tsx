@@ -4,10 +4,10 @@ import { useContext } from "react"
 import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
 import {
+  activeLyricEmit,
+  activeSongEmit,
   bibleEmit,
   clearEmit,
-  disableLyricEmit,
-  disableSongEmit,
   styleEmit,
   verseEmit,
 } from "@helpers/socket/emit"
@@ -41,9 +41,9 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
   }
 
   return (

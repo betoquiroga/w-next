@@ -10,7 +10,6 @@ import {
 } from "react"
 import { SongContext } from "./SongContext"
 import { socket } from "socket/mainSocket"
-import { desactivateAllLyrics } from "../api/songs/lyrics.api"
 
 const ActiveLyricContext = createContext({} as ActiveLyricsContextProps)
 
@@ -30,18 +29,6 @@ const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
     socket.on("activeLyric", handleActiveLyric)
     return () => {
       socket.off("activeLyric")
-    }
-  }, [])
-
-  const handleDisableLyric = (data: string) => {
-    setActiveLyricId(Number(data))
-  }
-
-  useEffect(() => {
-    socket.on("disableLyric", handleDisableLyric)
-    desactivateAllLyrics()
-    return () => {
-      socket.off("disableLyric")
     }
   }, [])
 

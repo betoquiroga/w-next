@@ -1,9 +1,9 @@
 import { Spinner } from "@components/Spinner"
 import { Tab } from "@headlessui/react"
 import {
+  activeLyricEmit,
+  activeSongEmit,
   clearEmit,
-  disableLyricEmit,
-  disableSongEmit,
   styleEmit,
 } from "@helpers/socket/emit"
 import { useQuery } from "@tanstack/react-query"
@@ -60,9 +60,9 @@ const ImagesPanel = () => {
 
   const handleClick = () => {
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
   }
 
   if (isLoading) {

@@ -1,8 +1,8 @@
 import { StyleContext } from "src/common/context/StyleContext"
 import { SyntheticEvent, useContext } from "react"
 import {
-  disableLyricEmit,
-  disableSongEmit,
+  activeLyricEmit,
+  activeSongEmit,
   styleEmit,
 } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
@@ -27,9 +27,9 @@ const StyleItem = ({
     await setActiveStyle(id)
     setStyle({ ...data, image: currentImageUrl(image) })
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {

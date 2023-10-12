@@ -2,10 +2,10 @@ import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 import { defaultStyle } from "src/common/constants/style"
 import {
+  activeLyricEmit,
+  activeSongEmit,
   blackEmit,
   clearEmit,
-  disableLyricEmit,
-  disableSongEmit,
   styleEmit,
 } from "@helpers/socket/emit"
 import {
@@ -33,33 +33,33 @@ const ActionsSection = () => {
 
   const handleClickBlack = () => {
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
     blackEmit("black")
   }
 
   const handleClickLogo = () => {
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
     handleAction(WW_LOGO as string)
   }
 
   const handleClickClear = () => {
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
     clearEmit("song")
   }
 
   const handleClickPreach = () => {
     desactivateAllSongs()
-    disableSongEmit("0")
+    activeSongEmit("0")
     desactivateAllLyrics()
-    disableLyricEmit("0")
+    activeLyricEmit("0")
     handleAction(WW_BIBLE as string)
   }
 
