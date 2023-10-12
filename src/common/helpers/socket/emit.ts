@@ -14,6 +14,14 @@ export const activeLyricEmit = (content: string) => {
   socket.emit("activeLyric", content)
 }
 
+export const disableSongEmit = (content: string) => {
+  socket.emit("disableSong", content)
+}
+
+export const disableLyricEmit = (content: string) => {
+  socket.emit("disableLyric", content)
+}
+
 export const lyricEmit = (content: string) => {
   const emitObject: Emit = {
     type: "song",
