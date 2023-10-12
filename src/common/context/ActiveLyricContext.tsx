@@ -32,6 +32,17 @@ const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
     }
   }, [])
 
+  const handleDisableLyric = (data: string) => {
+    setActiveLyricId(Number(data))
+  }
+
+  useEffect(() => {
+    socket.on("disableLyric", handleDisableLyric)
+    return () => {
+      socket.off("disableLyric")
+    }
+  }, [])
+
   const setNextSongVerse = () => {
     let nextSongVerse
     if (activeLyricId === -1 && data) {

@@ -66,4 +66,15 @@ export default class LyricsService extends HttpRequest {
     const response = await this.patch<Lyric>({ active: true })
     return new ServiceResponse(response.data)
   }
+
+  async desactivateAllLyrics() {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `${LYRICS_ENDPOINT}/desactivateAllLyrics`,
+    })
+
+    const response = await this.post<Lyric>({})
+    return new ServiceResponse(response.data)
+  }
 }

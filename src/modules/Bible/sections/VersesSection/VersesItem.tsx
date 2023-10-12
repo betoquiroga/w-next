@@ -6,6 +6,8 @@ import { BookContext } from "@context/BookContext"
 import {
   bibleEmit,
   clearEmit,
+  disableLyricEmit,
+  disableSongEmit,
   styleEmit,
   verseEmit,
 } from "@helpers/socket/emit"
@@ -16,6 +18,8 @@ import {
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
+import { desactivateAllSongs } from "src/common/api/songs/songs.api"
+import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -36,6 +40,10 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
     verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
+    // desactivateAllSongs()
+    // disableSongEmit("0")
+    // desactivateAllLyrics()
+    // disableLyricEmit("0")
   }
 
   return (
