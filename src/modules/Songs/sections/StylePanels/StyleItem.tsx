@@ -20,6 +20,7 @@ const StyleItem = ({
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
     await setActiveStyle(id)
     setStyle({ ...data, image: currentImageUrl(image) })
+    // disableSongEmit("0")
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {

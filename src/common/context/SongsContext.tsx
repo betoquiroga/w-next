@@ -31,6 +31,17 @@ const SongsProvider = ({ children }: SongProviderProps) => {
     }
   }, [])
 
+  const handleDisableSong = (data: string) => {
+    setActiveSongId(Number(data))
+  }
+
+  useEffect(() => {
+    socket.on("disableSong", handleDisableSong)
+    return () => {
+      socket.off("disableSong")
+    }
+  }, [])
+
   useEffect(() => {
     const active = data?.find((d: Song) => d.active)
     if (data && active) {
