@@ -40,10 +40,10 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
     verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
-    // desactivateAllSongs()
-    // disableSongEmit("0")
-    // desactivateAllLyrics()
-    // disableLyricEmit("0")
+    desactivateAllSongs()
+    disableSongEmit("0")
+    desactivateAllLyrics()
+    disableLyricEmit("0")
   }
 
   return (

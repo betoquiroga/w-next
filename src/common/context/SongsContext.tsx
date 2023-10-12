@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react"
-import { getSong } from "../api/songs/songs.api"
+import { desactivateAllSongs, getSong } from "../api/songs/songs.api"
 import { socket } from "socket/mainSocket"
 
 const SongsContext = createContext({} as SongContextProps)
@@ -37,6 +37,7 @@ const SongsProvider = ({ children }: SongProviderProps) => {
 
   useEffect(() => {
     socket.on("disableSong", handleDisableSong)
+    desactivateAllSongs()
     return () => {
       socket.off("disableSong")
     }
