@@ -4,8 +4,6 @@ import { useContext } from "react"
 import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
 import {
-  activeLyricEmit,
-  activeSongEmit,
   bibleEmit,
   clearEmit,
   styleEmit,
@@ -18,8 +16,7 @@ import {
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
-import { desactivateAllSongs } from "src/common/api/songs/songs.api"
-import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
+import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -31,7 +28,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
-    clearEmit()
+    clearEmit("cover")
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(text)
@@ -40,10 +37,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
     verseEmit(
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
+    deactivateSongs()
   }
 
   return (
