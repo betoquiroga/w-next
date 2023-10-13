@@ -82,7 +82,7 @@ const VideosPanel = () => {
             <video
               muted
               controls
-              controlsList="nodownload nofullscreen noplaybackrate noshowvolumecontrol"
+              controlsList="nodownload nofullscreen noplaybackrate"
               src={videoURL}
               style={{
                 width: "300px",
