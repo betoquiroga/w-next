@@ -1,17 +1,11 @@
 import { Spinner } from "@components/Spinner"
 import { Tab } from "@headlessui/react"
-import {
-  activeLyricEmit,
-  activeSongEmit,
-  clearEmit,
-  styleEmit,
-} from "@helpers/socket/emit"
+import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { deleteFile, getFiles } from "src/common/api/gallery/gallery.api"
 import { updateScreen } from "src/common/api/screen/screen.api"
-import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
-import { desactivateAllSongs } from "src/common/api/songs/songs.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
@@ -59,10 +53,7 @@ const ImagesPanel = () => {
   }
 
   const handleClick = () => {
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
+    deactivateSongs()
   }
 
   if (isLoading) {
