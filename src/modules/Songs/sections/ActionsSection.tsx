@@ -7,10 +7,9 @@ import {
   WW_LOGO,
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
-import DeactivateSongs from "../helper/deactivateSong"
+import { deactivateSongs } from "../helper/deactivateSong"
 
 const ActionsSection = () => {
-  const deactivateSongs = DeactivateSongs()
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") blackEmit("black")
