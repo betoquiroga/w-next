@@ -9,7 +9,6 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
     style.image,
     500
   )
-  console.log(displayedData)
   return (
     <div className={`wallpaper ${animationClass}`}>
       {style.type === "Video" && (

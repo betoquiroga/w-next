@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { Tab } from "@headlessui/react"
-import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import { styleEmit } from "@helpers/socket/emit"
 import { defaultVideoStyle } from "src/common/constants/style"
-import { WW_GALLERY_FOLDER } from "src/common/constants/images"
 
 const VideosPanel = () => {
   const [videoURLs, setVideoURLs] = useState<string[]>([])
@@ -41,8 +40,7 @@ const VideosPanel = () => {
   }
 
   const emitVideo = (videoURL: string) => {
-    clearEmit("gallery")
-    styleEmit(defaultVideoStyle(videoURL, WW_GALLERY_FOLDER))
+    styleEmit(defaultVideoStyle(videoURL))
   }
 
   const removeFile = (indexToRemove: number) => {

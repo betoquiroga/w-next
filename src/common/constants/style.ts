@@ -11,7 +11,7 @@ export const defaultStyle = (image: string, folder: string): Style => ({
   image: buildImageURL(image, folder),
 })
 
-export const defaultVideoStyle = (videoURL: string, folder: string): Style => ({
+export const defaultVideoStyle = (videoURL: string): Style => ({
   id: 0,
   title: "Default Video Style",
   type: "Video",
