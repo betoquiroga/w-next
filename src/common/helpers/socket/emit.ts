@@ -22,6 +22,7 @@ export const lyricEmit = (content: string) => {
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     content: emitObject.content,
     verse: " ",
+    type: "song",
   })
   socket.emit("lyric", JSON.stringify(emitObject))
   socket.emit("verse", "")
