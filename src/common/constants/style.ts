@@ -4,11 +4,20 @@ import { WW_STYLES_FOLDER } from "./images"
 
 export const defaultStyle = (image: string, folder: string): Style => ({
   id: 0,
-  title: "Logo ESP",
+  title: "Default Image Style",
   type: "Imagen JPEG",
   details: "Manrope Black / 24px",
   active: true,
   image: buildImageURL(image, folder),
+})
+
+export const defaultVideoStyle = (videoURL: string, folder: string): Style => ({
+  id: 0,
+  title: "Default Video Style",
+  type: "Video",
+  details: "Video Details",
+  active: true,
+  image: videoURL,
 })
 
 export const buildImageURL = (

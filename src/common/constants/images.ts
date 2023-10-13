@@ -9,4 +9,8 @@ export const WW_FILETYPE_ACCEPT = {
   "image/png": [".png"],
   "image/jpg": [".jpg"],
   "image/jpeg": [".jpeg"],
+  "video/mp4": [".mp4"],
+  "video/mpeg": [".mpeg"],
+  "video/mkv": [".mkv"],
+  "video/quicktime": [".mov"],
 }
