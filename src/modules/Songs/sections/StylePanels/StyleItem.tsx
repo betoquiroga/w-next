@@ -26,10 +26,6 @@ const StyleItem = ({
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
     await setActiveStyle(id)
     setStyle({ ...data, image: currentImageUrl(image) })
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
   }
 
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
