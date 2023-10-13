@@ -31,35 +31,30 @@ const ActionsSection = () => {
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
   }
 
-  const handleClickBlack = () => {
+  const deactivateSongs = () => {
     desactivateAllSongs()
     activeSongEmit("0")
     desactivateAllLyrics()
     activeLyricEmit("0")
+  }
+
+  const handleClickBlack = () => {
+    deactivateSongs()
     blackEmit("black")
   }
 
   const handleClickLogo = () => {
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
+    deactivateSongs()
     handleAction(WW_LOGO as string)
   }
 
   const handleClickClear = () => {
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
+    deactivateSongs()
     clearEmit("song")
   }
 
   const handleClickPreach = () => {
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
+    deactivateSongs()
     handleAction(WW_BIBLE as string)
   }
 
