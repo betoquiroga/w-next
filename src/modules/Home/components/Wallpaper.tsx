@@ -9,7 +9,6 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
     style.image,
     500
   )
-
   return (
     <div className={`wallpaper ${animationClass}`}>
       {style.type === "Video" && (
@@ -19,7 +18,7 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
           muted
           loop
           className="main-video"
-          src={style.image}
+          src={displayedData}
         />
       )}
       {style?.type?.includes("Imagen") && (
