@@ -40,3 +40,8 @@ export const setActiveSong = async (id: number) => {
   const response = await service.setActive(id)
   return response.data
 }
+
+export const desactivateAllSongs = async () => {
+  const response = await service.desactivateAllSongs()
+  return response.data
+}

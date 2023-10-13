@@ -81,4 +81,15 @@ export default class SongsService extends HttpRequest {
     const response = await this.patch<SongBase>({ active: true })
     return new ServiceResponse(response.data)
   }
+
+  async desactivateAllSongs() {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `${SONGS_ENDPOINT}/desactivateAllSongs`,
+    })
+
+    const response = await this.post<SongBase>({})
+    return new ServiceResponse(response.data)
+  }
 }
