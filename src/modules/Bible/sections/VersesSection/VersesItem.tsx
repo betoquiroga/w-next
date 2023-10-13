@@ -16,20 +16,19 @@ import {
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
-import DeactivateSongs from "@modules/Songs/helper/deactivateSong"
+import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
   const { chapter, activeVerse, setActiveVerse } = useContext(ChapterContext)
   const { version } = useContext(BookContext)
-  const deactivateSongs = DeactivateSongs()
 
   const handleClick = async () => {
     const currentVerse = {
       verse,
       text,
     }
-    clearEmit()
+    clearEmit("cover")
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(text)
