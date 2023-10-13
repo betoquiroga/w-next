@@ -1,22 +1,16 @@
 import ActionButton from "./ActionsPanel/ActionButton"
 import { useEffect } from "react"
 import { defaultStyle } from "src/common/constants/style"
-import {
-  activeLyricEmit,
-  activeSongEmit,
-  blackEmit,
-  clearEmit,
-  styleEmit,
-} from "@helpers/socket/emit"
+import { blackEmit, clearEmit, styleEmit } from "@helpers/socket/emit"
 import {
   WW_BIBLE,
   WW_LOGO,
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
-import { desactivateAllSongs } from "src/common/api/songs/songs.api"
-import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
+import DeactivateSongs from "../helper/deactivateSong"
 
 const ActionsSection = () => {
+  const deactivateSongs = DeactivateSongs()
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") blackEmit("black")
@@ -29,13 +23,6 @@ const ActionsSection = () => {
   const handleAction = (image: string) => {
     clearEmit("bible")
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
-  }
-
-  const deactivateSongs = () => {
-    desactivateAllSongs()
-    activeSongEmit("0")
-    desactivateAllLyrics()
-    activeLyricEmit("0")
   }
 
   const handleClickBlack = () => {
