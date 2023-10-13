@@ -59,6 +59,7 @@ export const verseEmit = (content: string) => {
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
+    type: "bible",
     verse: emitObject.content,
   })
   socket.emit("verse", JSON.stringify(emitObject))
@@ -67,6 +68,7 @@ export const verseEmit = (content: string) => {
 export const styleEmit = (content: Style) => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
+    type: "cover",
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
