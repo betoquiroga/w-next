@@ -30,3 +30,8 @@ export const deleteLyricById = async (id: number): Promise<void> => {
     await service.deleteLyricById(id)
   }
 }
+
+export const desactivateAllLyrics = async () => {
+  const response = await service.desactivateAllLyrics()
+  return response.data
+}
