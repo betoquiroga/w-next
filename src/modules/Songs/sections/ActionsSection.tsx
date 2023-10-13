@@ -15,10 +15,8 @@ import {
 } from "src/common/constants/images"
 import { desactivateAllSongs } from "src/common/api/songs/songs.api"
 import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
-import DeactivateSongs from "../helper/deactivateSongs"
 
 const ActionsSection = () => {
-  const deactivateSongs = DeactivateSongs()
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") blackEmit("black")
@@ -33,30 +31,30 @@ const ActionsSection = () => {
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
   }
 
-  // const deactivateSongs = () => {
-  //   desactivateAllSongs()
-  //   activeSongEmit("0")
-  //   desactivateAllLyrics()
-  //   activeLyricEmit("0")
-  // }
+  const deactivateSongs = () => {
+    desactivateAllSongs()
+    activeSongEmit("0")
+    desactivateAllLyrics()
+    activeLyricEmit("0")
+  }
 
   const handleClickBlack = () => {
-    deactivateSongs
+    deactivateSongs()
     blackEmit("black")
   }
 
   const handleClickLogo = () => {
-    deactivateSongs
+    deactivateSongs()
     handleAction(WW_LOGO as string)
   }
 
   const handleClickClear = () => {
-    deactivateSongs
+    deactivateSongs()
     clearEmit("song")
   }
 
   const handleClickPreach = () => {
-    deactivateSongs
+    deactivateSongs()
     handleAction(WW_BIBLE as string)
   }
 
