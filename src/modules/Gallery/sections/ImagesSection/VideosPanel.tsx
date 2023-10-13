@@ -80,10 +80,15 @@ const VideosPanel = () => {
             style={{ position: "relative" }}
           >
             <video
-              autoPlay
               muted
+              controls
+              controlsList="nodownload nofullscreen noplaybackrate noshowvolumecontrol"
               src={videoURL}
-              style={{ width: "300px", height: "150px", objectFit: "cover" }}
+              style={{
+                width: "300px",
+                height: "150px",
+                objectFit: "cover",
+              }}
               onClick={() => emitVideo(videoURL)}
             ></video>
             <button
