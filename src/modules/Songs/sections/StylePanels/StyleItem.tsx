@@ -1,15 +1,9 @@
 import { StyleContext } from "src/common/context/StyleContext"
 import { SyntheticEvent, useContext } from "react"
-import {
-  activeLyricEmit,
-  activeSongEmit,
-  styleEmit,
-} from "@helpers/socket/emit"
+import { styleEmit } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
-import { desactivateAllLyrics } from "src/common/api/songs/lyrics.api"
-import { desactivateAllSongs } from "src/common/api/songs/songs.api"
 
 const StyleItem = ({
   id,

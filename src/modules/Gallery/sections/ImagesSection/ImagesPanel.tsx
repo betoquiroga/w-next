@@ -1,6 +1,7 @@
 import { Spinner } from "@components/Spinner"
 import { Tab } from "@headlessui/react"
 import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import DeactivateSongs from "@modules/Songs/helper/deactivateSong"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { deleteFile, getFiles } from "src/common/api/gallery/gallery.api"
@@ -11,6 +12,7 @@ import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
+  const deactivateSongs = DeactivateSongs()
   const { data, isLoading, refetch } = useQuery<string[], Error>(
     ["ALL_IMAGES"],
     () => getFiles("gallery", "small")
@@ -51,6 +53,10 @@ const ImagesPanel = () => {
     }
   }
 
+  const handleClick = () => {
+    deactivateSongs()
+  }
+
   if (isLoading) {
     return (
       <Tab.Panel>
@@ -78,6 +84,7 @@ const ImagesPanel = () => {
                   alt={i}
                   onClick={() => {
                     sendData(i)
+                    handleClick()
                   }}
                   placeholder="blur"
                   blurDataURL="/images/blur/cruz4.jpg"
