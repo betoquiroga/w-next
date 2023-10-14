@@ -13,18 +13,18 @@ export default class SongsService extends HttpRequest {
       endpoint: SONGS_ENDPOINT,
     })
 
-    const response = await this.get<SongBase[]>()
+    const response = await this.get<Song[]>()
     return new ServiceResponse(response.data)
   }
 
-  async getSong() {
+  async getActive() {
     this.useToken(getToken())
 
     this.configRequest({
-      endpoint: SONGS_ENDPOINT,
+      endpoint: `${SONGS_ENDPOINT}/active`,
     })
 
-    const response = await this.get<Song[]>()
+    const response = await this.get<Song>()
     return new ServiceResponse(response.data)
   }
 

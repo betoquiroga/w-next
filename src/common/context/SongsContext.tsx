@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react"
-import { getSong } from "../api/songs/songs.api"
+import { getSongs } from "../api/songs/songs.api"
 import { socket } from "socket/mainSocket"
 
 const SongsContext = createContext({} as SongContextProps)
@@ -17,7 +17,7 @@ const SongsProvider = ({ children }: SongProviderProps) => {
   const [selectedSongId, setSelectedSongId] = useState(0)
   const { data, isLoading, isError } = useQuery<Song[], Error>(
     ["ALL_SONGS"],
-    getSong
+    getSongs
   )
 
   const handleActiveSong = (data: string) => {

@@ -19,7 +19,7 @@ const LyricsPanel = () => {
     if (data && active) {
       setActiveLyricId(active.id)
     }
-  }, [data])
+  }, [selectedSongId])
 
   if (isLoading)
     return (
