@@ -1,4 +1,4 @@
 # WISWORDS!!!
 
 Deployed on vercel.
-Nuevo espacio dev
+Nuevo espacio dev y dotenv
