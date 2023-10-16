@@ -22,7 +22,6 @@ export const lyricEmit = (content: string) => {
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     content: emitObject.content,
     verse: " ",
-    type: "song",
   })
   socket.emit("lyric", JSON.stringify(emitObject))
   socket.emit("verse", "")
@@ -69,7 +68,7 @@ export const verseEmit = (content: string) => {
 export const styleEmit = (content: Style) => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: "cover",
+    type: "song",
     background: image,
   })
   socket.emit("style", JSON.stringify(content))

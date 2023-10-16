@@ -6,6 +6,7 @@ import { Emit } from "@interfaces/emit.interface"
 import { getScreenActive } from "src/common/api/screen/screen.api"
 import { socket } from "socket/mainSocket"
 import { WW_STYLES_FOLDER, defaultStyle } from "src/common/constants/style"
+import { WW_GALLERY_FOLDER } from "../constants/images"
 
 export function useHome() {
   const { style } = useContext(StyleContext)
@@ -82,7 +83,10 @@ export function useHome() {
           content: screenData.verse || "",
         })
         setStyleData(
-          defaultStyle(screenData.background || "", WW_STYLES_FOLDER)
+          defaultStyle(
+            screenData.background || "",
+            screenData.type === "gallery" ? WW_GALLERY_FOLDER : WW_STYLES_FOLDER
+          )
         )
       } catch (error) {
         console.error("Error al obtener datos del Screen:", error)

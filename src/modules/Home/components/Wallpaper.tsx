@@ -21,10 +21,10 @@ const Wallpaper = ({ style, effects }: WallpaperProps) => {
           src={displayedData}
         />
       )}
-      {style?.type?.includes("Imagen") && (
+      {style?.type?.includes("Imagen") && displayedData && (
         <Image
           src={displayedData}
-          alt={"."}
+          alt={displayedData}
           height={1080}
           width={1920}
           blurDataURL="/images/styles/logo.jpeg"

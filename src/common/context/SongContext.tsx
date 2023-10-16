@@ -9,6 +9,7 @@ import {
   useState,
 } from "react"
 import { getLyrics } from "../api/songs/lyrics.api"
+import { getActive } from "../api/songs/songs.api"
 
 const SongContext = createContext({} as SongContextProps)
 
@@ -19,6 +20,12 @@ const SongProvider = ({ children }: SongProviderProps) => {
     ["CURRENT_SONG_LYRICS"],
     () => getLyrics(songId)
   )
+
+  useEffect(() => {
+    getActive().then((song) => {
+      setSongId(song.id)
+    })
+  }, [])
 
   useEffect(() => {
     refetch()

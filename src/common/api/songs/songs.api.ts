@@ -8,13 +8,13 @@ export const getSongs = async () => {
   return response.data
 }
 
-export const getSong = async () => {
-  const response = await service.getSong()
+export const getSongById = async (id: number) => {
+  const response = await service.getSongById(id)
   return response.data
 }
 
-export const getSongById = async (id: number) => {
-  const response = await service.getSongById(id)
+export const getActive = async () => {
+  const response = await service.getActive()
   return response.data
 }
 
