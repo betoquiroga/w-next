@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Tab } from "@headlessui/react"
-import { styleEmit } from "@helpers/socket/emit"
+import { styleEmit, videoEmit } from "@helpers/socket/emit"
 import { defaultVideoStyle } from "src/common/constants/style"
 
 const VideosPanel = () => {
@@ -40,7 +40,7 @@ const VideosPanel = () => {
   }
 
   const emitVideo = (videoURL: string) => {
-    styleEmit(defaultVideoStyle(videoURL))
+    videoEmit(defaultVideoStyle(videoURL))
   }
 
   const removeFile = (indexToRemove: number) => {
