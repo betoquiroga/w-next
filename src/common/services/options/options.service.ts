@@ -81,4 +81,15 @@ export default class OptionsService extends HttpRequest {
     const response = await this.delete<Option>()
     return new ServiceResponse(response.data)
   }
+
+  async deactivateOptions() {
+    this.useToken(getToken())
+
+    this.configRequest({
+      endpoint: `${OPTIONS_ENDPOINT}/deactivateOptions`,
+    })
+
+    const response = await this.post<Option>({})
+    return new ServiceResponse(response.data)
+  }
 }

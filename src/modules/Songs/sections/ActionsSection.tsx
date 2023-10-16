@@ -8,7 +8,7 @@ import {
   WW_STYLES_FOLDER,
 } from "src/common/constants/images"
 import { deactivateSongs } from "../helper/deactivateSong"
-import { Style } from "@interfaces/style.interface"
+import { deactivatedOptions } from "../helper/deactivateOptions"
 
 const ActionsSection = () => {
   useEffect(() => {
@@ -27,6 +27,7 @@ const ActionsSection = () => {
 
   const handleClickBlack = () => {
     deactivateSongs()
+    deactivatedOptions()
     blackEmit("black")
   }
 
