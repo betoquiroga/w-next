@@ -22,7 +22,7 @@ const nextConfig = {
         pathname: "/uploads/**",
       },
     ],
-    domains: ["localhost", "wiswords.com"],
+    domains: ["localhost", "wiswords.com", "dev.wiswords.com"],
   },
 }
 
