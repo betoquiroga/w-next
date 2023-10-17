@@ -12,17 +12,15 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "wiswords.com",
-        port: "3040",
         pathname: "/uploads/**",
       },
       {
         protocol: "https",
         hostname: "dev.wiswords.com",
-        port: "3050",
         pathname: "/uploads/**",
       },
     ],
-    domains: ["localhost", "wiswords.com", "vercel.app"],
+    domains: ["localhost", "wiswords.com", "vercel.app", "dev.wiswords.com"],
   },
 }
 
