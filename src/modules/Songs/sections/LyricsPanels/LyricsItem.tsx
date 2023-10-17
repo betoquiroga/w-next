@@ -19,7 +19,12 @@ import { setActiveSong } from "src/common/api/songs/songs.api"
 import ProyectIcon from "@icons/misc/proyect"
 
 const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
-  const { activeLyricId, setActiveLyricId } = useContext(ActiveLyricContext)
+  const {
+    activeLyricId,
+    setActiveLyricId,
+    selectedLyricId,
+    setSelectedLyricId,
+  } = useContext(ActiveLyricContext)
   const { setStyle } = useContext(StyleContext)
   const [styleChanged, setStyleChanged] = useState(false)
 
@@ -51,6 +56,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
     setActiveLyricId(id)
     setActive(id)
     setActiveSong(idSong)
+    setSelectedLyricId(id)
     activeSongEmit(`${idSong}`)
     activeLyricEmit(`${id}`)
   }
@@ -61,7 +67,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
       className={classNames(
         "flex justify-between items-center border-t-2 border-t-ww-alt p-4 hover:bg-ww-alt cursor-pointer",
         {
-          "bg-ww-green-800 hover:bg-ww-green-800": activeLyricId === id,
+          "bg-ww-green-800 hover:bg-ww-green-800": selectedLyricId === id,
         }
       )}
     >

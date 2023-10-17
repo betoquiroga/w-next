@@ -12,11 +12,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "wiswords.com",
-        port: "3040",
-        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "dev.wiswords.com",
       },
     ],
-    domains: ["localhost", "wiswords.com"],
   },
 }
 
