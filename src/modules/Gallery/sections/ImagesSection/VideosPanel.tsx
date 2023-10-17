@@ -22,17 +22,16 @@ const VideosPanel = () => {
       }
 
       for (let i = 0; i < files.length; i++) {
-        const file = files[i]
-
-        if (file.type.startsWith("video/")) {
-          const objectURL = URL.createObjectURL(file)
+        const myFile = files[i]
+        if (myFile.type.startsWith("video/")) {
+          const objectURL = URL.createObjectURL(myFile)
           videoURLArray.push(objectURL)
         }
       }
 
       if (videoURLArray.length > 0) {
         if (videoURLs.length + videoURLArray.length <= 20) {
-          videoURLArray.forEach((url) => addVideoURL(url))
+          addVideoURL(videoURLArray)
         } else {
           alert("No puedes seleccionar más de 20 archivos.")
         }
