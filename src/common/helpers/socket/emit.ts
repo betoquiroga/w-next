@@ -101,3 +101,7 @@ export const blackEmit = (
   socket.emit("lyric", JSON.stringify(dataLyric))
   socket.emit("verse", JSON.stringify(dataVerse))
 }
+
+export const videoEmit = (content: Style) => {
+  socket.emit("style", JSON.stringify(content))
+}
