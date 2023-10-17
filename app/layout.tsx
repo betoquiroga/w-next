@@ -1,5 +1,4 @@
 "use client"
-import { SectionProvider } from "@context/SectionContext"
 import "./globals.css"
 import Providers from "./providers"
 import { StyleProvider } from "src/common/context/StyleContext"
@@ -14,9 +13,7 @@ export default function RootLayout({
       <head />
       <body>
         <Providers>
-          <SectionProvider>
-            <StyleProvider>{children}</StyleProvider>
-          </SectionProvider>
+          <StyleProvider>{children}</StyleProvider>
         </Providers>
       </body>
     </html>

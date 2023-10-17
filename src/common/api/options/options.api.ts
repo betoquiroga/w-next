@@ -40,3 +40,8 @@ export const deleteOption = async (id: number) => {
   const response = await optionsService.deleteOption(id)
   return response.data
 }
+
+export const deactivateOptions = async () => {
+  const response = await optionsService.deactivateOptions()
+  return response.data
+}
