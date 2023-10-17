@@ -16,6 +16,7 @@ const ActiveLyricContext = createContext({} as ActiveLyricsContextProps)
 const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
   const [activeLyricId, setActiveLyricId] = useState(0)
   const { data } = useContext(SongContext)
+  const [selectedLyricId, setSelectedLyricId] = useState(0)
 
   const lyrics = data?.sort((a: Lyric, b: Lyric) => a.order - b.order) || []
   const active = () =>
@@ -60,6 +61,8 @@ const ActiveLyricProvider = ({ children }: ActiveLyricProviderProps) => {
         setActiveLyricId,
         setNextSongVerse,
         setPrevSongVerse,
+        selectedLyricId,
+        setSelectedLyricId,
       }}
     >
       {children}
@@ -76,6 +79,8 @@ type ActiveLyricProviderProps = {
 type ActiveLyricsContextProps = {
   activeLyricId: number
   setActiveLyricId: Dispatch<SetStateAction<number>>
+  selectedLyricId: number
+  setSelectedLyricId: Dispatch<SetStateAction<number>>
   setNextSongVerse: () => void
   setPrevSongVerse: () => void
 }

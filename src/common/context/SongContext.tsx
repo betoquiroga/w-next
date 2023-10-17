@@ -24,6 +24,7 @@ const SongProvider = ({ children }: SongProviderProps) => {
   useEffect(() => {
     getActive().then((song) => {
       setSongId(song.id)
+      setSong(song)
     })
   }, [])
 

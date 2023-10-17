@@ -92,12 +92,18 @@ export const clearEmit = (
 export const blackEmit = (
   type: "bible" | "black" | "cover" | "gallery" | "song"
 ) => {
+  // setActive(0)
   const dataLyric = { type, content: " " }
   const dataVerse = { content: " " }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: dataLyric.type,
+    // content: dataLyric.content,
     verse: dataVerse.content,
   })
   socket.emit("lyric", JSON.stringify(dataLyric))
   socket.emit("verse", JSON.stringify(dataVerse))
+}
+
+export const videoEmit = (content: Style) => {
+  socket.emit("style", JSON.stringify(content))
 }
