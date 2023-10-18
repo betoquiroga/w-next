@@ -71,7 +71,7 @@ export const styleEmit = (content: Style, type: "gallery" | "style") => {
     type: type,
     background: image,
   })
-  socket.emit("style", JSON.stringify(content, type))
+  socket.emit("style", JSON.stringify(content))
 }
 
 export const clearEmit = (

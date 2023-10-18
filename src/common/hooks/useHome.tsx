@@ -69,7 +69,7 @@ export function useHome() {
       if (message) setContent(JSON.parse(message))
     }
 
-    const handleStyleMessage = (data: string, ) => {
+    const handleStyleMessage = (data: string) => {
       setStyleData(JSON.parse(data))
     }
 

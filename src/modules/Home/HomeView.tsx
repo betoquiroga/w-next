@@ -24,9 +24,9 @@ const HomeView = ({ width }: HomeViewProps) => {
       {effectsWs.particles && <div className="snow" />}
       {bibleVerse?.content.length > 1 && <BibleVerse verse={bibleVerse} />}
       {!black && <Wallpaper style={styleData} effects={effectsWs} />}
-      {!black && content.type === "lyric" && <SongContent data={content} />}
-      {!black && content.type === "bible" && <BibleContent data={content} />}
-      {!black && content.type === "songCover" && <CoverContent data={content} />}
+      {content.type === "lyric" && <SongContent data={content} />}
+      {content.type === "bible" && <BibleContent data={content} />}
+      {content.type === "songCover" && <CoverContent data={content} />}
       <FullScreenButton />
     </div>
   )
