@@ -19,7 +19,7 @@ const ImagesPanel = () => {
 
   const sendData = (image: string) => {
     clearEmit("gallery")
-    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
+    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER), "gallery")
     updateScreen(WW_DEFAULT_SCREEN_ID, {
       type: "gallery",
       content: " ",

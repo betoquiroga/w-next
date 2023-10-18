@@ -15,14 +15,14 @@ const ActionsSection = () => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") blackEmit("black")
       if (event.key === "F4") handleAction(WW_LOGO as string)
-      if (event.key === "F5") clearEmit("song")
+      if (event.key === "F5") clearEmit("lyric")
       if (event.key === "F6") handleAction(WW_BIBLE as string)
     })
   }, [])
 
   const handleAction = (image: string) => {
     clearEmit("bible")
-    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
   }
 
   const handleClickBlack = () => {
@@ -38,7 +38,7 @@ const ActionsSection = () => {
 
   const handleClickClear = () => {
     deactivateSongs()
-    clearEmit("song")
+    clearEmit("lyric")
   }
 
   const handleClickPreach = () => {

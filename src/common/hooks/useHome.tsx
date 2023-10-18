@@ -21,17 +21,55 @@ export function useHome() {
   const validTypes: Emit["type"][] = [
     "bible",
     "black",
-    "cover",
+    "songCover",
     "gallery",
-    "song",
+    "lyric",
+    "style",
   ]
+
+  useEffect(() => {
+    const fetchScreenData = async () => {
+      try {
+        const screenData = await getScreenActive()
+        const type = screenData.type || "lyric"
+
+        if (!validTypes.includes(type)) {
+          console.error("Tipo de pantalla no válido:", type)
+          return
+        }
+        setContent({
+          type,
+          content: screenData.content || "",
+        })
+
+        setBibleVerse({
+          type,
+          content: screenData.verse || "",
+        })
+        setStyleData(
+          defaultStyle(
+            screenData.background || "",
+            screenData.type === "gallery"
+              ? WW_GALLERY_FOLDER
+              : screenData.type === "style"
+              ? WW_STYLES_FOLDER
+              : ""
+          )
+        )
+      } catch (error) {
+        console.error("Error al obtener datos del Screen:", error)
+      }
+    }
+
+    fetchScreenData()
+  }, [])
 
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
       if (message) setContent(JSON.parse(message))
     }
 
-    const handleStyleMessage = (data: string) => {
+    const handleStyleMessage = (data: string, ) => {
       setStyleData(JSON.parse(data))
     }
 
@@ -43,13 +81,13 @@ export function useHome() {
       setEffectsWs(JSON.parse(data))
     }
 
-    socket.on("lyric", handleLyricMessage)
+    socket.on("song", handleLyricMessage)
     socket.on("style", handleStyleMessage)
     socket.on("verse", handleVerseMessage)
     socket.on("effects", handleEffectsMessage)
 
     return () => {
-      socket.off("lyric", handleLyricMessage)
+      socket.off("song", handleLyricMessage)
       socket.off("style", handleStyleMessage)
       socket.off("verse", handleVerseMessage)
       socket.off("effects", handleEffectsMessage)
@@ -64,38 +102,6 @@ export function useHome() {
       setBlack(false)
     }
   }, [content])
-
-  useEffect(() => {
-    const fetchScreenData = async () => {
-      try {
-        const screenData = await getScreenActive()
-        const type = screenData.type || "song"
-
-        if (!validTypes.includes(type)) {
-          console.error("Tipo de pantalla no válido:", type)
-          return
-        }
-        setContent({
-          type,
-          content: screenData.content || "",
-        })
-        setBibleVerse({
-          type,
-          content: screenData.verse || "",
-        })
-        setStyleData(
-          defaultStyle(
-            screenData.background || "",
-            screenData.type === "gallery" ? WW_GALLERY_FOLDER : WW_STYLES_FOLDER
-          )
-        )
-      } catch (error) {
-        console.error("Error al obtener datos del Screen:", error)
-      }
-    }
-
-    fetchScreenData()
-  }, [])
 
   return { content, styleData, bibleVerse, effectsWs, black }
 }

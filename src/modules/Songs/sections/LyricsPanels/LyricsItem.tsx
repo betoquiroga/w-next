@@ -42,7 +42,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
       cover === true
     ) {
       const image = style.image
-      styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+      styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
       setStyle({ ...style, image: currentImageUrl(image) })
       updateScreen(WW_DEFAULT_SCREEN_ID, {
         verse: " ",
