@@ -57,6 +57,7 @@ export function useHome() {
   }, [])
 
   useEffect(() => {
+    console.log(content.type)
     if (content.type === "black") {
       setBlack(true)
     } else {

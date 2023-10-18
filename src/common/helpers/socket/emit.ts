@@ -105,5 +105,13 @@ export const blackEmit = (
 }
 
 export const videoEmit = (content: Style) => {
+  const emitObject: Emit = {
+    type: "gallery",
+    content: "",
+  }
+  updateScreen(WW_DEFAULT_SCREEN_ID, {
+    type: "gallery",
+  })
   socket.emit("style", JSON.stringify(content))
+  socket.emit("lyric", JSON.stringify({ type: emitObject.type }))
 }

@@ -10,6 +10,7 @@ const VideosPanel = () => {
     null
   )
   const fileInputRef = React.useRef<HTMLInputElement | null>(null)
+  const selectedFileNames = React.useRef<string[]>([])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target && event.target.files) {
@@ -24,8 +25,13 @@ const VideosPanel = () => {
       for (let i = 0; i < files.length; i++) {
         const myFile = files[i]
         if (myFile.type.startsWith("video/")) {
-          const objectURL = URL.createObjectURL(myFile)
-          videoURLArray.push(objectURL)
+          if (selectedFileNames.current.includes(myFile.name)) {
+            alert("El archivo ya ha sido seleccionado.")
+          } else {
+            const objectURL = URL.createObjectURL(myFile)
+            videoURLArray.push(objectURL)
+            selectedFileNames.current.push(myFile.name)
+          }
         }
       }
 
