@@ -21,7 +21,6 @@ export const lyricEmit = (content: string) => {
     verse: " ",
   })
   socket.emit("song", JSON.stringify(emitObject))
-  socket.emit("style", JSON.stringify(emitObject))
   socket.emit("verse", "")
 }
 export const coverEmit = (content: string) => {
