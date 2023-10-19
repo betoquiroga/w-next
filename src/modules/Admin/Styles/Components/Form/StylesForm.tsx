@@ -29,7 +29,6 @@ const StyleForm = () => {
         setStyleDetails(data.details || "")
         setStyleImage(data.image)
         setIsEditing(true)
-        console.log(data)
       })
     }
   }, [idStyle, isEditing])
