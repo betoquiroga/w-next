@@ -26,7 +26,7 @@ const ChromaView = () => {
   return (
     <div className="chroma bg-cover">
       <div className="container">
-        {contentData?.type === "style" && (
+        {contentData?.type === "lyric" && (
           <LyricContent
             primeraMitad={primeraMitad}
             segundaMitad={segundaMitad}
