@@ -21,9 +21,7 @@ const ImagesPanel = () => {
     clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
     updateScreen(WW_DEFAULT_SCREEN_ID, {
-      type: "gallery",
-      content: " ",
-      verse: " ",
+      typeStyle: "gallery",
     })
   }
 

@@ -53,7 +53,7 @@ export const bibleEmit = (content: string, verso: string) => {
 export const styleEmit = (content: Style) => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: "style",
+    // typeStyle: "gallery",
     background: image,
   })
   socket.emit("style", JSON.stringify(content))

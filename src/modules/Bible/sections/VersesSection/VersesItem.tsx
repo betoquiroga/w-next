@@ -12,6 +12,8 @@ import {
 } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
 import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
+import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
+import { updateScreen } from "src/common/api/screen/screen.api"
 
 const VersesItem = ({ verseData }: VersesItemProps) => {
   const { verse, text } = verseData
@@ -23,7 +25,7 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
-    // clearEmit("songCover")
+    clearEmit("songCover")
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(
@@ -31,6 +33,9 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
     styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
+    updateScreen(WW_DEFAULT_SCREEN_ID, {
+      typeStyle: "style",
+    })
     setActiveStyle(Number(WW_DEFAULT_STYLE_ID))
     deactivateSongs()
   }

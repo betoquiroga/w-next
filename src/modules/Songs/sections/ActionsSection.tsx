@@ -9,6 +9,8 @@ import {
 } from "src/common/constants/images"
 import { deactivateSongs } from "../helper/deactivateSong"
 import { deactivatedOptions } from "../helper/deactivateOptions"
+import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
+import { updateScreen } from "src/common/api/screen/screen.api"
 
 const ActionsSection = () => {
   useEffect(() => {
@@ -23,6 +25,9 @@ const ActionsSection = () => {
   const handleAction = (image: string) => {
     clearEmit("bible")
     styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+    updateScreen(WW_DEFAULT_SCREEN_ID, {
+      typeStyle: "style",
+    })
   }
 
   const handleClickBlack = () => {
