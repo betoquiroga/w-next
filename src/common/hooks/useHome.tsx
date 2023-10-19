@@ -86,11 +86,7 @@ export function useHome() {
         setStyleData(
           defaultStyle(
             screenData.background || "",
-            screenData.type === "gallery"
-              ? WW_GALLERY_FOLDER
-              : screenData.type === "style"
-              ? WW_STYLES_FOLDER
-              : ""
+            screenData.type === "gallery" ? WW_GALLERY_FOLDER : WW_STYLES_FOLDER
           )
         )
       } catch (error) {
