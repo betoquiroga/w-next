@@ -17,7 +17,7 @@ const StyleItem = ({
 
   const changeStyle = async () => {
     const data = { id, title, type, details, active, image }
-    styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
     await setActiveStyle(id)
     setStyle({ ...data, image: currentImageUrl(image) })
   }

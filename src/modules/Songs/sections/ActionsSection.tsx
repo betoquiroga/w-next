@@ -22,7 +22,7 @@ const ActionsSection = () => {
 
   const handleAction = (image: string) => {
     clearEmit("bible")
-    styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
   }
 
   const handleClickBlack = () => {

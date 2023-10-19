@@ -23,13 +23,14 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
+    // clearEmit("songCover")
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
     bibleEmit(
       text,
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
-    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER), "style")
+    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
     setActiveStyle(Number(WW_DEFAULT_STYLE_ID))
     deactivateSongs()
   }

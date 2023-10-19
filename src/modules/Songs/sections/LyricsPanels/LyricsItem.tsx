@@ -34,7 +34,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
   }, [idSong])
 
   const addMessage = () => {
-    clearEmit("lyric")
+    // clearEmit("lyric")
     cover ? coverEmit(content) : lyricEmit(content)
 
     if (
@@ -44,7 +44,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
       cover === true
     ) {
       const image = style.image
-      styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
+      styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
       setStyle({ ...style, image: currentImageUrl(image) })
       updateScreen(WW_DEFAULT_SCREEN_ID, {
         verse: " ",
