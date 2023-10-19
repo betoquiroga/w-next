@@ -12,7 +12,7 @@ export function useHome() {
   const { style } = useContext(StyleContext)
   const [content, setContent] = useState<Emit>({ content: "" } as Emit)
   const [styleData, setStyleData] = useState<Style>(style)
-  const [bibleVerse, setBibleVerse] = useState<Emit>({ content: "" } as Emit)
+  const [bibleVerse, setBibleVerse] = useState<string>("")
   const [effectsWs, setEffectsWs] = useState<Effect>({
     zoom: false,
     particles: false,
@@ -26,43 +26,6 @@ export function useHome() {
     "lyric",
     "style",
   ]
-
-  useEffect(() => {
-    const fetchScreenData = async () => {
-      try {
-        const screenData = await getScreenActive()
-        const type = screenData.type || "lyric"
-
-        if (!validTypes.includes(type)) {
-          console.error("Tipo de pantalla no válido:", type)
-          return
-        }
-        setContent({
-          type,
-          content: screenData.content || "",
-        })
-
-        setBibleVerse({
-          type,
-          content: screenData.verse || "",
-        })
-        setStyleData(
-          defaultStyle(
-            screenData.background || "",
-            screenData.type === "gallery"
-              ? WW_GALLERY_FOLDER
-              : screenData.type === "style"
-              ? WW_STYLES_FOLDER
-              : ""
-          )
-        )
-      } catch (error) {
-        console.error("Error al obtener datos del Screen:", error)
-      }
-    }
-
-    fetchScreenData()
-  }, [])
 
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
@@ -95,13 +58,48 @@ export function useHome() {
   }, [])
 
   useEffect(() => {
-    console.log(content.type)
     if (content.type === "black") {
       setBlack(true)
     } else {
       setBlack(false)
     }
   }, [content])
+
+  useEffect(() => {
+    const fetchScreenData = async () => {
+      try {
+        const screenData = await getScreenActive()
+        const type = screenData.type || "lyric"
+
+        if (!validTypes.includes(type)) {
+          console.error("Tipo de pantalla no válido:", type)
+          return
+        }
+
+        setContent({
+          type,
+          content: screenData.content || "",
+        })
+
+        setBibleVerse(screenData.verse || "")
+
+        setStyleData(
+          defaultStyle(
+            screenData.background || "",
+            screenData.type === "gallery"
+              ? WW_GALLERY_FOLDER
+              : screenData.type === "style"
+              ? WW_STYLES_FOLDER
+              : ""
+          )
+        )
+      } catch (error) {
+        console.error("Error al obtener datos del Screen:", error)
+      }
+    }
+
+    fetchScreenData()
+  }, [])
 
   return { content, styleData, bibleVerse, effectsWs, black }
 }

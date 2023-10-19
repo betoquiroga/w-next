@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import {
   activeLyricEmit,
   activeSongEmit,
+  clearEmit,
   coverEmit,
   lyricEmit,
   styleEmit,
@@ -33,6 +34,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
   }, [idSong])
 
   const addMessage = () => {
+    clearEmit("lyric")
     cover ? coverEmit(content) : lyricEmit(content)
 
     if (

@@ -54,8 +54,8 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
 
   const sendVerse = (data: Verse) => {
     setActiveVerse(data)
-    bibleEmit(data?.text)
-    verseEmit(
+    bibleEmit(
+      data?.text,
       `${chapter.book.title} ${chapter.chapter}:${data.verse} (${version.abbreviation})`
     )
   }

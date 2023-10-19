@@ -41,30 +41,19 @@ export const coverEmit = (content: string) => {
   socket.emit("verse", "")
 }
 
-export const bibleEmit = (content: string) => {
+export const bibleEmit = (content: string, verso: string) => {
   const emitObject: Emit = {
     type: "bible",
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
+    verse: verso,
     content: emitObject.content,
   })
-  socket.emit("style", JSON.stringify(emitObject))
+  console.log(emitObject)
   socket.emit("song", JSON.stringify(emitObject))
-  socket.emit("verse", JSON.stringify(emitObject))
-}
-
-export const verseEmit = (content: string) => {
-  const emitObject: Emit = {
-    type: "bible",
-    content,
-  }
-  updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: emitObject.type,
-    verse: emitObject.content,
-  })
-  socket.emit("verse", JSON.stringify(emitObject))
+  socket.emit("verse", JSON.stringify(verso))
 }
 
 export const styleEmit = (content: Style, type: "gallery" | "style") => {
@@ -74,8 +63,6 @@ export const styleEmit = (content: Style, type: "gallery" | "style") => {
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
-  // socket.emit("song", JSON.stringify(content))
-  // socket.emit("verse", JSON.stringify(content))
 }
 
 export const clearEmit = (
