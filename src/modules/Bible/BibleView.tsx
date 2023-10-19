@@ -1,5 +1,6 @@
 import { ChapterContext } from "@context/ChapterContext"
 import { useContext } from "react"
+import withAuth from "src/common/hoc/withAuth"
 import BooksSection from "./sections/BooksSection"
 import ChaptersSection from "./sections/ChaptersSection"
 import PreviewSection from "./sections/PreviewSection"
@@ -32,4 +33,4 @@ const BibleView = () => {
   )
 }
 
-export default BibleView
+export default withAuth(BibleView)
