@@ -58,9 +58,6 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
       data?.text,
       `${chapter.book.title} ${chapter.chapter}:${data.verse} (${version.abbreviation})`
     )
-    // verseEmit(
-    //   `${chapter.book.title} ${chapter.chapter}:${data.verse} (${version.abbreviation})`
-    // )
   }
 
   return (

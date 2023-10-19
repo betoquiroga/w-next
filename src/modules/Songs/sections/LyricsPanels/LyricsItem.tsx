@@ -47,7 +47,6 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
       styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
       setStyle({ ...style, image: currentImageUrl(image) })
       updateScreen(WW_DEFAULT_SCREEN_ID, {
-        // verse: " ",
         typeStyle: "style",
       })
       setStyleChanged(true)

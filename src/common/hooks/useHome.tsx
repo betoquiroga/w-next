@@ -30,7 +30,6 @@ export function useHome() {
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
       if (message) setContent(JSON.parse(message))
-      console.log(message)
     }
 
     const handleStyleMessage = (data: string) => {
@@ -71,7 +70,6 @@ export function useHome() {
       try {
         const screenData = await getScreenActive()
         const type = screenData.type || "lyric"
-        console.log(screenData.typeStyle)
 
         if (!validTypes.includes(type)) {
           console.error("Tipo de pantalla no válido:", type)

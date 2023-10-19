@@ -46,14 +46,12 @@ export const bibleEmit = (content: string, verso: string) => {
     verse: verso,
     content: emitObject.content,
   })
-  console.log(emitObject)
   socket.emit("song", JSON.stringify(emitObject))
   socket.emit("verse", JSON.stringify(verso))
 }
 export const styleEmit = (content: Style) => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
-    // typeStyle: "gallery",
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
@@ -89,8 +87,5 @@ export const blackEmit = (
   socket.emit("verse", JSON.stringify(dataVerse))
 }
 export const videoEmit = (content: Style) => {
-  updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: "gallery",
-  })
   socket.emit("style", JSON.stringify(content))
 }
