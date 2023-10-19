@@ -50,7 +50,9 @@ export const bibleEmit = (content: string) => {
     type: emitObject.type,
     content: emitObject.content,
   })
+  socket.emit("style", JSON.stringify(emitObject))
   socket.emit("song", JSON.stringify(emitObject))
+  socket.emit("verse", JSON.stringify(emitObject))
 }
 
 export const verseEmit = (content: string) => {
@@ -72,6 +74,8 @@ export const styleEmit = (content: Style, type: "gallery" | "style") => {
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
+  // socket.emit("song", JSON.stringify(content))
+  // socket.emit("verse", JSON.stringify(content))
 }
 
 export const clearEmit = (
@@ -102,7 +106,7 @@ export const blackEmit = (
     verse: dataVerse.content,
   })
   socket.emit("style", JSON.stringify(dataStyle))
-  socket.emit("lyric", JSON.stringify(dataLyric))
+  socket.emit("song", JSON.stringify(dataLyric))
   socket.emit("verse", JSON.stringify(dataVerse))
 }
 
