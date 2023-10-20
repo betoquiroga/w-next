@@ -1,6 +1,6 @@
 import { Spinner } from "@components/Spinner"
 import { Tab } from "@headlessui/react"
-import { clearEmit, styleEmit } from "@helpers/socket/emit"
+import { styleEmit } from "@helpers/socket/emit"
 import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
@@ -16,7 +16,6 @@ const ImagesPanel = () => {
   )
 
   const sendData = (image: string) => {
-    clearEmit("gallery")
     styleEmit(defaultStyle(image, WW_GALLERY_FOLDER), "gallery")
   }
 
