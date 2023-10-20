@@ -19,6 +19,7 @@ export const lyricEmit = (content: string) => {
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
     content: emitObject.content,
+    verse: " ",
   })
   socket.emit("song", JSON.stringify(emitObject))
 }
@@ -30,6 +31,7 @@ export const coverEmit = (content: string) => {
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
     content: emitObject.content,
+    verse: " ",
   })
   socket.emit("song", JSON.stringify(emitObject))
 }

@@ -32,7 +32,6 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
   }, [idSong])
 
   const addMessage = () => {
-    clearEmit("lyric")
     cover ? coverEmit(content) : lyricEmit(content)
 
     if (

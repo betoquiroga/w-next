@@ -26,7 +26,6 @@ export function useHome() {
     "lyric",
     "style",
   ]
-
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
       if (message) setContent(JSON.parse(message))
@@ -37,7 +36,7 @@ export function useHome() {
     }
 
     const handleVerseMessage = (verse: string) => {
-      if (verse) setBibleVerse(JSON.parse(verse))
+      if (verse) setBibleVerse(verse)
     }
 
     const handleEffectsMessage = (data: string) => {
@@ -63,6 +62,9 @@ export function useHome() {
     } else {
       setBlack(false)
     }
+    if (content.type !== "bible") {
+      setBibleVerse(" ")
+    }
   }, [content])
 
   useEffect(() => {
@@ -80,8 +82,6 @@ export function useHome() {
           type,
           content: screenData.content || "",
         })
-
-        setBibleVerse(screenData.verse || "")
 
         setStyleData(
           defaultStyle(
