@@ -1,5 +1,7 @@
-// utils/axios.js
 import axios from "axios"
+import { login } from "@helpers/auth.helper"
+import { WW_API_DOMAIN, WW_PROTOCOL } from "../constants/domains"
+import { REFRESH_NAME } from "../constants/auth"
 
 const axiosWW = axios.create({
   timeout: 5000,
@@ -8,16 +10,24 @@ const axiosWW = axios.create({
 axiosWW.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log("beto", error)
     const originalRequest = error.config
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
-      /*
-      const refreshToken = getRefreshToken() // Implementa esta función para obtener el refresh token
-      const newAccessToken = await refreshAccessToken(refreshToken) // Implementa esta función para obtener un nuevo access token
-      setAccessToken(newAccessToken) // Implementa esta función para almacenar el nuevo access token
-      originalRequest.headers["Authorization"] = "Bearer " + newAccessToken
-      */
+
+      try {
+        const newToken = await axios.post(
+          `${WW_PROTOCOL}://${WW_API_DOMAIN}/users/refresh`,
+          {
+            token: localStorage?.getItem(REFRESH_NAME)?.replace("Bearer ", ""),
+          }
+        )
+        originalRequest.headers["Authorization"] =
+          "Bearer " + newToken.data.token
+        login(newToken.data.token)
+      } catch (e) {
+        window.location.href = "/login"
+      }
+
       return axiosWW(originalRequest)
     }
     return Promise.reject(error)

@@ -16,7 +16,7 @@ const withAuth = <P extends AuthProps>(WrappedComponent: ComponentType<P>) => {
           },
         })
         .catch(() => {
-          window.location.href = "/login"
+          // window.location.href = "/login"
           logout()
         })
     }, [])
