@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react"
 import {
   activeLyricEmit,
   activeSongEmit,
-  clearEmit,
   coverEmit,
   lyricEmit,
   styleEmit,
