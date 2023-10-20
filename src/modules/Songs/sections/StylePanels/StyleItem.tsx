@@ -4,8 +4,6 @@ import { styleEmit } from "@helpers/socket/emit"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
 import { setActiveStyle } from "src/common/api/styles/styles.api"
-import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
-import { updateScreen } from "src/common/api/screen/screen.api"
 
 const StyleItem = ({
   id,
@@ -19,10 +17,7 @@ const StyleItem = ({
 
   const changeStyle = async () => {
     const data = { id, title, type, details, active, image }
-    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
-    updateScreen(WW_DEFAULT_SCREEN_ID, {
-      typeStyle: "style",
-    })
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
     await setActiveStyle(id)
     setStyle({ ...data, image: currentImageUrl(image) })
   }

@@ -9,25 +9,20 @@ import {
 } from "src/common/constants/images"
 import { deactivateSongs } from "../helper/deactivateSong"
 import { deactivatedOptions } from "../helper/deactivateOptions"
-import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
-import { updateScreen } from "src/common/api/screen/screen.api"
 
 const ActionsSection = () => {
   useEffect(() => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "F3") blackEmit("black")
       if (event.key === "F4") handleAction(WW_LOGO as string)
-      if (event.key === "F5") clearEmit("lyric")
+      if (event.key === "F5") clearEmit("style")
       if (event.key === "F6") handleAction(WW_BIBLE as string)
     })
   }, [])
 
   const handleAction = (image: string) => {
     clearEmit("bible")
-    styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
-    updateScreen(WW_DEFAULT_SCREEN_ID, {
-      typeStyle: "style",
-    })
+    styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
   }
 
   const handleClickBlack = () => {
@@ -43,7 +38,7 @@ const ActionsSection = () => {
 
   const handleClickClear = () => {
     deactivateSongs()
-    clearEmit("lyric")
+    clearEmit("style")
   }
 
   const handleClickPreach = () => {

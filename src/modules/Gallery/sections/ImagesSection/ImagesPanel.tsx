@@ -5,10 +5,8 @@ import { deactivateSongs } from "@modules/Songs/helper/deactivateSong"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { deleteFile, getFiles } from "src/common/api/gallery/gallery.api"
-import { updateScreen } from "src/common/api/screen/screen.api"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "src/common/constants/domains"
 import { WW_GALLERY_FOLDER } from "src/common/constants/images"
-import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
 import { defaultStyle } from "src/common/constants/style"
 
 const ImagesPanel = () => {
@@ -19,10 +17,7 @@ const ImagesPanel = () => {
 
   const sendData = (image: string) => {
     clearEmit("gallery")
-    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER))
-    updateScreen(WW_DEFAULT_SCREEN_ID, {
-      typeStyle: "gallery",
-    })
+    styleEmit(defaultStyle(image, WW_GALLERY_FOLDER), "gallery")
   }
 
   const isImage = (filename: string): boolean => {

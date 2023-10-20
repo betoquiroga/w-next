@@ -17,11 +17,10 @@ export const lyricEmit = (content: string) => {
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
+    type: emitObject.type,
     content: emitObject.content,
-    verse: " ",
   })
   socket.emit("song", JSON.stringify(emitObject))
-  socket.emit("verse", "")
 }
 export const coverEmit = (content: string) => {
   const emitObject: Emit = {
@@ -31,10 +30,8 @@ export const coverEmit = (content: string) => {
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
     content: emitObject.content,
-    verse: " ",
   })
   socket.emit("song", JSON.stringify(emitObject))
-  socket.emit("verse", "")
 }
 export const bibleEmit = (content: string, verso: string) => {
   const emitObject: Emit = {
@@ -49,9 +46,10 @@ export const bibleEmit = (content: string, verso: string) => {
   socket.emit("song", JSON.stringify(emitObject))
   socket.emit("verse", JSON.stringify(verso))
 }
-export const styleEmit = (content: Style) => {
+export const styleEmit = (content: Style, typeStyle: "gallery" | "style") => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
+    typeStyle: typeStyle,
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
@@ -81,6 +79,7 @@ export const blackEmit = (
     type: dataStyle.type,
     content: dataLyric.content,
     verse: dataVerse.content,
+    background: " ",
   })
   socket.emit("style", JSON.stringify(dataStyle))
   socket.emit("song", JSON.stringify(dataLyric))

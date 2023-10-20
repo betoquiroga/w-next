@@ -13,8 +13,6 @@ import { Style } from "@interfaces/style.interface"
 import { currentImageUrl, defaultStyle } from "src/common/constants/style"
 import { WW_STYLES_FOLDER } from "src/common/constants/images"
 import { StyleContext } from "@context/StyleContext"
-import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
-import { updateScreen } from "src/common/api/screen/screen.api"
 import { setActive } from "src/common/api/songs/lyrics.api"
 import { setActiveSong } from "src/common/api/songs/songs.api"
 import ProyectIcon from "@icons/misc/proyect"
@@ -34,7 +32,7 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
   }, [idSong])
 
   const addMessage = () => {
-    clearEmit("bible")
+    clearEmit("lyric")
     cover ? coverEmit(content) : lyricEmit(content)
 
     if (
@@ -44,11 +42,8 @@ const LyricsItem = ({ content, id, cover, style, idSong }: LyricsItemProps) => {
       cover === true
     ) {
       const image = style.image
-      styleEmit(defaultStyle(image, WW_STYLES_FOLDER))
+      styleEmit(defaultStyle(image, WW_STYLES_FOLDER), "style")
       setStyle({ ...style, image: currentImageUrl(image) })
-      updateScreen(WW_DEFAULT_SCREEN_ID, {
-        typeStyle: "style",
-      })
       setStyleChanged(true)
     }
   }
