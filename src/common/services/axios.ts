@@ -12,6 +12,7 @@ axiosWW.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
     if (error.response.status === 401 && !originalRequest._retry) {
+      console.log("Refrescando")
       originalRequest._retry = true
 
       try {
@@ -19,13 +20,20 @@ axiosWW.interceptors.response.use(
           `${WW_PROTOCOL}://${WW_API_DOMAIN}/users/refresh`,
           {
             token: localStorage?.getItem(REFRESH_NAME)?.replace("Bearer ", ""),
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage?.getItem(REFRESH_NAME),
+            },
           }
         )
         originalRequest.headers["Authorization"] =
           "Bearer " + newToken.data.token
         login(newToken.data.token)
+        console.log("TOKEN REFRESCADO")
       } catch (e) {
-        window.location.href = "/login"
+        console.log("REFRES VENCIDO")
+        // window.location.href = "/login"
       }
 
       return axiosWW(originalRequest)
