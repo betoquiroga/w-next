@@ -12,7 +12,6 @@ axiosWW.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
     if (error.response.status === 401 && !originalRequest._retry) {
-      console.log("Refrescando")
       originalRequest._retry = true
 
       try {
@@ -30,10 +29,8 @@ axiosWW.interceptors.response.use(
         originalRequest.headers["Authorization"] =
           "Bearer " + newToken.data.token
         login(newToken.data.token)
-        console.log("TOKEN REFRESCADO")
       } catch (e) {
-        console.log("REFRES VENCIDO")
-        // window.location.href = "/login"
+        window.location.href = "/login"
       }
 
       return axiosWW(originalRequest)
