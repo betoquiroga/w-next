@@ -1,6 +1,8 @@
 import {
   AuthenticateResponse,
+  Data,
   IsAuthenticatedResponse,
+  RefreshTokenResponse,
   RegisterPayload,
   RegisterResponse,
 } from "src/common/interfaces/auth-service.interface"
@@ -28,6 +30,15 @@ export default class AuthenticationService extends HttpRequest {
   ): Promise<AxiosResponse<RegisterResponse>> {
     this.configRequest({
       endpoint: REGISTER_ENDPOINT,
+    })
+    return this.post(payload)
+  }
+
+  public refreshToken(
+    payload: Data
+  ): Promise<AxiosResponse<RefreshTokenResponse>> {
+    this.configRequest({
+      endpoint: `${REGISTER_ENDPOINT}/refresh`,
     })
     return this.post(payload)
   }

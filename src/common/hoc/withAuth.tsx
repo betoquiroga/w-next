@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useRouter } from "next/navigation"
 import { ComponentType, useEffect } from "react"
 import { getToken, logout } from "@helpers/auth.helper"
 import axios from "axios"
@@ -9,7 +8,6 @@ interface AuthProps {}
 
 const withAuth = <P extends AuthProps>(WrappedComponent: ComponentType<P>) => {
   const hocComponent = (props: P) => {
-    const router = useRouter()
     useEffect(() => {
       axios
         .get(`${WW_PROTOCOL}://${WW_API_DOMAIN}/users/validate`, {
@@ -18,7 +16,7 @@ const withAuth = <P extends AuthProps>(WrappedComponent: ComponentType<P>) => {
           },
         })
         .catch(() => {
-          router.push("/login")
+          // window.location.href = "/login"
           logout()
         })
     }, [])

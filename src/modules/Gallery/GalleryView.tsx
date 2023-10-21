@@ -1,3 +1,4 @@
+import withAuth from "src/common/hoc/withAuth"
 import FilesSection from "./sections/FilesSection"
 import PreviewSection from "./sections/PreviewSection"
 
@@ -12,4 +13,4 @@ const GalleryView = () => {
   )
 }
 
-export default GalleryView
+export default withAuth(GalleryView)

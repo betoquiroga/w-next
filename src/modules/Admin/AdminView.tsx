@@ -1,4 +1,5 @@
 import Link from "next/link"
+import withAuth from "src/common/hoc/withAuth"
 
 const AdminView = () => {
   return (
@@ -27,4 +28,4 @@ const AdminView = () => {
   )
 }
 
-export default AdminView
+export default withAuth(AdminView)
