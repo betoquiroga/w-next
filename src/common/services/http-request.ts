@@ -1,6 +1,7 @@
 import { HttpRequestParam } from "src/common/interfaces/http-request"
-import axios, { AxiosResponse } from "axios"
+import { AxiosResponse } from "axios"
 import { WW_API_DOMAIN, WW_PROTOCOL } from "../constants/domains"
+import axiosWW from "./axios"
 
 export default class HttpRequest implements HttpRequestParam {
   constructor(
@@ -31,31 +32,31 @@ export default class HttpRequest implements HttpRequestParam {
   }
 
   protected get<T>(): Promise<AxiosResponse<T>> {
-    return axios.get(this.urlBuilder(), {
+    return axiosWW.get(this.urlBuilder(), {
       headers: this.headers,
     })
   }
 
   protected post<T>(data: unknown): Promise<AxiosResponse<T>> {
-    return axios.post(this.urlBuilder(), data, {
+    return axiosWW.post(this.urlBuilder(), data, {
       headers: this.headers,
     })
   }
 
   protected patch<T>(data: unknown): Promise<AxiosResponse<T>> {
-    return axios.patch(this.urlBuilder(), data, {
+    return axiosWW.patch(this.urlBuilder(), data, {
       headers: this.headers,
     })
   }
 
   protected put<T>(data: unknown): Promise<AxiosResponse<T>> {
-    return axios.put(this.urlBuilder(), data, {
+    return axiosWW.put(this.urlBuilder(), data, {
       headers: this.headers,
     })
   }
 
   protected delete<T>(): Promise<AxiosResponse<T>> {
-    return axios.delete(this.urlBuilder(), {
+    return axiosWW.delete(this.urlBuilder(), {
       headers: this.headers,
     })
   }

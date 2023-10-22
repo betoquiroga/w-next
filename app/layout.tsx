@@ -2,6 +2,7 @@
 import "./globals.css"
 import Providers from "./providers"
 import { StyleProvider } from "src/common/context/StyleContext"
+import { VideoProvider } from "@context/VideoContext"
 
 export default function RootLayout({
   children,
@@ -13,7 +14,9 @@ export default function RootLayout({
       <head />
       <body>
         <Providers>
-          <StyleProvider>{children}</StyleProvider>
+          <VideoProvider>
+            <StyleProvider>{children}</StyleProvider>
+          </VideoProvider>
         </Providers>
       </body>
     </html>

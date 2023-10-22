@@ -10,7 +10,7 @@ import {
 } from "react"
 import axios from "axios"
 import { BookContext } from "./BookContext"
-import { bibleEmit, verseEmit } from "@helpers/socket/emit"
+import { bibleEmit } from "@helpers/socket/emit"
 
 const ChapterContext = createContext({} as ChapterContextProps)
 
@@ -54,8 +54,8 @@ const ChapterProvider = ({ children }: ChaptersProviderProps) => {
 
   const sendVerse = (data: Verse) => {
     setActiveVerse(data)
-    bibleEmit(data?.text)
-    verseEmit(
+    bibleEmit(
+      data?.text,
       `${chapter.book.title} ${chapter.chapter}:${data.verse} (${version.abbreviation})`
     )
   }

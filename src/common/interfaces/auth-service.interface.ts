@@ -4,6 +4,7 @@ export interface RefreshTokenResponse extends Response {
 
 export interface AuthenticateResponse extends Response {
   token: string
+  refresh: string
 }
 
 export interface RegisterResponse extends Response {

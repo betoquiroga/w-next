@@ -17,16 +17,16 @@ const HomeView = ({ width }: HomeViewProps) => {
     <div
       ref={preview}
       className={classNames("prueba", {
-        "landscape:pt-24 portrait:pt-12": bibleVerse?.content.length > 1,
+        "landscape:pt-24 portrait:pt-12": bibleVerse?.length > 1,
       })}
       style={{ transform: `scale(${width || 1})` }}
     >
       {effectsWs.particles && <div className="snow" />}
-      {bibleVerse?.content.length > 1 && <BibleVerse verse={bibleVerse} />}
+      {bibleVerse?.length > 1 && <BibleVerse verse={bibleVerse} />}
       {!black && <Wallpaper style={styleData} effects={effectsWs} />}
-      {content.type === "song" && <SongContent data={content} />}
+      {content.type === "lyric" && <SongContent data={content} />}
       {content.type === "bible" && <BibleContent data={content} />}
-      {content.type === "cover" && <CoverContent data={content} />}
+      {content.type === "songCover" && <CoverContent data={content} />}
       <FullScreenButton />
     </div>
   )

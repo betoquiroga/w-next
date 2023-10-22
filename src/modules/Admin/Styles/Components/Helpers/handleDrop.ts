@@ -1,5 +1,3 @@
-// handleDrop.ts
-
 import { useCallback } from "react"
 
 export function useHandleDrop(

@@ -1,12 +1,16 @@
 import React, { useState } from "react"
 import { Tab } from "@headlessui/react"
-import { styleEmit, videoEmit } from "@helpers/socket/emit"
+import { videoEmit } from "@helpers/socket/emit"
 import { defaultVideoStyle } from "src/common/constants/style"
+import { useVideoContext } from "@context/VideoContext"
 
 const VideosPanel = () => {
-  const [videoURLs, setVideoURLs] = useState<string[]>([])
-
+  const { videoURLs, addVideoURL, removeVideoURL } = useVideoContext()
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState<null | number>(
+    null
+  )
   const fileInputRef = React.useRef<HTMLInputElement | null>(null)
+  const selectedFileNames = React.useRef<string[]>([])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target && event.target.files) {
@@ -19,17 +23,21 @@ const VideosPanel = () => {
       }
 
       for (let i = 0; i < files.length; i++) {
-        const file = files[i]
-
-        if (file.type.startsWith("video/")) {
-          const objectURL = URL.createObjectURL(file)
-          videoURLArray.push(objectURL)
+        const myFile = files[i]
+        if (myFile.type.startsWith("video/")) {
+          if (selectedFileNames.current.includes(myFile.name)) {
+            alert("El archivo ya ha sido seleccionado.")
+          } else {
+            const objectURL = URL.createObjectURL(myFile)
+            videoURLArray.push(objectURL)
+            selectedFileNames.current.push(myFile.name)
+          }
         }
       }
 
       if (videoURLArray.length > 0) {
         if (videoURLs.length + videoURLArray.length <= 20) {
-          setVideoURLs([...videoURLs, ...videoURLArray])
+          addVideoURL(videoURLArray)
         } else {
           alert("No puedes seleccionar más de 20 archivos.")
         }
@@ -39,15 +47,9 @@ const VideosPanel = () => {
     }
   }
 
-  const emitVideo = (videoURL: string) => {
+  const emitVideo = (videoURL: string, index: number) => {
     videoEmit(defaultVideoStyle(videoURL))
-  }
-
-  const removeFile = (indexToRemove: number) => {
-    const updatedVideoURLs = videoURLs.filter(
-      (_, index) => index !== indexToRemove
-    )
-    setVideoURLs(updatedVideoURLs)
+    setSelectedVideoIndex(index)
   }
 
   return (
@@ -76,7 +78,9 @@ const VideosPanel = () => {
         {videoURLs.map((videoURL, index) => (
           <div
             key={index}
-            className="relative cursor-pointer"
+            className={`relative cursor-pointer ${
+              selectedVideoIndex === index ? "selected" : ""
+            }`}
             style={{ position: "relative" }}
           >
             <video
@@ -88,13 +92,15 @@ const VideosPanel = () => {
                 width: "300px",
                 height: "150px",
                 objectFit: "cover",
+                border:
+                  selectedVideoIndex === index ? "4px solid #2DAB8B" : "none",
               }}
-              onClick={() => emitVideo(videoURL)}
+              onClick={() => emitVideo(videoURL, index)}
             ></video>
             <button
               type="button"
               className="bg-ww-scroll flex justify-center align-middle rounded-full text-ww-normal text-center w-6 h-6 absolute top-0 right-0 hover:bg-red-600"
-              onClick={() => removeFile(index)}
+              onClick={() => removeVideoURL(index)}
             >
               x
             </button>

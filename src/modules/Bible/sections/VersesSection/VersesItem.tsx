@@ -3,12 +3,7 @@ import classNames from "classnames"
 import { useContext } from "react"
 import { ChapterContext } from "@context/ChapterContext"
 import { BookContext } from "@context/BookContext"
-import {
-  bibleEmit,
-  clearEmit,
-  styleEmit,
-  verseEmit,
-} from "@helpers/socket/emit"
+import { bibleEmit, styleEmit } from "@helpers/socket/emit"
 import { defaultStyle } from "src/common/constants/style"
 import {
   WW_BIBLE,
@@ -28,15 +23,14 @@ const VersesItem = ({ verseData }: VersesItemProps) => {
       verse,
       text,
     }
-    clearEmit("cover")
     setActiveVerse(currentVerse)
     localStorage?.setItem("currentVerse", JSON.stringify(currentVerse))
-    bibleEmit(text)
-    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER))
-    setActiveStyle(Number(WW_DEFAULT_STYLE_ID))
-    verseEmit(
+    bibleEmit(
+      text,
       `${chapter.book.title} ${chapter.chapter}:${verse} (${version.abbreviation})`
     )
+    styleEmit(defaultStyle(WW_BIBLE as string, WW_STYLES_FOLDER), "style")
+    setActiveStyle(Number(WW_DEFAULT_STYLE_ID))
     deactivateSongs()
   }
 

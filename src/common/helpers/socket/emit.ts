@@ -5,31 +5,27 @@ import { socket } from "socket/mainSocket"
 import { updateScreen } from "src/common/api/screen/screen.api"
 import { setActive } from "src/common/api/songs/lyrics.api"
 import { WW_DEFAULT_SCREEN_ID } from "src/common/constants/screen"
-
 export const activeSongEmit = (content: string) => {
   socket.emit("activeSong", content)
 }
-
 export const activeLyricEmit = (content: string) => {
   socket.emit("activeLyric", content)
 }
-
 export const lyricEmit = (content: string) => {
   const emitObject: Emit = {
-    type: "song",
+    type: "lyric",
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
+    type: emitObject.type,
     content: emitObject.content,
     verse: " ",
   })
-  socket.emit("lyric", JSON.stringify(emitObject))
-  socket.emit("verse", "")
+  socket.emit("song", JSON.stringify(emitObject))
 }
-
 export const coverEmit = (content: string) => {
   const emitObject: Emit = {
-    type: "cover",
+    type: "songCover",
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
@@ -37,45 +33,31 @@ export const coverEmit = (content: string) => {
     content: emitObject.content,
     verse: " ",
   })
-  socket.emit("lyric", JSON.stringify(emitObject))
-  socket.emit("verse", "")
+  socket.emit("song", JSON.stringify(emitObject))
 }
-
-export const bibleEmit = (content: string) => {
+export const bibleEmit = (content: string, verso: string) => {
   const emitObject: Emit = {
     type: "bible",
     content,
   }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
     type: emitObject.type,
+    verse: verso,
     content: emitObject.content,
   })
-  socket.emit("lyric", JSON.stringify(emitObject))
+  socket.emit("song", JSON.stringify(emitObject))
+  socket.emit("verse", JSON.stringify(verso))
 }
-
-export const verseEmit = (content: string) => {
-  const emitObject: Emit = {
-    type: "bible",
-    content,
-  }
-  updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: "bible",
-    verse: emitObject.content,
-  })
-  socket.emit("verse", JSON.stringify(emitObject))
-}
-
-export const styleEmit = (content: Style) => {
+export const styleEmit = (content: Style, typeStyle: "gallery" | "style") => {
   const image = path.basename(content.image)
   updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: "song",
+    typeStyle: typeStyle,
     background: image,
   })
   socket.emit("style", JSON.stringify(content))
 }
-
 export const clearEmit = (
-  type: "bible" | "black" | "cover" | "gallery" | "song"
+  type: "bible" | "black" | "songCover" | "gallery" | "lyric" | "style"
 ) => {
   setActive(0)
   const dataLyric = { type, content: " " }
@@ -85,25 +67,26 @@ export const clearEmit = (
     content: dataLyric.content,
     verse: dataVerse.content,
   })
-  socket.emit("lyric", JSON.stringify(dataLyric))
-  socket.emit("verse", JSON.stringify(dataVerse))
+  socket.emit("song", JSON.stringify(dataLyric))
+  socket.emit("verse", dataVerse.content)
 }
-
 export const blackEmit = (
-  type: "bible" | "black" | "cover" | "gallery" | "song"
+  type: "bible" | "black" | "songCover" | "gallery" | "lyric" | "style"
 ) => {
-  // setActive(0)
-  const dataLyric = { type, content: " " }
+  setActive(0)
+  const dataStyle = { type }
+  const dataLyric = { content: " " }
   const dataVerse = { content: " " }
   updateScreen(WW_DEFAULT_SCREEN_ID, {
-    type: dataLyric.type,
-    // content: dataLyric.content,
+    type: dataStyle.type,
+    content: dataLyric.content,
     verse: dataVerse.content,
+    background: " ",
   })
-  socket.emit("lyric", JSON.stringify(dataLyric))
+  socket.emit("style", JSON.stringify(dataStyle))
+  socket.emit("song", JSON.stringify(dataLyric))
   socket.emit("verse", JSON.stringify(dataVerse))
 }
-
 export const videoEmit = (content: Style) => {
   socket.emit("style", JSON.stringify(content))
 }

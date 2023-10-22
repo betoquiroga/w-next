@@ -14,7 +14,7 @@ const ChromaView = () => {
   const [contentData, setContentData] = useState<Emit>({} as Emit)
 
   useEffect(() => {
-    socket.on("lyric", (message: string) => {
+    socket.on("song", (message: string) => {
       const { content } = JSON.parse(message)
 
       setPrimeraMitad(parseContent(content).primeraMitad)
@@ -26,7 +26,7 @@ const ChromaView = () => {
   return (
     <div className="chroma bg-cover">
       <div className="container">
-        {contentData?.type === "song" && (
+        {contentData?.type === "lyric" && (
           <LyricContent
             primeraMitad={primeraMitad}
             segundaMitad={segundaMitad}

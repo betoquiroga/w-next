@@ -12,7 +12,7 @@ export function useHome() {
   const { style } = useContext(StyleContext)
   const [content, setContent] = useState<Emit>({ content: "" } as Emit)
   const [styleData, setStyleData] = useState<Style>(style)
-  const [bibleVerse, setBibleVerse] = useState<Emit>({ content: "" } as Emit)
+  const [bibleVerse, setBibleVerse] = useState<string>("")
   const [effectsWs, setEffectsWs] = useState<Effect>({
     zoom: false,
     particles: false,
@@ -21,11 +21,11 @@ export function useHome() {
   const validTypes: Emit["type"][] = [
     "bible",
     "black",
-    "cover",
+    "songCover",
     "gallery",
-    "song",
+    "lyric",
+    "style",
   ]
-
   useEffect(() => {
     const handleLyricMessage = (message: string) => {
       if (message) setContent(JSON.parse(message))
@@ -36,20 +36,20 @@ export function useHome() {
     }
 
     const handleVerseMessage = (verse: string) => {
-      if (verse) setBibleVerse(JSON.parse(verse))
+      if (verse) setBibleVerse(verse)
     }
 
     const handleEffectsMessage = (data: string) => {
       setEffectsWs(JSON.parse(data))
     }
 
-    socket.on("lyric", handleLyricMessage)
+    socket.on("song", handleLyricMessage)
     socket.on("style", handleStyleMessage)
     socket.on("verse", handleVerseMessage)
     socket.on("effects", handleEffectsMessage)
 
     return () => {
-      socket.off("lyric", handleLyricMessage)
+      socket.off("song", handleLyricMessage)
       socket.off("style", handleStyleMessage)
       socket.off("verse", handleVerseMessage)
       socket.off("effects", handleEffectsMessage)
@@ -62,30 +62,33 @@ export function useHome() {
     } else {
       setBlack(false)
     }
+    if (content.type !== "bible") {
+      setBibleVerse(" ")
+    }
   }, [content])
 
   useEffect(() => {
     const fetchScreenData = async () => {
       try {
         const screenData = await getScreenActive()
-        const type = screenData.type || "song"
+        const type = screenData.type || "lyric"
 
         if (!validTypes.includes(type)) {
           console.error("Tipo de pantalla no válido:", type)
           return
         }
+
         setContent({
           type,
           content: screenData.content || "",
         })
-        setBibleVerse({
-          type,
-          content: screenData.verse || "",
-        })
+
         setStyleData(
           defaultStyle(
             screenData.background || "",
-            screenData.type === "gallery" ? WW_GALLERY_FOLDER : WW_STYLES_FOLDER
+            screenData.typeStyle === "gallery"
+              ? WW_GALLERY_FOLDER
+              : WW_STYLES_FOLDER
           )
         )
       } catch (error) {
