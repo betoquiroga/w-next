@@ -28,7 +28,7 @@ axiosWW.interceptors.response.use(
         )
         originalRequest.headers["Authorization"] =
           "Bearer " + newToken.data.token
-        login(newToken.data.token)
+        await login(newToken.data.token)
       } catch (e) {
         window.location.href = "/login"
       }

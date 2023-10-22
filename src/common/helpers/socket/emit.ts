@@ -68,7 +68,6 @@ export const clearEmit = (
     verse: dataVerse.content,
   })
   socket.emit("song", JSON.stringify(dataLyric))
-  // socket.emit("verse", JSON.stringify(dataVerse))
   socket.emit("verse", dataVerse.content)
 }
 export const blackEmit = (
